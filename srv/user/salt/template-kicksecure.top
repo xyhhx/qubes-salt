@@ -1,0 +1,5 @@
+user:
+  dom0:
+    - template-kicksecure.clone
+  {{ pillar['names']['base_templates']['kicksecure'] }}:
+    - template-kicksecure.morph
