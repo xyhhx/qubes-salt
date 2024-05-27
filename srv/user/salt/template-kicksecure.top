@@ -4,6 +4,6 @@
 ---
 user:
   dom0:
-    - template-kicksecure.clone
+    - template-kicksecure.vm
   {{ pillar['names']['base_templates']['kicksecure'] }}:
-    - template-kicksecure.morph
+    - template-kicksecure.configure
