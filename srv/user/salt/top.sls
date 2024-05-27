@@ -17,4 +17,5 @@
 user:
   '*':
     - fedora-ivpn.top
-    - template-kicksecure 
+    - template-kicksecure
+
