@@ -2,11 +2,11 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-'on-kicksecure-17.vm - qvm.exists':
+'provides-flatpak.vm - qvm.exists':
   qvm.exists:
     - name: {{ pillar.names.templates.base.debian }}
 
-'on-kicksecure-17.vm - qvm.clone':
+'provides-flatpak.vm - qvm.clone':
   qvm.clone:
-    - name: {{ pillar.names.templates.base.kicksecure }}
+    - name: {{ pillar.names.templates.providers.flatpak }}
     - source: {{ pillar.names.templates.base.debian }}

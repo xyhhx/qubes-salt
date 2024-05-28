@@ -17,4 +17,4 @@
 
 /etc/fonts/local.conf:
   file.managed:
-    - source: salt://common/themes/files/local.conf
+    - source: salt://common/theme/files/local.conf

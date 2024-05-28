@@ -7,6 +7,7 @@ names:
       debian: on-debian-12-minimal
       kicksecure: on-kicksecure-17
     providers:
+      flatpak: provides-flatpak
     stacks:
   appvms:
   dispvms:

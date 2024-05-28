@@ -5,6 +5,7 @@
 debian-12-minimal:
   qvm.template_installed
 
-{{ pillar.names.templates.base.debian_minimal }}
+'on-debian-12-minimal.vm - qvm.clone'
   qvm.clone:
+   - name: {{ pillar.names.templates.base.debian }}
    - source: debian-12-minimal

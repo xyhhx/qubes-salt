@@ -15,3 +15,8 @@ alacritty:
   file.managed:
     - makedirs: true
     - source: salt://common/shell/files/alacritty.yml
+
+/etc/skel/.config/alacritty/alacritty.yml:
+  file.managed:
+    - makedirs: true
+    - source: salt://common/shell/files/alacritty.yml
