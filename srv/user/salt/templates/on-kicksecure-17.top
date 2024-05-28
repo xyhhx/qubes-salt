@@ -5,6 +5,6 @@
 user:
   dom0:
     - on-kicksecure-17.vm
-  on-kicksecure-17:
+  {{ pillar.names.templates.base.kicksecure }}
     - on-kicksecure-17.configure
     - common.base
