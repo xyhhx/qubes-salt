@@ -6,5 +6,3 @@ user:
   dom0:
     - templates.on-debian-12-minimal
   {{ pillars.names.templates.debian_minimal }}:
-    - common.base
-    - common.theme

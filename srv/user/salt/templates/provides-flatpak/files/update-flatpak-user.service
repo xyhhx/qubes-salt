@@ -1,0 +1,9 @@
+[Unit]
+Description=Update user flatpaks
+StartLimitIntervalSec=0
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/flatpak --user update -y
+User=user
+

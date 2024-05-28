@@ -6,4 +6,6 @@ user:
   dom0:
     - templates.provides-flatpak.vm
   {{ pillar.names.templates.providers.flatpak }}:
+    - common.base
+    - common.theme
     - templates.provides-flatpak.configure

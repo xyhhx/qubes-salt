@@ -9,11 +9,17 @@
 'common.base - install':
   pkg.installed:
     - pkgs:
+      - curl
       - vim
       - xclip
+{% if grains.os_family|lower == 'debian' %}
+      - unzip
+      - zip
+{% endif %}
       - zsh
     - skip_suggestions: true
     - install_recommends: false
+    - order: 1
 
 include:
   - common.theme
