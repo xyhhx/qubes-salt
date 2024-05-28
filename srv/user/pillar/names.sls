@@ -11,4 +11,5 @@ names:
     stacks:
   appvms:
   dispvms:
+    browsers: dvm-browsers
   standalones:

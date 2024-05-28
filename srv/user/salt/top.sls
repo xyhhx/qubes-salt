@@ -19,4 +19,5 @@ user:
     - templates.on-debian-12-minimal
     - templates.on-kicksecure-17
     - templates.provides-flatpak
+    - appvms.dvm-browsers
 
