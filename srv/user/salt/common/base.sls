@@ -18,4 +18,4 @@
 
 include:
   - common.theme
-  - common.terminal
+  - common.shell

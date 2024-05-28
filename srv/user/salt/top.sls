@@ -16,6 +16,6 @@
 # === User Defined Salt States ================================================
 user:
   '*':
-    - fedora-ivpn.top
-    - template-kicksecure
+    - bundles.fedora-ivpn
+    - templates.on-kicksecure-17
 

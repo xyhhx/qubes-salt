@@ -5,7 +5,7 @@
 user:
   dom0:
     - fedora-ivpn.template.vm
-  {{ pillar['names']['templates']['provides_ivpn_fedora'] }}:
+  provides-ivpn-fedora:
     - fedora-ivpn.template.configure
-  {{ pillar['names']['appvms']['ivpn_fedora'] }}:
+  sys-vpn-ivpn:
     - fedora-ivpn.appvm.vm

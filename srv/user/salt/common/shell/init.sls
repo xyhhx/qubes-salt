@@ -2,7 +2,7 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-'common.terminal - install alacritty':
+'common.shell - install alacritty':
   pkg.installed:
     - pkgs:
       - alacritty
@@ -13,7 +13,7 @@
 'update-alternatives --set x-terminal-emulator $(which alacritty)':
   cmd.run
 
-'common.terminal - alacritty.yml':
+'common.shell - alacritty.yml':
   file.managed:
     - name: '/home/user/.config/alacritty/alacritty.yml'
     - source:

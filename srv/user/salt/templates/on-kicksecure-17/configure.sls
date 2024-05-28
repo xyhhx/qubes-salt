@@ -2,11 +2,11 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-'template-kicksecure.configure - update':
+'on-kicksecure-17.configure - update':
   pkg.uptodate:
     - refresh: true
 
-'template-kicksecure.configure - install prerequisites':
+'on-kicksecure-17.configure - install prerequisites':
   pkg.installed:
     - pkgs:
       - sudo
@@ -15,14 +15,14 @@
     - skip_suggestions: true
     - install_recommends: false
 
-'template-kicksecure.configure - add user to console group':
+'on-kicksecure-17.configure - add user to console group':
   group.present:
     - name: console
     - system: true
     - members:
       - user
 
-'template-kicksecure.configure - add sudo group':
+'on-kicksecure-17.configure - add sudo group':
   group.present:
     - name: sudo
     - addusers:
@@ -31,14 +31,14 @@
 'sudo http_proxy=http://127.0.0.1:8082 https_proxy=http://127.0.0.1:8082 extrepo enable kicksecure':
   cmd.run
 
-'template-kicksecure.configure - install kicksecure':
+'on-kicksecure-17.configure - install kicksecure':
   pkg.installed:
     - pkgs:
       - kicksecure-qubes-cli
     - skip_suggestions: true
     - install_recommends: false
 
-'template-kicksecure.configure - remove flatpak':
+'on-kicksecure-17.configure - remove flatpak':
   pkg.removed:
     - pkgs:
       - flatpak
@@ -49,20 +49,20 @@
 'sudo extrepo disable kicksecure':
   cmd.run
 
-'template-kicksecure.configure - empty sources.list':
+'on-kicksecure-17.configure - empty sources.list':
   file.managed:
     - name: /etc/apt/sources.list
     - source:
-      - salt://template-kicksecure/files/sources.list
+      - salt://on-kicksecure-17/files/sources.list
 
-'template-kicksecure.configure - onionize qubes repos':
+'on-kicksecure-17.configure - onionize qubes repos':
   file.managed:
     - name: /etc/apt/sources.list.d/qubes-r4.list
     - source:
-      - salt://template-kicksecure/files/qubes-r4.list
+      - salt://on-kicksecure-17/files/qubes-r4.list
 
-'template-kicksecure.configure - onionize debian repos':
+'on-kicksecure-17.configure - onionize debian repos':
   file.managed:
     - name: /etc/apt/sources.list.d/debian.list
     - source:
-      - salt://template-kicksecure/files/debian.list
+      - salt://on-kicksecure-17/files/debian.list
