@@ -2,8 +2,5 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-'provides-flatpak.configure - install':
+flatpak:
   pkg.installed
-    - pkgs:
-      - flatpak
-      - flatseal
