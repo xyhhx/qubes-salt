@@ -9,7 +9,6 @@
 'common.base - install':
   pkg.installed:
     - pkgs:
-      - alacritty
       - vim
       - xclip
       - zsh

@@ -16,5 +16,6 @@
 # === User Defined Salt States ================================================
 user:
   '*':
+    - templates.on-debian-12-minimal
     - templates.on-kicksecure-17
 

@@ -15,8 +15,6 @@
     - skip_suggestions: true
     - install_recommends: false
 
-'common.theme - configure fonts':
+/etc/fonts/local.conf:
   file.managed:
-    - name: /etc/fonts/local.conf
-    - source:
-      - salt://common/themes/files/local.conf
+    - source: salt://common/themes/files/local.conf

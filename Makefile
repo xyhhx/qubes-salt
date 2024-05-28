@@ -1,7 +1,7 @@
 lift:
 	./scripts/lift.sh $(filter-out $@, $(MAKECMDGOALS))
 
-apply:
+targets:
 	qubesctl --targets $(filter-out $@, $(MAKECMDGOALS)) state.apply
 
 %:

@@ -38,10 +38,8 @@
     - skip_suggestions: true
     - install_recommends: false
 
-'on-kicksecure-17.configure - remove flatpak':
-  pkg.removed:
-    - pkgs:
-      - flatpak
+flatpak:
+  pkg.removed
 
 'sudo repository-dist --enable --repository stable --transport onion':
   cmd.run
@@ -49,20 +47,14 @@
 'sudo extrepo disable kicksecure':
   cmd.run
 
-'on-kicksecure-17.configure - empty sources.list':
+/etc/apt/sources.list:
   file.managed:
-    - name: /etc/apt/sources.list
-    - source:
-      - salt://on-kicksecure-17/files/sources.list
+    - source: salt://templates/on-kicksecure-17/files/sources.list
 
-'on-kicksecure-17.configure - onionize qubes repos':
+/etc/apt/sources.list.d/qubes-r4.list:
   file.managed:
-    - name: /etc/apt/sources.list.d/qubes-r4.list
-    - source:
-      - salt://on-kicksecure-17/files/qubes-r4.list
+    - source: salt://templates/on-kicksecure-17/files/qubes-r4.list
 
-'on-kicksecure-17.configure - onionize debian repos':
+/etc/apt/sources.list.d/debian.list:
   file.managed:
-    - name: /etc/apt/sources.list.d/debian.list
-    - source:
-      - salt://on-kicksecure-17/files/debian.list
+    - source: salt://templates/on-kicksecure-17/files/debian.list

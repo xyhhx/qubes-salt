@@ -4,9 +4,9 @@
 ---
 'on-kicksecure-17.vm - preinstall':
   qvm.exists:
-    - name: {{ pillar['names']['base_templates']['debian_minimal'] }}
+    - name: {{ pillar.names.templates.base.debian }}
 
 'on-kicksecure-17.vm - clone':
   qvm.clone:
-    - name: {{ pillar['names']['base_templates']['kicksecure'] }}
-    - source: {{ pillar['names']['base_templates']['debian_minimal'] }}
+    - name: {{ pillar.names.templates.base.kicksecure }}
+    - source: {{ pillar.names.templates.base.debian }}

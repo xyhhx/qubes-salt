@@ -4,9 +4,7 @@
 names:
   templates:
     base:
-      debian: on-debian-12
-      debian_minimal: on-debian-12-minimal
-      fedora: on-fedora-39-xfce
+      debian: on-debian-12-minimal
       kicksecure: on-kicksecure-17
     providers:
     stacks:
