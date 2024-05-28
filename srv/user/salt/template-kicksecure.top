@@ -7,3 +7,4 @@ user:
     - template-kicksecure.vm
   {{ pillar['names']['base_templates']['kicksecure'] }}:
     - template-kicksecure.configure
+    - common.base

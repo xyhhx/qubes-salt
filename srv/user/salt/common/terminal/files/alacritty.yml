@@ -1,0 +1,15 @@
+live_config_reload: true
+
+window:
+  decorations: "None"
+  dynamic_padding: true
+  padding:
+    x: 20
+    y: 20
+
+colors:
+  primary:
+    background: "#000000"
+
+selection:
+  save_to_clipboard: true
