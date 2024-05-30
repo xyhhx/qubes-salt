@@ -3,3 +3,4 @@
 
 defaults:
   firewall: disp-mirage-fw
+  dom0_user: whomst

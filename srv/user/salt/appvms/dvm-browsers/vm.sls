@@ -10,16 +10,16 @@
       - label: red
     - prefs:
       - template-for-dispvms: true
+    - features:
+      - enable:
+        - appmenus-dispvm
+      - set:
+        - menu-items: "io.gitlab.librewolf-community.desktop io.github.ungoogled_software.ungoogled_chromium.desktop"
+        - default-menu-items: "io.gitlab.librewolf-community.desktop io.github.ungoogled_software.ungoogled_chromium.desktop"
 
 'qvm-volume extend {{ pillar.names.dispvms.browsers }}:private 12Gi':
   cmd.run
 
-'dvm-browsers.vm - qvm.features':
-  qvm.features:
-   - name: {{ pillar.names.dispvms.browsers }}
-   - set:
-     - menu-items: "io.gitlab.librewolf-community.desktop io.github.ungoogled_software.ungoogled_chromium.desktop"
-     - default-menu-items: "io.gitlab.librewolf-community.desktop io.github.ungoogled_software.ungoogled_chromium.desktop"
-
-'qvm-sync-appmenus --regenerate-only --force-root {{ pillar.names.dispvms.browsers }}':
-  cmd.run
+'qvm-appmenus --update {{ pillar.names.dispvms.browsers }}':
+  cmd.run:
+    - runas: {{ pillar.defaults.dom0_user }} 
