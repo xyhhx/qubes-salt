@@ -2,16 +2,14 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-'dvm-browsers.vm - qvm.present':
-  qvm.present:
+'dvm-browsers.vm':
+  qvm.vm:
     - name: {{ pillar.names.dispvms.browsers }}
-
-'dvm-browsers.vm - qvm.prefs':
-  qvm.prefs:
-    - name: {{ pillar.names.dispvms.browsers }}
-    - template: {{ pillar.names.templates.providers.flatpak }}
-    - label: red
-    - template-for-dispvms: true
+    - present:
+      - template: {{ pillar.names.templates.providers.flatpak }}
+      - label: red
+    - prefs:
+      - template-for-dispvms: true
 
 'qvm-volume extend {{ pillar.names.dispvms.browsers }}:private 12Gi':
   cmd.run
