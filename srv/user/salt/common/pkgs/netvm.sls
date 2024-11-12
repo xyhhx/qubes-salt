@@ -24,7 +24,7 @@
       - notification-daemon
       - polkit
       - @hardware-support
-{% if grains['os_family']|lower == 'redhat' %}
+{% elif grains['os_family']|lower == 'redhat' %}
       - wpasupplicant
       - ntpd
 {% endif %}
