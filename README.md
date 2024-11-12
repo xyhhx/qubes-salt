@@ -1,8 +1,8 @@
 <div align="center">
 
-# my qubes oS saltstack configuration
+# my qubes os saltstack configuration
 
-an attempt to rewrite my qubes oS setup as saltstack configuration.
+an attempt to rewrite my qubes os setup as saltstack configuration.
 
 [canonical source](https://git.sr.ht/~xyhhx/qubes-salt)
 
