@@ -16,4 +16,4 @@
     - clone:
       - source: '{{ base_template }}'
     - prefs:
-      - label: gray
+      - label: black
