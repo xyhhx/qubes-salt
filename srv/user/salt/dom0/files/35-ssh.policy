@@ -1,2 +1,2 @@
-# vi: set ts=2 sw=2 et number:
+# vi: set syntax=yaml ts=2 sw=2 et number:
 qubes.SshAgent  *  @anyvm  @default  ask target=sys-onlykey

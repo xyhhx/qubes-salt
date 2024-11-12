@@ -1,4 +1,4 @@
-# vi: set ts=2 sw=2 et number
+# vi: set syntax=yaml ts=2 sw=2 et number
 admin.Events  *  sys-audio  sys-audio               allow   target=dom0
 admin.Events  *  sys-audio  @adminvm                allow   target=dom0
 admin.Events  *  sys-audio  @tag:audiovm-sys-audio  allow   target=dom0
