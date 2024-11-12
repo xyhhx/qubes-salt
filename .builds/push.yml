@@ -5,10 +5,10 @@ packages:
 sources:
   - https://git.sr.ht:~xyhhx/qubes-salt
 secrets:
-  - c82fa2e8-b83f-4af6-878c-bd34b4a9e88e 
+  - 7c704da2-71d6-42be-836a-0f09b1d9e452
   - 0cae6893-81a1-4712-b0be-a7a37317c074
 environment:
-  repo_name: qubes-salt 
+  repo_name: qubes-salt
 
   github_username: xyhhx
   github_repo: xyhhx/qubes-salt
