@@ -20,6 +20,7 @@ user:
     - templates.on-debian-12-minimal
     - templates.on-kicksecure-17
     - templates.on-fedora-40-minimal
+    - templates.on-fedora-40-xfce
 
     # Providers
     - templates.provides-browsers-on-fedora
