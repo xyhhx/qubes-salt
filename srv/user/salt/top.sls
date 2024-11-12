@@ -1,4 +1,4 @@
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+# vim: set ts=2 sw=2 sts=2 et :
 #
 # 1) Intial Setup: sync any modules, etc
 # --> qubesctl saltutil.sync_all
@@ -16,8 +16,10 @@
 # === User Defined Salt States ================================================
 user:
   '*':
+    # Base OS templates
     - templates.on-debian-12-minimal
     - templates.on-kicksecure-17
-    - templates.provides-flatpak
-    - appvms.dvm-browsers
+    - templates.on-fedora-40-minimal
 
+    # Providers
+    - templates.provides-browsers-on-fedora

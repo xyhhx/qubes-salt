@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eux
+set -euxo pipefail
 
 # This script is used to send the repo up to dom0. It's intended to be used via
 # Make, by running `make lift $domU`. Make will call this script from dom0.

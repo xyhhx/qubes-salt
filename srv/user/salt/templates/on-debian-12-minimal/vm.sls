@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+# vim: set ts=2 sw=2 sts=2 et :
 
 ---
-debian-12-minimal:
+{% set vm_name = pillar.names.templates.base.debian %}
+{% set base_template = 'debian-12-minimal' %}
+
+'{{ base_template }}':
   qvm.template_installed
 
-'on-debian-12-minimal.vm - qvm.clone'
-  qvm.clone:
-   - name: {{ pillar.names.templates.base.debian }}
-   - source: debian-12-minimal
+'{{ vm_name }}':
+  qvm.vm:
+    - actions:
+      - clone
+      - prefs
+    - clone:
+      - source: '{{ base_template }}'
+    - prefs:
+      - label: gray

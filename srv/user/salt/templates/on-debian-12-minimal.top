@@ -2,7 +2,10 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
+{% set vm_name = pillar.names.templates.base.debian %}
+
 user:
   dom0:
-    - templates.on-debian-12-minimal
-  {{ pillars.names.templates.debian_minimal }}:
+    - templates.on-debian-12-minimal.vm
+  '{{ vm_name }}':
+    - common.base

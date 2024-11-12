@@ -1,7 +1,6 @@
 live_config_reload: true
 
 window:
-  decorations: "None"
   dynamic_padding: true
   padding:
     x: 20

@@ -6,16 +6,10 @@
   pkg.installed:
     - pkgs:
 {% if grains['os_family']|lower == 'debian' %}
-      - fonts-fantasque-sans
-      - fonts-ibm-plex
-      - fonts-inter
-      - fonts-liberation2
-      - fonts-noto
+      # There is no deepin GTK theme on debian
 {% if grains['os_family']|lower == 'redhat' %}
-      - google-noto-*-fonts
-      - ibm-plex-mono-fonts
-      - liberation-fonts
-      - rsms-inter-fonts
+      - deepin-gtk-theme
 {% endif %}
     - skip_suggestions: true
     - install_recommends: false
+

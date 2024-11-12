@@ -1,0 +1,9 @@
+16c16
+< formula_dirs: ['/srv/formulas', '/srv/user_formulas']
+---
+> formula_dirs: ['/srv/formulas', '/srv/user_formulas', '/srv/user/formulas']
+219a220
+>   - /srv/user/salt
+242a244
+>     - /srv/user/pillar
+

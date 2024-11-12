@@ -1,0 +1,13 @@
+# -*- coding: utf-8 -*-
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+
+---
+{% set vm_name = pillar.names.templates.providers.browsers-fedora %}
+
+user:
+  dom0:
+    - templates.provides-browsers-on-fedora.vm
+  '{{ vm_name }}':
+    - common.base
+    - common.hardened_malloc
+    - templates.provides-browsers-on-fedora.pkgs

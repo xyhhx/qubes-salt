@@ -2,8 +2,11 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
+{% set vm_name = pillar.names.templates.base.kicksecure %}
+
 user:
   dom0:
     - templates.on-kicksecure-17.vm
-  {{ pillar.names.templates.base.kicksecure }}:
-    - templates.on-kicksecure-17.configure
+  '{{ vm_name }}':
+    - common.base
+    - common.install-kicksecure
