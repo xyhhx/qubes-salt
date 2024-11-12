@@ -8,6 +8,6 @@ user:
   dom0:
     - templates.provides-browsers-on-fedora.vm
   '{{ vm_name }}':
-    - common.base
+    - common.pkgs.common
     - common.hardened_malloc
     - templates.provides-browsers-on-fedora.pkgs

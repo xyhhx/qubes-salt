@@ -16,6 +16,3 @@
     - install_recommends: false
     - order: 1
 
-include:
-  - common.theme
-  - common.terminal

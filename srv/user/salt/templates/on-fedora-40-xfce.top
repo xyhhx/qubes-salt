@@ -8,5 +8,5 @@ user:
   dom0:
     - templates.on-fedora-40-xfce.vm
   '{{ vm_name }}':
-    - common.base
+    - common.pkgs.common
     - common.hardened_malloc

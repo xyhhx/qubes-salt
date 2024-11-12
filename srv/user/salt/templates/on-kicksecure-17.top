@@ -8,5 +8,5 @@ user:
   dom0:
     - templates.on-kicksecure-17.vm
   '{{ vm_name }}':
-    - common.base
+    - common.pkgs.common
     - common.install-kicksecure

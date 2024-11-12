@@ -24,3 +24,4 @@ user:
 
     # Providers
     - templates.provides-browsers-on-fedora
+    - templates.provides-net

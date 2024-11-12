@@ -11,6 +11,7 @@ names:
     providers:
       browsers-fedora: provides-browsers-on-fedora
       browsers-kicksecure: provides-browsers-on-kicksecure
+      net: provides-net
     stacks:
 
   appvms:
