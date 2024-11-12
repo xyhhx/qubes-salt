@@ -9,5 +9,6 @@ user:
     - templates.provides-browsers-on-fedora.vm
   '{{ vm_name }}':
     - common.pkgs.common
-    - common.hardened_malloc
+    - common.pkgs.hardened_malloc
+    - common.pkgs.audio
     - templates.provides-browsers-on-fedora.pkgs

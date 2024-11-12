@@ -9,4 +9,4 @@ user:
     - templates.on-fedora-40-minimal.vm
   '{{ vm_name }}':
     - common.pkgs.common
-    - common.hardened_malloc
+    - common.pkgs.hardened_malloc
