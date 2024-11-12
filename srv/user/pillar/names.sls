@@ -17,5 +17,4 @@ names:
 
   appvms:
   dispvms:
-    browsers: dvm-browsers
   standalones:
