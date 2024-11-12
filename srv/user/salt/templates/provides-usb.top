@@ -2,12 +2,11 @@
 # vim: set ts=2 sw=2 sts=2 et :
 
 ---
-{% set vm_name = pillar.names.templates.providers.net %}
+{% set vm_name = pillar.names.templates.providers.usb %}
 
 user:
   dom0:
-    - templates.provides-net.vm
+    - templates.provides-usb.vm
   '{{ vm_name }}':
     - common.pkgs.common
     - common.pkgs.hardened_malloc
-    - common.pkgs.netvm

@@ -2,7 +2,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 
 ---
-{% set vm_name = pillar.names.templates.providers.browsers_fedora %}
+{% set vm_name = pillar.names.templates.providers.usb %}
 {% set base_template = 'fedora-40-minimal' %}
 
 {% from 'utils.sls' import create_template with context %}

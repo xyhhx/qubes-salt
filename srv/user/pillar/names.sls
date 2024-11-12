@@ -10,9 +10,10 @@ names:
       fedora_xfce: on-fedora-40-xfce
     providers:
       audio: provides-audio
-      browsers-fedora: provides-browsers-on-fedora
-      browsers-kicksecure: provides-browsers-on-kicksecure
+      browsers_fedora: provides-browsers-on-fedora
+      browsers_kicksecure: provides-browsers-on-kicksecure
       net: provides-net
+      usb: provides-usb
     stacks:
 
   appvms:

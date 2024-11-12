@@ -2,7 +2,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 
 ---
-{% set vm_name = pillar.names.templates.providers.provides-audio %}
+{% set vm_name = pillar.names.templates.providers.audio %}
 
 user:
   dom0:

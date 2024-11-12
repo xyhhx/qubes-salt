@@ -24,19 +24,62 @@ EOF
 }
 
 unpack() {
+  required "source vm" "${1}"
+  required "source directory" "${2}"
+
   src_vm="${1}"
   src_dir="${2}"
-  src_tarball="/tmp/${default_tarball}"
   tmp_dir=$(mktemp -d)
-  qvm-run --pass-io "${src_vm}" "cd ${src_dir} && ${src_dir}/scripts/lift.sh"
-  qvm-run --pass-io "${src_vm}" "cat ${src_tarball}" > /tmp/salt.tar.xz
-  tar xjvf /tmp/salt.tar.xz .
+  src_tarball="/tmp/${default_tarball}"
+  backup="/tmp/salt-backup/$(echo "${RANDOM}" | base64).bak"
+
   pushd "${tmp_dir}"
-  mkdir -p ~/qubes_salt
-  rsync -azP . ~/qubes_salt
+  qvm-run --pass-io "${src_vm}" "cd ${src_dir} && ${src_dir}/scripts/lift.sh"
+  (qvm-run --pass-io "${src_vm}" "cat ${src_tarball}" > "${tmp_dir}/salt.tar.xz")
+
+  mkdir -p "src/"
+  cd src
+  tar xjvf "${tmp_dir}/salt.tar.xz"
+
+  mkdir -p "${backup}"
+  sudo mv /srv/user "${backup}/srvuser"
+  if [[ -d "${HOME}/salt" ]]; then
+    sudo mv "${HOME}/salt" "${backup}"
+  fi
+
+  mkdir -p "${HOME}/salt"
+  sudo mv ./srv/user /srv/user
+  rmdir srv
+  mv ./* "${HOME}/salt"
+  ln -s /srv "${HOME}/salt/srv"
   popd
-  sudo rsync -azP ~/qubes_salt/srv /
-  rm /tmp/salt.tar.xz
+
+  rm -rf "${tmp_dir}"
+  sudo qubesctl saltutil.clear_cache
+  sudo qubesctl saltutil.sync_all
+
+  cat <<-EOF
+  --
+
+  The project has been installed.
+
+  Previous version backed up to: ${backup}
+  Current version installed to: /srv/user
+  The rest of the project is available at: ${HOME}/salt
+
+  --
+EOF
+}
+
+required() {
+  if [[ -z "${2}" ]]; then
+    cat <<-EOF
+    ${1} is a required argument.
+    Please call this script like make lift \$src_vm \$src_dir
+    Exiting...
+EOF
+    exit 1
+  fi
 }
 
 if [ "$(hostname)" == "dom0" ]; then
@@ -44,3 +87,4 @@ if [ "$(hostname)" == "dom0" ]; then
 else
   pack
 fi
+

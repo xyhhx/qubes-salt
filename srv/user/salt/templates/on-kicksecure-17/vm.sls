@@ -5,15 +5,5 @@
 {% set vm_name = pillar.names.templates.base.kicksecure %}
 {% set base_template = 'debian-12-minimal' %}
 
-'{{ base_template }}':
-  qvm.template_installed
-
-'{{ vm_name }}':
-  qvm.vm:
-    - actions:
-      - clone
-      - prefs
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - label: black
+{% from 'utils.sls' import create_template with context %}
+{{ create_template(vm_name, base_template, { "label": "black" }) }}
