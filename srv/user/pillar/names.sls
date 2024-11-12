@@ -9,6 +9,7 @@ names:
       fedora: on-fedora-40-minimal
       fedora_xfce: on-fedora-40-xfce
     providers:
+      audio: provides-audio
       browsers-fedora: provides-browsers-on-fedora
       browsers-kicksecure: provides-browsers-on-kicksecure
       net: provides-net

@@ -23,5 +23,6 @@ user:
     - templates.on-fedora-40-xfce
 
     # Providers
+    - templates.provides-audio
     - templates.provides-browsers-on-fedora
     - templates.provides-net
