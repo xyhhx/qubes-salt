@@ -1,0 +1,5 @@
+# vi: set  ts=2  sw=2  et  number:
+
+qubes.InputMouse     *  disp-sys-usb  dom0  ask  default_target=dom0
+qubes.InputKeyboard  *  disp-sys-usb  dom0  ask  default_target=dom0
+qubes.InputTablet    *  disp-sys-usb  dom0  ask  default_target=dom0

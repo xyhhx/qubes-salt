@@ -1,0 +1,5 @@
+# vi: set ts=2 sw=2 et number
+qubes.UpdatesProxy    *  @type:TemplateVM  @anyvm    allow  target=disp-sys-firewall-linux-wifi
+qubes.ConnectTCP      *  @anyvm            @anyvm    allow
+qubes.Xdpi            *  @anyvm            @adminvm  allow  notify=yes
+qubes.ClipboardPaste  *  @anyvm            @anyvm    allow

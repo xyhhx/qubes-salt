@@ -1,0 +1,12 @@
+# vi: set  ts=2  sw=2  et  number:
+
+qubes.InputMouse     *  disp-sys-usb  @adminvm  ask  default_target=dom0
+qubes.InputKeyboard  *  disp-sys-usb  @adminvm  ask  default_target=dom0
+qubes.InputTablet    *  disp-sys-usb  @adminvm  ask  default_target=dom0
+
+qubes.Filecopy  * sys-gui-gpu  @anyvm  allow
+
+admin.Events  * sys-gui-gpu  @anyvm  allow  notify=yes
+admin.Events  * @anyvm       @anyvm  allow  notify=yes
+
+qubes.VMShell  *  sys-gui-gpu  dom0  allow

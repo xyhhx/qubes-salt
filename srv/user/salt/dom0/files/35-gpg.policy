@@ -1,0 +1,3 @@
+# vi: set ts=2 sw=2 et number:
+qubes.Gpg2  * @anyvm  @default  allow target=sys-onlykey
+qubes.Gpg   * @anyvm  @anyvm    ask

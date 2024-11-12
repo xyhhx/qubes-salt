@@ -1,0 +1,40 @@
+# vi: set ts=2 sw=2 et number
+admin.Events  *  sys-audio  sys-audio               allow   target=dom0
+admin.Events  *  sys-audio  @adminvm                allow   target=dom0
+admin.Events  *  sys-audio  @tag:audiovm-sys-audio  allow   target=dom0
+admin.Events  *  sys-audio  dom0                    allow
+
+admin.Events  +domain-stopped          sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.Events  +domain-shutdown         sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.Events  +domain-start            sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.Events  +connection-established  sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+
+admin.vm.CurrentState *   sys-audio     sys-audio               allow  target=dom0
+admin.vm.CurrentState *   sys-audio     @adminvm                allow  target=dom0
+admin.vm.CurrentState *   sys-audio     @tag:audiovm-sys-audio  allow  target=dom0
+
+admin.vm.List  *  sys-audio  sys-audio               allow  target=dom0
+admin.vm.List  *  sys-audio  @adminvm                allow  target=dom0
+admin.vm.List  *  sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+
+admin.vm.property.Get  +audiovm      sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.vm.property.Get  +xid          sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.vm.property.Get  +stubdom_xid  sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.vm.property.Get  +virt_mode    sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+
+admin.vm.property.Get  *  sys-audio  @anyvm  allow
+
+admin.vm.feature.CheckWithTemplate  +gui                        sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.vm.feature.CheckWithTemplate  +audio                      sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.vm.feature.CheckWithTemplate  +audio-model                sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.vm.feature.CheckWithTemplate  +supported-service.pipewire sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.vm.feature.CheckWithTemplate  +audio-low-latency          sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+
+admin.vm.feature.CheckWithTemplate  *  sys-audio  @anyvm  deny  notify=no
+
+admin.vm.device.usb.Available  *  sys-audio  disp-sys-usb  allow
+
+admin.vm.property.GetAll  *  sys-audio  sys-audio               allow  target=dom0
+admin.vm.property.GetAll  *  sys-audio  @tag:audiovm-sys-audio  allow  target=dom0
+admin.vm.property.GetAll  *  sys-audio  @adminvm                allow  target=dom0
+admin.vm.property.GetAll  *  sys-audio  @anyvm                  deny notify=no

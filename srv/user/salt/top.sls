@@ -15,6 +15,8 @@
 
 # === User Defined Salt States ================================================
 user:
+  dom0:
+    - dom0.configure
   '*':
     # Base OS templates
     - templates.on-debian-12-minimal
