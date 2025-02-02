@@ -2,8 +2,11 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-alacritty:
-  pkg.installed
+
+'{{ vm_name }}':
+  pkg.installed:
+    pkgs:
+      - alacritty
 {% if grains.os_family|lower == 'debian' %}
       - libxkbcommon-x11-0
 {% if grains.os_family|lower == 'redhat' %}
