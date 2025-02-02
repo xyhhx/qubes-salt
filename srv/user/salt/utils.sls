@@ -8,11 +8,13 @@
   qvm.template_installed:
     - name: '{{ base_template }}'
 
-'{{ vm_name }}':
+'{{ vm_name }} - qvm.vm':
   qvm.vm:
+    - name: '{{ vm_name }}'
     - actions:
       - clone
       - prefs
+      - tags
     - clone:
       - source: '{{ base_template }}'
     - prefs: {{
@@ -23,5 +25,8 @@
         prefs,
       ])
     }}
+    - tags:
+      - add:
+        - salt-managed
 {% endmacro %}
 

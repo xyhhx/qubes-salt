@@ -11,4 +11,4 @@ user:
     - common.pkgs.common
     - common.pkgs.hardened_malloc
     - common.pkgs.audio
-    - templates.provides-browsers-on-fedora.pkgs
+    - templates.provides-browsers-on-fedora.configure

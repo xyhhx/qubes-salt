@@ -13,7 +13,7 @@
       - fonts-noto
 {% if grains['os_family']|lower == 'redhat' %}
       - google-noto-*-fonts
-      - ibm-plex-mono-fonts
+      - ibm-plex-fonts-all
       - liberation-fonts
       - rsms-inter-fonts
 {% endif %}
