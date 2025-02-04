@@ -7,5 +7,5 @@
 user:
   dom0:
     - appvms.sys-onlykey.vm
-  '{{ vm_name }}':
+  '{{ vm_name }} or dom0':
     - appvms.sys-onlykey.configure
