@@ -5,7 +5,8 @@
 include:
   - common.https_proxy
 
-hardened-chromium:
+trivalent:
   pkgrepo.managed:
-    - copr: secureblue/hardened-chromium
+    - copr: secureblue/trivalent
   pkg.installed:
+    - trivalent
