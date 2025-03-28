@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
 
@@ -10,6 +9,6 @@
 
 '{{ vm_name }}':
   qvm.service:
-      - enable:
-        - updates-proxy-setup
+    - enable:
+      - updates-proxy-setup
 

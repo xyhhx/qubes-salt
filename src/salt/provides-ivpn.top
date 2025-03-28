@@ -10,4 +10,4 @@ user:
   '{{ vm_name }}':
     - common.pkgs.common
     - common.pkgs.hardened_malloc
-    - common.pkgs.netvm
+    - templates.provides-ivpn.configure

@@ -12,7 +12,7 @@ names:
       audio: "provides-audio"
       browsers_fedora: "provides-browsers-on-fedora"
       browsers_kicksecure: "provides-browsers-on-kicksecure"
-      ivpn: "provide-ivpn"
+      ivpn: "provides-ivpn"
       mirageos_firewall:  "provides-mirageos-firewall"
       net: "provides-net"
       usb: "provides-usb"

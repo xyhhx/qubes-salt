@@ -4,7 +4,7 @@
 
 {% if grains['id'] == 'dom0' %}
 
-'/etc/qubes/policy.d/user.d/49-onlykey.policy':
+'dom0 - /etc/qubes/policy.d/user.d/49-onlykey.policy':
   file.managed:
     - source: 'salt://appvms/sys-onlykey/files/49-onlykey.policy'
     - mode: '0640'
