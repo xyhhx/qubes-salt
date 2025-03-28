@@ -11,5 +11,6 @@
     - pkgs:
       - ivpn-ui
       - ivpn
+    - refresh: true
     - skip_suggestions: true
     - install_recommends: false
