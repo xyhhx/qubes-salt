@@ -1,8 +1,10 @@
+<!-- vim: set wrap : -->
+
 # my qubes os saltstack configuration
 
 an attempt to rewrite my qubes os setup as saltstack configuration.
 
-[canonical source](https://git.sr.ht/~xyhhx/qubes-salt)
+[canonical source](https://git.sr.ht/~xyhhx/qubes-salts)
 
 mirrors:
 
@@ -12,18 +14,29 @@ mirrors:
 
 ---
 
-## usage
+## quick start
+
+### prerequisites
+
+you must have already enabled the user salts. you can run the following in dom0 to do that:
+
+```sh
+sudo qubesctl top.enable qubes.user-dirs
+sudo qubesctl state.apply
+```
 
 ### installation
 
 - clone the repo in any vm
-- in the dev domain:
-  - get the command to run in dom0 by running `make cmd-install-dom0`
+- the commands to run in dom0 can be found by running `make cmd-install-domu` from the project workspace. **please inspect them before running them!**
+- now you may enable tops as you please, and apply their states/highstates accordingly
 
 ---
 
-some references i referred to (thanks!):
+some resources i referenced while working on this (thanks!):
 
 - https://git.drkhsh.at/salt-n-pepper/file/README.md.html
 - https://forum.qubes-os.org/t/qubes-salt-beginners-guide/20126
 - https://github.com/ben-grande/qusal
+- https://github.com/gonzalo-bulnes/qubes-mgmt-salt-user
+- https://github.com/unman/shaker
