@@ -17,5 +17,41 @@
     - pkgs:
       - ivpn
       - ivpn-ui
-    - skip_suggestions: true
+    - skip_suggestions: tru
     - install_recommends: false
+
+/etc/systemd/system/dnat-to-ns.service:
+  file.managed:
+    - source: 'salt://templates/provides-ivpn/files/dnat-to-ns.service'
+    - mode: 0640
+    - owner: root
+    - group: root
+
+/etc/systemd/system/dnat-to-ns.path:
+  file.managed:
+    - source: 'salt://templates/provides-ivpn/files/dnat-to-ns.path'
+    - mode: 0640
+    - owner: root
+    - group: root
+
+/etc/systemd/system/dnat-to-ns-boot.service:
+  file.managed:
+    - source: 'salt://templates/provides-ivpn/files/dnat-to-ns-boot.service'
+    - mode: 0640
+    - owner: root
+    - group: root
+
+/etc/systemd/system/systemd-resolved.conf.d/override.conf:
+  file.managed:
+    - source: 'salt://templates/provides-ivpn/files/systemd_override.conf'
+    - mode: 0640
+    - owner: root
+    - group: root
+    - makedirs: true
+
+dnat-to-ns.path:
+  service.enabled
+
+dnat-to-ns-boot.service:
+  service.enabled
+
