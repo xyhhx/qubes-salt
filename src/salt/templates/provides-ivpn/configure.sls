@@ -12,6 +12,7 @@
     - humanname: "IVPN Software"
     - baseurl: "https://repo.ivpn.net/stable/fedora/generic/$basearch"
     - key_url: "https://repo.ivpn.net/stable/fedora/generic/repo.gpg"
+    - gpgcheck: true
     - require_in:
       - ivpn
       - ivpn-ui
@@ -21,7 +22,7 @@
     - pkgs:
       - ivpn
       - ivpn-ui
-    - skip_suggestions: tru
+    - skip_suggestions: true
     - install_recommends: false
 
 /etc/systemd/system/dnat-to-ns.service:

@@ -6,6 +6,10 @@ USER_SALT_SRV      ?= /srv/user
 CURRENT_HOSTNAME     := $(shell hostname)
 CURRENT_PATH         := $(realpath .)
 
+QUBESCTL_OPTS :=
+QUBESCTL_OPTS += --force-color
+QUBESCTL_OPTS += --show-output
+
 ifeq ($(CURRENT_HOSTNAME), "dom0")
 	IS_DOM0 := true
 else
@@ -55,6 +59,10 @@ cmd-install-dom0:
 # these tasks are intended to be run in dom0
 # ----------------------------------------------------------------------------
 
+# TODO: should this be a macro?
+#
+# checks if make is running in dom0. really shouldn't be called manually
+# usage: make check-is-dom0
 .PHONY: check-is-dom0
 check-is-dom0:
 ifeq ($(IS_DOM0), "false")
@@ -63,23 +71,55 @@ endif
 
 $(BUNDLE_FILE): get-bundle-from-domu
 
+# TODO: should this be a macro?
+#
+# ephemerally creates a git bundle in the configured $REMOTE_DOMAIN, and
+# copies it into $BUNDLE_FILE (/tmp/salt.bundle by default)
+# usage: make get-bundle-from-domu
 .PHONY: get-bundle-from-domu
 get-bundle-from-domu: check-is-dom0
 	qvm-run -p $(REMOTE_DOMAIN) \
 		'cd $(REMOTE_DOMAIN_PATH) && git bundle create - --all' \
 		> $(BUNDLE_FILE)
 
-.PHONY: git-pull-from-bundle
-git-pull-from-bundle: $(BUNDLE_FILE) check-is-dom0
+# TODO: should this be a macro?
+#
+# wrapper around `git pull --rebase`
+# usage: make git-pull
+.PHONY: git-pull
+git-pull: $(BUNDLE_FILE) check-is-dom0
 	git pull --rebase
 
-.PHONY: pull-changes
-pull-changes: get-bundle-from-domu git-pull-from-bundle
+# pulls changes from the configured domU. wrapper around get-bundle-from-domu
+# and git-pull
+# usage: make pull
+.PHONY: pull
+pull: get-bundle-from-domu git-pull
 
+# runs all highstates
+# usage: make salt-highstate-all
 .PHONY: salt-highstate-all
 salt-highstate-all: check-is-dom0
-	qubesctl --all state.highstate
+	qubesctl $(QUBESCTL_OPTS) --all state.highstate
 
+# TODO: this doesn't work...
+#
+# runs highstate against given target(s)
+# usage: TARGETS=provides-net make salt-highstate
 .PHONY: salt-highstate
 salt-highstate: check-is-dom0
-	qubesctl --skip-dom0 --targets $$(TARGETS) state.highstate
+	qubesctl $(QUBESCTL_OPTS) \
+		--skip-dom0 \
+		--targets $(TARGETS) \
+		state.highstate
+
+# runs a specific sls against given target(s)
+# usage: TARGETS=provides-net make salt-sls templates.provides-net.configure
+.PHONY: salt-sls
+salt-sls: check-is-dom0
+	qubesctl $(QUBESCTL_OPTS) \
+		--skip-dom0 \
+		--targets $(TARGETS) \
+		state.sls \
+		$(filter-out $@, $(MAKECMDGOALS)) \
+		saltenv=user
