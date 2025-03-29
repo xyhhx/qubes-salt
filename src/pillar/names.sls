@@ -33,5 +33,6 @@ names:
     net_lan: "sys-net-lan"
     net_wifi: "sys-net-wifi"
     onlykey: "sys-onlykey"
+    vpn_ivpn: "sys-vpn-ivpn"
 
 
