@@ -4,18 +4,29 @@
 # Avoid applying the state by mistake to dom0
 {% if grains['nodename'] != 'dom0' %}
 
+include:
+  - common.https_proxy
+#
 # Set vm_name from pillar data
 {% set vm_name = pillar.names.templates.providers.ivpn %}
 
-'{{ vm_name }}__pkgrepo.managed':
-  pkgrepo.managed:
-    - humanname: "IVPN Software"
-    - baseurl: "https://repo.ivpn.net/stable/fedora/generic/$basearch"
-    - key_url: "https://repo.ivpn.net/stable/fedora/generic/repo.gpg"
-    - gpgcheck: true
-    - require_in:
-      - ivpn
-      - ivpn-ui
+
+/etc/yum.repos.d/ivpn.repo:
+  file.managed:
+    - source: "salt://templates/provides-ivpn/files/ivpn.repo"
+    - user: root
+    - group: root
+    - mode: 0644
+
+# '{{ vm_name }}__pkgrepo.managed':
+#   pkgrepo.managed:
+#     - humanname: "IVPN Software"
+#     - baseurl: "https://repo.ivpn.net/stable/fedora/generic/$basearch"
+#     - key_url: "https://repo.ivpn.net/stable/fedora/generic/repo.gpg"
+#     - gpgcheck: true
+#     - require_in:
+#       - ivpn
+#       - ivpn-ui
 
 '{{ vm_name }}__pkg.installed':
   pkg.installed:
