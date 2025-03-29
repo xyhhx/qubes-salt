@@ -18,16 +18,6 @@ include:
     - group: root
     - mode: 0644
 
-# '{{ vm_name }}__pkgrepo.managed':
-#   pkgrepo.managed:
-#     - humanname: "IVPN Software"
-#     - baseurl: "https://repo.ivpn.net/stable/fedora/generic/$basearch"
-#     - key_url: "https://repo.ivpn.net/stable/fedora/generic/repo.gpg"
-#     - gpgcheck: true
-#     - require_in:
-#       - ivpn
-#       - ivpn-ui
-
 '{{ vm_name }}__pkg.installed':
   pkg.installed:
     - pkgs:
