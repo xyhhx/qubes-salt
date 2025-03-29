@@ -40,3 +40,4 @@ some resources i referenced while working on this (thanks!):
 - https://github.com/ben-grande/qusal
 - https://github.com/gonzalo-bulnes/qubes-mgmt-salt-user
 - https://github.com/unman/shaker
+- https://github.com/freedomofpress/securedrop-workstation
