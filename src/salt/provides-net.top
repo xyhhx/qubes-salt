@@ -9,4 +9,5 @@ user:
   '{{ vm_name }}':
     - common.pkgs.common
     - common.pkgs.hardened_malloc
+    - common.pkgs.network
     - common.pkgs.netvm

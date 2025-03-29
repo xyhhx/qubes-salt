@@ -8,15 +8,6 @@
 'common.networking - install':
   pkg.installed:
     - pkgs:
-      - pciutils
-      - psmisc
-      - gnome-keyring
-      - qubes-core-agent-networking
-      - qubes-core-agent-network-manager
-      - telnet
-      - tcpdump
-      - nmap
-      - netcat
 {% if grains['os_family']|lower == 'redhat' %}
       - NetworkManager-wifi
       - network-manager-applet
