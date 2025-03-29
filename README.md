@@ -26,3 +26,4 @@ some references i referred to (thanks!):
 
 - https://git.drkhsh.at/salt-n-pepper/file/README.md.html
 - https://forum.qubes-os.org/t/qubes-salt-beginners-guide/20126
+- https://github.com/ben-grande/qusal
