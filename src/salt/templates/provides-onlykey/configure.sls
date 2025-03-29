@@ -1,7 +1,13 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
 
-'provides-onlykey__pkg.installed':
+# Avoid applying the state by mistake to dom0
+{% if grains['nodename'] != 'dom0' %}
+
+# Set vm_name from pillar data
+{% set vm_name = pillar.names.templates.providers.onlykey %}
+
+'{{ vm_name }}__pkg.installed':
   pkg.installed:
     - pkgs:
       - libudev-devel
@@ -19,14 +25,14 @@
 
 /etc/qubes-rpc/onlykey.SshAgent:
   file.managed:
-    - source: salt://templates/provides-onlykey/files/onlykey.SshAgent
+    - source: "salt://templates/provides-onlykey/files/onlykey.SshAgent"
     - user: user
     - group: user
     - mode: 0750
 
 /etc/udev/rules.d/49-onlykey.rules:
   file.managed:
-    - source: salt://templates/provides-onlykey/files/49-onlykey.rules
+    - source: "salt://templates/provides-onlykey/files/49-onlykey.rules"
     - user: user
     - group: user
     - mode: 0750
@@ -40,3 +46,5 @@
 
 'udevadm trigger':
   cmd.run
+
+{% endif %}

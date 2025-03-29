@@ -1,7 +1,11 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
-{% set vm_name = "provides-ivpn" %}
-# {% set vm_name = pillar.names.templates.providers.ivpn %}
+
+# Avoid applying the state by mistake to dom0
+{% if grains['nodename'] != 'dom0' %}
+
+# Set vm_name from pillar data
+{% set vm_name = pillar.names.templates.providers.ivpn %}
 
 '{{ vm_name }}__pkgrepo.managed':
   pkgrepo.managed:
@@ -55,3 +59,4 @@ dnat-to-ns.path:
 dnat-to-ns-boot.service:
   service.enabled
 
+{% endif %}
