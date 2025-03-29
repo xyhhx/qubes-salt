@@ -1,10 +1,10 @@
 <!-- vim: set wrap : -->
 
-# my qubes os saltstack configuration
+# qubes-mgmt-salt-user
 
 an attempt to rewrite my qubes os setup as saltstack configuration.
 
-[canonical source](https://git.sr.ht/~xyhhx/qubes-salts)
+[canonical source](https://git.sr.ht/~xyhhx/qubes-mgmt-salt-user)
 
 mirrors:
 
@@ -38,6 +38,6 @@ some resources i referenced while working on this (thanks!):
 - https://git.drkhsh.at/salt-n-pepper/file/README.md.html
 - https://forum.qubes-os.org/t/qubes-salt-beginners-guide/20126
 - https://github.com/ben-grande/qusal
-- https://github.com/gonzalo-bulnes/qubes-mgmt-salt-user
+- https://github.com/gonzalo-bulnes/qubes-mgmt-salt-user (obviously)
 - https://github.com/unman/shaker
 - https://github.com/freedomofpress/securedrop-workstation

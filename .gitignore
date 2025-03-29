@@ -1,1 +1,5 @@
 .env
+*.env
+_out/
+pkg/**/VERSION
+pkg/**/*.spec
