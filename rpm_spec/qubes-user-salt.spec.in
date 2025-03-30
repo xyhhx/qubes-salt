@@ -1,16 +1,19 @@
 # vim: set syn=spec :
 
-Name:           qubes-mgmt-salt-user
+Name:           ${NAME}
 Version:        ${VERSION}
-Release:        %autorelease
+Release:        ${RELEASE}
 Summary:        My Qubes OS salt formulae
 
 License:        HL3-FULL
-URL:            ${SPEC_URL}
+URL:            https://git.sr.ht/~xyhhx/qubes-user-salt
 Source0:        %{name}-%{version}.tar.gz
 
 Group:          System administration tools
 BuildArch:      noarch
+
+Requires:       qubes-mgmt-salt-base
+BuildRequires:  make
 
 %description
 A series of salt formulae to provision a Qubes OS how I like it
@@ -25,7 +28,10 @@ make
 make install DESTDIR=%{buildroot}
 
 %files
+%defattr(-,root,root)
 %license LICENSE
 %doc README.md
+%config(noreplace) /srv/user/pillar/top.sls
+%attr(750,root,root) /srv/user/*
 
-%autochangelog
+%changelog
