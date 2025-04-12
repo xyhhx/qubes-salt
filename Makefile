@@ -27,6 +27,12 @@ TITO_ARGS += -o $(OUT_DIR)
 TITO_ARGS += --no-sudo
 TITO_ARGS += --quiet
 TITO_ARGS += --ignore-missing-config
+ifeq ($(DRY_RUN), true)
+TITO_ARGS += --test
+endif
+ifeq ($(DEBUG), true)
+TITO_ARGS += --debug
+endif
 
 # common opts for qubectl
 QUBESCTL_OPTS :=
@@ -36,7 +42,8 @@ QUBESCTL_OPTS += --show-output
 # set up vars for the spec file
 export NAME    ?= $(notdir $(CURDIR))
 export VERSION ?= $(shell cat $(WORKDIR)/VERSION)
-export RELEASE ?= 1%{?dist}
+export RELEASE ?= 1
+
 
 ifeq ($(CURRENT_HOSTNAME), "dom0")
 CURRENT_QUBESDB_NAME := "dom0"
@@ -45,6 +52,12 @@ else
 CURRENT_QUBESDB_NAME := $(shell qubesdb-read /name)
 IS_DOM0 := false
 endif
+
+.DEFAULT_GOAL := all
+
+.PHONY: all
+all:
+	# noop
 
 .PHONY: verify-sources
 verify-sources:
@@ -60,13 +73,28 @@ $(OUT_DIR)/Makefile: generate-pkg-makefile
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
 
-build: verify-sources generate-pkg-spec generate-pkg-makefile
-	cp -r $(SRC_DIR) $(OUT_DIR)
-	pushd $(OUT_DIR) && \
-		tito build --rpm $(TITO_ARGS) && \
-		popd
+.PHONY: tag
+tag:
+		git tag -s "$(NAME)-$(VERSION)-$(RELEASE)"
+
+.PHONY: build
+build:
+	tito build --rpm $(TITO_ARGS) .
 	@printf "\n\n%s\n" "Built the package to $(OUT_DIR)"
 	@-tree "$(OUT_DIR)"
+
+# .PHONY: build
+# build: $(OUT_DIR)/$(NAME).spec $(OUT_DIR)/Makefile
+# 	cp -r $(SRC_DIR) $(OUT_DIR)
+# 	pushd $(OUT_DIR) && \
+# 		tito build --rpm $(TITO_ARGS) . && \
+# 		popd
+# 	@printf "\n\n%s\n" "Built the package to $(OUT_DIR)"
+# 	@-tree "$(OUT_DIR)"
+
+.PHONY: release
+release: verify-sources tag generate-pkg-makefile generate-pkg-spec build
+
 
 generate-pkg-makefile: $(OUT_DIR)
 	printf \
@@ -245,3 +273,4 @@ install: check-is-dom0
 	install -D -m0644 src/salt/dispvms/dvm-browsers-fedora/vm.sls $(DESTDIR)$(USER_SALT_SRV)/salt/dispvms/dvm-browsers-fedora/vm.sls
 
 	install -D -m0644 src/salt/utils/macros/create_template.sls $(DESTDIR)$(USER_SALT_SRV)/salt/utils/macros/create_template.sls
+
