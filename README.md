@@ -1,10 +1,10 @@
 <!-- vim: set wrap : -->
 
-# qubes-user-salt
+# qubes-mgmt-salt-user
 
 an attempt to rewrite my qubes os setup as saltstack configuration.
 
-[canonical source](https://git.sr.ht/~xyhhx/qubes-user-salt)
+[canonical source](https://git.sr.ht/~xyhhx/qubes-mgmt-salt-user)
 
 mirrors:
 

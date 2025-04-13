@@ -3,13 +3,13 @@ CURRENT_HOSTNAME := $(shell hostname)
 CURRENT_PATH     := $(realpath .)
 WORKDIR          := $(CURRENT_PATH)
 OUT_DIR	  			 := $(WORKDIR)/_out
-SPEC_TPL  			 := $(WORKDIR)/rpm_spec/qubes-user-salt.spec.in
+SPEC_TPL  			 := $(WORKDIR)/rpm_spec/qubes-mgmt-salt-user.spec.in
 SRC_DIR					 := $(WORKDIR)/src
-TMP              := $(shell mktemp -d /tmp/qubes-user-salt-XXXXXX-buildroot)
+TMP              := $(shell mktemp -d /tmp/qubes-mgmt-salt-user-XXXXXX-buildroot)
 
 # set some vars that if they're unset
 BUNDLE_FILE        ?= /tmp/salt.bundle
-REMOTE_DOMAIN_PATH ?= /home/user/qubes-user-salt
+REMOTE_DOMAIN_PATH ?= /home/user/qubes-mgmt-salt-user
 SALT_ENV					 ?= user
 USER_SALT_DIR 		 ?= $(HOME)/salt
 USER_SALT_SRV 		 ?= /srv/user
@@ -106,7 +106,7 @@ generate-pkg-makefile: $(OUT_DIR)
 
 generate-pkg-spec: $(OUT_DIR)
 	@echo "generating ${NAME}.spec for version: ${VERSION} and release: ${RELEASE}"
-	tail -n +2 "${SPEC_TPL}" | envsubst '$${NAME} $${VERSION} $${RELEASE}' > $(OUT_DIR)/qubes-user-salt.spec
+	tail -n +2 "${SPEC_TPL}" | envsubst '$${NAME} $${VERSION} $${RELEASE}' > $(OUT_DIR)/qubes-mgmt-salt-user.spec
 
 # runs all highstates
 # usage: make salt-highstate-all

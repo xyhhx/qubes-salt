@@ -1,11 +1,11 @@
 
-Name:           qubes-user-salt
-Version:        0.1.1
+Name:           qubes-mgmt-salt-user
+Version:
 Release:        %autorelease
 Summary:        My Qubes OS salt formulae
 
 License:        HL3-FULL
-URL:            https://git.sr.ht/~xyhhx/qubes-user-salt
+URL:            https://git.sr.ht/~xyhhx/qubes-mgmt-salt-user
 Source0:        %{name}-%{version}.tar.gz
 
 Group:          System administration tools
