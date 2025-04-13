@@ -23,16 +23,10 @@ TAG      := $(shell git describe --tag --always --match v[0-9]\* --abbrev)
 # common args for the tito cli
 TITO_ARGS :=
 TITO_ARGS += --offline
-TITO_ARGS += -o $(OUT_DIR)
-TITO_ARGS += --no-sudo
 TITO_ARGS += --ignore-missing-config
-ifeq ($(DRY_RUN), true)
-TITO_ARGS += --test
-endif
+TITO_ARGS += -o $(OUT_DIR)
 ifeq ($(DEBUG), true)
 TITO_ARGS += --debug
-else
-TITO_ARGS += --quiet
 endif
 
 # common opts for qubectl
@@ -65,6 +59,10 @@ all:
 verify-sources:
 	git tag -v `git describe`
 
+.PHONY: tag
+tag:
+	git tag -s "$(NAME)-$(VERSION)-$(RELEASE)"
+
 .PHONY: clean
 clean:
 	rm -rf $(OUT_DIR)
@@ -75,24 +73,15 @@ $(OUT_DIR)/Makefile: generate-pkg-makefile
 $(OUT_DIR):
 	mkdir -p $(OUT_DIR)
 
-.PHONY: tag
-tag:
-		git tag -s "$(NAME)-$(VERSION)-$(RELEASE)"
+.PHONY: test
+test:
+	tito build --rpm $(TITO_ARGS) --test .
 
 .PHONY: build
 build:
 	tito build --rpm $(TITO_ARGS) .
 	@printf "\n\n%s\n" "Built the package to $(OUT_DIR)"
 	@-tree "$(OUT_DIR)"
-
-# .PHONY: build
-# build: $(OUT_DIR)/$(NAME).spec $(OUT_DIR)/Makefile
-# 	cp -r $(SRC_DIR) $(OUT_DIR)
-# 	pushd $(OUT_DIR) && \
-# 		tito build --rpm $(TITO_ARGS) . && \
-# 		popd
-# 	@printf "\n\n%s\n" "Built the package to $(OUT_DIR)"
-# 	@-tree "$(OUT_DIR)"
 
 .PHONY: release
 release: verify-sources tag generate-pkg-makefile generate-pkg-spec build

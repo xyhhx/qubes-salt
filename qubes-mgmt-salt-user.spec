@@ -1,6 +1,6 @@
 
 Name:           qubes-mgmt-salt-user
-Version:
+Version:        0.1.0
 Release:        %autorelease
 Summary:        My Qubes OS salt formulae
 
@@ -33,4 +33,5 @@ make install DESTDIR=%{buildroot}
 %config(noreplace) /srv/user/pillar/top.sls
 %attr(750,root,root) /srv/user/*
 
+%changelog
 %autochangelog
