@@ -1,7 +1,7 @@
 
 Name:           qubes-user-salt
 Version:        0.1.1
-Release:        1%{?dist}
+Release:        %autorelease
 Summary:        My Qubes OS salt formulae
 
 License:        HL3-FULL
@@ -33,7 +33,4 @@ make install DESTDIR=%{buildroot}
 %config(noreplace) /srv/user/pillar/top.sls
 %attr(750,root,root) /srv/user/*
 
-%changelog
-* Fri Apr 11 2025 xyhhx <xyhhx@tuta.io> 0.1.1-1
-- new package built with tito
-
+%autochangelog

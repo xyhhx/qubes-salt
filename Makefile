@@ -15,23 +15,24 @@ USER_SALT_DIR 		 ?= $(HOME)/salt
 USER_SALT_SRV 		 ?= /srv/user
 
 # save some values collected from git
-SHA        := $(shell git describe --match=none --always --abbrev=8)
-TAG        := $(shell git describe --tag --always --match v[0-9]\* --abbrev)
-FULL_TAG   := $(shell git describe --tags >/dev/null 2>/dev/null && git describe --tag --always --match v[0-9]\* --abbrev=0 || echo 'undefined')
-BRANCH     := $(shell git rev-parse --abbrev-ref HEAD)
+BRANCH   := $(shell git rev-parse --abbrev-ref HEAD)
+FULL_TAG := $(shell git describe --tags >/dev/null 2>/dev/null && git describe --tag --always --match v[0-9]\* --abbrev=0 || echo 'undefined')
+SHA      := $(shell git describe --match=none --always --abbrev=8)
+TAG      := $(shell git describe --tag --always --match v[0-9]\* --abbrev)
 
 # common args for the tito cli
 TITO_ARGS :=
 TITO_ARGS += --offline
 TITO_ARGS += -o $(OUT_DIR)
 TITO_ARGS += --no-sudo
-TITO_ARGS += --quiet
 TITO_ARGS += --ignore-missing-config
 ifeq ($(DRY_RUN), true)
 TITO_ARGS += --test
 endif
 ifeq ($(DEBUG), true)
 TITO_ARGS += --debug
+else
+TITO_ARGS += --quiet
 endif
 
 # common opts for qubectl
@@ -45,12 +46,13 @@ export VERSION ?= $(shell cat $(WORKDIR)/VERSION)
 export RELEASE ?= 1
 
 
+# TODO: does this even work?
 ifeq ($(CURRENT_HOSTNAME), "dom0")
 CURRENT_QUBESDB_NAME := "dom0"
-IS_DOM0 := true
+IS_DOM0              := true
 else
 CURRENT_QUBESDB_NAME := $(shell qubesdb-read /name)
-IS_DOM0 := false
+IS_DOM0              := false
 endif
 
 .DEFAULT_GOAL := all
