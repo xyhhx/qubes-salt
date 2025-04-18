@@ -1,4 +1,4 @@
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+# vim: set syntax=yaml ft=sls ts=2 sw=2 sts=2 et :
 ---
 
 # Avoid applying the state by mistake to dom0
