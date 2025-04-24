@@ -13,6 +13,7 @@ user:
     - common.pkgs.neovim
     - common.pkgs.rustup
     - common.pkgs.networking
+    - common.pkgs.split-gpg
     - common.oh-my-zsh.init
     - common.theme.init
     - common.terminal.init

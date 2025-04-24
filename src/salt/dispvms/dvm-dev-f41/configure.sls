@@ -29,4 +29,11 @@ tpm_update_plugins:
     - env:
       - TMUX_PLUGIN_MANAGER_PATH: '/home/user/.config/tmux/plugins/'
 
+/home/user/.gitconfig:
+  file.managed:
+    - content: salt://dispvms/dvm-dev-f41/files/gitconfig
+    - user: 1000
+    - group: 1000
+    - mode: '0640'
+
 {% endif %}
