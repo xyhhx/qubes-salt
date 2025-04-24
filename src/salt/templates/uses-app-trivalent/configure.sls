@@ -15,4 +15,11 @@ secureblue:
 trivalent:
   pkg.installed
 
+/opt/trivalent/policies/managed/policy.json:
+  file.managed:
+    - source: salt://templates/uses-app-trivalent/files/policy.json
+    - user: root
+    - group: root
+    - mode: '0640'
+
 {% endif %}
