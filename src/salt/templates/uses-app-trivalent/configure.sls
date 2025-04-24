@@ -12,6 +12,9 @@ secureblue:
     - gpgcheck: 1
     - repo_gpgcheck: 1
     - gpgkey: https://repo.secureblue.dev/secureblue.gpg
+    - require_in:
+      - pkg: trivalent
+      - pkg: trivalent-subresource-filter
 
 trivalent-subresource-filter:
   pkg.installed
