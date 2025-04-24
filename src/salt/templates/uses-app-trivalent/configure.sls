@@ -21,5 +21,6 @@ trivalent:
     - user: root
     - group: root
     - mode: '0640'
+    - makedirs: true
 
 {% endif %}
