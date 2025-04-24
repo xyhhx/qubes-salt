@@ -1,0 +1,26 @@
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+---
+{% set name = "common.split-gpg.init" %}
+{% if grains['nodename'] != 'dom0' %}
+
+
+'{{ name }}':
+  pkg.installed:
+    - pkgs:
+      - qubes-gpg-split
+      - split-gpg2
+    - skip_suggestions: true
+    - install_recommends: false
+  file.managed:
+    - template: salt://common/pkgs/templates/gitconfig.j2
+    - mode: '0640'
+{% if pillar.qubes.type == 'template' %}
+    - name: /etc/skel/.gitconfig
+    - user: root
+    - group: root
+{% elif pillar.qubes.type == 'appvm' or pillar.qubes.type == 'standalone' %}
+    - name: /home/user/.gitconfig
+    - user: 1000
+    - group: 1000
+{% endif %}
+{% endif %}
