@@ -1,3 +1,5 @@
 {
-  "HomepageIsNewTabPage": true
+	"HomepageIsNewTabPage": true,
+	"GenAiDefaultSettings": 2,
+	"OsColorMode": "dark"
 }
