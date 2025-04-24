@@ -1,5 +1,10 @@
 live_config_reload: true
 
+fonts:
+  size: 9
+  normal:
+    family: "IBM Plex Mono Light"
+
 window:
   dynamic_padding: true
   padding:
