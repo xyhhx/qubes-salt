@@ -53,7 +53,6 @@
     - mode: 0600
     - makedirs: true
 
-
 /etc/skel/.vimrc:
   file.managed:
     - source: salt://templates/uses-stack-dev-f41/files/.vimrc
@@ -61,6 +60,13 @@
     - user: root
     - group: root
     - mode: 0600
+
+/etc/X11/Xresources.d/dpi:
+  file.managed:
+    - content: 'Xft.dpi: 192'
+    - user: root
+    - group: root
+    - mode: 0644
     - makedirs: true
 
 {% endif %}
