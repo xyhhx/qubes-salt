@@ -6,9 +6,9 @@
 
 '{{ vm_name }}':
   qvm:
-    - template_installed:
+    - template_installed
       - name: '{{ base_template }}'
-    - vm:
+    - vm
       - actions:
         - clone
         - prefs
