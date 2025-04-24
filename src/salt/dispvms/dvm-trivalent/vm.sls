@@ -13,5 +13,10 @@
       - label: red
     - prefs:
       - template-for-dispvms: true
+    - features:
+      - enable:
+        - appmenus-dispvm
+      - set:
+        - app-menu: trivalent.desktop
 
 {% endif %}
