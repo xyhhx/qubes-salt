@@ -36,7 +36,7 @@ cmd-git-bundle:
 cmd-minion-patch:
 	@echo \
 		qvm-run -p $(CURRENT_QUBESDB_NAME) \
-			"'cat $(CURRENT_PATH)/hack/f_defaults.conf.patch'" \
+			"'cat $(CURRENT_PATH)/scripts/f_defaults.conf.patch'" \
 			\| sudo patch /etc/salt/minion.d/f_defaults.conf
 
 
@@ -44,9 +44,11 @@ cmd-minion-patch:
 cmd-symlink-salts:
 	@echo ln -s $(USER_SALT_DIR) $(USER_SALT_SRV)
 
+# this prints the commands to run from dom0
 .PHONY:
 cmd-install-domu: cmd-git-bundle cmd-minion-patch cmd-symlink-salts
 
+# run this in dom0
 .PHONY: cmd-install-dom0
 cmd-install-dom0:
 	@echo qvm-run -p $(CURRENT_QUBESDB_NAME) \

@@ -1,0 +1,9 @@
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+---
+{% set vm_name = "sys-audio" %}
+
+user:
+  dom0:
+    - appvms.sys-audio.vm
+  '{{ vm_name }}':
+    - appvms.sys-audio.configure

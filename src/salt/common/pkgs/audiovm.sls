@@ -4,10 +4,6 @@
 
 {% set name = "common.pkgs.audio_vm" %}
 
-'{{ name }} - update':
-  pkg.uptodate:
-    - refresh: true
-
 '{{ name }} - install':
   pkg.installed:
     - pkgs:
@@ -26,5 +22,4 @@
 {% endif %}
     - skip_suggestions: true
     - install_recommends: false
-    - order: 1
-
+    - refresh: true

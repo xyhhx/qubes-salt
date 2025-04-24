@@ -1,6 +1,7 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
-
 ---
+{% set user = pillar.config.dom0_user %}
+
 '/home/{{ user }}/.local/bin/center-window-xfce.sh':
   file.managed:
     - source: 'salt://dom0/files/center-window-xfce.sh'

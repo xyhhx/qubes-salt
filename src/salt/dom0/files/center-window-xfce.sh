@@ -1,5 +1,5 @@
 #!/bin/sh
-# vim: set st=2 sw=2 et sts number:
+# vim: set sts=2 sw=2 et sts number:
 set -xeuo pipefail
 
 IFS='x' read display_width display_height < <(xrandr | grep " connected"  | grep -o '[0-9]\+x[0-9]\+')
@@ -13,4 +13,4 @@ window_height=$(xdotool getactivewindow getwindowgeometry --shell | grep -E "HEI
 new_pos_x=$((display_width/2 - window_width/2))
 new_pos_y=$((display_height/2 - window_height/2))
 
-xdotool getactivewindow windowmove "${new_pos_x}" "${new_pos_y}"
+xdotool getactivewindow windowmove "$new_pos_x" "$new_pos_y"
