@@ -16,6 +16,8 @@ secureblue:
       - pkg: trivalent
 
 trivalent:
+  pkgrepo.managed:
+    - copr: secureblue/trivalent
   pkg.installed
 
 psutils:
