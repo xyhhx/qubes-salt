@@ -2,13 +2,12 @@
 ---
 
 {% set vm_name = "dvm-dev-f41" %}
-{% set template_name = "uses-stack-dev-f41" %
+{% set template_name = "uses-stack-dev-f41" %}
 
 {% if grains['id'] == 'dom0' %}
 
-'{{ vm_name }}.vm':
+'{{ vm_name }}':
   qvm.vm:
-    - name: '{{ vm_name }}'
     - present:
       - template: '{{ template_name }}'
       - label: red
@@ -17,12 +16,16 @@
       - maxmem: 16000
       - vcpus: 8
       - template-for-dispvms: true
+    - features:
+      - enable:
+        - appmenus-dispvm
+      - set:
+        - menu-items: Alacritty.desktop
 
 'qvm-volume extend {{ vm_name }}:private 12Gi':
-  cmd.run
-
-'qvm-appmenus --update {{ vm_name }}':
   cmd.run:
-    - runas: '{{ pillar.defaults.dom0_user }}'
+    - onlyif:
+      - 'qvm-ls {{ vm_name }}'
+      - '[[ $(qvm-volume info {{ vm_name }}:private size | numfmt --to=iec-i) != 12Gi ]]'
 
 {% endif %}

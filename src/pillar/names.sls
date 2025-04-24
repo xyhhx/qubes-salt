@@ -34,5 +34,4 @@ names:
     net_wifi: "sys-net-wifi"
     onlykey: "sys-onlykey"
     vpn_ivpn: "sys-vpn-ivpn"
-
-
+  dom0_user: "whomst"

@@ -16,6 +16,6 @@
     - source: salt://appvms/sys-onlykey/files/ok-proxy-ssh-agent
     - user: user
     - group: user
-    - mode: "0755"
+    - mode: "0750"
 
 {% endif %}

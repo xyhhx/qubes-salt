@@ -1,19 +1,15 @@
 live_config_reload: true
-
 fonts:
-  size: 9
+  size: 16
   normal:
-    family: "IBM Plex Mono Light"
-
+    family: IBM Plex Mono Light
 window:
   dynamic_padding: true
   padding:
     x: 20
     y: 20
-
 colors:
   primary:
-    background: "#000000"
-
+    background: '#000000'
 selection:
   save_to_clipboard: true

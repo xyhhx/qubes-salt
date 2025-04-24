@@ -18,8 +18,4 @@
 'qvm-volume extend {{ vm_name }}:private 12Gi':
   cmd.run
 
-'qvm-appmenus --update {{ vm_name }}':
-  cmd.run:
-    - runas: '{{ pillar.defaults.dom0_user }}'
-
 {% endif %}
