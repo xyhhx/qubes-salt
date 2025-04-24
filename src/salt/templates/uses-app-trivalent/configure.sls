@@ -18,12 +18,17 @@ trivalent:
 psutils:
   pkg.installed
 
+/opt/trivalent/policies:
+  file.recurse:
+    - dir_mode: '0755'
+    - file_mode: '0644'
+
 /opt/trivalent/policies/managed/policy.json:
   file.managed:
     - source: salt://templates/uses-app-trivalent/files/policy.json
     - user: root
     - group: root
-    - mode: '0640'
+    - mode: '0644'
     - makedirs: true
 
 {% endif %}
