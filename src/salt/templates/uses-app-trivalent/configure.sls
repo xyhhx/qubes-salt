@@ -26,8 +26,7 @@ trivalent:
     - fromrepo: secureblue
 
 trivalent-subresource-filter:
-  pkg.installed:
-    - fromrepo: trivalent-copr
+  pkg.installed
 
 psutils:
   pkg.installed

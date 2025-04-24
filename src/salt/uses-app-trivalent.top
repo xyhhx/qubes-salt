@@ -11,6 +11,7 @@ user:
     - common.pkgs.hardened_malloc
     - common.pkgs.networking
     - common.pkgs.audio
-    - common.theme.init
-    - common.terminal.init
+    - common.dconf
+    - common.theme
+    - common.terminal
     - templates.uses-app-trivalent.configure

@@ -6,3 +6,4 @@ include:
   - common.theme.fonts
   - common.theme.gtk
   - common.theme.icons
+  - common.theme.dconf

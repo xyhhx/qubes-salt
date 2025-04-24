@@ -2,4 +2,4 @@
 ---
 
 include:
-  - common.terminal.alacritty
+  - common.dconf.setup
