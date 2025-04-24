@@ -9,12 +9,11 @@
 
 '{{ vm_name }}':
   qvm.vm:
-    - actions:
-      - clone
-      - prefs
-      - tags
     - clone:
       - source: '{{ base_template }}'
+    - features:
+      - set:
+        - menu-items: Alacritty.desktop
     - prefs:
       - label: gray
     - tags:

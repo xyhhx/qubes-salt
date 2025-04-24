@@ -20,3 +20,5 @@
     - tags:
       - add:
         - salt-managed
+        - fedora
+        - fedora-41

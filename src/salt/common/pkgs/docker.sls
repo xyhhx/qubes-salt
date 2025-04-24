@@ -7,16 +7,14 @@
 {% if grains.os_family|lower == 'debian' %}
 {% elif grains.os_family|lower == 'redhat' %}
 
-'{{ name }} - pkgrepo.managed':
+docker-ce-stable:
   pkgrepo.managed:
-    - name: docker-ce-stable
     - hummanname: Docker CE Stable - $basearch
     - baseurl: https://download.docker.com/linux/fedora/$releasever/$basearch/stable
     - gpgcheck: true
     - gpgkey: https://download.docker.com/linux/fedora/gpg
 
-
-'{{ name }} - pkg.installed':
+'{{ name }}':
   pkg.installed:
     - pkgs:
       - docker-ce
@@ -26,5 +24,11 @@
       - docker-compose-plugin
     - skip_suggestions: true
     - install_recommends: false
+  user.present:
+    - names:
+      - user
+    - groups:
+      - docker
+    - remove_groups: false
 
 {% endif %}

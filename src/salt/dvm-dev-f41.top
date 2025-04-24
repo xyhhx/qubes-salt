@@ -8,3 +8,5 @@ user:
     - dispvms.dvm-dev-f41.vm
   '{{ vm_name }}':
     - dispvms.dvm-dev-f41.configure
+    - common.neovim.init
+    - common.oh-my-zsh.init
