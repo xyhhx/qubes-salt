@@ -1,5 +1,6 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
+{% set name = 'templates.uses-app-trivalent.configure' %}
 
 # Avoid applying the state by mistake to dom0
 {% if grains['nodename'] != 'dom0' %}
@@ -11,6 +12,9 @@ secureblue:
     - gpgcheck: 1
     - repo_gpgcheck: 1
     - gpgkey: https://repo.secureblue.dev/secureblue.gpg
+
+trivalent-subresource-filter:
+  pkg.installed
 
 trivalent:
   pkg.installed
