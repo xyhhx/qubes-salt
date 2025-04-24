@@ -7,16 +7,13 @@
 '{{ vm_name }}':
   qvm:
     - template_installed
-      - name: '{{ base_template }}'
+    - name: '{{ base_template }}'
     - vm
-      - actions:
-        - clone
-        - prefs
-        - tags
-      - clone:
-        - source: '{{ base_template }}'
-      - prefs:
-        - label: gray
-      - tags:
-        - add:
-          - salt-managed
+    - clone:
+      - source: '{{ base_template }}'
+    - prefs:
+      - label: gray
+    - tags:
+      - add:
+        - salt-managed
+        - uses-app
