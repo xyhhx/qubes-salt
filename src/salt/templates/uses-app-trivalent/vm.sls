@@ -3,12 +3,13 @@
 ---
 {% set vm_name = "uses-app-trivalent" %}
 {% set base_template = 'fedora-41-minimal' %}
+{% set name = "templates.uses-app-trivalent.vm" %}
 
-'{{ base_template }}':
-  qvm.template_installed
-
-'{{ vm_name }}':
+'{{ name }}':
+  qvm.template_installed:
+    - name: '{{ base_template }}'
   qvm.vm:
+    - name: '{{ vm_name }}'
     - actions:
       - clone
       - prefs
