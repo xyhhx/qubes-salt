@@ -6,7 +6,8 @@
 
 '{{ vm_name }}':
   qvm:
-    - template_installed
+    - template_installed:
+      - name: '{{ base_template }}'
     - vm:
       - actions:
         - clone
