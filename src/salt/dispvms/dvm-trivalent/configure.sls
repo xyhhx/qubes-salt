@@ -1,8 +1,8 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
-{% set vm_name = pillar.names.dispvms.browsers_fedora %}
+{% set vm_name = "dvm-trivalent" %}
 {% if grains['id'] != 'dom0' %}
 
-# noop
+# TODO: configure trivalent
 
 {% endif %}

@@ -1,0 +1,16 @@
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+
+---
+{% set vm_name = "uses-app-trivalent" %}
+
+user:
+  dom0:
+    - templates.uses-app-trivalent.vm
+  '{{ vm_name }}':
+    - common.pkgs.base
+    - common.pkgs.hardened_malloc
+    - common.pkgs.networking
+    - common.pkgs.audio
+    - common.theme.init
+    - common.terminal.init
+    - templates.uses-app-trivalent.configure
