@@ -3,7 +3,6 @@
 ---
 {% set vm_name = "uses-app-trivalent" %}
 {% set base_template = 'fedora-41-minimal' %}
-{% set name = "templates.uses-app-trivalent.vm" %}
 
 '{{ vm_name }}':
   qvm:

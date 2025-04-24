@@ -6,9 +6,8 @@
 
 {% if grains['id'] == 'dom0' %}
 
-'{{ vm_name }}.vm':
+'{{ vm_name }}':
   qvm.vm:
-    - name: '{{ vm_name }}'
     - present:
       - template: '{{ template_name }}'
       - label: red
