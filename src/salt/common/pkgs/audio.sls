@@ -1,11 +1,14 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-'common.pkgs.audio - update':
+
+{% set name = "common.pkgs.audio" %}
+
+'{{ name }} - update':
   pkg.uptodate:
     - refresh: true
 
-'common.pkgs.audio - install':
+'{{ name }} - install':
   pkg.installed:
     - pkgs:
       - pipewire

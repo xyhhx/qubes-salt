@@ -1,17 +1,12 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-'common.base - update':
-  pkg.uptodate:
-    - refresh: true
+{% set name = "common.theme.icons" %}
 
-'common.base - install':
+'{{ name }}':
   pkg.installed:
     - pkgs:
-      - curl
-      - vim
-      - xclip
+      - deepin-icon-theme
     - skip_suggestions: true
     - install_recommends: false
-    - order: 1
 

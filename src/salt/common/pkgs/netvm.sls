@@ -1,11 +1,13 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-'common.netvm - update':
+{% set name = "common.pkgs.netvm" %}
+
+'{{ name }} - update':
   pkg.uptodate:
     - refresh: true
 
-'common.netvm - install':
+'{{ name }} - install':
   pkg.installed:
     - pkgs:
 {% if grains['os_family']|lower == 'redhat' %}

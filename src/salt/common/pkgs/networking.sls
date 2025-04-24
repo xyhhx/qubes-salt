@@ -1,7 +1,9 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-'common.networking - install':
+{% set name = "common.pkgs.networking" %}
+
+'{{ name }} - install':
   pkg.installed:
     - pkgs:
       - pciutils

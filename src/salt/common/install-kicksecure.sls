@@ -2,16 +2,17 @@
 
 ---
 
+{% set name = "common.install-kicksecure" %}
 {% if grains['os_family']|lower == 'debian' %}
 
 include:
   - common.https_proxy
 
-'configure - update':
+'{{ name }} - configure - update':
   pkg.uptodate:
     - refresh: true
 
-'configure - install prerequisites':
+'{{ name }} - configure - install prerequisites':
   pkg.installed:
     - pkgs:
       - adduser
@@ -19,7 +20,7 @@ include:
     - skip_suggestions: true
     - install_recommends: false
 
-'configure - add user to console group':
+'{{ name }} - configure - add user to console group':
   group.present:
     - name: console
     - system: true
@@ -29,7 +30,7 @@ include:
 'extrepo enable kicksecure':
   cmd.run
 
-'configure - install kicksecure':
+'{{ name }} - configure - install kicksecure':
   pkg.installed:
     - pkgs:
       - kicksecure-qubes-cli
