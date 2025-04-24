@@ -5,19 +5,18 @@
 {% set base_template = 'fedora-41-minimal' %}
 {% set name = "templates.uses-app-trivalent.vm" %}
 
-'{{ name }}':
-  qvm.template_installed:
-    - name: '{{ base_template }}'
-  qvm.vm:
-    - name: '{{ vm_name }}'
-    - actions:
-      - clone
-      - prefs
-      - tags
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - label: gray
-    - tags:
-      - add:
-        - salt-managed
+'{{ vm_name }}':
+  qvm:
+    - template_installed
+    - vm:
+      - actions:
+        - clone
+        - prefs
+        - tags
+      - clone:
+        - source: '{{ base_template }}'
+      - prefs:
+        - label: gray
+      - tags:
+        - add:
+          - salt-managed
