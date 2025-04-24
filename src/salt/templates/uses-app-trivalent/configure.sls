@@ -15,6 +15,9 @@ secureblue:
 trivalent:
   pkg.installed
 
+psutils:
+  pkg.installed
+
 /opt/trivalent/policies/managed/policy.json:
   file.managed:
     - source: salt://templates/uses-app-trivalent/files/policy.json
