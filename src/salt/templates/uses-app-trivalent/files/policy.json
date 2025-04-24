@@ -1,7 +1,10 @@
 {
-	"DefaultSearchProviderEnabled": false,
-	"EssentialSearchEnabled": true,
-	"HomepageIsNewTabPage": true,
-	"GenAiDefaultSettings": 2,
-	"OsColorMode": "dark"
+  "DefaultSearchProviderEnabled": false,
+  "EssentialSearchEnabled": true,
+  "HomepageIsNewTabPage": true,
+  "GenAiDefaultSettings": 2,
+  "OsColorMode": "dark",
+  "URLBlocklist": [
+    "https://google.com",
+  ]
 }
