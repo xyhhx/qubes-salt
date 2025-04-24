@@ -1,8 +1,8 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = pillar.names.dispvms.browsers_fedora %}
-{% set template_name = pillar.names.template.browsers_fedora %
+{% set vm_name = "dvm-trivalent" %}
+{% set template_name = "uses-app-trivalent" %
 
 {% if grains['id'] == 'dom0' %}
 
@@ -14,8 +14,5 @@
       - label: red
     - prefs:
       - template-for-dispvms: true
-
-'qvm-volume extend {{ vm_name }}:private 12Gi':
-  cmd.run
 
 {% endif %}

@@ -7,9 +7,10 @@ names:
       kicksecure: "on-kicksecure-17"
       fedora: "on-fedora-40-minimal"
       fedora_xfce: "on-fedora-40-xfce"
+    apps:
+      trivalent: "uses-app-trivalent"
     providers:
       audio: "provides-audio"
-      browsers_fedora: "provides-browsers-on-fedora"
       browsers_kicksecure: "provides-browsers-on-kicksecure"
       ivpn: "provides-ivpn"
       mirageos_firewall:  "provides-mirageos-firewall"
@@ -20,7 +21,7 @@ names:
 
   appvms:
   dispvms:
-    browsers_fedora: "dvm-browsers-fedora"
+    trivalent: "dvm-trivalent"
     browsers_kicksecure: "dvm-browsers-kicksecure"
     firewall_wifi_mirageos: "disp-sys-firewall-mirageos-wifi"
     sys_net_lan: "disp-sys-net-lan"
