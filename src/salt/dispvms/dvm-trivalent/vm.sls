@@ -2,7 +2,7 @@
 ---
 
 {% set vm_name = "dvm-trivalent" %}
-{% set template_name = "uses-app-trivalent" %
+{% set template_name = "uses-app-trivalent" %}
 
 {% if grains['id'] == 'dom0' %}
 
