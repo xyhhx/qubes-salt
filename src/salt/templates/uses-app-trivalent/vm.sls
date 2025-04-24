@@ -4,11 +4,10 @@
 {% set vm_name = "uses-app-trivalent" %}
 {% set base_template = 'fedora-41-minimal' %}
 
+{% if grains['id'] == 'dom0' %}
+
 '{{ vm_name }}':
-  qvm:
-    - template_installed
-    - name: '{{ base_template }}'
-    - vm
+  qvm.vm:
     - clone:
       - source: '{{ base_template }}'
     - prefs:
@@ -17,3 +16,5 @@
       - add:
         - salt-managed
         - uses-app
+
+{% endif %}

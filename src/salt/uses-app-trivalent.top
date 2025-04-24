@@ -9,5 +9,8 @@ user:
   '{{ vm_name }}':
     - common.pkgs.common
     - common.pkgs.hardened_malloc
+    - common.pkgs.networking
     - common.pkgs.audio
+    - common.theme.init
+    - common.terminal.init
     - templates.uses-app-trivalent.configure
