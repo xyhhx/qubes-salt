@@ -1,4 +1,6 @@
 {
+	"DefaultSearchProviderEnabled": false,
+	"EssentialSearchEnabled": true,
 	"HomepageIsNewTabPage": true,
 	"GenAiDefaultSettings": 2,
 	"OsColorMode": "dark"
