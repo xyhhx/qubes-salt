@@ -1,7 +1,8 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
 ---
-{% set name = "common.pkgs.netvm" %}
+
+{% set name = "common.pkgs.base" %}
 
 '{{ name }} - update':
   pkg.uptodate:
@@ -10,15 +11,12 @@
 '{{ name }} - install':
   pkg.installed:
     - pkgs:
-{% if grains['os_family']|lower == 'redhat' %}
-      - NetworkManager-wifi
-      - network-manager-applet
-      - notification-daemon
-      - polkit
-      - @hardware-support
+      - curl
+      - xclip
+{% if grains['os_family']|lower == 'debian' %}
+      - vim
 {% elif grains['os_family']|lower == 'redhat' %}
-      - wpasupplicant
-      - ntpd
+      - vim-common
 {% endif %}
     - skip_suggestions: true
     - install_recommends: false

@@ -4,5 +4,5 @@
 
 include:
   - common.theme.fonts
-  - common.theme.gtk-themes
-  - common.theme.icon-themes
+  - common.theme.gtk
+  - common.theme.icons

@@ -1,10 +1,10 @@
-BUNDLE_FILE        ?= /tmp/salt.bundle
+BUNDLE_FILE				?= /tmp/salt.bundle
 REMOTE_DOMAIN_PATH ?= /home/user/qubes-salts
-USER_SALT_DIR      ?= $(HOME)/salt
-USER_SALT_SRV      ?= /srv/user
+USER_SALT_DIR			?= $(HOME)/salt
+USER_SALT_SRV			?= /srv/user
 
-CURRENT_HOSTNAME     := $(shell hostname)
-CURRENT_PATH         := $(realpath .)
+CURRENT_HOSTNAME		 := $(shell hostname)
+CURRENT_PATH				 := $(realpath .)
 
 QUBESCTL_OPTS :=
 QUBESCTL_OPTS += --force-color
@@ -36,8 +36,8 @@ cmd-git-bundle:
 cmd-minion-patch:
 	@echo \
 		qvm-run -p $(CURRENT_QUBESDB_NAME) \
-		  "'cat $(CURRENT_PATH)/hack/f_defaults.conf.patch'" \
-		  \| sudo patch /etc/salt/minion.d/f_defaults.conf
+			"'cat $(CURRENT_PATH)/hack/f_defaults.conf.patch'" \
+			\| sudo patch /etc/salt/minion.d/f_defaults.conf
 
 
 .PHONY: cmd-symlink-salts

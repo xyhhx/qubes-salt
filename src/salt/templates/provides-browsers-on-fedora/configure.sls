@@ -4,13 +4,15 @@
 # Avoid applying the state by mistake to dom0
 {% if grains['nodename'] != 'dom0' %}
 
-include:
-  - common.https_proxy
+secureblue:
+  pkgrepo.managed:
+    - baseurl: https://repo.secureblue.dev
+    - enabled: 1
+    - gpgcheck: 1
+    - repo_gpgcheck: 1
+    - gpgkey: https://repo.secureblue.dev/secureblue.gpg
 
 trivalent:
-  pkgrepo.managed:
-    - copr: secureblue/trivalent
-  pkg.installed:
-    - trivalent
+  pkg.installed
 
 {% endif %}

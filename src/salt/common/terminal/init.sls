@@ -2,18 +2,48 @@
 
 ---
 
-'{{ vm_name }}':
+{% set name = "common.terminal.init" %}
+
+'{{ name }}':
   pkg.installed:
-    pkgs:
+    - pkgs:
       - alacritty
 {% if grains.os_family|lower == 'debian' %}
       - libxkbcommon-x11-0
-{% if grains.os_family|lower == 'redhat' %}
+{% elif grains.os_family|lower == 'redhat' %}
       - libxkbcommon
+      - libxkbcommon-x11
 {% endif %}
 
 'update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty 50':
   cmd.run
 
-'update-alternatives --set x-terminal-emulator /usr/bin/alacritty 50':
+'update-alternatives --set x-terminal-emulator /usr/bin/alacritty':
   cmd.run
+
+
+{% if grains['os_family']|lower == 'debian' %}
+
+/home/user/.config/alacritty/alacritty.yml:
+  file.managed:
+    - makedirs: true
+    - source: salt://common/terminal/files/alacritty.yml
+
+/etc/skel/.config/alacritty/alacritty.yml:
+  file.managed:
+    - makedirs: true
+    - source: salt://common/terminal/files/alacritty.yml
+
+{% elif grains['os_family']|lower == 'redhat' %}
+
+/home/user/.config/alacritty/alacritty.toml:
+  file.managed:
+    - makedirs: true
+    - source: salt://common/terminal/files/alacritty.toml
+
+/etc/skel/.config/alacritty/alacritty.toml:
+  file.managed:
+    - makedirs: true
+    - source: salt://common/terminal/files/alacritty.toml
+
+{% endif %}
