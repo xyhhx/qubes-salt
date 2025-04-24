@@ -16,10 +16,10 @@ secureblue:
       - pkg: trivalent
       - pkg: trivalent-subresource-filter
 
-trivalent-subresource-filter:
+trivalent:
   pkg.installed
 
-trivalent:
+trivalent-subresource-filter:
   pkg.installed
 
 psutils:
