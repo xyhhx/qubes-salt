@@ -14,12 +14,8 @@ secureblue:
     - gpgkey: https://repo.secureblue.dev/secureblue.gpg
     - require_in:
       - pkg: trivalent
-      - pkg: trivalent-subresource-filter
 
 trivalent:
-  pkg.installed
-
-trivalent-subresource-filter:
   pkg.installed
 
 psutils:
