@@ -13,5 +13,5 @@
 /etc/qubes/policy.d/user.d/49-onlykey.policy:
   file.managed:
     - source: salt://appvms/sys-onlykey/files/49-onlykey.policy
-    - mode: 0640
+    - mode: "0640"
     - makedirs: true

@@ -12,6 +12,7 @@ user:
     - common.pkgs.docker
     - common.pkgs.neovim
     - common.pkgs.rustup
+    - common.oh-my-zsh.init
     - common.theme.init
     - common.terminal.init
     - templates.uses-stack-dev-f41.configure

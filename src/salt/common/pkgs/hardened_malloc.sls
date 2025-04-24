@@ -17,11 +17,11 @@ hardened_malloc:
 '/etc/ld.so.preload':
   file.managed:
     - contents: 'libhardened_malloc.so'
-    - mode: 0644
+    - mode: "0644"
 
 '/etc/sysctl.d/hardened_malloc.conf':
   file.managed:
     - contents: 'vm.max_map_count = 1048576'
-    - mode: 0644
+    - mode: "0644"
 
 {% endif %}

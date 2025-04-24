@@ -28,14 +28,14 @@
     - source: "salt://templates/provides-onlykey/files/onlykey.SshAgent"
     - user: user
     - group: user
-    - mode: 0750
+    - mode: "0750"
 
 /etc/udev/rules.d/49-onlykey.rules:
   file.managed:
     - source: "salt://templates/provides-onlykey/files/49-onlykey.rules"
     - user: user
     - group: user
-    - mode: 0750
+    - mode: "0750"
 
 'HTTPS_PROXY=127.0.0.1:8082 pipx install onlykey onlykey-agent':
   cmd.run:
