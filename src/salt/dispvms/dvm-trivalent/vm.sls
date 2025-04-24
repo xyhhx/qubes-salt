@@ -17,6 +17,6 @@
       - enable:
         - appmenus-dispvm
       - set:
-        - app-menu: trivalent.desktop
+        - menu-items: trivalent.desktop
 
 {% endif %}
