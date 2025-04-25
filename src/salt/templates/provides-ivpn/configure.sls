@@ -45,7 +45,7 @@ ivpn-repo:
 
 /opt/ivpn/etc/firewall.sh:
   file.replace:
-    - pattern: '\(.*{{ "elif [[ $1 = \"-set_dns\" ]]; then" | regex_escape }}.*\)'
+    - pattern: '\(# DNS.*\n.*\)'
     - repl: |-
         \1
         #QUBES OS - specific operation
