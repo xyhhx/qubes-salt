@@ -9,3 +9,7 @@
       - label: yellow
       - flags:
         - net
+      - netvm: '*default*'
+    - service:
+      - enable:
+        - clocksync

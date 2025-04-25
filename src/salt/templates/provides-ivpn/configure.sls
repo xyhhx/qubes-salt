@@ -5,6 +5,7 @@
 {% if grains['id'] != 'dom0' %}
 # Set vm_name from pillar data
 {% set vm_name = pillar.names.templates.providers.ivpn %}
+{% set name = "templates.provides-ivpn.configure" %}
 
 include:
   - common.https_proxy
@@ -18,7 +19,7 @@ ivpn-repo:
     - repo_gpgcheck: 1
     - gpgkey: "https://repo.ivpn.net/stable/fedora/generic/repo.gpg"
 
-'{{ vm_name }}':
+'{{ name }}':
   pkg.installed:
     - pkgs:
       - ivpn
@@ -39,6 +40,16 @@ ivpn-repo:
         - source: 'salt://templates/provides-ivpn/files/dnat-to-ns-boot.service'
       - /etc/systemd/system/systemd-resolved.conf.d/override.conf:
         - source: 'salt://templates/provides-ivpn/files/systemd_override.conf'
+
+/opt/ivpn/etc/firewall.sh:
+  file.line:
+    - match: 'elif [[ $1 = "-set_dns" ]]; then'
+    - mode: insert
+    - location: end
+    - content: |-
+        #QUBES OS - specific operation
+        systemctl restart systemd-resolved || echo "Error: systemd-resolved" # this line is required for Qubes OS 4.2 (tested on Qubes OS 4.2-RC4)
+        /usr/lib/qubes/qubes-setup-dnat-to-ns || echo "Error: failed to run '/usr/lib/qubes/qubes-setup-dnat-to-ns'"
 
 dnat-to-ns.path:
   service.enabled
