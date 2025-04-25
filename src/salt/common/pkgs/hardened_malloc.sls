@@ -7,21 +7,20 @@
 include:
   - common.https_proxy
 
-'{{ name }} - pkgrepo.managed':
+secureblue/hardened_malloc:
   pkgrepo.managed:
     - copr: secureblue/hardened_malloc
-
-hardened_malloc:
-  pkg.installed
-
-'/etc/ld.so.preload':
+  pkg.installed:
+    - name: hardened_malloc
   file.managed:
-    - contents: 'libhardened_malloc.so'
-    - mode: "0644"
-
-'/etc/sysctl.d/hardened_malloc.conf':
-  file.managed:
-    - contents: 'vm.max_map_count = 1048576'
-    - mode: "0644"
+    - mode: '0640'
+    - user: root
+    - group: root
+    - makedirs: true
+    - names:
+      - '/etc/ld.so.preload':
+        - contents: 'libhardened_malloc.so'
+      - '/etc/sysctl.d/hardened_malloc.conf':
+        - contents: 'vm.max_map_count = 1048576'
 
 {% endif %}
