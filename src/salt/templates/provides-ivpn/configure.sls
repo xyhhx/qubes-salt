@@ -45,10 +45,10 @@ ivpn-repo:
 
 /opt/ivpn/etc/firewall.sh:
   file.replace:
-    - pattern: '\(# DNS.*\n.*\)'
+    - pattern: |-
+        \(.*set_dns.*\)
     - repl: |-
-        \1
-        #QUBES OS - specific operation
+        \1,#QUBES OS - specific operation
         systemctl restart systemd-resolved || echo "Error: systemd-resolved" # this line is required for Qubes OS 4.2 (tested on Qubes OS 4.2-RC4)
         /usr/lib/qubes/qubes-setup-dnat-to-ns || echo "Error: failed to run '/usr/lib/qubes/qubes-setup-dnat-to-ns'"
     - ignore_if_missing: true
