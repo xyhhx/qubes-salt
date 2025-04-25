@@ -2,58 +2,38 @@
 ---
 
 # Avoid applying the state by mistake to dom0
-{% if grains['nodename'] != 'dom0' %}
+{% if grains['id'] != 'dom0' %}
+# Set vm_name from pillar data
+{% set vm_name = pillar.names.templates.providers.ivpn %}
+{% set name = "templates.provides-ivpn.configure" %}
+{% set file_dir = 'salt://templates/provides-ivpn/files' %}
 
 include:
   - common.https_proxy
 
-# Set vm_name from pillar data
-{% set vm_name = pillar.names.templates.providers.ivpn %}
+ivpn-repo:
+  pkgrepo.managed:
+    - baseurl: "https://repo.ivpn.net/stable/fedora/generic/$basearch"
+    - type: "rpm"
+    - enabled: 1
+    - gpgcheck: 1
+    - repo_gpgcheck: 1
+    - gpgkey: "https://repo.ivpn.net/stable/fedora/generic/repo.gpg"
 
-
-/etc/yum.repos.d/ivpn.repo:
-  file.managed:
-    - source: "salt://templates/provides-ivpn/files/ivpn.repo"
-    - user: root
-    - group: root
-    - mode: "0640"
-
-'{{ vm_name }}__pkg.installed':
+'{{ name }}':
   pkg.installed:
     - pkgs:
       - ivpn
       - ivpn-ui
+      - patch
+      - procps-ng
     - skip_suggestions: true
     - install_recommends: false
+    - refresh: true
 
-/etc/systemd/system/dnat-to-ns.service:
-  file.managed:
-    - source: 'salt://templates/provides-ivpn/files/dnat-to-ns.service'
-    - mode: "0640"
-    - owner: root
-    - group: root
-
-/etc/systemd/system/dnat-to-ns.path:
-  file.managed:
-    - source: 'salt://templates/provides-ivpn/files/dnat-to-ns.path'
-    - mode: "0640"
-    - owner: root
-    - group: root
-
-/etc/systemd/system/dnat-to-ns-boot.service:
-  file.managed:
-    - source: 'salt://templates/provides-ivpn/files/dnat-to-ns-boot.service'
-    - mode: "0640"
-    - owner: root
-    - group: root
-
-/etc/systemd/system/systemd-resolved.conf.d/override.conf:
-  file.managed:
-    - source: 'salt://templates/provides-ivpn/files/systemd_override.conf'
-    - mode: "0640"
-    - owner: root
-    - group: root
-    - makedirs: true
+/opt/ivpn/etc/firewall.sh:
+  file.patch:
+    - source: '{{ file_dir }}/firewall.patch'
 
 dnat-to-ns.path:
   service.enabled

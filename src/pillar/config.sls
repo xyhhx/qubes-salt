@@ -2,6 +2,7 @@
 ---
 
 config:
+  default_netvm: disp-sys-firewall-mirageos-wifi
   dom0_user: whomst
   gpg_user: xyhhx
   gpg_email: xyhhx@tuta.io

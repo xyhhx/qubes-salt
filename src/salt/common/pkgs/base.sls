@@ -7,6 +7,7 @@
 '{{ name }} - update':
   pkg.uptodate:
     - refresh: true
+    - order: first
 
 '{{ name }} - install':
   pkg.installed:
@@ -20,5 +21,4 @@
 {% endif %}
     - skip_suggestions: true
     - install_recommends: false
-    - order: 1
 

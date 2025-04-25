@@ -9,3 +9,10 @@
       - label: yellow
       - flags:
         - net
+    - prefs:
+      - netvm: '*default*'
+    - features:
+      - enable:
+        - service.clocksync
+      - set:
+        - menu-items: Alacritty.desktop IVPN.desktop
