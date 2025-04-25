@@ -25,24 +25,11 @@ ivpn-repo:
     - pkgs:
       - ivpn
       - ivpn-ui
+      - patch
       - procps-ng
     - skip_suggestions: true
     - install_recommends: false
     - refresh: true
-  file.managed:
-    - user: root
-    - group: root
-    - mode: '0640'
-    - makedirs: true
-    - names:
-      - /etc/systemd/system/dnat-to-ns.service:
-        - source: '{{ file_dir }}/dnat-to-ns.service'
-      - /etc/systemd/system/dnat-to-ns.path:
-        - source: '{{ file_dir }}/dnat-to-ns.path'
-      - /etc/systemd/system/dnat-to-ns-boot.service:
-        - source: '{{ file_dir }}/dnat-to-ns-boot.service'
-      - /etc/systemd/system/systemd-resolved.conf.d/override.conf:
-        - source: '{{ file_dir }}/systemd_override.conf'
 
 /opt/ivpn/etc/firewall.sh:
   file.patch:
