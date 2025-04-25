@@ -42,14 +42,14 @@ ivpn-repo:
         - source: 'salt://templates/provides-ivpn/files/systemd_override.conf'
 
 /opt/ivpn/etc/firewall.sh:
-  file.line:
-    - match: 'elif [[ $1 = "-set_dns" ]]; then'
-    - mode: insert
-    - location: end
-    - content: |-
+  file.replace:
+    - pattern: '\(.*{{ "elif [[ $1 = "-set_dns" ]]; then" | regex_escape }}.*\)'
+    - repl: |-
+        \1
         #QUBES OS - specific operation
         systemctl restart systemd-resolved || echo "Error: systemd-resolved" # this line is required for Qubes OS 4.2 (tested on Qubes OS 4.2-RC4)
         /usr/lib/qubes/qubes-setup-dnat-to-ns || echo "Error: failed to run '/usr/lib/qubes/qubes-setup-dnat-to-ns'"
+    - ignore_if_missing: true
 
 dnat-to-ns.path:
   service.enabled
