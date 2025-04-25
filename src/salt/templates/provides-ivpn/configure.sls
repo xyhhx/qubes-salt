@@ -24,6 +24,7 @@ ivpn-repo:
     - pkgs:
       - ivpn
       - ivpn-ui
+      - procps-ng
     - skip_suggestions: true
     - install_recommends: false
   file.managed:
@@ -43,7 +44,7 @@ ivpn-repo:
 
 /opt/ivpn/etc/firewall.sh:
   file.replace:
-    - pattern: '\(.*{{ "elif [[ $1 = "-set_dns" ]]; then" | regex_escape }}.*\)'
+    - pattern: '\(.*{{ "elif [[ $1 = \"-set_dns\" ]]; then" | regex_escape }}.*\)'
     - repl: |-
         \1
         #QUBES OS - specific operation
