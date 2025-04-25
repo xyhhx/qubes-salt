@@ -4,11 +4,12 @@
 
 {% set name = "common.pkgs.base" %}
 
-'{{ name }}':
-  module.run:
-    - pkg.uptodate
+'{{ name }} - update':
+  pkg.uptodate:
     - refresh: true
     - order: first
+
+'{{ name }} - install':
   pkg.installed:
     - pkgs:
       - curl
