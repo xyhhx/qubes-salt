@@ -19,6 +19,8 @@
     - names:
       - 'update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty 50'
       - 'update-alternatives --set x-terminal-emulator /usr/bin/alacritty'
+    - onchanges:
+      - pkg: '{{ name }}'
 
   file.managed:
     - makedirs: true

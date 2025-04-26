@@ -13,5 +13,10 @@
         - source: salt://common/theme/files/gtk-theme.conf
         - context:
           gtk_theme: 'deepin'
+        - onchanges_in:
+          - cmd: dconf update
       - '{{ dconf_d }}/prefer-dark':
         - source: salt://common/theme/files/prefer-dark.conf
+        - onchanges_in:
+          - cmd: dconf update
+
