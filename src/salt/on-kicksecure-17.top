@@ -7,5 +7,8 @@ user:
   dom0:
     - templates.on-kicksecure-17.vm
   '{{ vm_name }}':
-    - common.pkgs.common
+    - common.pkgs.base
+    - common.dconf
+    - common.terminal
+    - common.theme
     - common.install-kicksecure

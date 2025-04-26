@@ -7,4 +7,8 @@ user:
   dom0:
     - templates.on-debian-12-minimal.vm
   '{{ vm_name }}':
-    - common.pkgs.common
+    - common.pkgs.base
+    - common.pkgs.hardened_malloc
+    - common.dconf
+    - common.terminal
+    - common.theme
