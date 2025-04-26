@@ -8,6 +8,7 @@
   pkg.uptodate:
     - refresh: true
     - order: first
+    - pkgs: '*'
 
 '{{ name }} - install':
   pkg.installed:
