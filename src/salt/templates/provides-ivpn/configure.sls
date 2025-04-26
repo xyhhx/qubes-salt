@@ -30,19 +30,26 @@ ivpn-repo:
     - skip_suggestions: true
     - install_recommends: false
     - refresh: true
-
-/opt/ivpn/etc/firewall.sh:
-  file.patch:
-    - source: '{{ file_dir }}/firewall.patch'
-
-/etc/qubes-bind-dirs.d/50_user.conf:
   file.managed:
     - user: root
     - group: root
     - mode: '0640'
     - makedirs: true
-    - contents: |-
-        binds+=( '/etc/opt/ivpn/mutable' )
+    - names:
+      - /etc/qubes-bind-dirs.d/50_user.conf:
+        - contents: |-
+            binds+=( '/etc/opt/ivpn/mutable' )
+
+/etc/X11/Xresources:
+  file.replace:
+    - pattern: |-
+        Xft.dpi: 96
+    - repl: |-
+        Xft.dpi: 192
+
+/opt/ivpn/etc/firewall.sh:
+  file.patch:
+    - source: '{{ file_dir }}/firewall.patch'
 
 /rw/bind-dirs/etc/opt/ivpn/mutable:
   file.directory:

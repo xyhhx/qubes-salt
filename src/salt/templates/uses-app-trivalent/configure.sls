@@ -31,12 +31,21 @@ trivalent-subresource-filter:
 psutils:
   pkg.installed
 
-/etc/trivalent/policies/managed/policy.json:
+'{{ name }}':
   file.managed:
-    - source: salt://templates/uses-app-trivalent/files/policy.json
     - user: root
     - group: root
     - mode: '0644'
     - makedirs: true
+    - names:
+      - /etc/trivalent/policies/managed/policy.json:
+        - source: salt://templates/uses-app-trivalent/files/policy.json
+
+/etc/X11/Xresources:
+  file.replace:
+    - pattern: |-
+        Xft.dpi: 96
+    - repl: |-
+        Xft.dpi: 192
 
 {% endif %}
