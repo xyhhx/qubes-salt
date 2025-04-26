@@ -12,13 +12,14 @@
     - skip_suggestions: true
     - install_recommends: false
   file.managed:
-    - template: salt://common/pkgs/templates/gitconfig.j2
+    - source: salt://common/pkgs/templates/gitconfig.j2
+    - template: jinja
     - mode: '0640'
-{% if pillar.qubes.type == 'template' %}
+{% if qubes:type == 'template' %}
     - name: /etc/skel/.gitconfig
     - user: root
     - group: root
-{% elif pillar.qubes.type == 'appvm' or pillar.qubes.type == 'standalone' %}
+{% else %}
     - name: /home/user/.gitconfig
     - user: 1000
     - group: 1000
