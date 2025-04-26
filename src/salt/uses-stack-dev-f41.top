@@ -14,7 +14,8 @@ user:
     - common.pkgs.rustup
     - common.pkgs.networking
     - common.pkgs.split-gpg
-    - common.oh-my-zsh.init
-    - common.theme.init
-    - common.terminal.init
+    - common.oh-my-zsh
+    - common.dconf
+    - common.theme
+    - common.terminal
     - templates.uses-stack-dev-f41.configure

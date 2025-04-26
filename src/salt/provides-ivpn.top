@@ -10,6 +10,7 @@ user:
     - common.pkgs.base
     - common.pkgs.hardened_malloc
     - common.pkgs.networking
+    - common.dconf
     - common.terminal
     - common.theme
     - templates.provides-ivpn.configure

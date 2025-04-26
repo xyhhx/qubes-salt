@@ -10,5 +10,6 @@ user:
     - common.pkgs.base
     - common.pkgs.hardened_malloc
     - common.pkgs.audiovm
+    - common.dconf
     - common.terminal
     - common.theme
