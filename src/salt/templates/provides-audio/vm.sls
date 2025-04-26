@@ -4,12 +4,10 @@
 {% set vm_name = pillar.names.templates.providers.audio %}
 {% set base_template = 'fedora-41-minimal' %}
 
+{% if grains.id == 'dom0' %}
+
 '{{ vm_name }}':
   qvm.vm:
-    - actions:
-      - clone
-      - prefs
-      - tags
     - clone:
       - source: '{{ base_template }}'
     - prefs:
@@ -19,3 +17,5 @@
         - salt-managed
         - fedora
         - fedora-41
+
+[% endif %]

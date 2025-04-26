@@ -4,13 +4,12 @@
 {% set vm_name = "uses-stack-dev-f41" %}
 {% set base_template = 'fedora-41-minimal' %}
 
+{% if grains.id == 'dom0' %}
+
 '{{ vm_name }}':
   qvm.vm:
     - clone:
       - source: '{{ base_template }}'
-    - features:
-      - set:
-        - menu-items: Alacritty.desktop
     - prefs:
       - label: gray
     - tags:
@@ -18,4 +17,9 @@
         - salt-managed
         - fedora
         - fedora-41
+        - uses-stack
+    - features:
+      - set:
+        - menu-items: Alacritty.desktop
 
+{% endif %}

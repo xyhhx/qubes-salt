@@ -18,5 +18,8 @@
         - fedora
         - fedora-41
         - uses-app
+    - features:
+      - set:
+        - menu-items: Alacritty.desktop
 
 {% endif %}

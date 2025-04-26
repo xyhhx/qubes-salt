@@ -4,15 +4,10 @@
 {% set vm_name = 'on-debian-12-minimal' %}
 {% set base_template = 'debian-12-minimal' %}
 
-'{{ base_template }}':
-  qvm.template_installed
+{% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':
   qvm.vm:
-    - actions:
-      - clone
-      - prefs
-      - tags
     - clone:
       - source: '{{ base_template }}'
     - prefs:
@@ -20,3 +15,10 @@
     - tags:
       - add:
         - salt-managed
+        - debian
+        - debian-12
+    - features:
+      - set:
+        - menu-items: Alacritty.desktop
+
+{% endif %}
