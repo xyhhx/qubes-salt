@@ -8,4 +8,7 @@
 keepassxc:
   pkg.installed
 
+qrencode:
+  pkg.installed
+
 {% endif %}

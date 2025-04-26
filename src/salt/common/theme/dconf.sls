@@ -5,8 +5,8 @@
 
 '{{ name }}':
   file.managed:
-    - user: 1000
-    - group: 1000
+    - user: root
+    - group: root
     - mode: '0640'
     - names:
       - '{{ dconf_d }}/gtk-theme':
