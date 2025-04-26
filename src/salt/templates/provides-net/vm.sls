@@ -2,10 +2,7 @@
 
 ---
 {% set vm_name = pillar.names.templates.providers.net %}
-{% set base_template = 'fedora-40-minimal' %}
-
-'{{ base_template }}':
-  qvm.template_installed
+{% set base_template = 'fedora-41-minimal' %}
 
 '{{ vm_name }}':
   qvm.vm:
