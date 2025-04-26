@@ -1,0 +1,16 @@
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+
+---
+{% set vm_name = "on-fedora-41-xfce" %}
+
+user:
+  dom0:
+    - templates.on-fedora-41-xfce.vm
+  '{{ vm_name }}':
+    - common.pkgs.update
+    - common.pkgs.base
+    - common.pkgs.hardened_malloc
+    - common.dconf
+    - common.terminal
+    - common.theme
+    - common.xdpi
