@@ -19,6 +19,8 @@ bat-extras:
       - bind-utils
       - bottom
       - btop
+      - cargo
+      - clippy
       - direnv
       - fd-find
       - git
@@ -30,17 +32,21 @@ bat-extras:
       - luarocks
       - nmap
       - opentofu
-      - texlive-latex
-      - python3-pip
       - pipx
       - podman
       - psutils
+      - python3-pip
       - qubes-core-agent-passwordless-root
       - qubes-ctap
       - qubes-usb-proxy
       - ripgrep
       - rsync
+      - rust
+      - rust-analyzer
+      - rust-src
+      - rustfmt
       - sqlite
+      - texlive-latex
       - tito
       - tmux
       - tree
