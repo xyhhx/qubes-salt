@@ -5,8 +5,8 @@ names:
     base:
       debian: "on-debian-12-minimal"
       kicksecure: "on-kicksecure-17"
-      fedora: "on-fedora-40-minimal"
-      fedora_xfce: "on-fedora-40-xfce"
+      fedora: "on-fedora-41-minimal"
+      fedora_xfce: "on-fedora-41-xfce"
     apps:
       trivalent: "uses-app-trivalent"
     providers:
