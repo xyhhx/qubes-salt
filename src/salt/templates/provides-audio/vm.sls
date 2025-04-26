@@ -17,5 +17,8 @@
         - salt-managed
         - fedora
         - fedora-41
+    - features:
+      - set:
+        - menu-items: Alacritty.desktop
 
-[% endif %]
+{% endif %}
