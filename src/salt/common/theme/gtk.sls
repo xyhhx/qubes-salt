@@ -3,13 +3,17 @@
 ---
 {% set name = "common.theme.gtk" %}
 
-'{{ name }}':
+{% if grains.os_family|lower == 'redhat' %}
+deepin-gtk-theme:
   pkg.installed:
-    - pkgs:
-{% if grains.os_family|lower == 'debian' %}
-      # There is no deepin GTK theme on debian
-{% elif grains.os_family|lower == 'redhat' %}
-      - deepin-gtk-theme
-{% endif %}
     - skip_suggestions: true
     - install_recommends: false
+{% endif %}
+
+/etc/gtk-3.0/settings.ini:
+  file.managed:
+    - source: salt://common/theme/files/gtk3-settings.ini
+    - makedirs: true
+    - user: root
+    - group: root
+    - mode: '0640'
