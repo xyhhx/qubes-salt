@@ -1,0 +1,14 @@
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+---
+{% set vm_name = 'provides-split-gpg' %}
+
+user:
+  dom0:
+    - templates.provides-split-gpg.vm
+  '{{ vm_name }}':
+    - common.pkgs.base
+    - common.pkgs.hardened_malloc
+    - common.dconf
+    - common.terminal
+    - common.theme
+    - templates.provides-split-gpg.configure
