@@ -18,6 +18,6 @@
         - appmenus-dispvm
       - set:
         - menu-items: trivalent.desktop
-        - menu-favorites: "@disp:Trivalent"
+        - menu-favorites: "@disp:trivalent"
 
 {% endif %}
