@@ -23,12 +23,12 @@
   file.managed:
     - makedirs: true
     - names:
-{% if grains['os_family']|lower == 'debian' %}
+{% if grains.os_family|lower == 'debian' %}
       - /home/user/.config/alacritty/alacritty.yml:
         - source: salt://common/terminal/files/alacritty.yml
       - /etc/skel/.config/alacritty/alacritty.yml:
         - source: salt://common/terminal/files/alacritty.yml
-{% elif grains['os_family']|lower == 'redhat' %}
+{% elif grains.os_family|lower == 'redhat' %}
       - /home/user/.config/alacritty/alacritty.toml:
         - source: salt://common/terminal/files/alacritty.toml
       - /etc/skel/.config/alacritty/alacritty.toml:

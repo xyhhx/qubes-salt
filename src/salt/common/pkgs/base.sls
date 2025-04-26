@@ -15,9 +15,9 @@
     - pkgs:
       - curl
       - xclip
-{% if grains['os_family']|lower == 'debian' %}
+{% if grains.os_family|lower == 'debian' %}
       - vim
-{% elif grains['os_family']|lower == 'redhat' %}
+{% elif grains.os_family|lower == 'redhat' %}
       - vim-common
 {% endif %}
     - skip_suggestions: true

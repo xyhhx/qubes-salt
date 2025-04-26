@@ -11,11 +11,11 @@
       - notification-daemon
       - qubes-core-agent-network-manager
       - qubes-core-agent-networking
-{% if grains['os_family']|lower == 'redhat' %}
+{% if grains.os_family|lower == 'redhat' %}
       - NetworkManager-wifi
       - network-manager-applet
       - polkit
-{% elif grains['os_family']|lower == 'debian' %}
+{% elif grains.os_family|lower == 'debian' %}
       - lspci
       - network-manager
       - ntpd

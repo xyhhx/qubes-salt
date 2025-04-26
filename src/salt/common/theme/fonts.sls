@@ -6,13 +6,13 @@
 '{{ name }}':
   pkg.installed:
     - pkgs:
-{% if grains['os_family']|lower == 'debian' %}
+{% if grains.os_family|lower == 'debian' %}
       - fonts-fantasque-sans
       - fonts-ibm-plex
       - fonts-inter
       - fonts-liberation2
       - fonts-noto
-{% elif grains['os_family']|lower == 'redhat' %}
+{% elif grains.os_family|lower == 'redhat' %}
       - google-noto-fonts-all
       - ibm-plex-fonts-all
       - liberation-fonts-all

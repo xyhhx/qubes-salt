@@ -2,7 +2,7 @@
 ---
 
 # Avoid applying the state by mistake to dom0
-{% if grains['nodename'] != 'dom0' %}
+{% if grains.id != 'dom0' %}
 
 {% set vm_name = 'uses-stack-dev-f41' %}
 {% set name = 'templates.uses-stack-dev-f41.configure' %}

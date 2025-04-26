@@ -4,7 +4,7 @@
 {% set vm_name = "dvm-trivalent" %}
 {% set template_name = "uses-app-trivalent" %}
 
-{% if grains['id'] == 'dom0' %}
+{% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':
   qvm.vm:

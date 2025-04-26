@@ -17,7 +17,7 @@
       - pavucontrol
       - qubes-core-admin-client
       - qubes-usb-proxy
-{% if grains['os_family']|lower == 'debian' %}
+{% if grains.os_family|lower == 'debian' %}
       - libspa-0.2-bluetooth
 {% endif %}
     - skip_suggestions: true

@@ -1,7 +1,7 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
 
-{% if grains['id'] == 'dom0' %}
+{% if grains.id == 'dom0' %}
 
 'dom0 - /etc/qubes/policy.d/user.d/49-onlykey.policy':
   file.managed:

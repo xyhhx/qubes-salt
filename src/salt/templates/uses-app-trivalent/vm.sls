@@ -4,7 +4,7 @@
 {% set vm_name = "uses-app-trivalent" %}
 {% set base_template = 'fedora-41-minimal' %}
 
-{% if grains['id'] == 'dom0' %}
+{% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':
   qvm.vm:

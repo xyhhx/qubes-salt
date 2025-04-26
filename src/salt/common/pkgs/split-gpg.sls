@@ -1,7 +1,7 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
 {% set name = "common.split-gpg.init" %}
-{% if grains['nodename'] != 'dom0' %}
+{% if grains.id != 'dom0' %}
 
 
 '{{ name }}':

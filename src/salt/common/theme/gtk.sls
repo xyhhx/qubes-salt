@@ -6,9 +6,9 @@
 '{{ name }}':
   pkg.installed:
     - pkgs:
-{% if grains['os_family']|lower == 'debian' %}
+{% if grains.os_family|lower == 'debian' %}
       # There is no deepin GTK theme on debian
-{% elif grains['os_family']|lower == 'redhat' %}
+{% elif grains.os_family|lower == 'redhat' %}
       - deepin-gtk-theme
 {% endif %}
     - skip_suggestions: true

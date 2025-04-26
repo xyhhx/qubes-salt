@@ -4,7 +4,7 @@
 {% set name = "dispvms.dvm-dev-f41.configure" %}
 
 # Avoid applying the state by mistake to dom0
-{% if grains['nodename'] != 'dom0' %}
+{% if grains.id != 'dom0' %}
 
 https://github.com/tmux-plugins/tpm.git:
   git.latest:

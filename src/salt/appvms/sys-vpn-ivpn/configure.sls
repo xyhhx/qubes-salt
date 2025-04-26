@@ -2,7 +2,7 @@
 ---
 
 # Avoid applying the state by mistake to dom0
-{% if grains['id'] != 'dom0' %}
+{% if grains.id != 'dom0' %}
 
 # Set vm_name from pillar data
 {% set vm_name = 'sys-vpn-ivpn' %}

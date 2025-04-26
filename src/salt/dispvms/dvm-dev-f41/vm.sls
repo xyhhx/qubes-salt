@@ -4,7 +4,7 @@
 {% set vm_name = "dvm-dev-f41" %}
 {% set template_name = "uses-stack-dev-f41" %}
 
-{% if grains['id'] == 'dom0' %}
+{% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':
   qvm.vm:

@@ -3,7 +3,7 @@
 {% set name = 'templates.uses-app-trivalent.configure' %}
 
 # Avoid applying the state by mistake to dom0
-{% if grains['nodename'] != 'dom0' %}
+{% if grains.id != 'dom0' %}
 
 secureblue:
   pkgrepo.managed:

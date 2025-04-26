@@ -2,7 +2,7 @@
 
 ---
 {% set name = "common.pkgs.hardened_malloc" %}
-{% if grains['os_family']|lower == 'redhat' %}
+{% if grains.os_family|lower == 'redhat' %}
 
 include:
   - common.https_proxy

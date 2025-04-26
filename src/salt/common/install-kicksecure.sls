@@ -3,7 +3,7 @@
 ---
 
 {% set name = "common.install-kicksecure" %}
-{% if grains['os_family']|lower == 'debian' %}
+{% if grains.os_family|lower == 'debian' %}
 
 include:
   - common.https_proxy
