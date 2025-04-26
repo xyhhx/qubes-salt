@@ -4,9 +4,6 @@
 {% set vm_name = "uses-stack-dev-f41" %}
 {% set base_template = 'fedora-41-minimal' %}
 
-'{{ base_template }}':
-  qvm.template_installed
-
 '{{ vm_name }}':
   qvm.vm:
     - clone:
