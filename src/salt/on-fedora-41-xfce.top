@@ -3,9 +3,6 @@
 ---
 {% set vm_name = "on-fedora-41-xfce" %}
 
-include:
-  - common.base-templates
-
 user:
   dom0:
     - templates.on-fedora-41-xfce.vm
