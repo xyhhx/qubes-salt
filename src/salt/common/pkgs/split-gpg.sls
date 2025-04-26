@@ -15,7 +15,7 @@
     - source: salt://common/pkgs/templates/gitconfig.j2
     - template: jinja
     - mode: '0640'
-{% if qubes:type == 'template' %}
+{% if grains.get('qubes:type')  == 'template' %}
     - name: /etc/skel/.gitconfig
     - user: root
     - group: root
