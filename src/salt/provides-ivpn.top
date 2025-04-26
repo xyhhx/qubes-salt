@@ -7,10 +7,12 @@ user:
   dom0:
     - templates.provides-ivpn.vm
   '{{ vm_name }}':
+    - common.pkgs.update
     - common.pkgs.base
     - common.pkgs.hardened_malloc
     - common.pkgs.networking
     - common.dconf
     - common.terminal
     - common.theme
+    - common.xdpi
     - templates.provides-ivpn.configure

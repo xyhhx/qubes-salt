@@ -7,6 +7,7 @@ user:
   dom0:
     - templates.uses-stack-dev-f41.vm
   '{{ vm_name }}':
+    - common.pkgs.update
     - common.pkgs.base
     - common.pkgs.hardened_malloc
     - common.pkgs.docker
@@ -15,6 +16,7 @@ user:
     - common.pkgs.networking
     - common.pkgs.split-gpg
     - common.oh-my-zsh
+    - common.xdpi
     - common.dconf
     - common.theme
     - common.terminal

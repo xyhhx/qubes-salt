@@ -1,11 +1,10 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
-
 ---
-{% set vm_name = pillar.names.templates.providers.usb %}
+{% set vm_name = 'provides-split-gpg' %}
 
 user:
   dom0:
-    - templates.provides-usb.vm
+    - templates.provides-split-gpg.vm
   '{{ vm_name }}':
     - common.pkgs.update
     - common.pkgs.base
@@ -14,4 +13,4 @@ user:
     - common.terminal
     - common.theme
     - common.xdpi
-    - templates.provides-usb.configure
+    - templates.provides-split-gpg.configure

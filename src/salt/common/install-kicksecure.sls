@@ -8,10 +8,6 @@
 include:
   - common.https_proxy
 
-'{{ name }} - configure - update':
-  pkg.uptodate:
-    - refresh: true
-
 '{{ name }} - configure - install prerequisites':
   pkg.installed:
     - pkgs:

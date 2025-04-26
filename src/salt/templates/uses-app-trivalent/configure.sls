@@ -41,11 +41,4 @@ psutils:
       - /etc/trivalent/policies/managed/policy.json:
         - source: salt://templates/uses-app-trivalent/files/policy.json
 
-/etc/X11/Xresources:
-  file.replace:
-    - pattern: |-
-        Xft.dpi: 96
-    - repl: |-
-        Xft.dpi: 192
-
 {% endif %}

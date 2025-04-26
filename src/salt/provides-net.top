@@ -7,9 +7,11 @@ user:
   dom0:
     - templates.provides-net.vm
   '{{ vm_name }}':
+    - common.pkgs.update
     - common.pkgs.base
     - common.pkgs.hardened_malloc
     - common.dconf
     - common.terminal
     - common.theme
+    - common.xdpi
     - common.pkgs.netvm
