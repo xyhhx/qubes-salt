@@ -21,5 +21,7 @@
     - features:
       - set:
         - menu-items: Alacritty.desktop
+    - require:
+      - qvm: '{{ base_template }}'
 
 {% endif %}
