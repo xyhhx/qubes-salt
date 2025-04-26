@@ -1,6 +1,6 @@
 live_config_reload: true
 fonts:
-  size: 9
+  size: 10
   normal:
     family: IBM Plex Mono Light
 window:
