@@ -1,11 +1,7 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
-
 {% set vm_name = pillar.names.templates.providers.usb %}
-{% set base_template = 'fedora-40-minimal' %}
-
-'{{ base_template }}':
-  qvm.template_installed
+{% set base_template = 'fedora-41-minimal' %}
 
 '{{ vm_name }}':
   qvm.vm:
@@ -20,3 +16,6 @@
     - tags:
       - add:
         - salt-managed
+        - fedora
+        - fedora-41
+

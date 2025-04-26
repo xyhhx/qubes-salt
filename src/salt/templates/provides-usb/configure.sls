@@ -7,7 +7,6 @@
 # Set vm_name from pillar data
 {% set vm_name = pillar.names.templates.providers.usb %}
 
-
 '{{ vm_name }}':
   pkg.installed:
     - pkgs:

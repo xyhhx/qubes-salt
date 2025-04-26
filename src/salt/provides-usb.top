@@ -7,6 +7,9 @@ user:
   dom0:
     - templates.provides-usb.vm
   '{{ vm_name }}':
-    - common.pkgs.common
+    - common.pkgs.base
     - common.pkgs.hardened_malloc
+    - common.dconf
+    - common.terminal
+    - common.theme
     - templates.provides-usb.configure
