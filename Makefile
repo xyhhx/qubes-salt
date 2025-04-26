@@ -11,10 +11,10 @@ QUBESCTL_OPTS += --force-color
 QUBESCTL_OPTS += --show-output
 
 ifeq ($(CURRENT_HOSTNAME), "dom0")
-  IS_DOM0 := true
+	IS_DOM0 := true
 else
-  CURRENT_QUBESDB_NAME := $(shell qubesdb-read /name)
-  IS_DOM0 := false
+	CURRENT_QUBESDB_NAME := $(shell qubesdb-read /name)
+	IS_DOM0 := false
 endif
 
 # ============================================================================
@@ -26,23 +26,23 @@ endif
 
 .PHONY: cmd-git-bundle
 cmd-git-bundle:
-  @echo \
-    qvm-run -p $(CURRENT_QUBESDB_NAME) \
-      "'cd $(CURRENT_PATH) && git bundle create - --all'" \
-      \> $(BUNDLE_FILE)
+	@echo \
+	 qvm-run -p $(CURRENT_QUBESDB_NAME) \
+	"'cd $(CURRENT_PATH) && git bundle create - --all'" \
+	\> $(BUNDLE_FILE)
 
 
 .PHONY: cmd-minion-patch
 cmd-minion-patch:
-  @echo \
-    qvm-run -p $(CURRENT_QUBESDB_NAME) \
-      "'cat $(CURRENT_PATH)/scripts/f_defaults.conf.patch'" \
-      \| sudo patch /etc/salt/minion.d/f_defaults.conf
+	@echo \
+	 qvm-run -p $(CURRENT_QUBESDB_NAME) \
+	"'cat $(CURRENT_PATH)/scripts/f_defaults.conf.patch'" \
+	\| sudo patch /etc/salt/minion.d/f_defaults.conf
 
 
 .PHONY: cmd-symlink-salts
 cmd-symlink-salts:
-  @echo ln -s $(USER_SALT_DIR) $(USER_SALT_SRV)
+	@echo ln -s $(USER_SALT_DIR) $(USER_SALT_SRV)
 
 # this prints the commands to run from dom0
 .PHONY:
@@ -51,8 +51,8 @@ cmd-install-domu: cmd-git-bundle cmd-minion-patch cmd-symlink-salts
 # run this in dom0
 .PHONY: cmd-install-dom0
 cmd-install-dom0:
-  @echo qvm-run -p $(CURRENT_QUBESDB_NAME) \
-    "'cd $(CURRENT_PATH) && make cmd-install-domu'"
+	@echo qvm-run -p $(CURRENT_QUBESDB_NAME) \
+	 "'cd $(CURRENT_PATH) && make cmd-install-domu'"
 
 # ============================================================================
 # ----------------------------------------------------------------------------
@@ -68,7 +68,7 @@ cmd-install-dom0:
 .PHONY: check-is-dom0
 check-is-dom0:
 ifeq ($(IS_DOM0), "false")
-  exit 1
+	exit 1
 endif
 
 $(BUNDLE_FILE): get-bundle-from-domu
@@ -80,9 +80,9 @@ $(BUNDLE_FILE): get-bundle-from-domu
 # usage: make get-bundle-from-domu
 .PHONY: get-bundle-from-domu
 get-bundle-from-domu: check-is-dom0
-  qvm-run -p $(REMOTE_DOMAIN) \
-    'cd $(REMOTE_DOMAIN_PATH) && git bundle create - --all' \
-    > $(BUNDLE_FILE)
+	qvm-run -p $(REMOTE_DOMAIN) \
+	 'cd $(REMOTE_DOMAIN_PATH) && git bundle create - --all' \
+	 > $(BUNDLE_FILE)
 
 # TODO: should this be a macro?
 #
@@ -90,7 +90,7 @@ get-bundle-from-domu: check-is-dom0
 # usage: make git-pull
 .PHONY: git-pull
 git-pull: $(BUNDLE_FILE) check-is-dom0
-  git pull --rebase
+	git pull --rebase
 
 # pulls changes from the configured domU. wrapper around get-bundle-from-domu
 # and git-pull
@@ -102,7 +102,7 @@ pull: get-bundle-from-domu git-pull
 # usage: make salt-highstate-all
 .PHONY: salt-highstate-all
 salt-highstate-all: check-is-dom0
-  qubesctl $(QUBESCTL_OPTS) --all state.highstate
+	qubesctl $(QUBESCTL_OPTS) --all state.highstate
 
 # TODO: this doesn't work...
 #
@@ -110,18 +110,18 @@ salt-highstate-all: check-is-dom0
 # usage: TARGETS=provides-net make salt-highstate
 .PHONY: salt-highstate
 salt-highstate: check-is-dom0
-  qubesctl $(QUBESCTL_OPTS) \
-    --skip-dom0 \
-    --targets $(TARGETS) \
-    state.highstate
+	qubesctl $(QUBESCTL_OPTS) \
+	 --skip-dom0 \
+	 --targets $(TARGETS) \
+	 state.highstate
 
 # runs a specific sls against given target(s)
 # usage: TARGETS=provides-net make salt-sls templates.provides-net.configure
 .PHONY: salt-sls
 salt-sls: check-is-dom0
-  qubesctl $(QUBESCTL_OPTS) \
-    --skip-dom0 \
-    --targets $(TARGETS) \
-    state.sls \
-    $(filter-out $@, $(MAKECMDGOALS)) \
-    saltenv=user
+	qubesctl $(QUBESCTL_OPTS) \
+	 --skip-dom0 \
+	 --targets $(TARGETS) \
+	 state.sls \
+	 $(filter-out $@, $(MAKECMDGOALS)) \
+	 saltenv=user

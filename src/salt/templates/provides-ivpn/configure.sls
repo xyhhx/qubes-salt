@@ -35,10 +35,17 @@ ivpn-repo:
   file.patch:
     - source: '{{ file_dir }}/firewall.patch'
 
-dnat-to-ns.path:
-  service.enabled
+/etc/qubes-bind-dirs.d/50_user.conf:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: '0640'
+    - makedirs: true
+    - contents: |-
+        binds+=( '/etc/opt/ivpn/mutable' )
 
-dnat-to-ns-boot.service:
-  service.enabled
+/rw/bind-dirs/etc/opt/ivpn/mutable:
+  file.directory:
+    - makedirs: true
 
 {% endif %}
