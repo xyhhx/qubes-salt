@@ -37,6 +37,8 @@ neovim-nightly:
     - source_hash_update: true
     - overwrite: true
     - enforce_toplevel: false
+    - onlyif: |-
+        [[ -z $(fc-list : family | grep 'BlexMono Nerd Font') ]]
 
 '{{ name }} - pkg.installed':
   pkg.installed:

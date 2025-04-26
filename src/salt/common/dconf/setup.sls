@@ -9,16 +9,12 @@
     - group: root
     - mode: '0640'
     - makedirs: true
+    - onchanges_in:
+      - cmd: 'dconf update'
     - names:
       - '{{ dconf_d }}/touchpad':
         - source: salt://common/dconf/files/touchpad.conf
-        - onchanges_in:
-          - cmd: dconf update
       - '{{ dconf_d }}/disable-automount':
         - source: salt://common/dconf/files/disable-automount.conf
-        - onchanges_in:
-          - cmd: dconf update
       - '{{ dconf_d }}/locks/disable-automount':
         - source: salt://common/dconf/files/disable-automount.lock
-        - onchanges_in:
-          - cmd: dconf update
