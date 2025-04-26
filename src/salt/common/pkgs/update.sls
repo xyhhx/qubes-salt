@@ -2,6 +2,7 @@
 ---
 {% set name = "common.pkgs.update" %}
 
-pkg.upgrade:
-  module.run:
+'{{ name }}':
+  pkg.uptodate:
     - refresh: true
+    - pkgs: None
