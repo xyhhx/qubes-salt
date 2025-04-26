@@ -18,6 +18,6 @@
       - liberation-fonts-all
       - rsms-inter-fonts
 {% endif %}
-    - refresh: true
     - skip_suggestions: true
     - install_recommends: false
+    - aggregate: true

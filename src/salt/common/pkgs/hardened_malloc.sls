@@ -12,6 +12,7 @@ secureblue/hardened_malloc:
     - copr: secureblue/hardened_malloc
   pkg.installed:
     - name: hardened_malloc
+    - aggregate: true
   file.managed:
     - mode: '0640'
     - user: root

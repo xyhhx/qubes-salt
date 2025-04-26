@@ -24,12 +24,15 @@ trivalent-copr:
 trivalent:
   pkg.installed:
     - fromrepo: secureblue
+    - aggregate: true
 
 trivalent-subresource-filter:
-  pkg.installed
+  pkg.installed:
+    - aggregate: true
 
 psutils:
-  pkg.installed
+  pkg.installed:
+    - aggregate: true
 
 '{{ name }}':
   file.managed:

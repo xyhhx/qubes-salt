@@ -6,9 +6,13 @@
 {% if grains.id != 'dom0' %}
 
 keepassxc:
-  pkg.installed
+  pkg.installed:
+    - aggregate: true
+
 
 qrencode:
-  pkg.installed
+  pkg.installed:
+    - aggregate: true
+
 
 {% endif %}

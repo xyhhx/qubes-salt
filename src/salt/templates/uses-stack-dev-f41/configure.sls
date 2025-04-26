@@ -53,6 +53,7 @@ bat-extras:
       - wget2-wget
       - yq
       - zsh
+    - aggregate: true
   file.managed:
     - user: root
     - group: root
