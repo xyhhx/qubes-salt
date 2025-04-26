@@ -12,4 +12,5 @@ user:
     - common.dconf
     - common.terminal
     - common.theme
+    - common.xdpi
     - templates.provides-usb.configure

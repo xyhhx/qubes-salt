@@ -15,6 +15,7 @@ user:
     - common.pkgs.networking
     - common.pkgs.split-gpg
     - common.oh-my-zsh
+    - common.xdpi
     - common.dconf
     - common.theme
     - common.terminal

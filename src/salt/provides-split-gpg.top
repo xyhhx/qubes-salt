@@ -11,4 +11,5 @@ user:
     - common.dconf
     - common.terminal
     - common.theme
+    - common.xdpi
     - templates.provides-split-gpg.configure

@@ -40,13 +40,6 @@ ivpn-repo:
         - contents: |-
             binds+=( '/etc/opt/ivpn/mutable' )
 
-/etc/X11/Xresources:
-  file.replace:
-    - pattern: |-
-        Xft.dpi: 96
-    - repl: |-
-        Xft.dpi: 192
-
 /opt/ivpn/etc/firewall.sh:
   file.patch:
     - source: '{{ file_dir }}/firewall.patch'

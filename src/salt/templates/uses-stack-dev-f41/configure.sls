@@ -65,11 +65,4 @@ bat-extras:
     - gid: 1000
     - shell: /bin/zsh
 
-/etc/X11/Xresources:
-  file.replace:
-    - pattern: |-
-        Xft.dpi: 96
-    - repl: |-
-        Xft.dpi: 192
-
 {% endif %}
