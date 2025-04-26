@@ -1,16 +1,8 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
-
 ---
-
 {% set name = "common.pkgs.base" %}
 
-'{{ name }} - update':
-  pkg.uptodate:
-    - refresh: true
-    - order: first
-    - pkgs: '*'
-
-'{{ name }} - install':
+'{{ name }}':
   pkg.installed:
     - pkgs:
       - curl

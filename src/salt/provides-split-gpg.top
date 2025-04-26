@@ -6,6 +6,7 @@ user:
   dom0:
     - templates.provides-split-gpg.vm
   '{{ vm_name }}':
+    - common.pkgs.update
     - common.pkgs.base
     - common.pkgs.hardened_malloc
     - common.dconf

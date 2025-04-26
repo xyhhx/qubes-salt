@@ -4,11 +4,7 @@
 
 {% set name = "common.pkgs.audio" %}
 
-'{{ name }} - update':
-  pkg.uptodate:
-    - refresh: true
-
-'{{ name }} - install':
+'{{ name }}':
   pkg.installed:
     - pkgs:
       - pipewire
