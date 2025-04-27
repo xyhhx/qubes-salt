@@ -1,7 +1,7 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = "dvm-on-fedora-41-xfce" %}
+{% set vm_name = "dvm-fedora-41-xfce" %}
 {% set template_name = "on-fedora-41-xfce" %}
 
 {% if grains.id == 'dom0' %}
@@ -13,6 +13,10 @@
       - label: red
     - prefs:
       - template-for-dispvms: true
+    - features:
+      - set:
+        - menu-favorites: "@disp:org.mozilla.firefox @disp:thunar @disp:xfce4-terminal"
+
 
 '{{ vm_name }}-offline':
   qvm.vm:
@@ -21,6 +25,9 @@
       - label: gray
     - prefs:
       - template-for-dispvms: true
+    - features:
+      - set:
+        - menu-favorites: "@disp:thunar @disp:xfce4-terminal"
 
 {% endif %}
 
