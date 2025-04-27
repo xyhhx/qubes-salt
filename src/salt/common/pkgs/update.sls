@@ -1,8 +1,5 @@
 # vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 ---
-{% set name = "common.pkgs.update" %}
+include:
+  - base: update.qubes-vm
 
-'{{ name }}':
-  pkg.uptodate:
-    - refresh: true
-    - pkgs: None

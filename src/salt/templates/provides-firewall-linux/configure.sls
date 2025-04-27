@@ -3,17 +3,14 @@
 
 # Avoid applying the state by mistake to dom0
 {% if grains.id != 'dom0' %}
+{% set vm_name = 'provides-firewall-linux' %}
+{% set name = "templates.provides-firewall-linux.configure" %}
 
-# Set vm_name from pillar data
-{% set vm_name = pillar.names.templates.providers.usb %}
-
-'{{ vm_name }}':
+'{{ name }}':
   pkg.installed:
     - pkgs:
-      - gnome-keyring
-      - qubes-usb-proxy
-      - qubes-input-proxy-sender
-      - qubes-ctap
+      - iproute
+      - qubes-core-agent-dom0-updates
     - skip_suggestions: true
     - install_recommends: false
     - aggregate: true

@@ -9,4 +9,5 @@
       - deepin-icon-theme
     - skip_suggestions: true
     - install_recommends: false
+    - aggregate: true
 

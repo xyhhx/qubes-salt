@@ -12,6 +12,8 @@ secureblue/hardened_malloc:
     - copr: secureblue/hardened_malloc
   pkg.installed:
     - name: hardened_malloc
+    - require:
+      - pkgrepo: secureblue/hardened_malloc
   file.managed:
     - mode: '0640'
     - user: root
@@ -22,5 +24,7 @@ secureblue/hardened_malloc:
         - contents: 'libhardened_malloc.so'
       - '/etc/sysctl.d/hardened_malloc.conf':
         - contents: 'vm.max_map_count = 1048576'
+    - require:
+      - pkg: hardened_malloc
 
 {% endif %}

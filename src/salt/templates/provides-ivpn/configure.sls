@@ -29,7 +29,7 @@ ivpn-repo:
       - procps-ng
     - skip_suggestions: true
     - install_recommends: false
-    - refresh: true
+    - aggregate: true
   file.managed:
     - user: root
     - group: root

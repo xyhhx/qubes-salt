@@ -24,6 +24,7 @@ docker-ce-stable:
       - docker-compose-plugin
     - skip_suggestions: true
     - install_recommends: false
+    - aggregate: true
   user.present:
     - names:
       - user

@@ -23,6 +23,6 @@
 {% endif %}
     - skip_suggestions: true
     - install_recommends: false
-    - refresh: true
+    - aggregate: true
 
 {% endif %}

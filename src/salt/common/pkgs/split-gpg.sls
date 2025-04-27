@@ -11,6 +11,7 @@
       - split-gpg2
     - skip_suggestions: true
     - install_recommends: false
+    - aggregate: true
   file.managed:
     - source: salt://common/pkgs/templates/gitconfig.j2
     - template: jinja

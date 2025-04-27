@@ -1,0 +1,21 @@
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+
+---
+{% set vm_name = 'provides-firewall-linux' %}
+
+user:
+  dom0:
+    - templates.provides-firewall-linux.vm
+  '{{ vm_name }}':
+    - common.pkgs.base
+    - common.pkgs.hardened_malloc
+    - common.pkgs.networking
+    - common.dconf
+    - common.terminal
+    - common.theme
+    - common.xdpi
+    - templates.provides-firewall-linux.configure
+    # - common.pkgs.update
+base:
+  'not dom0':
+    - update.qubes-vm
