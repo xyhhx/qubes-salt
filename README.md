@@ -4,11 +4,9 @@
 
 an attempt to rewrite my qubes os setup as saltstack configuration.
 
-[sourcehut](https://git.sr.ht/~xyhhx/qubes-salts)
-
 mirrors:
 
-[0xacab](https://0xacab.org/xyhhx/qubes-mgmt-salt-user) | [github](https://github.com/xyhhx/qubes-salt) | [codeberg](https://codeberg.org/xyhhx/qubes-salt)
+[sourcehut](https://git.sr.ht/~xyhhx/qubes-salts) | [0xacab](https://0xacab.org/xyhhx/qubes-mgmt-salt-user) | [github](https://github.com/xyhhx/qubes-salt) | [codeberg](https://codeberg.org/xyhhx/qubes-salt)
 
 [![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](LICENSE.md)
 
