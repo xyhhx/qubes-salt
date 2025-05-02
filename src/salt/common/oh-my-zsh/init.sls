@@ -1,4 +1,4 @@
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
+# vim: set ts=2 sw=2 sts=2 et :
 ---
 {% set name = "common.oh-my-zsh.init" %}
 {% if grains.id != 'dom0' %}
