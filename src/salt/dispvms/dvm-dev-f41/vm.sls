@@ -14,7 +14,7 @@
     - prefs:
       - memory: 8000
       - maxmem: 16000
-      - vcpus: 8
+      - vcpus: 4 
       - template-for-dispvms: true
     - features:
       - enable:
