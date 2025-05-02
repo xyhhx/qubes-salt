@@ -20,7 +20,7 @@
     - prefs:
       - netvm: '{{ netvm }}'
       - memory: 32
-      - maxmem: 32
+      - maxmem: 0
       - vcpus: 1
       - provides-network: true
     - features:

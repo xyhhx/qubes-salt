@@ -13,7 +13,7 @@
       - label: red
     - prefs:
       - memory: 32
-      - maxmem: 32
+      - maxmem: 0
       - vcpus: 1
       - template-for-dispvms: true
       - provides-network: true
