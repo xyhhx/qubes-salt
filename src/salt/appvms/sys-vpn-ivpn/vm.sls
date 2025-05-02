@@ -4,9 +4,6 @@
 {% set template = 'provides-ivpn' %}
 {% set netvm = 'disp-sys-firewall-mirageos-wifi' %}
 
-'{{ netvm }}':
-  qvm.exists
-
 '{{ vm_name }}':
   qvm.vm:
     - present:
@@ -21,6 +18,3 @@
         - service.clocksync
       - set:
         - menu-items: Alacritty.desktop IVPN.desktop
-    - require:
-      - qvm: '{{ template }}'
-      - qvm: '{{ netvm }}'
