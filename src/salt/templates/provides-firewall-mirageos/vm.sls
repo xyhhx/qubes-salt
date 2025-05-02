@@ -17,7 +17,7 @@
       - kernelopts: ''
       - include_in_backups: false
       - memory: 32
-      - maxmem: 32
+      - maxmem: 0
     - features:
       - enable:
         - no-default-kernelopts

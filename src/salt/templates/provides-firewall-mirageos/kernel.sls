@@ -6,7 +6,6 @@
 
 {% set name = "templates.provides-firewall-mirageos.kernel" %}
 {% set vm_name = "provides-firewall-mirageos" %}
-{% set mgmt_qube = "disp-mgmt-mirageos-fw" %}
 
 {% set version = config.versions.mirageos %}
 {% set kernel = "qubes-firewall.xen" %}
@@ -21,7 +20,6 @@
     - source: 'salt://templates/provides-firewall-mirageos/download-kernel.sh'
     - env:
       - VERSION: '{{ version }}'
-      - DOMU: '{{ mgmt_qube }}'
       - KERNEL_URL: '{{ download_base ~ kernel }}'
       - DIGEST_URL: '{{ download_base ~ checksum }}'
       - FORCE_OVERWRITE: 'yes'
