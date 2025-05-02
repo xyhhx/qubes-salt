@@ -9,6 +9,7 @@
 '{{ vm_name }}':
   qvm.vm:
     - present:
+      - class: AppVM
       - template: '{{ template_name }}'
       - label: red
     - prefs:

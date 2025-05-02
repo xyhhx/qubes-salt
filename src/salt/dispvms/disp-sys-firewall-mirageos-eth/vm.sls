@@ -12,7 +12,7 @@
 '{{ vm_name }}':
   qvm.vm:
     - present:
-      - class: DisposableVM
+      - class: DispVM
       - template: '{{ template }}'
       - label: orange
       - flags:

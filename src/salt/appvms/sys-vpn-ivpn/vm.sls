@@ -18,3 +18,6 @@
         - service.clocksync
       - set:
         - menu-items: Alacritty.desktop IVPN.desktop
+    - require:
+      - qvm: '{{ template }}'
+      - qvm: '{{ netvm }}'
