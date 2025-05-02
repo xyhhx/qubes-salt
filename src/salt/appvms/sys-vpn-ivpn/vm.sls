@@ -2,6 +2,10 @@
 ---
 {% set vm_name = pillar.names.sysvms.vpn_ivpn %}
 {% set template = 'provides-ivpn' %}
+{% set netvm = 'disp-sys-firewall-mirageos-wifi' %}
+
+'{{ netvm }}':
+  qvm.exists
 
 '{{ vm_name }}':
   qvm.vm:
@@ -11,7 +15,7 @@
       - flags:
         - net
     - prefs:
-      - netvm: 'disp-sys-firewall-mirageos-wifi'
+      - netvm: '{{ netvm }}'
     - features:
       - enable:
         - service.clocksync
@@ -19,3 +23,4 @@
         - menu-items: Alacritty.desktop IVPN.desktop
     - require:
       - qvm: '{{ template }}'
+      - qvm: '{{ netvm }}'

@@ -2,4 +2,5 @@
 ---
 
 include:
-  - templates.provides-firewall-mirageos.mgmt-vm
+  - templates.provides-firewall-mirageos.kernel
+  - templates.provides-firewall-mirageos.vm
