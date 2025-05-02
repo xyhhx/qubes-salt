@@ -3,7 +3,8 @@
 
 # ===== User Defined Salt Pillars =============================================
 
+{% import_yaml '/home/whomst/.config/qubes-mgmt-salt-user/config.yml' as config %}
+
 user:
   '*':
     - names
-    - config

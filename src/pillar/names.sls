@@ -13,7 +13,7 @@ names:
       audio: "provides-audio"
       browsers_kicksecure: "provides-browsers-on-kicksecure"
       ivpn: "provides-ivpn"
-      mirageos_firewall:  "provides-mirageos-firewall"
+      mirageos_firewall: "provides-firewall-mirageos"
       net: "provides-net"
       usb: "provides-usb"
     stacks:

@@ -15,6 +15,9 @@ QUBESCTL_OPTS :=
 QUBESCTL_OPTS += --force-color
 QUBESCTL_OPTS += --show-output
 
+SALTCALL_OPTS :=
+SALTCALL_OPTS += -l $(or $(LOG_LEVEL), "error")
+
 ifeq ($(HOSTNAME), "dom0")
 	QUBE_NAME := $(shell qubesdb-read /name)
 endif
@@ -99,9 +102,9 @@ salt-apply-all: check-is-dom0
 .PHONY: salt-apply
 salt-apply: check-is-dom0
 	qubesctl $(QUBESCTL_OPTS) \
-	--skip-dom0 \
 	--target $(TARGETS) \
-	state.apply
+	state.apply \
+	$(SALTCALL_OPTS) \
 
 # runs a specific sls against given target(s)
 # usage: TARGETS=provides-net make salt-sls templates.provides-net.configure
@@ -112,6 +115,7 @@ salt-sls: check-is-dom0
 	--target $(TARGETS) \
 	state.sls \
 	$(filter-out $@, $(MAKECMDGOALS)) \
+	$(SALTCALL_OPTS) \
 	saltenv=user
 
 

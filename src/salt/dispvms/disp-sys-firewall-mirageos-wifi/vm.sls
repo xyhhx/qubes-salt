@@ -1,0 +1,34 @@
+# vim: set ts=2 sw=2 sts=2 et :
+---
+{% set vm_name = 'disp-sys-firewall-mirageos-wifi' %}
+{% set template = 'dvm-firewall-mirageos' %}
+{% set netvm = 'sys-net-wifi' %}
+
+{% if grains.id == 'dom0' %}
+
+'{{ netvm }}':
+  qvm.exists
+
+'{{ vm_name }}':
+  qvm.vm:
+    - present:
+      - class: DispVM
+      - template: '{{ template }}'
+      - label: orange
+      - flags:
+        - net
+    - prefs:
+      - netvm: '{{ netvm }}'
+      - memory: 32
+      - maxmem: 0
+      - vcpus: 1
+      - provides-network: true
+    - features:
+      - enable:
+        - qubes-firewall
+        - no-default-kernelopts
+    - require:
+      - qvm: '{{ template }}'
+      - qvm: '{{ netvm }}'
+
+{% endif %}

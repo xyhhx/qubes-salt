@@ -1,0 +1,8 @@
+# vim: set ts=2 sw=2 sts=2 et :
+
+---
+{% set vm_name = "dvm-firewall-mirageos" %}
+
+user:
+  dom0:
+    - dispvms.{{ vm_name }}.vm
