@@ -24,6 +24,7 @@
 
 'qvm-volume extend {{ vm_name }}:private 12Gi':
   cmd.run:
+    - use_vt: true
     - onlyif:
       - 'qvm-ls {{ vm_name }}'
       - '[[ $(qvm-volume info {{ vm_name }}:private size | numfmt --to=iec-i) != 12Gi ]]'

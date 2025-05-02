@@ -7,7 +7,7 @@
 # Set vm_name from pillar data
 {% set vm_name = pillar.names.templates.providers.onlykey %}
 
-'{{ vm_name }}__pkg.installed':
+'{{ vm_name }}':
   pkg.installed:
     - pkgs:
       - libudev-devel
@@ -22,29 +22,21 @@
       - yubikey-personlization-gui
     - skip_suggestions: true
     - install_recommends: false
-
-/etc/qubes-rpc/onlykey.SshAgent:
   file.managed:
-    - source: "salt://templates/provides-onlykey/files/onlykey.SshAgent"
+    - names:
+      - '/etc/qubes-rpc/onlykey.SshAgent':
+        - source: "salt://templates/provides-onlykey/files/onlykey.SshAgent"
+      - '/etc/udev/rules.d/49-onlykey.rules':
+        - source: "salt://templates/provides-onlykey/files/49-onlykey.rules"
     - user: user
     - group: user
     - mode: "0750"
-
-/etc/udev/rules.d/49-onlykey.rules:
-  file.managed:
-    - source: "salt://templates/provides-onlykey/files/49-onlykey.rules"
-    - user: user
-    - group: user
-    - mode: "0750"
-
-'HTTPS_PROXY=127.0.0.1:8082 pipx install onlykey onlykey-agent':
   cmd.run:
+    - names:
+      - 'HTTPS_PROXY=127.0.0.1:8082 pipx install onlykey onlykey-agent'
+      - 'udevadm control --reload-rules'
+      - 'udevadm trigger'
+    - use_vt: true
     - runas: user
-
-'udevadm control --reload-rules':
-  cmd.run
-
-'udevadm trigger':
-  cmd.run
 
 {% endif %}
