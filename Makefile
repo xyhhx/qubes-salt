@@ -99,7 +99,6 @@ salt-apply-all: check-is-dom0
 .PHONY: salt-apply
 salt-apply: check-is-dom0
 	qubesctl $(QUBESCTL_OPTS) \
-	--skip-dom0 \
 	--target $(TARGETS) \
 	state.apply
 
