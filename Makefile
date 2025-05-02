@@ -95,7 +95,7 @@ pull: get-bundle-from-domu git-pull
 # usage: make salt-apply-all
 .PHONY: salt-apply-all
 salt-apply-all: check-is-dom0
-	qubesctl $(QUBESCTL_OPTS) --all state.apply
+	qubesctl $(QUBESCTL_OPTS) --all state.apply $(SALTCALL_OPTS)
 
 
 # usage: TARGETS=provides-net make salt-apply
