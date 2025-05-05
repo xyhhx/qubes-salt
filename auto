@@ -1,0 +1,10 @@
+#!/bin/bash --
+set -axeuo pipefail
+
+export COMMIT_SHA=$(git rev-parse --short HEAD)
+export RELEASE=$(rpm --eval "%autorelease -p -e pre1 -s ${COMMIT_SHA}")
+
+[[ "${1}" == "clean" ]] && . ./scripts/autoclean.sh && exit 0
+[[ "${1}" == "gen" ]] && . ./scripts/autogen.sh && exit 0
+[[ "${1}" == "tag" ]] && . ./scripts/autotag.sh && exit 0
+[[ "${1}" == "build" ]] && make dist-gzip && exit 0

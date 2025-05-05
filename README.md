@@ -14,28 +14,6 @@ mirrors:
 
 ______________________________________________________________________
 
-## usage
-
-- enable the `qubes.user_dirs` state
-
-- replace any occurance of `/srv/user_salt` with `/srv/user/salt` etc
-
-- clone the repo in any vm
-
-- the commands to run in dom0 can be found by running `make cmd-install-domu` from the project workspace. **please inspect them before running them!**
-
-- now you may enable tops as you please, and apply their states/highstates accordingly
-
-  - for example:
-
-    ```sh
-    targets="on-fedora-41-minimal,uses-app-trivalent,dvm-trivalent"
-    sudo qubesctl top.enable "${targets}"
-    sudo qubesctl state.apply --targets "${targets}"
-    ```
-
-______________________________________________________________________
-
 some resources i referenced while working on this (thanks!):
 
 - <https://git.drkhsh.at/salt-n-pepper/file/README.md.html>

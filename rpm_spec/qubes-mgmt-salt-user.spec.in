@@ -1,0 +1,55 @@
+%global  commit_sha  %(git rev-parse --short HEAD)
+%global  _srvdir     /srv
+
+Name:           @PACKAGE@
+Version:        @VERSION@
+Release:        %(rpm --eval "%autorelease -p -e pre1 -s ${COMMIT_SHA}")
+Summary:        salts for xyhhx's collection of qubes
+
+License:        HL3-FULL
+URL:            @PACKAGE_URL@
+Source0:        %{name}-%{version}.tar.gz
+
+Group:          System administration tools
+BuildArch:      noarch
+
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-rpmbuild
+
+BuildRequires:  intltool
+BuildRequires:  libtool
+BuildRequires:  make
+BuildRequires:  tar
+
+Requires:       qubes-mgmt-salt
+Requires:       qubes-mgmt-salt-base
+Requires:       qubes-mgmt-salt-dom0
+Requires:       qubes-mgmt-salt-qvm
+Requires:       qubes-mgmt-salt-update
+Requires:       salt
+
+%description
+A collection of top files and salts to set up qubes according
+
+%prep
+%autosetup
+
+
+%build
+%configure
+make %{?_smp_mflags}
+
+
+%install
+%make_install
+
+
+%files
+%defattr(-,root,root)
+%license LICENSE LICENSE.md
+%doc README.md
+%config(noreplace) %{_srvdir}/user/config.yml
+%attr(750, root, root) %dir %{_srvdir}/user
+%files %{_srvdir}/user
+
+%changelog
+%autochangelog
