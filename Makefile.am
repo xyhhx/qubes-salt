@@ -8,54 +8,55 @@
 
 
 # prelim setup
-AUTOMAKE_OPTIONS = subdir-objects -Wall -Werror foreign
+AUTOMAKE_OPTIONS = subdir-objects foreign
 
 # set some sane defaults
-NAME    ?= $(basename $(CURDIR))
-REPO    ?= $(NAME)
-VERSION ?= "0.1.0"
-RELEASE ?= "rc1"
+NAME    ?= @PACKAGE_NAME@
+VERSION ?= @PACKAGE_VERSION@
+RELEASE ?= @PACKAGE_RELEASE@
 
-COMMIT_SHA = $(shell git rev-parse --short HEAD)
+COMMIT_SHA = @COMMIT_SHA@
+LOG_LEVEL  = @LOG_LEVEL@
+PACKAGE    = $(NAME)
 
 # set some vars for automake
-srcdir       = @srcdir@
-VPATH        = @srcdir@
-saltdir      = @datadir@/srv
+srcdir		   = @srcdir@
+VPATH		     = @srcdir@
+saltdir	     = @datadir@/srv
 licensesdir  = @datadir@/licenses
 usersaltsdir = $(saltdir)/user
 
 EXTRA_DIST = LICENSE LICENSE.md README.md scripts src $(PACKAGE).spec rpm_spec/$(PACKAGE).spec.in
-SUBDIRS    = .
+SUBDIRS	   = .
 
 
 # automake dist definitions
 
-dist_doc_DATA       = README
+dist_doc_DATA		    = README
 dist_licenses_DATA  = LICENSE
 dist_usersalts_DATA = src/README \
-  src/srv/mirage-os.top \
-  src/srv/mirage-os.sls
+	src/srv/mirage-os.top \
+	src/srv/mirage-os.sls
 
 
 # automake clean defs
 
 DISTCLEANFILES  = @srcdir@/*.tar.gz
 MAINTAINERCLEAN = @srcdir@/autom4te.cache \
-  @srcdir@/$(PACKAGE).spec \
-  @srcdir@/configure \
-  @srcdir@/*.log \
-  @srcdir@/.m4/*
+	@srcdir@/$(PACKAGE).spec \
+	@srcdir@/configure \
+	@srcdir@/*.log \
+	@srcdir@/.m4/*
 
 
 # options for qubesctl and salt wrapper phonies
 
-QUBESCTL_OPTS :=
+QUBESCTL_OPTS =
 QUBESCTL_OPTS += --force-color
 QUBESCTL_OPTS += --show-output
 
-SALTCALL_OPTS :=
-SALTCALL_OPTS += -l $(or $(LOG_LEVEL), "error")
+SALTCALL_OPTS =
+SALTCALL_OPTS += -l $(LOG_LEVEL)
 
 
 # run from dom0 against a domU with up-to-date repo
@@ -63,32 +64,32 @@ SALTCALL_OPTS += -l $(or $(LOG_LEVEL), "error")
 .PHONY: cmd-minion-patch
 cmd-minion-patch:
 	@echo \
-    qvm-run -p $(QUBE_NAME) \
-    "'cat @abs_srcdir@/scripts/f_defaults.conf.patch'" \
-    \| sudo patch /etc/salt/minion.d/f_defaults.conf
+	qvm-run -p $(QUBE_NAME) \
+	"'cat @abs_srcdir@/scripts/f_defaults.conf.patch'" \
+	\| sudo patch /etc/salt/minion.d/f_defaults.conf
 
 # runs all applys
 # usage: make salt-apply-all
 .PHONY: salt-apply-all
 salt-apply-all: check-is-dom0
-  qubesctl $(QUBESCTL_OPTS) --all state.apply $(SALTCALL_OPTS)
+	qubesctl $(QUBESCTL_OPTS) --all state.apply $(SALTCALL_OPTS)
 
 # usage: TARGETS=provides-net make salt-apply
 .PHONY: salt-apply
 salt-apply: check-is-dom0
-  qubesctl $(QUBESCTL_OPTS) \
-  --target $(TARGETS) \
-  $(SALTCALL_OPTS)
+	qubesctl $(QUBESCTL_OPTS) \
+	--target $(TARGETS) \
+	$(SALTCALL_OPTS)
 
 # runs a specific sls against given target(s)
 # usage: TARGETS=provides-net make salt-sls templates.provides-net.configure
 .PHONY: salt-sls
 salt-sls: check-is-dom0
 	qubesctl $(QUBESCTL_OPTS) \
-    --skip-dom0 \
-    --target $(TARGETS) \
-    state.sls \
-    $(filter-out $@, $(MAKECMDGOALS)) \
-    $(SALTCALL_OPTS) \
-    saltenv=user
+	--skip-dom0 \
+	--target $(TARGETS) \
+	state.sls \
+	$(filter-out $@, $(MAKECMDGOALS)) \
+	$(SALTCALL_OPTS) \
+	saltenv=user
 

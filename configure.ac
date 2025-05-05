@@ -2,28 +2,27 @@
 # vim: set syn=config :
 
 AC_PREREQ([2.72])
-AC_DIAGNOSE([all])
 
 # initialize autoconf from env vars
 # TODO: add checks to ensure that the envs exist
 AC_INIT(
-  # name
-  [mirage-fw],
-  # version
+  m4_esyscmd([echo ${NAME}]),
   m4_esyscmd([echo ${VERSION}]),
-  # version string (exactly "version string")
-  m4_esyscmd([echo `version ${VERSION}`]),
-  # bug report
-  m4_esyscmd([echo ${PACKAGE_MAINTAINERS}]),
-  # url
-  m4_esyscmd([echo ${PACKAGE_URL}]),
+  m4_esyscmd([echo "version ${VERSION}"]),
+  m4_esyscmd([echo ${MAINTAINERS}]),
+  m4_esyscmd([echo ${URL}]),
 )
 
-AC_CONFIG_SRCDIR([rpm_spec/${PACKAGE}.spec.in])
+# NOTE: from now on, PACKAGE_NAME, PACKAGE_VERSION, PACKAGE_STRING,
+# PACKAGE_BUGREPORT, and PACKAGE_URL are available. (these are also
+# passed to the generated makefile )
+# ---
+
+AC_CONFIG_SRCDIR([rpm_spec/${PACKAGE_NAME.spec.in])
 AC_DEFINE_UNQUOTED([RELEASE], [`${RELEASE}`], [rc1])
 
 AS_IF(
-  [ test -d "$srcdir/.m4" ],
+  [ test -d "${srcdir}/.m4" ],
   [AC_CONFIG_AUX_DIR([.m4])]
 )
 
@@ -37,5 +36,8 @@ AC_PROG_MKDIR_P
 AC_PROG_SED
 PKG_PROG_PKG_CONFIG
 
-AC_CONFIG_FILES([Makefile ${PACKAGE}.spec:rpm_spec/mirage-fw.spec.in])
+AC_SUBST([LOG_LEVEL],[error])
+AC_SUBST([COMMIT_SHA], m4_esyscmd([shell git rev-parse --short HEAD]))
+
+AC_CONFIG_FILES([Makefile ${PACKAGE_NAME.spec:rpm_spec/${PACKAGE}.spec.in])
 AC_OUTPUT
