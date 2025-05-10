@@ -1,6 +1,6 @@
-# vim: set ts=2 sw=2 sts=2 et :
-
+# vim: set syn=yaml ft=sls ts=2 sw=2 sts=2 et :
 ---
+
 {% set vm_name = "uses-stack-dev-f41" %}
 
 user:
