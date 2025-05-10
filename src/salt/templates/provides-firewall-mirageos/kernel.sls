@@ -2,7 +2,7 @@
 ---
 {% if grains.id == 'dom0' %}
 
-{% import_yaml '/home/whomst/.config/qubes-mgmt-salt-user/config.yml' as config %}
+{% import_yaml 'config.yml' as config %}
 
 {% set name = "templates.provides-firewall-mirageos.kernel" %}
 {% set vm_name = "provides-firewall-mirageos" %}
