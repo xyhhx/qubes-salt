@@ -16,6 +16,9 @@
     - features:
       - enable:
         - appmenus-dispvm
+        - service.qubes-ctapproxy@sys-onlykey
+      - disable:
+        - service.qubes-ctapproxy
       - set:
         - menu-items: trivalent.desktop
         - menu-favorites: "@disp:trivalent"

@@ -7,13 +7,13 @@ user:
   dom0:
     - templates.uses-app-trivalent.vm
   '{{ vm_name }}':
-    - common.pkgs.update
+    - common.dconf
+    - common.pkgs.audio
     - common.pkgs.base
     - common.pkgs.hardened_malloc
     - common.pkgs.networking
-    - common.pkgs.audio
-    - common.dconf
-    - common.theme
+    - common.pkgs.update
     - common.terminal
+    - common.theme
     - common.xdpi
     - templates.uses-app-trivalent.configure

@@ -14,11 +14,14 @@
     - prefs:
       - memory: 8000
       - maxmem: 16000
-      - vcpus: 4 
+      - vcpus: 4
       - template-for-dispvms: true
     - features:
       - enable:
         - appmenus-dispvm
+        - service.qubes-ctapproxy@sys-onlykey
+      - disable:
+        - service.qubes-ctapproxy
       - set:
         - menu-items: Alacritty.desktop
 

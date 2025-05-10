@@ -14,13 +14,13 @@
   cmd.run:
     - names:
       - /home/user/.tmux/plugins/tpm/bin/install_plugins
-      - /home/user/.tmux/plugins/tpm/bin/update_plugins all
+      - '/home/user/.tmux/plugins/tpm/bin/update_plugins all':
         - onchanges:
           - git: '{{ name }}'
     - runas: user
     - cwd: /home/user
     - use_vt: true
     - env:
-      - TMUX_PLUGIN_MANAGER_PATH: '/home/user/.config/tmux/plugins/'
+      TMUX_PLUGIN_MANAGER_PATH: '/home/user/.config/tmux/plugins/'
 
 {% endif %}

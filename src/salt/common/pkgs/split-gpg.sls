@@ -1,6 +1,6 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
-{% set name = "common.split-gpg.init" %}
+{% set name = "common.pkgs.split-gpg" %}
 {% if grains.id != 'dom0' %}
 
 

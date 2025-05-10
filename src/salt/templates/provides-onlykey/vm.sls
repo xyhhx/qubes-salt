@@ -17,9 +17,7 @@
     - tags:
       - add:
         - salt-managed
-
-'{{ vm_name }}':
-  qvm.service:
-    - enable:
-      - updates-proxy-setup
+    - features:
+      - enable:
+        - service.updates-proxy-setup
 

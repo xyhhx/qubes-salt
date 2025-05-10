@@ -10,6 +10,7 @@ user:
     - common.pkgs.update
     - common.pkgs.base
     - common.pkgs.hardened_malloc
+    - common.pkgs.ctap-proxy
     - common.dconf
     - common.theme
     - common.terminal

@@ -7,16 +7,17 @@ user:
   dom0:
     - templates.uses-stack-dev-f41.vm
   '{{ vm_name }}':
-    - common.pkgs.update
+    - common.dconf
+    - common.oh-my-zsh
     - common.pkgs.base
-    - common.pkgs.hardened_malloc
+    - common.pkgs.ctap-proxy
     - common.pkgs.docker
+    - common.pkgs.hardened_malloc
     - common.pkgs.neovim
     - common.pkgs.networking
     - common.pkgs.split-gpg
-    - common.oh-my-zsh
-    - common.xdpi
-    - common.dconf
-    - common.theme
+    - common.pkgs.update
     - common.terminal
+    - common.theme
+    - common.xdpi
     - templates.uses-stack-dev-f41.configure
