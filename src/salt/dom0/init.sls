@@ -4,7 +4,7 @@
 {% if grains.id == 'dom0' %}
 
 include:
-  - dom0.base_templates
+  - dom0.base-templates
   - dom0.pkgs
   - dom0.policies
   - dom0.user-settings

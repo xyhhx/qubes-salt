@@ -5,7 +5,7 @@
 
 '{{ name }}':
   qvm.template_installed:
-    names:
+    - names:
       - debian-12-minimal
       - fedora-41-minimal
       - fedora-41-xfce
