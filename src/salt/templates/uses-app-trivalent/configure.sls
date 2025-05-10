@@ -41,7 +41,7 @@ psutils:
     - mode: '0644'
     - makedirs: true
     - names:
-      - /etc/trivalent/policies/managed/policy.json:
-        - source: salt://templates/uses-app-trivalent/files/policy.json
+      - /etc/librewolf/policies/qubes-mgmt-salt-user.json:
+        - source: salt://templates/uses-app-librewolf-f41/files/policy.json
 
 {% endif %}

@@ -18,8 +18,15 @@ librewolf:
     - fromrepo: librewolf
     - aggregate: true
 
-psutils:
-  pkg.installed:
-    - aggregate: true
+'{{ name }}':
+  file.managed:
+    - user: root
+    - group: root
+    - mode: '0644'
+    - makedirs: true
+    - names:
+      - /etc/librewolf/policies/policies.json:
+        - source: salt://templates/uses-app-librewolf-f41/files/policies.json
+
 
 {% endif %}

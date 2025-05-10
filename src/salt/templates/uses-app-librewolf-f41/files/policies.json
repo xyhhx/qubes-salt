@@ -1,0 +1,172 @@
+{
+  "policies": {
+    "3rdParty": {
+      "Extensions": {
+        "uMatrix@raymondhill.net": {
+          "adminSettings": {
+            "userSettings": {
+              "advancedUserEnabled": true,
+              "colorBlindFriendly": true,
+              "uiAccentCustom": true,
+              "uiAccentCustom0": "",
+              "importedLists": [],
+              "popupPanelSections": 63
+            },
+            "selectedFilterLists": [
+              "user-filters",
+              "LegitimateURLShortener",
+              "adguard-cookies",
+              "adguard-generic",
+              "adguard-mobile",
+              "adguard-mobile-app-banners",
+              "adguard-other-annoyances",
+              "adguard-popup-overlays",
+              "adguard-social",
+              "adguard-spyware",
+              "adguard-spyware-url",
+              "adguard-widgets",
+              "block-lan",
+              "curben-phishing",
+              "dpollock-0",
+              "easylist",
+              "easylist-annoyances",
+              "easylist-chat",
+              "easylist-newsletters",
+              "easylist-notifications",
+              "easyprivacy",
+              "fanboy-cookiemonster",
+              "fanboy-social",
+              "fanboy-thirdparty_social",
+              "plowe-0",
+              "ublock-annoyances",
+              "ublock-badware",
+              "ublock-cookies-adguard",
+              "ublock-cookies-easylist",
+              "ublock-filters",
+              "ublock-privacy",
+              "ublock-quick-fixes",
+              "ublock-unbreak",
+              "urlhaus-1"
+            ]
+          }
+        }
+      },
+      "ExtensionSettings": {
+        "*": {
+          "blocked_install_message": "Installing extensions is disabled",
+          "installation_mode": "blocked",
+          "allowed_types": ["extension"]
+        },
+        "uMatrix@raymondhill.net": {
+          "installation_mode": "force_installed",
+          "install_url": "https://addons.mozilla.org/firefox/downloads/latest/umatrix/latest.xpi"
+        },
+        "@testpilot-containers": {
+          "installation_mode": "force_installed",
+          "install_url": "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi"
+        },
+        "{c607c8df-14a7-4f28-894f-29e8722976af}": {
+          "installation_mode": "force_installed",
+          "install_url": "https://addons.mozilla.org/firefox/downloads/latest/temporary-containers/latest.xpi"
+        },
+        "jsr@javascriptrestrictor": {
+          "installation_mode": "force_installed",
+          "install_url": "https://addons.mozilla.org/firefox/downloads/latest/javascript-restrictor/latest.xpi"
+        },
+        "{33ff5b1f-6988-4070-9fd7-746b498a00f9}": {
+          "installation_mode": "force_installed",
+          "install_url": "https: //addons.mozilla.org/firefox/downloads/latest/jd-black-theme/latest.xpi"
+        }
+      },
+      "FirefoxHome": {
+        "Highlights": true,
+        "Locked": true,
+        "Pocket": false,
+        "Search": true,
+        "Snippets": true,
+        "SponsoredPocket": false,
+        "SponsoredTopSites": false,
+        "TopSites": true
+      },
+      "InstallAddonsPermission": {
+        "Default": false
+      },
+      "NewTabPage": true,
+      "NoDefaultBookmarks": true,
+      "OfferToSaveLogins": false,
+      "OverrideFirstRunPage": "",
+      "OverridePostUpdatePage": "",
+      "PostQuantumKeyAgreementEnabled": true,
+      "Preferences": {
+        "media.autoplay.blocking_policy": {
+          "Value": 2,
+          "Status": "user"
+        },
+        "font.name.monospace.x-western": {
+            "Value": "IBM Plex Mono Light",
+            "Status": "user"
+        },
+        "font.name.sans-serif.x-western": {
+          "Value": "Liberation Sans",
+          "Status": "user"
+        },
+        "font.name.serif.x-western": {
+          "Value": "Liberation Serif",
+          "Status": "user"
+        },
+        "browser.tabs.inTitlebar": {
+          "Value": 0
+        },
+        "security.ssl.require_safe_negotiation": {
+          "Value": true
+        },
+        "privacy.resistFingerprinting": {
+          "Value": false
+        },
+        "browser.uiCustomization.state":{"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":["ublock0_raymondhill_net-browser-action","addon_darkreader_org-browser-action","jsr_javascriptrestrictor-browser-action","_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action"],"nav-bar":["back-button","forward-button","stop-reload-button","vertical-spacer","customizableui-special-spring1","urlbar-container","customizableui-special-spring2","save-to-pocket-button","downloads-button","fxa-toolbar-menu-button","unified-extensions-button","_testpilot-containers-browser-action","umatrix_raymondhill_net-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["tabbrowser-tabs","new-tab-button","alltabs-button","_c607c8df-14a7-4f28-894f-29e8722976af_-browser-action"],"vertical-tabs":[],"PersonalToolbar":["import-button","personal-bookmarks"]},"seen":["developer-button","ublock0_raymondhill_net-browser-action","umatrix_raymondhill_net-browser-action","addon_darkreader_org-browser-action","jsr_javascriptrestrictor-browser-action","_7a7a4a92-a2a0-41d1-9fd7-1e92480d612d_-browser-action","_testpilot-containers-browser-action","_c607c8df-14a7-4f28-894f-29e8722976af_-browser-action"],"dirtyAreaCache":["nav-bar","vertical-tabs","PersonalToolbar","toolbar-menubar","TabsToolbar","unified-extensions-area"],"currentVersion":21,"newElementCount":2},
+      }
+    },
+    "PDFjs": {
+      "Enabled": false,
+      "EnablePermission": false
+    },
+    "DisableFirefoxStudies": true,
+    "DisableFirefoxAccounts": true,
+    "DisableFirefoxScreenshots": true,
+    "DisableForgetButton": true,
+    "DisableMasterPasswordCreation": true,
+    "DisableProfileImport": true,
+    "DisableSetDesktopBackground": true,
+    "DisplayMenuBar": "default-off",
+    "DisablePocket": true,
+    "DisableTelemetry": true,
+    "DisableFormHistory": true,
+    "DontCheckDefaultBrowser": true,
+    "HardwareAcceleration": false,
+    "OfferToSaveLogins": false,
+    "EnableTrackingProtection": {
+      "Value": true,
+      "Cryptomining": true,
+      "Fingerprinting": true,
+      "EmailTracking": true
+    },
+    "EncryptedMediaExtensions": {
+      "Enabled": true,
+      "Locked": true
+    },
+    "FirefoxSuggest": {
+      "WebSuggestions": false,
+      "ImproveSuggest": false,
+      "Locked": true
+    },
+    "StartDownloadsInTempDirectory": true,
+    "UserMessaging": {
+      "ExtensionRecommendations": "false",
+      "FeatureRecommendations": "false",
+      "Locked": "true",
+      "MoreFromMozilla": "false",
+      "SkipOnboarding": "true",
+        "WhatsNew": "false"
+    }
+  }
+}

@@ -3,6 +3,6 @@
 {% set vm_name = "dvm-librewolf-f41" %}
 {% if grains.id != 'dom0' %}
 
-# TODO: configure librewolf-f41
+
 
 {% endif %}
