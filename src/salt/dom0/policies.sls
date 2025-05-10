@@ -3,9 +3,10 @@
 
 {% set user = pillar.config.dom0_user %}
 
+{% if grains.id == 'dom0' %}
+
 'dom0 - policies':
   file.managed:
-    - contents: '!include-dir user.d/'
     - mode: '0640'
     - makedirs: true
     - names:
@@ -25,5 +26,7 @@
           - source: 'salt://dom0/files/35-ssh.policy'
 
 '/home/{{ user }}/policies':
-  symlink:
+  file.symlink:
     - target: '/etc/qubes/policy.d/user.d'
+
+{% endif %}
