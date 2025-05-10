@@ -3,6 +3,7 @@
 ---
 
 {% set name = "common.pkgs.audio" %}
+{% if grains.id != 'dom0' %}
 
 '{{ name }}':
   pkg.installed:
@@ -17,3 +18,4 @@
     - order: 1
     - aggregate: true
 
+{% endif %}

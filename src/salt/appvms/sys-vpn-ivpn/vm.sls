@@ -4,6 +4,8 @@
 {% set template = 'provides-ivpn' %}
 {% set netvm = 'disp-sys-firewall-mirageos-wifi' %}
 
+{% if grains.id == 'dom0' %}
+
 '{{ vm_name }}':
   qvm.vm:
     - present:
@@ -21,3 +23,5 @@
     - require:
       - qvm: '{{ template }}'
       - qvm: '{{ netvm }}'
+
+{% endif %}

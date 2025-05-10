@@ -2,6 +2,7 @@
 
 ---
 {% set name = "common.theme.fonts" %}
+{% if grains.id != 'dom0' %}
 
 '{{ name }}':
   pkg.installed:
@@ -21,3 +22,5 @@
     - skip_suggestions: true
     - install_recommends: false
     - aggregate: true
+
+{% endif %}

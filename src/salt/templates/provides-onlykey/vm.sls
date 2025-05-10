@@ -4,6 +4,8 @@
 {% set vm_name = "provides-onlykey" %}
 {% set base_template = 'fedora-41-minimal' %}
 
+{% if grains.id == 'dom0' %}
+
 '{{ vm_name }}':
   qvm.vm:
     - actions:
@@ -21,3 +23,4 @@
       - enable:
         - service.updates-proxy-setup
 
+{% endif %}

@@ -3,6 +3,7 @@
 ---
 
 {% set name = "common.pkgs.docker" %}
+{% if grains.id != 'dom0' %}
 
 {% if grains.os_family|lower == 'debian' %}
 {% elif grains.os_family|lower == 'redhat' %}
@@ -32,4 +33,5 @@ docker-ce-stable:
       - docker
     - remove_groups: false
 
+{% endif %}
 {% endif %}

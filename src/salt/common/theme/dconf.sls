@@ -3,6 +3,8 @@
 {% set name = 'common.theme.dconf' %}
 {% set dconf_d = '/etc/dconf/db/local.d' %}
 
+{% if grains.id != 'dom0' %}
+
 '{{ name }}':
   file.managed:
     - user: root
@@ -18,3 +20,4 @@
       - '{{ dconf_d }}/prefer-dark':
         - source: salt://common/theme/files/prefer-dark.conf
 
+{% endif %}

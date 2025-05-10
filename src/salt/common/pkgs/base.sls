@@ -2,6 +2,8 @@
 ---
 {% set name = "common.pkgs.base" %}
 
+{% if grains.id != 'dom0' %}
+
 '{{ name }}':
   pkg.installed:
     - pkgs:
@@ -16,3 +18,4 @@
     - install_recommends: false
     - aggregate: true
 
+{% endif %}

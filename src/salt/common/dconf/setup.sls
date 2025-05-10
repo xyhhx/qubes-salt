@@ -2,6 +2,7 @@
 ---
 {% set name = 'common.dconf.setup' %}
 {% set dconf_d = '/etc/dconf/db/local.d' %}
+{% if grains.id != 'dom0' %}
 
 '{{ name }}':
   file.managed:
@@ -18,3 +19,5 @@
         - source: salt://common/dconf/files/disable-automount.conf
       - '{{ dconf_d }}/locks/disable-automount':
         - source: salt://common/dconf/files/disable-automount.lock
+
+{% endif %}

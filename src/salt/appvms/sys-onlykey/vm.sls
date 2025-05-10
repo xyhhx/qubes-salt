@@ -2,6 +2,7 @@
 ---
 
 {% set vm_name = "sys-onlykey" %}
+{% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':
   qvm.vm:
@@ -15,3 +16,5 @@
     - source: salt://appvms/sys-onlykey/files/49-onlykey.policy
     - mode: "0640"
     - makedirs: true
+
+{% endif %}

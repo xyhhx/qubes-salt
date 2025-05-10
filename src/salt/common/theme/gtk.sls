@@ -3,6 +3,7 @@
 ---
 {% set name = "common.theme.gtk" %}
 
+{% if grains.id != 'dom0' %}
 {% if grains.os_family|lower == 'redhat' %}
 deepin-gtk-theme:
   pkg.installed:
@@ -18,3 +19,5 @@ deepin-gtk-theme:
     - user: root
     - group: root
     - mode: '0640'
+
+{% endif %}

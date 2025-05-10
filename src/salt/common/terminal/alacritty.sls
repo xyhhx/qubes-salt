@@ -2,7 +2,9 @@
 
 ---
 
-{% set name = "common.terminal.init" %}
+{% set name = "common.terminal.alacritty" %}
+
+{% if grains.id != 'dom0' %}
 
 '{{ name }}':
   pkg.installed:
@@ -37,4 +39,6 @@
         - source: salt://common/terminal/files/alacritty.toml
       - /etc/skel/.config/alacritty/alacritty.toml:
         - source: salt://common/terminal/files/alacritty.toml
+{% endif %}
+
 {% endif %}

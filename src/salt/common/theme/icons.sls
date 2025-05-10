@@ -3,6 +3,8 @@
 ---
 {% set name = "common.theme.icons" %}
 
+{% if grains.id != 'dom0' %}
+
 '{{ name }}':
   pkg.installed:
     - pkgs:
@@ -11,3 +13,4 @@
     - install_recommends: false
     - aggregate: true
 
+{% endif %}
