@@ -17,7 +17,6 @@ bat-extras:
       - bat
       - bat-extras
       - bind-utils
-      - bottom
       - btop
       - cargo
       - clippy
@@ -27,19 +26,16 @@ bat-extras:
       - git-delta
       - iputils
       - jq
-      - lazygit
+      - just
       - lua
       - luarocks
-      - nmap
       - opentofu
       - pipx
       - podman
       - psutils
       - python3-pip
       - qubes-core-agent-passwordless-root
-      - qubes-ctap
       - qubes-usb-proxy
-      - ripgrep
       - rsync
       - rust
       - rust-analyzer

@@ -9,6 +9,7 @@ user:
   '{{ vm_name }}':
     - common.dconf
     - common.pkgs.base
+    - common.pkgs.ctap-proxy
     - common.pkgs.docker
     - common.pkgs.hardened_malloc
     - common.pkgs.neovim
