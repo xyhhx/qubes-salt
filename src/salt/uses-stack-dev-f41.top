@@ -8,9 +8,7 @@ user:
     - templates.uses-stack-dev-f41.vm
   '{{ vm_name }}':
     - common.dconf
-    - common.oh-my-zsh
     - common.pkgs.base
-    - common.pkgs.ctap-proxy
     - common.pkgs.docker
     - common.pkgs.hardened_malloc
     - common.pkgs.neovim

@@ -104,7 +104,7 @@ salt-apply: check-is-dom0
 	qubesctl $(QUBESCTL_OPTS) \
 	--target $(TARGETS) \
 	state.apply \
-	$(SALTCALL_OPTS) \
+	$(SALTCALL_OPTS)
 
 # runs a specific sls against given target(s)
 # usage: TARGETS=provides-net make salt-sls templates.provides-net.configure

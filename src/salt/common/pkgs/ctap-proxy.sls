@@ -7,7 +7,7 @@
 '{{ name }}':
   pkg.installed:
     - pkgs:
-      - qubes-ctap-proxy
+      - qubes-ctap
     - skip_suggestions: true
     - install_recommends: false
     - aggregate: true
