@@ -3,8 +3,8 @@
 
 # ===== User Defined Salt Pillars =============================================
 
-{% import_yaml 'config.yml' as config %}
 
 user:
   '*':
     - names
+    - config

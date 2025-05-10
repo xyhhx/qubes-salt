@@ -1,7 +1,6 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 {% set vm_name = pillar.names.templates.providers.mirageos_firewall %}
-{% import_yaml 'config.yml' as config %}
 
 {% if grains.id == 'dom0' %}
 
@@ -13,7 +12,7 @@
       - flags:
         - quiet
     - prefs:
-      - kernel: '{{ "mirage-firewall-" ~ config.versions.mirageos }}'
+      - kernel: '{{ "mirage-firewall-" ~ pillar.config.versions.mirageos }}'
       - kernelopts: ''
       - include_in_backups: false
       - memory: 32

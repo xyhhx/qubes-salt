@@ -2,12 +2,10 @@
 ---
 {% if grains.id == 'dom0' %}
 
-{% import_yaml 'config.yml' as config %}
-
 {% set name = "templates.provides-firewall-mirageos.kernel" %}
 {% set vm_name = "provides-firewall-mirageos" %}
 
-{% set version = config.versions.mirageos %}
+{% set version = pillar.config.versions.mirageos %}
 {% set kernel = "qubes-firewall.xen" %}
 {% set checksum = "qubes-firewall-release.sha256" %}
 {% set download_base = "https://github.com/mirage/qubes-mirage-firewall/releases/download/" ~ version ~ "/" %}

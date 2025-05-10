@@ -1,10 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% import_yaml 'config.yml' as config %}
-
 {% set name = "dom0.pkgs" %}
-{% set user = config.dom0_user %}
+{% set user = pillar.config.dom0_user %}
 
 {% if grains.id == 'dom0' %}
 
