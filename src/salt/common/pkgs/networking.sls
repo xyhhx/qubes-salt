@@ -3,6 +3,8 @@
 ---
 {% set name = "common.pkgs.networking" %}
 
+{% if grains.id != 'dom0' %}
+
 '{{ name }} - install':
   pkg.installed:
     - pkgs:
@@ -20,3 +22,4 @@
     - order: 1
     - aggregate: true
 
+{% endif %}

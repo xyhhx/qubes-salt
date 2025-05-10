@@ -18,7 +18,10 @@
 #
 # Not needed?
 # update-locale LC_ALL=en_US.UTF-8
-#
+
+{% if grains.id != 'dom0' %}
+
 en_US.utf8:
   locale.system
 
+{% endif %}

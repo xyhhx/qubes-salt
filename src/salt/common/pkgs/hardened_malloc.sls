@@ -2,6 +2,7 @@
 
 ---
 {% set name = "common.pkgs.hardened_malloc" %}
+{% if grains.id != 'dom0' %}
 {% if grains.os_family|lower == 'redhat' %}
 
 include:
@@ -27,4 +28,5 @@ secureblue/hardened_malloc:
     - require:
       - pkg: hardened_malloc
 
+{% endif %}
 {% endif %}

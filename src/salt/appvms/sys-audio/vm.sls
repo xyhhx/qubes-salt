@@ -2,6 +2,7 @@
 ---
 {% set name = "appvms.sys-audio.vm" %}
 {% set vm_name = "sys-audio" %}
+{% if grains.id == 'dom0' %}
 
 '{{ name }}':
   qvm.vm:
@@ -17,3 +18,5 @@
     - group: 1000
     - mode: "0640"
     - makedirs: true
+
+{% endif %}

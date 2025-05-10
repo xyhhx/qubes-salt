@@ -3,6 +3,7 @@
 ---
 
 {% set name = "common.pkgs.audio_vm" %}
+{% if grains.id != 'dom0' %}
 
 '{{ name }} - install':
   pkg.installed:
@@ -23,3 +24,5 @@
     - skip_suggestions: true
     - install_recommends: false
     - aggregate: true
+
+{% endif %}
