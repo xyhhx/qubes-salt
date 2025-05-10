@@ -1,6 +1,6 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
-{% set user = pillar.config.dom0_user %}
+{% set user = config.dom0_user %}
 
 '/home/{{ user }}/.local/bin/center-window-xfce.sh':
   file.managed:
