@@ -14,6 +14,8 @@
           - contents: '!include-dir user.d/'
       - '/etc/qubes/policy.d/user.d/10-custom.policy':
           - source: 'salt://dom0/files/10-custom.policy'
+      - '/etc/qubes/policy.d/user.d/10-updates.policy':
+          - source: 'salt://dom0/files/10-updates.policy'
       - '/etc/qubes/policy.d/user.d/30-sys-audio.policy':
           - source: 'salt://dom0/files/30-sys-audio.policy'
       - '/etc/qubes/policy.d/user.d/30-sys-gui.policy':
