@@ -35,10 +35,6 @@
         - source: salt://templates/uses-app-librewolf-f41/files/jsr@javascriptrestrictor.json
       - /usr/lib/librewolf/managed-storage/{c607c8df-14a7-4f28-894f-29e8722976af}.json:
         - source: salt://templates/uses-app-librewolf-f41/files/{c607c8df-14a7-4f28-894f-29e8722976af}.json
-      - /etc/skel/.librewolf/installs.ini:
-        - source: salt://templates/uses-app-librewolf-f41/files/installs.ini
-      - /etc/skel/.librewolf/profiles.ini:
-        - source: salt://templates/uses-app-librewolf-f41/files/profiles.ini
 
 qubes-ctapproxy@sys-usb.service:
   service.disabled
