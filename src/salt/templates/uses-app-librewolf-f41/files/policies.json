@@ -1,6 +1,7 @@
 {
   "$schema": "https://github.com/mozilla/gecko-dev/raw/HEAD/browser/components/enterprisepolicies/schemas/policies-schema.json",
   "__COMMENT__ More Information": "https://github.com/mozilla/policy-templates/blob/master/README.md",
+
   "policies": {
     "AllowFileSelectionDialogs": true,
     "AllowedDomainsForApps": "",
@@ -14,6 +15,7 @@
     "BlockAboutProfiles": true,
     "BlockAboutSupport": true,
     "DisableAppUpdate": true,
+    "DisableBuiltinPDFViewer": true,
     "DisableDeveloperTools": false,
     "DisableFeedbackCommands": true,
     "DisableFirefoxAccounts": true,
@@ -24,70 +26,185 @@
     "DisableMasterPasswordCreation": true,
     "DisablePocket": true,
     "DisableProfileImport": true,
+    "DisableSafeMode": true,
     "DisableSetDesktopBackground": true,
     "DisableSystemAddonUpdate": true,
     "DisableTelemetry": true,
+    "DisplayBookmarksToolbar": "never",
     "DisplayMenuBar": "default-off",
     "DontCheckDefaultBrowser": true,
     "ExtensionUpdate": false,
     "HardwareAcceleration": false,
+    "HttpsOnlyMode": "force_enabled",
+    "ManualAppUpdateOnly": true,
+    "MicrosoftEntraSSO": false,
     "NewTabPage": true,
+    "NetworkPrediction": false,
     "NoDefaultBookmarks": true,
     "OfferToSaveLogins": false,
     "OverrideFirstRunPage": "",
     "OverridePostUpdatePage": "",
     "PasswordManagerEnabled": false,
     "PostQuantumKeyAgreementEnabled": true,
+    "PrimaryPassword": true,
+    "PrintingEnabled": false,
+    "PromptForDownloadLocation": true,
+    "SanitizeOnShutdown": true,
+    "SearchBar": "unified",
+    "ShowHomeButton": false,
     "SSLVersionMin": "tls1.2",
     "StartDownloadsInTempDirectory": true,
     "UseSystemPrintDialog": true,
     "WindowsSSO": false,
-    "Extensions": {
-      "Uninstall": [
-        "google@search.mozilla.org",
-        "bing@search.mozilla.org",
-        "amazondotcom@search.mozilla.org",
-        "ebay@search.mozilla.org",
-        "twitter@search.mozilla.org"
+
+    "Homepage": {
+      "URL": "about:home",
+      "Locked": true,
+      "StartPage": "homepage-locked"
+    },
+
+    "DisableSecurityBypass": {
+      "InvalidCertificate": true,
+      "SafeBrowsing": true
+    },
+
+    "FirefoxHome": {
+      "Locked": true,
+      "Highlights": false,
+      "Pocket": false,
+      "Search": true,
+      "Snippets": false,
+      "SponsoredPocket": false,
+      "SponsoredTopSites": false,
+      "TopSites": false
+    },
+
+    "InstallAddonsPermission": {
+      "Default": false
+    },
+
+
+    "PDFjs": {
+      "Enabled": false,
+      "EnablePermission": false
+    },
+
+    "WebsiteFilter": {
+      "Block": [
+        "https://google.com/"
+      ],
+      "Exceptions": [
       ]
     },
-    "ExtensionSettings": {
-      "*": {
-        "blocked_install_message": "Installing addons is disabled.",
-        "installation_mode": "blocked",
-        "allowed_types": [
-          "theme",
-          "sitepermission",
-          "dictionary",
-          "locale"
-        ]
+
+    "EnableTrackingProtection": {
+      "Value": true,
+      "Cryptomining": true,
+      "Fingerprinting": true,
+      "EmailTracking": true,
+      "Locked": true
+    },
+
+    "EncryptedMediaExtensions": {
+      "Enabled": false,
+      "Locked": true
+    },
+
+    "FirefoxSuggest": {
+      "WebSuggestions": false,
+      "ImproveSuggest": false,
+      "Locked": true
+    },
+
+    "UserMessaging": {
+      "ExtensionRecommendations": false,
+      "FeatureRecommendations": false,
+      "UrlbarInterventions": false,
+      "SkipOnboarding": true,
+      "MoreFromMozilla": false,
+      "FirefoxLabs": true,
+      "Locked": true
+    },
+
+    "Permissions": {
+      "Camera": {
+        "BlockNewRequests": true,
+        "Locked": true
       },
-      "uBlock0@raymondhill.net": {
-        "installation_mode": "force_installed",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+      "Microphone": {
+        "BlockNewRequests": true,
+        "Locked": true
       },
-      "uMatrix@raymondhill.net": {
-        "installation_mode": "force_installed",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/umatrix/latest.xpi"
+      "Location": {
+        "BlockNewRequests": true,
+        "Locked": true
       },
-      "@testpilot-containers": {
-        "installation_mode": "force_installed",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi"
+      "Notifications": {
+        "BlockNewRequests": true,
+        "Locked": false
       },
-      "{c607c8df-14a7-4f28-894f-29e8722976af}": {
-        "installation_mode": "force_installed",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/temporary-containers/latest.xpi"
-      },
-      "jsr@javascriptrestrictor": {
-        "installation_mode": "force_installed",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/javascript-restrictor/latest.xpi"
-      },
-      "{33ff5b1f-6988-4070-9fd7-746b498a00f9}": {
-        "installation_mode": "force_installed",
-        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/jd-black-theme/latest.xpi"
+      "Autoplay": {
+        "Default": "block-audio-video",
+        "Locked": false
       }
     },
+    "PopupBlocking": {
+      "Default": true,
+      "Locked": false
+    },
+
+    "Containers": {
+      "Default": [
+        {
+          "name": "1",
+          "icon": "fingerprint",
+          "color": "toolbar"
+        },
+        {
+          "name": "2",
+          "icon": "fingerprint",
+          "color": "blue"
+        },
+        {
+          "name": "3",
+          "icon": "fingerprint",
+          "color": "green"
+        },
+        {
+          "name": "4",
+          "icon": "fingerprint",
+          "color": "yellow"
+        },
+        {
+          "name": "5",
+          "icon": "fingerprint",
+          "color": "orange"
+        },
+        {
+          "name": "6",
+          "icon": "fingerprint",
+          "color": "red"
+        },
+        {
+          "name": "7",
+          "icon": "fingerprint",
+          "color": "pink"
+        },
+        {
+          "name": "8",
+          "icon": "fingerprint",
+          "color": "purple"
+        },
+        {
+          "name": "9",
+          "icon": "fingerprint",
+          "color": "turquoise"
+        }
+      ]
+    },
+
     "SearchEngines": {
+      "Default": "envs.net - SearXNG",
       "PreventInstalls": true,
       "Remove": [
         "Google",
@@ -141,20 +258,12 @@
         }
       ]
     },
-    "FirefoxHome": {
-      "Locked": true,
-      "Highlights": false,
-      "Pocket": false,
-      "Search": true,
-      "Snippets": false,
-      "SponsoredPocket": false,
-      "SponsoredTopSites": false,
-      "TopSites": false
-    },
-    "InstallAddonsPermission": {
-      "Default": false
-    },
+
     "Preferences": {
+      "security.ssl.errorReporting.enabled": {
+        "Value": false,
+        "Status": "locked"
+      },
       "security.default_personal_cert": {
         "Value": "Ask Every Time",
         "Status": "locked"
@@ -241,79 +350,51 @@
         "newElementCount": 2
       }
     },
-    "PDFjs": {
-      "Enabled": false,
-      "EnablePermission": false
-    },
-    "WebsiteFilter": {
-      "Block": [
-        "https://localhost/*"
-      ],
-      "Exceptions": [
-        "https://localhost/*"
+
+    "Extensions": {
+      "Uninstall": [
+        "google@search.mozilla.org",
+        "bing@search.mozilla.org",
+        "amazondotcom@search.mozilla.org",
+        "ebay@search.mozilla.org",
+        "twitter@search.mozilla.org"
       ]
     },
-    "EnableTrackingProtection": {
-      "Value": true,
-      "Cryptomining": true,
-      "Fingerprinting": true,
-      "EmailTracking": true,
-      "Locked": true
-    },
-    "EncryptedMediaExtensions": {
-      "Enabled": false,
-      "Locked": true
-    },
-    "FirefoxSuggest": {
-      "WebSuggestions": false,
-      "ImproveSuggest": false,
-      "Locked": true
-    },
-    "UserMessaging": {
-      "ExtensionRecommendations": false,
-      "FeatureRecommendations": false,
-      "UrlbarInterventions": false,
-      "SkipOnboarding": true,
-      "MoreFromMozilla": false,
-      "FirefoxLabs": true,
-      "Locked": true
-    },
-    "SanitizeOnShutdown": {
-      "Cache": true,
-      "Cookies": true,
-      "Downloads": true,
-      "FormData": true,
-      "History": true,
-      "Sessions": true,
-      "SiteSettings": true,
-      "OfflineApps": true,
-      "Locked": true
-    },
-    "Permissions": {
-      "Camera": {
-        "BlockNewRequests": true,
-        "Locked": true
+    "ExtensionSettings": {
+      "*": {
+        "blocked_install_message": "Installing addons is disabled.",
+        "installation_mode": "blocked",
+        "allowed_types": [
+          "theme",
+          "sitepermission",
+          "dictionary",
+          "locale"
+        ]
       },
-      "Microphone": {
-        "BlockNewRequests": true,
-        "Locked": true
+      "uBlock0@raymondhill.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
       },
-      "Location": {
-        "BlockNewRequests": true,
-        "Locked": true
+      "uMatrix@raymondhill.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/umatrix/latest.xpi"
       },
-      "Notifications": {
-        "BlockNewRequests": true,
-        "Locked": false
+      "@testpilot-containers": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/multi-account-containers/latest.xpi"
       },
-      "Autoplay": {
-        "Default": "block-audio-video",
-        "Locked": false
+      "{c607c8df-14a7-4f28-894f-29e8722976af}": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/temporary-containers/latest.xpi"
+      },
+      "jsr@javascriptrestrictor": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/javascript-restrictor/latest.xpi"
+      },
+      "{33ff5b1f-6988-4070-9fd7-746b498a00f9}": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/jd-black-theme/latest.xpi"
       }
-    },
-    "PopupBlocking": {
-      "Default": true,
-      "Locked": false
     },
 
     "3rdparty": {
@@ -377,7 +458,7 @@
             "notifications": false,
             "container": {
               "namePrefix": "tmp",
-              "color": "toolbar",
+              "color": "turquoise",
               "colorRandom": false,
               "colorRandomExcluded": [],
               "icon": "fence",
@@ -469,7 +550,14 @@
             }
           }
         }
-      }
+      },
+
+    "SupportMenu": {
+      "Title": "Qubes OS Documentation",
+      "URL": "https://qubes-os.org",
+      "AccessKey": "S"
+    }
+
     }
   }
 }
