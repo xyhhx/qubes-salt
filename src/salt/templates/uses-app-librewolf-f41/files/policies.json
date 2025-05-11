@@ -1,7 +1,6 @@
 {
   "$schema": "https://github.com/mozilla/gecko-dev/raw/HEAD/browser/components/enterprisepolicies/schemas/policies-schema.json",
   "__COMMENT__ More Information": "https://github.com/mozilla/policy-templates/blob/master/README.md",
-
   "policies": {
     "AllowFileSelectionDialogs": true,
     "AllowedDomainsForApps": "",
@@ -56,18 +55,15 @@
     "StartDownloadsInTempDirectory": true,
     "UseSystemPrintDialog": true,
     "WindowsSSO": false,
-
     "Homepage": {
       "URL": "about:home",
       "Locked": true,
       "StartPage": "homepage-locked"
     },
-
     "DisableSecurityBypass": {
       "InvalidCertificate": true,
       "SafeBrowsing": true
     },
-
     "FirefoxHome": {
       "Locked": true,
       "Highlights": false,
@@ -78,25 +74,19 @@
       "SponsoredTopSites": false,
       "TopSites": false
     },
-
     "InstallAddonsPermission": {
       "Default": false
     },
-
-
     "PDFjs": {
       "Enabled": false,
       "EnablePermission": false
     },
-
     "WebsiteFilter": {
       "Block": [
         "https://google.com/"
       ],
-      "Exceptions": [
-      ]
+      "Exceptions": []
     },
-
     "EnableTrackingProtection": {
       "Value": true,
       "Cryptomining": true,
@@ -104,18 +94,15 @@
       "EmailTracking": true,
       "Locked": true
     },
-
     "EncryptedMediaExtensions": {
       "Enabled": false,
       "Locked": true
     },
-
     "FirefoxSuggest": {
       "WebSuggestions": false,
       "ImproveSuggest": false,
       "Locked": true
     },
-
     "UserMessaging": {
       "ExtensionRecommendations": false,
       "FeatureRecommendations": false,
@@ -125,7 +112,6 @@
       "FirefoxLabs": true,
       "Locked": true
     },
-
     "Permissions": {
       "Camera": {
         "BlockNewRequests": true,
@@ -152,7 +138,6 @@
       "Default": true,
       "Locked": false
     },
-
     "Containers": {
       "Default": [
         {
@@ -202,7 +187,6 @@
         }
       ]
     },
-
     "SearchEngines": {
       "Default": "envs.net - SearXNG",
       "PreventInstalls": true,
@@ -258,7 +242,6 @@
         }
       ]
     },
-
     "Preferences": {
       "security.ssl.errorReporting.enabled": {
         "Value": false,
@@ -350,7 +333,6 @@
         "newElementCount": 2
       }
     },
-
     "Extensions": {
       "Uninstall": [
         "google@search.mozilla.org",
@@ -396,57 +378,56 @@
         "install_url": "https://addons.mozilla.org/firefox/downloads/latest/jd-black-theme/latest.xpi"
       }
     },
-
     "3rdparty": {
       "Extensions": {
-
         "uBlock0@raymondhill.net": {
-          "userSettings": {
-            "advancedUserEnabled": true,
-            "colorBlindFriendly": true,
-            "uiAccentCustom": true,
-            "uiAccentCustom0": "",
-            "importedLists": [],
-            "popupPanelSections": 63
-          },
-          "selectedFilterLists": [
-            "user-filters",
-            "LegitimateURLShortener",
-            "adguard-cookies",
-            "adguard-generic",
-            "adguard-mobile",
-            "adguard-mobile-app-banners",
-            "adguard-other-annoyances",
-            "adguard-popup-overlays",
-            "adguard-social",
-            "adguard-spyware",
-            "adguard-spyware-url",
-            "adguard-widgets",
-            "block-lan",
-            "curben-phishing",
-            "dpollock-0",
-            "easylist",
-            "easylist-annoyances",
-            "easylist-chat",
-            "easylist-newsletters",
-            "easylist-notifications",
-            "easyprivacy",
-            "fanboy-cookiemonster",
-            "fanboy-social",
-            "fanboy-thirdparty_social",
-            "plowe-0",
-            "ublock-annoyances",
-            "ublock-badware",
-            "ublock-cookies-adguard",
-            "ublock-cookies-easylist",
-            "ublock-filters",
-            "ublock-privacy",
-            "ublock-quick-fixes",
-            "ublock-unbreak",
-            "urlhaus-1"
-          ]
+          "adminSettings": {
+            "userSettings": {
+              "advancedUserEnabled": true,
+              "colorBlindFriendly": true,
+              "uiAccentCustom": true,
+              "uiAccentCustom0": "",
+              "importedLists": [],
+              "popupPanelSections": 63
+            },
+            "selectedFilterLists": [
+              "user-filters",
+              "LegitimateURLShortener",
+              "adguard-cookies",
+              "adguard-generic",
+              "adguard-mobile",
+              "adguard-mobile-app-banners",
+              "adguard-other-annoyances",
+              "adguard-popup-overlays",
+              "adguard-social",
+              "adguard-spyware",
+              "adguard-spyware-url",
+              "adguard-widgets",
+              "block-lan",
+              "curben-phishing",
+              "dpollock-0",
+              "easylist",
+              "easylist-annoyances",
+              "easylist-chat",
+              "easylist-newsletters",
+              "easylist-notifications",
+              "easyprivacy",
+              "fanboy-cookiemonster",
+              "fanboy-social",
+              "fanboy-thirdparty_social",
+              "plowe-0",
+              "ublock-annoyances",
+              "ublock-badware",
+              "ublock-cookies-adguard",
+              "ublock-cookies-easylist",
+              "ublock-filters",
+              "ublock-privacy",
+              "ublock-quick-fixes",
+              "ublock-unbreak",
+              "urlhaus-1"
+            ]
+          }
         },
-
         "jsr@javascriptrestrictor": {
           "requestShieldOn": true,
           "fpDetectionOn": true,
@@ -489,7 +470,6 @@
           "version": 7,
           "__default__": "Custom5"
         },
-
         "{c607c8df-14a7-4f28-894f-29e8722976af}": {
           "version": "1.9.2",
           "date": 1746926940128,
@@ -594,13 +574,11 @@
           }
         }
       },
-
-    "SupportMenu": {
-      "Title": "Qubes OS Documentation",
-      "URL": "https://qubes-os.org",
-      "AccessKey": "S"
-    }
-
+      "SupportMenu": {
+        "Title": "Qubes OS Documentation",
+        "URL": "https://qubes-os.org",
+        "AccessKey": "S"
+      }
     }
   }
 }
