@@ -1,8 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = "dvm-trivalent" %}
-{% set template_name = "uses-app-trivalent" %}
+{% set vm_name = "dvm-librewolf-f41" %}
+{% set template_name = "uses-app-librewolf-f41" %}
 
 {% if grains.id == 'dom0' %}
 
@@ -18,7 +18,7 @@
         - appmenus-dispvm
         - service.qubes-ctap-proxy
       - set:
-        - menu-items: trivalent.desktop
-        - menu-favorites: "@disp:trivalent"
+        - menu-items: librewolf.desktop
+        - menu-favorites: "@disp:librewolf"
 
 {% endif %}

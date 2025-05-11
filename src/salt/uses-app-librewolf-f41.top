@@ -1,0 +1,19 @@
+# vim: set syn=yaml ft=sls ts=2 sw=2 sts=2 et :
+---
+
+{% set vm_name = "uses-app-librewolf-f41" %}
+
+user:
+  dom0:
+    - templates.uses-app-librewolf-f41.vm
+  '{{ vm_name }}':
+    - common.dconf
+    - common.pkgs.audio
+    - common.pkgs.base
+    - common.pkgs.hardened_malloc
+    - common.pkgs.networking
+    - common.pkgs.update
+    - common.terminal
+    - common.theme
+    - common.xdpi
+    - templates.uses-app-librewolf-f41.configure

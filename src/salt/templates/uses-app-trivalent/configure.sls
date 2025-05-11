@@ -5,43 +5,42 @@
 # Avoid applying the state by mistake to dom0
 {% if grains.id != 'dom0' %}
 
-secureblue:
-  pkgrepo.managed:
-    - baseurl: https://repo.secureblue.dev
-    - enabled: 1
-    - gpgcheck: 1
-    - repo_gpgcheck: 1
-    - gpgkey: https://repo.secureblue.dev/secureblue.gpg
-    - require_in:
-      - pkg: trivalent
-
-trivalent-copr:
-  pkgrepo.managed:
-    - copr: secureblue/trivalent
-    - require_in:
-      - pkg: trivalent-subresource-filter
-
-trivalent:
-  pkg.installed:
-    - fromrepo: secureblue
-    - aggregate: true
-
-trivalent-subresource-filter:
-  pkg.installed:
-    - aggregate: true
-
-psutils:
-  pkg.installed:
-    - aggregate: true
-
 '{{ name }}':
+  pkgrepo.managed:
+    - names:
+      - secureblue:
+        - baseurl: https://repo.secureblue.dev
+        - enabled: 1
+        - gpgcheck: 1
+        - repo_gpgcheck: 1
+        - gpgkey: https://repo.secureblue.dev/secureblue.gpg
+        - require_in:
+          - pkg: trivalent
+    - trivalent-copr:
+      - copr: secureblue/trivalent
+      - require_in:
+        - pkg: trivalent-subresource-filter
+  pkg.installed:
+    - aggregate: true
+    - pkgs:
+      - psutils
+      - qubes-ctap
+      - trivalent
+      - trivalent-subresource-filter
   file.managed:
     - user: root
     - group: root
     - mode: '0644'
     - makedirs: true
     - names:
-      - /etc/trivalent/policies/managed/policy.json:
+      - /etc/trivalent/policies/qubes-mgmt-salt-user.json:
         - source: salt://templates/uses-app-trivalent/files/policy.json
+
+qubes-ctapproxy@sys-usb.service:
+  service.disabled
+
+qubes-ctapproxy@sys-onlykey.service:
+  service.running:
+    - enable: true
 
 {% endif %}
