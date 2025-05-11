@@ -71,15 +71,9 @@
       "closeRedirectorTabs": {
         "active": false,
         "delay": 2000,
-        "domains": [
-          "t.co",
-          "outgoing.prod.mozaws.net",
-          "slack-redir.net"
-        ]
+        "domains": ["t.co", "outgoing.prod.mozaws.net", "slack-redir.net"]
       },
-      "ignoreRequests": [
-        "addons.mozilla.org"
-      ],
+      "ignoreRequests": ["addons.mozilla.org"],
       "cookies": {
         "domain": {}
       },
@@ -105,3 +99,4 @@
       }
     }
   }
+}
