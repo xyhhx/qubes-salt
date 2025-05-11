@@ -14,7 +14,7 @@
     - gpgkey: https://repo.librewolf.net/pubkey.gpg
     - repo_gpgcheck: 1
     - require_in:
-      - pkg: librewolf
+      - pkg: '{{ name }}'
   pkg.installed:
     - names:
       - librewolf:
@@ -39,5 +39,13 @@
         - source: salt://templates/uses-app-librewolf-f41/files/installs.ini
       - /etc/skel/.librewolf/profiles.ini:
         - source: salt://templates/uses-app-librewolf-f41/files/profiles.ini
+
+qubes-ctapproxy@sys-usb.service:
+  service.disabled
+
+qubes-ctapproxy@sys-onlykey.service:
+  service.running:
+    - enable: true
+
 
 {% endif %}

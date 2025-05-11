@@ -36,4 +36,11 @@
       - /etc/trivalent/policies/qubes-mgmt-salt-user.json:
         - source: salt://templates/uses-app-trivalent/files/policy.json
 
+qubes-ctapproxy@sys-usb.service:
+  service.disabled
+
+qubes-ctapproxy@sys-onlykey.service:
+  service.running:
+    - enable: true
+
 {% endif %}

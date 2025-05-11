@@ -3,6 +3,4 @@
 {% set vm_name = "dvm-trivalent" %}
 {% if grains.id != 'dom0' %}
 
-# TODO: configure trivalent
-
 {% endif %}

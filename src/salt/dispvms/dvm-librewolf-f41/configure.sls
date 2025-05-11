@@ -3,6 +3,4 @@
 {% set vm_name = "dvm-librewolf-f41" %}
 {% if grains.id != 'dom0' %}
 
-
-
 {% endif %}

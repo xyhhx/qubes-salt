@@ -19,6 +19,8 @@
         - fedora-41
         - uses-app
     - features:
+      - enable:
+        - service.qubes-ctap-proxy
       - set:
         - menu-items: Alacritty.desktop
     - require:
