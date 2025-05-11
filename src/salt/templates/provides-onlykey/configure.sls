@@ -18,6 +18,7 @@
       - qubes-usb-proxy
       - qubes-input-proxy-sender
       - qubes-ctap
+      - qubes-u2f
       - ykpers
       - yubikey-personlization-gui
     - skip_suggestions: true

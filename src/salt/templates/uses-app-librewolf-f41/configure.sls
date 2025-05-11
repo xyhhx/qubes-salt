@@ -5,8 +5,9 @@
 # Avoid applying the state by mistake to dom0
 {% if grains.id != 'dom0' %}
 
-librewolf:
+'{{ name }}':
   pkgrepo.managed:
+    - name: librewolf
     - baseurl: https://repo.librewolf.net
     - enabled: 1
     - gpgcheck: 1
@@ -15,10 +16,11 @@ librewolf:
     - require_in:
       - pkg: librewolf
   pkg.installed:
-    - fromrepo: librewolf
+    - names:
+      - librewolf:
+        - fromrepo: librewolf
+      - qubes-ctap
     - aggregate: true
-
-'{{ name }}':
   file.managed:
     - user: root
     - group: root
