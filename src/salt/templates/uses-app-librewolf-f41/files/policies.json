@@ -82,9 +82,7 @@
       "EnablePermission": false
     },
     "WebsiteFilter": {
-      "Block": [
-        "https://google.com/"
-      ],
+      "Block": ["https://google.com/"],
       "Exceptions": []
     },
     "EnableTrackingProtection": {
@@ -190,13 +188,7 @@
     "SearchEngines": {
       "Default": "envs.net - SearXNG",
       "PreventInstalls": true,
-      "Remove": [
-        "Google",
-        "Bing",
-        "Amazon.com",
-        "eBay",
-        "Twitter"
-      ],
+      "Remove": ["Google", "Bing", "Amazon.com", "eBay", "Twitter"],
       "Add": [
         {
           "Name": "DuckDuckGo Lite",
@@ -297,9 +289,7 @@
             "_testpilot-containers-browser-action",
             "umatrix_raymondhill_net-browser-action"
           ],
-          "toolbar-menubar": [
-            "menubar-items"
-          ],
+          "toolbar-menubar": ["menubar-items"],
           "TabsToolbar": [
             "tabbrowser-tabs",
             "new-tab-button",
@@ -307,10 +297,7 @@
             "_c607c8df-14a7-4f28-894f-29e8722976af_-browser-action"
           ],
           "vertical-tabs": [],
-          "PersonalToolbar": [
-            "import-button",
-            "personal-bookmarks"
-          ]
+          "PersonalToolbar": ["import-button", "personal-bookmarks"]
         },
         "seen": [
           "developer-button",
@@ -346,12 +333,7 @@
       "*": {
         "blocked_install_message": "Installing addons is disabled.",
         "installation_mode": "blocked",
-        "allowed_types": [
-          "theme",
-          "sitepermission",
-          "dictionary",
-          "locale"
-        ]
+        "allowed_types": ["theme", "sitepermission", "dictionary", "locale"]
       },
       "uBlock0@raymondhill.net": {
         "installation_mode": "force_installed",
