@@ -5,5 +5,7 @@ sast:
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
       when: always
+  tags:
+    - linux
 include:
   - template: Security/SAST.gitlab-ci.yml
