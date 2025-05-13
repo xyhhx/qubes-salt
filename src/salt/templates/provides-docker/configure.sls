@@ -21,4 +21,7 @@
     - mode: '0755'
     - makedirs: true
 
+docker:
+  service.enabled
+
 {% endif %}
