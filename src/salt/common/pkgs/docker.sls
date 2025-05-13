@@ -23,9 +23,8 @@ docker-ce-stable:
       - containerd.io
       - docker-buildx-plugin
       - docker-compose-plugin
-    - skip_suggestions: true
-    - install_recommends: false
-    - aggregate: true
+    - require:
+      - pkgrepo: docker-ce-stable
   user.present:
     - names:
       - user
