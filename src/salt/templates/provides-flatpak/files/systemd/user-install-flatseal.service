@@ -1,0 +1,15 @@
+# vim: set ft=systemd :
+[Unit]
+Description=Check if Flatseal is installed for user
+After=user-install-flathub.service
+StartLimitIntervalSec=400
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/usr/bin/flatpak install --user com.github.tchx84.Flatseal -y --noninteractive'
+Restart=on-failure
+RestartSec=90
+
+[Install]
+WantedBy=default.target

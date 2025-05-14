@@ -1,0 +1,15 @@
+# vim: set ft=systemd :
+[Unit]
+Description=Check if Warehouse app store is installed for user
+After=user-install-flathub.service
+StartLimitIntervalSec=400
+StartLimitBurst=3
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/usr/bin/flatpak --user install io.github.flattool.Warehouse -y --noninteractive'
+Restart=on-failure
+RestartSec=90
+
+[Install]
+WantedBy=default.target

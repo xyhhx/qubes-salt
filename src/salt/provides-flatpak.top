@@ -1,0 +1,17 @@
+# vim: set syn=yaml ft=sls ts=2 sw=2 sts=2 et :
+---
+
+{% set vm_name = "provides-flatpak" %}
+
+user:
+  dom0:
+    - templates.provides-flatpak.vm
+  '{{ vm_name }}':
+    - common.dconf
+    - common.pkgs.base
+    - common.pkgs.networking
+    - common.pkgs.update
+    - common.terminal
+    - common.theme
+    - common.xdpi
+    - templates.provides-flatpak.configure

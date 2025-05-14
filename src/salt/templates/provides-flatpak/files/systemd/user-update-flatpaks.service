@@ -1,0 +1,12 @@
+# vim: set ft=systemd :
+[Unit]
+Description=Update user Flatpaks
+After=user-install-flathub.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c '/bin/flatpak upgrade -u -y --noninteractive'
+
+[Install]
+WantedBy=default.target
+

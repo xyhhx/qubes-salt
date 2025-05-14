@@ -1,0 +1,12 @@
+# vim: set ft=systemd :
+[Unit]
+Description=Watcher for changes to Flatpak apps
+
+[Path]
+PathModified=%h/.local/share/flatpak/exports/applications
+Unit=qubes-sync-appmenu.service
+TriggerLimitIntervalSec=1h
+
+[Install]
+WantedBy=default.target
+
