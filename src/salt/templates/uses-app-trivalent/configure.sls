@@ -33,8 +33,20 @@
     - mode: '0644'
     - makedirs: true
     - names:
-      - /etc/trivalent/policies/qubes-mgmt-salt-user.json:
-        - source: salt://templates/uses-app-trivalent/files/policy.json
+      - /etc/trivalent/policies/recommended/00-titanium-cookies.json:
+        - source: salt://templates/uses-app-trivalent/files/00-titanium-cookies.json
+      - /etc/trivalent/policies/managed/00-titanium-extensions-chromium.json:
+        - source: salt://templates/uses-app-trivalent/files/00-titanium-extensions-chromium.json
+      - /etc/trivalent/policies/managed/01-titanium-managed.json:
+        - source: salt://templates/uses-app-trivalent/files/01-titanium-managed.json
+      - /etc/trivalent/policies/recommended/01-titanium-recommended.json:
+        - source: salt://templates/uses-app-trivalent/files/01-titanium-recommended.json
+      - /etc/trivalent/policies/managed/02-titanium-ublock.json:
+        - source: salt://templates/uses-app-trivalent/files/02-titanium-ublock.json
+      - /etc/trivalent/policies/managed/02-titanium-managed-chromium.json:
+        - source: salt://templates/uses-app-trivalent/files/02-titanium-managed-chromium.json
+      - /etc/trivalent/policies/recommended/02-titanium-recommended-chromium.json:
+        - source: salt://templates/uses-app-trivalent/files/02-titanium-recommended-chromium.json
 
 qubes-ctapproxy@sys-usb.service:
   service.disabled
