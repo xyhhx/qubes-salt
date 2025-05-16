@@ -1,10 +1,32 @@
 # vim: set ts=2 sw=2 sts=2 et sts :
 
 ---
-{% set name = "templates.provides-flatpak.configure" %}
+{% set name = "templates.provides-flatpak.init" %}
 {% set vm_name = "provides-flatpak" %}
+{% set base_template = 'fedora-41-minimal' %}
 
-{% if grains.id != 'dom0' %}
+{% if grains.id == 'dom0' %}
+
+'{{ vm_name }}':
+  qvm.vm:
+    - clone:
+      - source: '{{ base_template }}'
+    - prefs:
+      - label: gray
+    - tags:
+      - add:
+        - salt-managed
+        - fedora
+        - fedora-41
+    - features:
+      - set:
+        - menu-items: Alacritty.desktop
+        - default-menu-items: com.github.tchx84.Flatseal.desktop io.github.flattool.Warehouse Alacritty.desktop
+    - require:
+      - qvm: '{{ base_template }}'
+
+{% else %}
+
 
 {# unfortunately salt doesn't support --user args for systemctl so i gotta do it manually #}
 
@@ -17,8 +39,8 @@
     - source: salt://templates/provides-flatpak/files/systemd
     - user: root
     - group: root
-    - file_mode: 644
-    - dir_mode: 755
+    - file_mode: '0644'
+    - dir_mode: '0755'
     - clean: true
     - makedirs: true
     - replace: true
@@ -32,7 +54,7 @@
       - /etc/systemd/user/paths.target.wants
     - owner: root
     - group: root
-    - dir_mode: 755
+    - dir_mode: '0755'
     - allow_symlinks: true
     - clean: false
     - makedirs: true
@@ -68,5 +90,6 @@
     - atomic: true
     - require:
       - file: '{{ name }}'
+
 
 {% endif %}

@@ -4,7 +4,7 @@
 {% set vm_name = "sys-audio" %}
 
 user:
-  dom0:
-    - appvms.sys-audio.vm
+  'dom0 or {{ vm_name }}':
+    - appvms.sys-audio
   '{{ vm_name }}':
-    - appvms.sys-audio.configure
+    - common

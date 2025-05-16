@@ -1,11 +1,29 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-# Avoid applying the state by mistake to dom0
-{% if grains.id != 'dom0' %}
+{% set vm_name = "provides-onlykey" %}
+{% set base_template = 'fedora-41-minimal' %}
 
-# Set vm_name from pillar data
-{% set vm_name = pillar.names.templates.providers.onlykey %}
+{% if grains.id == 'dom0' %}
+
+'{{ vm_name }}':
+  qvm.vm:
+    - actions:
+      - clone
+      - prefs
+      - tags
+    - clone:
+      - source: '{{ base_template }}'
+    - prefs:
+      - label: gray
+    - tags:
+      - add:
+        - salt-managed
+    - features:
+      - enable:
+        - service.updates-proxy-setup
+
+{% else %}
 
 '{{ vm_name }}':
   pkg.installed:
@@ -39,5 +57,6 @@
       - 'udevadm trigger'
     - use_vt: true
     - runas: user
+
 
 {% endif %}

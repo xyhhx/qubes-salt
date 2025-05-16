@@ -4,9 +4,7 @@
 {% set vm_name = "provides-onlykey" %}
 
 user:
-  dom0:
-    - templates.provides-onlykey.vm
+  'dom0 or {{ vm_name }}':
+    - templates.provides-onlykey
   '{{ vm_name }}':
-    - common.pkgs.common
-    - common.pkgs.hardened_malloc
-    - templates.provides-onlykey.configure
+    - common

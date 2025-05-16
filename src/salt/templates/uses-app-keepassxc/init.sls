@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
----
 
-{% set vm_name = 'provides-firewall-linux' %}
+---
+{% set vm_name = "uses-app-keepassxc" %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}
@@ -17,10 +17,21 @@
         - salt-managed
         - fedora
         - fedora-41
+        - uses-app
     - features:
       - set:
         - menu-items: Alacritty.desktop
     - require:
       - qvm: '{{ base_template }}'
+
+{% else %}
+
+keepassxc:
+  pkg.installed:
+    - aggregate: true
+
+qrencode:
+  pkg.installed:
+    - aggregate: true
 
 {% endif %}

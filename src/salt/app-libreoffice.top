@@ -4,7 +4,7 @@
 {% set vm_name = "app-libreoffice" %}
 
 user:
-  dom0:
-    - appvms.app-libreoffice.vm
+  'dom0 or {{ vm_name }}':
+    - appvms.app-libreoffice
   '{{ vm_name }}':
-    - appvms.app-libreoffice.configure
+    - common

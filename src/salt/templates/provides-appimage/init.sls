@@ -1,17 +1,13 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
+# vim: set ts=2 sw=2 sts=2 et sts :
 
-{% set vm_name = "provides-onlykey" %}
+---
+{% set vm_name = "provides-appimage" %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':
   qvm.vm:
-    - actions:
-      - clone
-      - prefs
-      - tags
     - clone:
       - source: '{{ base_template }}'
     - prefs:
@@ -19,8 +15,17 @@
     - tags:
       - add:
         - salt-managed
+        - fedora
+        - fedora-41
     - features:
-      - enable:
-        - service.updates-proxy-setup
+      - set:
+        - menu-items: Alacritty.desktop
+    - require:
+      - qvm: '{{ base_template }}'
+
+{% else %}
+
+fuse-libs:
+  pkg.installed
 
 {% endif %}

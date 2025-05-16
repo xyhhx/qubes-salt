@@ -4,15 +4,9 @@
 {% set vm_name = "provides-docker" %}
 
 user:
-  dom0:
-    - templates.provides-docker.vm
+  'dom0 or {{ vm_name }}':
+    - templates.provides-docker
   '{{ vm_name }}':
-    - common.dconf
-    - common.pkgs.base
+    - common
     - common.pkgs.docker
     - common.pkgs.networking
-    - common.pkgs.update
-    - common.terminal
-    - common.theme
-    - common.xdpi
-    - templates.provides-docker.configure

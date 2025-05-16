@@ -4,19 +4,12 @@
 {% set vm_name = "uses-stack-dev-f41" %}
 
 user:
-  dom0:
-    - templates.uses-stack-dev-f41.vm
+  'dom0 or {{ vm_name }}':
+    - templates.uses-stack-dev-f41
   '{{ vm_name }}':
-    - common.dconf
-    - common.pkgs.base
+    - common
     - common.pkgs.ctap-proxy
     - common.pkgs.docker
-    - common.pkgs.hardened_malloc
     - common.pkgs.neovim
     - common.pkgs.networking
     - common.pkgs.split-gpg
-    - common.pkgs.update
-    - common.terminal
-    - common.theme
-    - common.xdpi
-    - templates.uses-stack-dev-f41.configure

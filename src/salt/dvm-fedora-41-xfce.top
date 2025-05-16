@@ -4,5 +4,7 @@
 {% set vm_name = "dvm-fedora-41-xfce" %}
 
 user:
-  dom0:
-    - dispvms.dvm-fedora-41-xfce.vm
+  'dom0 or {{ vm_name }}':
+    - dispvms.dvm-fedora-41-xfce
+  '{{ vm_name }}':
+    - common

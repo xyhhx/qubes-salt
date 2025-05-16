@@ -4,16 +4,9 @@
 {% set vm_name = "uses-app-librewolf-f41" %}
 
 user:
-  dom0:
-    - templates.uses-app-librewolf-f41.vm
+  'dom0 or {{ vm_name }}':
+    - templates.uses-app-librewolf-f41
   '{{ vm_name }}':
-    - common.dconf
+    - common
     - common.pkgs.audio
-    - common.pkgs.base
-    - common.pkgs.hardened_malloc
     - common.pkgs.networking
-    - common.pkgs.update
-    - common.terminal
-    - common.theme
-    - common.xdpi
-    - templates.uses-app-librewolf-f41.configure

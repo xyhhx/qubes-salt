@@ -4,15 +4,9 @@
 {% set vm_name = "uses-app-thunderbird" %}
 
 user:
-  dom0:
-    - templates.uses-app-thunderbird.vm
+  'dom0 or {{ vm_name }}':
+    - templates.uses-app-thunderbird
   '{{ vm_name }}':
-    - common.dconf
-    - common.pkgs.base
-    - common.pkgs.hardened_malloc
+    - common
     - common.pkgs.networking
     - common.pkgs.split-gpg
-    - common.terminal
-    - common.theme
-    - common.xdpi
-    - templates.uses-app-thunderbird.configure

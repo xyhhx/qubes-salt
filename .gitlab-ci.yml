@@ -1,11 +1,15 @@
 stages:
-  - test
-sast:
-  stage: test
+  - lint
+
+default:
+  image: alpine
+
+.standard-rules:       # Make a hidden job to hold the common rules
   rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
-      when: always
-  tags:
-    - linux
-include:
-  - template: Security/SAST.gitlab-ci.yml
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+
+lint-salt:
+  stage: lint
+  script:
+    - ci/salt-lint.sh

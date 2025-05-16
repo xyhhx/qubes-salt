@@ -4,15 +4,9 @@
 {% set vm_name = "uses-app-keepassxc" %}
 
 user:
-  dom0:
-    - templates.uses-app-keepassxc.vm
+  'dom0 or {{ vm_name }}':
+    - templates.uses-app-keepassxc
   '{{ vm_name }}':
-    - common.pkgs.update
-    - common.pkgs.base
+    - common
     - common.pkgs.hardened_malloc
     - common.pkgs.ctap-proxy
-    - common.dconf
-    - common.theme
-    - common.terminal
-    - common.xdpi
-    - templates.uses-app-keepassxc.configure

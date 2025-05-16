@@ -4,14 +4,7 @@
 {% set vm_name = "uses-app-libreoffice" %}
 
 user:
-  dom0:
-    - templates.uses-app-libreoffice.vm
+  'dom0 or {{ vm_name }}':
+    - templates.uses-app-libreoffice
   '{{ vm_name }}':
-    - common.pkgs.update
-    - common.pkgs.base
-    - common.pkgs.hardened_malloc
-    - common.dconf
-    - common.theme
-    - common.terminal
-    - common.xdpi
-    - templates.uses-app-libreoffice.configure
+    - common

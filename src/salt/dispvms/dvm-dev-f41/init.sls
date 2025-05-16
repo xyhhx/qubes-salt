@@ -1,6 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
+{% set name = "dispvms.dvm-dev-f41.init" %}
 {% set vm_name = "dvm-dev-f41" %}
 {% set template_name = "uses-stack-dev-f41" %}
 
@@ -31,5 +32,25 @@
     - onlyif:
       - 'qvm-ls {{ vm_name }}'
       - '[[ $(qvm-volume info {{ vm_name }}:private size | numfmt --to=iec-i) != 12Gi ]]'
+
+{% else %}
+
+'{{ name }}':
+  git.latest:
+    - name: https://github.com/tmux-plugins/tpm.git
+    - target: /home/user/.tmux/plugins/tpm
+    - user: user
+  cmd.run:
+    - names:
+      - /home/user/.tmux/plugins/tpm/bin/install_plugins
+      - '/home/user/.tmux/plugins/tpm/bin/update_plugins all':
+        - onchanges:
+          - git: '{{ name }}'
+    - runas: user
+    - cwd: /home/user
+    - use_vt: true
+    - env:
+      TMUX_PLUGIN_MANAGER_PATH: '/home/user/.config/tmux/plugins/'
+
 
 {% endif %}

@@ -4,15 +4,8 @@
 {% set vm_name = pillar.names.templates.providers.ivpn %}
 
 user:
-  dom0:
-    - templates.provides-ivpn.vm
+  'dom0 or {{ vm_name }}':
+    - templates.provides-ivpn
   '{{ vm_name }}':
-    - common.pkgs.update
-    - common.pkgs.base
-    - common.pkgs.hardened_malloc
+    - common
     - common.pkgs.networking
-    - common.dconf
-    - common.terminal
-    - common.theme
-    - common.xdpi
-    - templates.provides-ivpn.configure

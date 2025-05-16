@@ -4,7 +4,7 @@
 {% set vm_name = "dvm-trivalent" %}
 
 user:
-  dom0:
-    - dispvms.dvm-trivalent.vm
+  'dom0 or {{ vm_name }}':
+    - dispvms.dvm-trivalent
   '{{ vm_name }}':
-    - dispvms.dvm-trivalent.configure
+    - common

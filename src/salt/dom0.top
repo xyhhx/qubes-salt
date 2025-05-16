@@ -3,7 +3,7 @@
 
 base:
   dom0:
-    - topd.init
+    - topd
 user:
   dom0:
-    - dom0
+    - 'dom0'

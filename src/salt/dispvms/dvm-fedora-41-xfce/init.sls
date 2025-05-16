@@ -17,7 +17,6 @@
       - set:
         - menu-favorites: "@disp:org.mozilla.firefox @disp:thunar @disp:xfce4-terminal"
 
-
 '{{ vm_name }}-offline':
   qvm.vm:
     - present:

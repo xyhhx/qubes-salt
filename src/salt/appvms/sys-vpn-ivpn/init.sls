@@ -24,4 +24,17 @@
       - qvm: '{{ template }}'
       - qvm: '{{ netvm }}'
 
+{% else %}
+
+/rw/config/qubes-firewall-user-script:
+  file.managed:
+    - user: root
+    - group: root
+    - mode: '0750'
+    - makedirs: true
+    - content: |-
+        nft add rule qubes custom-forward oifname eth0 counter drop
+        nft add rule ip6 qubes custom-forward oifname eth0 counter drop
+
+
 {% endif %}

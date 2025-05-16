@@ -1,7 +1,6 @@
 # vim: set syn=yaml ft=sls ts=2 sw=2 sts=2 et :
 ---
 
-
 user:
-  'dom0':
+  dom0:
     - templates.provides-firewall-mirageos

@@ -3,9 +3,9 @@
 {% set vm_name = "dvm-dev-f41" %}
 
 user:
-  dom0:
-    - dispvms.dvm-dev-f41.vm
+  'dom0 or {{ vm_name }}':
+    - dispvms.dvm-dev-f41
   '{{ vm_name }}':
-    - dispvms.dvm-dev-f41.configure
+    - common
     - common.neovim
     - common.oh-my-zsh

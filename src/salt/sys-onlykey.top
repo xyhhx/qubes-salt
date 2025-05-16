@@ -4,7 +4,7 @@
 {% set vm_name = "sys-onlykey" %}
 
 user:
-  dom0:
-    - appvms.sys-onlykey.vm
-  '{{ vm_name }} or dom0':
-    - appvms.sys-onlykey.configure
+  'dom0 or {{ vm_name }}':
+    - appvms.sys-onlykey
+  '{{ vm_name }}':
+    - common

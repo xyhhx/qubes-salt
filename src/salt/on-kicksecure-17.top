@@ -4,11 +4,8 @@
 {% set vm_name = pillar.names.templates.base.kicksecure %}
 
 user:
-  dom0:
-    - templates.on-kicksecure-17.vm
+  'dom0 or {{ vm_name }}':
+    - templates.on-kicksecure-17
   '{{ vm_name }}':
-    - common.pkgs.base
-    - common.dconf
-    - common.terminal
-    - common.theme
+    - common
     - common.install-kicksecure

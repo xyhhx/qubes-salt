@@ -1,7 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
-
 ---
-{% set vm_name = "uses-app-thunderbird" %}
+
+{% set name = "templates.provides-firewall-linux.init" %}
+{% set vm_name = 'provides-firewall-linux' %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}
@@ -17,11 +18,22 @@
         - salt-managed
         - fedora
         - fedora-41
-        - uses-app
     - features:
       - set:
         - menu-items: Alacritty.desktop
     - require:
       - qvm: '{{ base_template }}'
+
+{% else %}
+
+'{{ name }}':
+  pkg.installed:
+    - pkgs:
+      - iproute
+      - qubes-core-agent-dom0-updates
+    - skip_suggestions: true
+    - install_recommends: false
+    - aggregate: true
+
 
 {% endif %}

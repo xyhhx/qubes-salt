@@ -4,11 +4,7 @@
 {% set vm_name = pillar.names.templates.base.debian %}
 
 user:
-  dom0:
-    - templates.on-debian-12-minimal.vm
+  'dom0 or {{ vm_name }}':
+    - templates.on-debian-12-minimal
   '{{ vm_name }}':
-    - common.pkgs.base
-    - common.pkgs.hardened_malloc
-    - common.dconf
-    - common.terminal
-    - common.theme
+    - common

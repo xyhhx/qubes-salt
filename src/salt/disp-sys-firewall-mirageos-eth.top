@@ -3,5 +3,5 @@
 {% set vm_name = "disp-sys-firewall-mirageos-eth" %}
 
 user:
-  dom0:
-    - dispvms.{{ vm_name }}.vm
+  'dom0 or {{ vm_name }}':
+    - dispvms.{{ vm_name }}

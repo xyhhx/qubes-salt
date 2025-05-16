@@ -4,14 +4,8 @@
 {% set vm_name = pillar.names.templates.providers.audio %}
 
 user:
-  dom0:
-    - templates.provides-audio.vm
+  'dom0 or {{ vm_name }}':
+    - templates.provides-audio
   '{{ vm_name }}':
-    - common.pkgs.update
-    - common.pkgs.base
-    - common.pkgs.hardened_malloc
+    - common
     - common.pkgs.audiovm
-    - common.dconf
-    - common.terminal
-    - common.theme
-    - common.xdpi
