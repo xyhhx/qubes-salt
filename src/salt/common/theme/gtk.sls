@@ -9,7 +9,6 @@ deepin-gtk-theme:
   pkg.installed:
     - skip_suggestions: true
     - install_recommends: false
-    - aggregate: true
 {% endif %}
 
 /etc/gtk-3.0/settings.ini:

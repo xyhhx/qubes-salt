@@ -27,11 +27,9 @@
 {% else %}
 
 keepassxc:
-  pkg.installed:
-    - aggregate: true
+  pkg.installed
 
 qrencode:
-  pkg.installed:
-    - aggregate: true
+  pkg.installed
 
 {% endif %}

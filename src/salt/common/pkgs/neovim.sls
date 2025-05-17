@@ -50,7 +50,6 @@ neovim-nightly:
       - python3-neovim
       - ripgrep
       - tree-sitter-cli
-    - aggregate: true
 
 {% endif %}
 {% endif %}

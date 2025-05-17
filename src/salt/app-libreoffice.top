@@ -6,5 +6,3 @@
 user:
   'dom0 or {{ vm_name }}':
     - appvms.app-libreoffice
-  '{{ vm_name }}':
-    - common

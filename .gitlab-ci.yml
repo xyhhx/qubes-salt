@@ -4,7 +4,7 @@ stages:
 default:
   image: alpine
 
-.standard-rules:       # Make a hidden job to hold the common rules
+.standard-rules:
   rules:
     - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

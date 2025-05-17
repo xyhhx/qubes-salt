@@ -12,12 +12,12 @@
     - features:
       - set:
         - menu-items: >-
-          libreoffice-base.desktop
-          libreoffice-calc.desktop
-          libreoffice-draw.desktop
-          libreoffice-impress.desktop
-          libreoffice-math.desktop
-          libreoffice-writer.desktop
+            libreoffice-base.desktop
+            libreoffice-calc.desktop
+            libreoffice-draw.desktop
+            libreoffice-impress.desktop
+            libreoffice-math.desktop
+            libreoffice-writer.desktop
     - require:
       - qvm: '{{ template }}'
 

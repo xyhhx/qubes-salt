@@ -33,7 +33,5 @@
       - qubes-core-agent-dom0-updates
     - skip_suggestions: true
     - install_recommends: false
-    - aggregate: true
-
 
 {% endif %}

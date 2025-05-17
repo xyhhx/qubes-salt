@@ -12,6 +12,5 @@
       - qubes-ctap-dom0
     - skip_suggestions: true
     - install_recommends: false
-    - aggregate: true
 
 {% endif %}

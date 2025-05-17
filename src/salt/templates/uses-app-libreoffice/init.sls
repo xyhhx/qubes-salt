@@ -27,8 +27,7 @@
 {% else %}
 
 libreoffice:
-  pkg.installed:
-    - aggregate: true
+  pkg.installed
 
 
 {% endif %}

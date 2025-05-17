@@ -1,6 +1,6 @@
 # vim: set ts=2 sw=2 sts=2 et :
 
---
+---
 
 {% set name = 'templates.uses-app-librewolf-f41.configure' %}
 {% set vm_name = "uses-app-librewolf-f41" %}
@@ -42,10 +42,8 @@
       - pkg: '{{ name }}'
   pkg.installed:
     - names:
-      - librewolf:
-        - fromrepo: librewolf
       - qubes-ctap
-    - aggregate: true
+      - librewolf
   file.managed:
     - user: root
     - group: root

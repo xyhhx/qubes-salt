@@ -20,6 +20,5 @@
     - skip_suggestions: true
     - install_recommends: false
     - order: 1
-    - aggregate: true
 
 {% endif %}

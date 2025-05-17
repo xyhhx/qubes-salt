@@ -16,7 +16,6 @@
       - libxkbcommon
       - libxkbcommon-x11
 {% endif %}
-    - aggregate: true
 
   cmd.run:
     - names:

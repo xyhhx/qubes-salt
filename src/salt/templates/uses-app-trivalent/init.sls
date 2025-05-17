@@ -45,7 +45,6 @@
       - require_in:
         - pkg: trivalent-subresource-filter
   pkg.installed:
-    - aggregate: true
     - pkgs:
       - psutils
       - qubes-ctap
