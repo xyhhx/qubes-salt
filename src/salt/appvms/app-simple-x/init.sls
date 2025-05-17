@@ -15,7 +15,6 @@
         - menu-items: >-
             chat.simplex.simplex.desktop
             com.github.tchx84.Flatseal.desktop
-            io.github.flattool.Warehouse.desktop
             Alacritty.desktop
     - require:
       - qvm: '{{ template }}'
