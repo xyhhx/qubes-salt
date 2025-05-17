@@ -9,5 +9,9 @@
       - debian-12-minimal
       - fedora-41-minimal
       - fedora-41-xfce
+      - whonix-gateway-17:
+        - fromrepo: qubes-templates-community-testing
+      - whonix-workstation-17:
+        - fromrepo: qubes-templates-community-testing
 
 {% endif %}
