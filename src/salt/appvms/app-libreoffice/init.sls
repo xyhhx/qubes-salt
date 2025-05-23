@@ -1,6 +1,6 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
-{% set vm_name = "app-libreoffice" %}
+{% set vm_name = pillar.names.appvms.libreoffice %}
 {% set template = "uses-app-libreoffice" %}
 {% if grains.id == 'dom0' %}
 

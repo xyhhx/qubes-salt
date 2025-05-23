@@ -1,7 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
+
 {% set name = "appvms.sys-audio.vm" %}
-{% set vm_name = "sys-audio" %}
+{% set vm_name = pillar.names.appvms.sys_audio %}
 {% if grains.id == 'dom0' %}
 
 '{{ name }}':

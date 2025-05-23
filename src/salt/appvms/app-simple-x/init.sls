@@ -1,6 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
-{% set vm_name = "app-simple-x" %}
+
+{% set vm_name = pillar.names.appvms.simplex %}
 {% set template = "provides-flatpak" %}
 
 {% if grains.id == 'dom0' %}

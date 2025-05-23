@@ -1,6 +1,8 @@
 # vim: set syn=yaml ft=sls ts=2 sw=2 sts=2 et :
 ---
 
+{% set vm_name = pillar.names.templates.providers.firewall_mirageos %}
+
 user:
   dom0:
-    - templates.provides-firewall-mirageos
+    - templates.{{ vm_name }}

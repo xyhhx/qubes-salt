@@ -3,7 +3,7 @@
 {% if grains.id == 'dom0' %}
 
 {% set name = "templates.provides-firewall-mirageos.kernel" %}
-{% set vm_name = "provides-firewall-mirageos" %}
+{% set vm_name = pillar.names.templates.providers.mirageos %}
 
 {% set version = pillar.config.versions.mirageos %}
 {% set kernel = "qubes-firewall.xen" %}

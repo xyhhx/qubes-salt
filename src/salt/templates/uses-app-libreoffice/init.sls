@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 
 ---
-{% set vm_name = "uses-app-libreoffice" %}
+{% set vm_name = pillar.names.templates.appvms.libreoffice %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}

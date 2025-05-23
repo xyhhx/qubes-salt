@@ -1,6 +1,6 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
-{% set vm_name = "app-thunderbird" %}
+{% set vm_name = pillar.names.appvms.thunderbird %}
 {% set template = "uses-app-thunderbird" %}
 {% if grains.id == 'dom0' %}
 

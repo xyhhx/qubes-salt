@@ -1,7 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
+
 {% set name = "appvms.sys-whonix.init" %}
-{% set vm_name = "sys-whonix" %}
+{% set vm_name = pillar.names.appvms.sys_whonix %}
 {% if grains.id == 'dom0' %}
 
 '{{ name }}':

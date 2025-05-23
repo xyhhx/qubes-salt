@@ -1,6 +1,7 @@
 # vim: set syn=yaml ft=sls ts=2 sw=2 sts=2 et :
 ---
-{% set vm_name = "disp-sys-firewall-mirageos-wifi" %}
+
+{% set vm_name = pillar.names.dispvms.sys_firewall_mirageos_wifi %}
 
 user:
   'dom0 or {{ vm_name }}':

@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 {% set name = "templates.provides-ivpn.init" %}
-{% set vm_name = "provides-ivpn" %}
+{% set vm_name = pillar.names.templates.providers.ivpn %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}

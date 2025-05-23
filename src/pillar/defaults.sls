@@ -49,13 +49,10 @@ names:
     sys_whonix: "sys-whonix"
 
   dispvms:
-    disp_sys_firewall_mirageos_eth: "disp-sys-firewall-mirageos-eth"
-    disp_sys_firewall_mirageos_wifi: "disp-sys-firewall-mirageos-wifi"
-    dvm_dev_f41: "dvm-dev-f41"
-    dvm_fedora_41_xfce: "dvm-fedora-41-xfce"
-    dvm_firewall_mirageos: "dvm-firewall-mirageos"
-    dvm_librewolf_f41: "dvm-librewolf-f41"
-    dvm_trivalent: "dvm-trivalent"
-
-  standalones:
-
+    sys_firewall_mirageos_eth: "disp-sys-firewall-mirageos-eth"
+    sys_firewall_mirageos_wifi: "disp-sys-firewall-mirageos-wifi"
+    dev_f41: "dvm-dev-f41"
+    fedora_41_xfce: "dvm-fedora-41-xfce"
+    firewall_mirageos: "dvm-firewall-mirageos"
+    librewolf_f41: "dvm-librewolf-f41"
+    trivalent: "dvm-trivalent"
