@@ -6,5 +6,5 @@
 
 user:
   '*':
-    - names
-    - config
+    - defaults
+    - overrides # ?

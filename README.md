@@ -1,4 +1,4 @@
-<!-- vim: set wrap : -->
+-- vim: set wrap : -->
 
 # my qubes os saltstack configuration
 
