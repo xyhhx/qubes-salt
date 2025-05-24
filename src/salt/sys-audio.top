@@ -5,6 +5,6 @@
 
 user:
   'dom0 or {{ vm_name }}':
-    - appvms.sys-audio
+    - appvms.{{ vm_name }}
   '{{ vm_name }}':
     - common

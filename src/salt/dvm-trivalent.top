@@ -5,6 +5,6 @@
 
 user:
   'dom0 or {{ vm_name }}':
-    - dispvms.dvm-trivalent
+    - dispvms.{{ vm_name }}
   '{{ vm_name }}':
     - common
