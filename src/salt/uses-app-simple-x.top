@@ -5,6 +5,6 @@
 
 user:
   'dom0 or {{ vm_name }}':
-    - templates.uses-app-simple-x
+    - templates.{{ vm_name }}
   '{{ vm_name }}':
     - common
