@@ -1,6 +1,6 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
-{% set vm_name = 'provides-split-gpg' %}
+{% set vm_name = pillar.names.providers.split_gpg %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}

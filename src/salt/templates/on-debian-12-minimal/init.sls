@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 
 ---
-{% set vm_name = 'on-debian-12-minimal' %}
+{% set vm_name = pillar.names.templates.base.debian %}
 {% set base_template = 'debian-12-minimal' %}
 
 {% if grains.id == 'dom0' %}
