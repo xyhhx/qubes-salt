@@ -2,7 +2,7 @@
 
 ---
 {% set vm_name = pillar.names.templates.appvms.libreoffice %}
-{% set base_template = 'fedora-41-minimal' %}
+{% set base_template = pillar.names.templates.base.fedora_minimal %}
 
 {% if grains.id == 'dom0' %}
 

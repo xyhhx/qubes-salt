@@ -1,8 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = pillar.names.templates.base.fedora %}
-{% set base_template = 'fedora-41-minimal' %}
+{% set vm_name = pillar.names.templates.oses.fedora %}
+{% set base_template = pillar.names.templates.base.fedora_minimal %}
 
 {% if grains.id == 'dom0' %}
 

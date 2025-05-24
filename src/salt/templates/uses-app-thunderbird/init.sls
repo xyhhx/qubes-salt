@@ -3,7 +3,7 @@
 ---
 {% set name = 'templates.uses-app-thunderbird.configure' %}
 {% set vm_name = pillar.names.templates.appvms.thunderbird %}
-{% set base_template = 'fedora-41-minimal' %}
+{% set base_template = pillar.names.templates.base.fedora_minimal %}
 
 {% if grains.id == 'dom0' %}
 

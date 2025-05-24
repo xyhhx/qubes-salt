@@ -2,7 +2,7 @@
 ---
 {% set name = "templates.provides-ivpn.init" %}
 {% set vm_name = pillar.names.templates.providers.ivpn %}
-{% set base_template = 'fedora-41-minimal' %}
+{% set base_template = pillar.names.templates.base.fedora_minimal %}
 
 {% if grains.id == 'dom0' %}
 

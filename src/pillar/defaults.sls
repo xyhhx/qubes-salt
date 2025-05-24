@@ -2,6 +2,11 @@
 ---
 
 config:
+  versions:
+    debian: 12
+    fedora: 41
+    kicksecure: 17
+    whonix: 17
   qvm_defaults:
     netvm: "sys-vpn-ivpn"
     guivm: "dom0"
@@ -10,12 +15,20 @@ config:
 names:
   templates:
     base:
-      debian: "on-debian-12-minimal"
-      fedora: "on-fedora-41-minimal"
-      fedora_xfce: "on-fedora-41-xfce"
-      kicksecure: "on-kicksecure-17"
-      whonix_gw: "on-whonix-17-gateway"
-      whonix_ws: "on-whonix-17-workstation"
+      debian: "debian-{{ debian_version }}"
+      debian_minimal: "debian-{{ debian_version }}-minimal"
+      fedora: "fedora-{{ fedora_version }}"
+      fedora_minimal: "fedora-{{ fedora_version }}-minimal"
+      fedora_xfce: "fedora-{{ fedora_version }}-xfce"
+      whonix_gw: "whonix-gateway-{{ whonix_version }}"
+      whonix_ws: "whonix-workstation-{{ whonix_version }}"
+    oses:
+      debian: "on-debian-{{ debian_version }}-minimal"
+      fedora: "on-fedora-{{ fedora_version }}-minimal"
+      fedora_xfce: "on-fedora-{{ fedora_version }}-xfce"
+      kicksecure: "on-kicksecure-{{ kicksecure_version }}"
+      whonix_gw: "on-whonix{{ whonix_version }}-gateway"
+      whonix_ws: "on-whonix{{ whonix_version }}-workstation"
     apps:
       keepassxc: "uses-app-keepassxc"
       libreoffice: "uses-app-libreoffice"
@@ -52,7 +65,7 @@ names:
     sys_firewall_mirageos_eth: "disp-sys-firewall-mirageos-eth"
     sys_firewall_mirageos_wifi: "disp-sys-firewall-mirageos-wifi"
     dev_f41: "dvm-dev-f41"
-    fedora_41_xfce: "dvm-fedora-41-xfce"
+    fedora_41_xfce: "dvm-fedora-{{ fedora_version }}-xfce"
     firewall_mirageos: "dvm-firewall-mirageos"
     librewolf_f41: "dvm-librewolf-f41"
     trivalent: "dvm-trivalent"
