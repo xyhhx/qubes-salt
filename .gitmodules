@@ -1,3 +1,0 @@
-[submodule "src/submodules/Titanium"]
-	path = src/submodules/Titanium
-	url = ssh://git@codeberg.org/celenity/Titanium.git
