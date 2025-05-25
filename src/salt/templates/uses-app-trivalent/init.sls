@@ -56,8 +56,6 @@
     - mode: '0644'
     - makedirs: true
     - names:
-      - /etc/trivalent/policies/recommended/00-titanium-cookies.json:
-        - source: salt://templates/uses-app-trivalent/files/00-titanium-cookies.json
       - /etc/trivalent/policies/managed/00-titanium-extensions-chromium.json:
         - source: salt://templates/uses-app-trivalent/files/00-titanium-extensions-chromium.json
       - /etc/trivalent/policies/managed/01-titanium-managed.json:
