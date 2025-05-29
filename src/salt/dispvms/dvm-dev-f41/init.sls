@@ -51,9 +51,12 @@
     - use_vt: true
     - env:
       TMUX_PLUGIN_MANAGER_PATH: '/home/user/.config/tmux/plugins/'
-  file.append:
+  file.managed:
     - name: /rw/config/rc.local
     - source: salt://dispvms/dvm-dev-f41/templates/split-ssh-rc-local.j2
+    - user: root
+    - group: root
+    - mode: '0755'
     - template: jinja
     - defaults:
         ssh_vault_vm: sys-onlykey
@@ -66,6 +69,7 @@
     - file_mode: "0640"
     - dir_mode: "0750"
     - makedirs: true
+    - clean: true
 
 
 {% endif %}

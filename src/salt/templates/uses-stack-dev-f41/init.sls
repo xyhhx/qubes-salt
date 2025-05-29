@@ -83,7 +83,7 @@ bat-extras:
         - source_hash: sha512=3adc2963b52e1cab729b040a949da587f97033609c3a61937e63a0cc442dba647e677b00b419f924f7afa6fa3a80c5ca671c71f67110e5f071d71c328a831286
       - /etc/environment:
         - contents: |
-            QUBES_SPLIT_SSH_VAULT_VM=sys-onlykey
+            QUBES_SPLIT_SSH_SOCK=/var/run/user/1000/sys-onlykey
         - mode: '0644'
 
   user.present:

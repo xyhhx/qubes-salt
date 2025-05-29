@@ -1,39 +1,39 @@
+#!/bin/bash --
 # vim: set syn=sh :
+set -xeuo pipefail
 
-systemd-cat "Starting Qubes split SSH..."
+log(){
+  logger --tag "qubes-split-ssh" "${1}"
+}
+
+log "STARTING SPLIT SSH...."
 
 # The following vars can be set with env vars
-QUBES_SPLIT_SSH_SOCK_DIR="${QUBES_SPLIT_SSH_SOCK_DIR:-"/var/run/user/1000/qubes-split-ssh/${QUBES_SPLIT_SSH_VAULT}"}"
-QUBES_SPLIT_SSH_SOCK_NAME="${QUBES_SPLIT_SSH_SOCK_NAME:-"S.qubes-split-ssh"}"
 QUBES_SPLIT_SSH_VAULT="${QUBES_SPLIT_SSH_VAULT:-"{{ ssh_vault_vm }}"}"
+QUBES_SPLIT_SSH_SOCK_DIR="${QUBES_SPLIT_SSH_SOCK_DIR:-"/tmp/qubes-split-ssh/${QUBES_SPLIT_SSH_VAULT}"}"
+QUBES_SPLIT_SSH_SOCK_NAME="${QUBES_SPLIT_SSH_SOCK_NAME:-"agent.${RANDOM}"}"
 QUBES_SPLIT_SSH_SOCK="${QUBES_SPLIT_SSH_SOCK:-"${QUBES_SPLIT_SSH_SOCK_DIR}/${QUBES_SPLIT_SSH_SOCK_NAME}"}"
 
 if [ -n "${QUBES_SPLIT_SSH_VAULT}" ]; then
 
-  systemd-cat "Preparing Qubes split SSH for ${QUBES_SPLIT_SSH_VAULT}"
+  log "SETTING UP SPLIT SSH FOR VAULT QUBE "${QUBES_SPLIT_SSH_VAULT}
 
   # make sure sock dir exists
-  mkdir -p "${QUBES_SPLIT_SSH_SOCK_DIR}"
-
-  # export our split ssh env vars
-  export \
-    QUBES_SPLIT_SSH_SOCK \
-    QUBES_SPLIT_SSH_SOCK_DIR \
-    QUBES_SPLIT_SSH_SOCK_NAME \
-    QUBES_SPLIT_SSH_VAULT
-
-  # clear any stale sockets
-  rm -f "${QUBES_SPLIT_SSH_SOCK}"
+  install \
+    -o 1000 \
+    -g 1000 \
+    -m 0700 \
+    -d "${QUBES_SPLIT_SSH_SOCK_DIR}"
 
   # start the proxy
-  sudo -u user \
-    /bin/sh -c \
-      "umask 177 \
-        && exec socat \
-        'UNIX-LISTEN:${QUBES_SPLIT_SSH_SOCK},fork' \
-        'EXEC:qrexec-client-vm ${QUBES_SPLIT_SSH_VAULT} qubes.SshAgent'" \
-        &
+  sudo -u user socat \
+    "UNIX-LISTEN:${QUBES_SPLIT_SSH_SOCK},fork,mode=755" \
+    "EXEC:qrexec-client-vm ${QUBES_SPLIT_SSH_VAULT} qubes.SshAgent" \
+    &
+
+  log "PROXY SOCKET OPEN FOR ${QUBES_SPLIT_SSH_VAULT} ON ${QUBES_SPLIT_SSH_SOCK}"
 else
-  systemd-cat '$QUBES_SPLIT_SSH_VAULT is not defined; aborting'
+  log "\$QUBES_SPLIT_SSH_VAULT IS NOT DEFINED, ABORTING"
 fi
+
 

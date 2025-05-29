@@ -1,2 +1,3 @@
-[ -n "${QUBES_SPLIT_SSH_SOCK}" ] && export SSH_AUTH_SOCK="${QUBES_SPLIT_SSH_SOCK}"
+[ -n "${QUBES_SPLIT_SSH_VAULT}" ] \
+  && export SSH_AUTH_SOCK="$( find "/tmp/qubes-split-ssh/${QUBES_SPLIT_SSH_VAULT}" -type s | head -n1 )"
 
