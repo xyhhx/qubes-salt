@@ -29,7 +29,6 @@
 '{{ vm_name }}':
   pkg.installed:
     - pkgs:
-      - libudev-devel
       - libusb1-devel
       - pipx
       - gnome-keyring
@@ -37,11 +36,6 @@
       - qubes-usb-proxy
       - qubes-input-proxy-sender
       - qubes-ctap
-      - qubes-u2f
-      - ykpers
-      - yubikey-personlization-gui
-    - skip_suggestions: true
-    - install_recommends: false
   file.managed:
     - names:
       - '/etc/qubes-rpc/onlykey.SshAgent':
@@ -54,11 +48,12 @@
     - makedirs: true
   cmd.run:
     - names:
-      - 'https_proxy=127.0.0.1:8082 pipx install --global onlykey onlykey-agent'
+      - 'PIPX_GLOBAL_BIN_DIR=/usr/local.orig/bin/ https_proxy=127.0.0.1:8082 pipx install --global onlykey onlykey-agent'
       - 'udevadm control --reload-rules'
       - 'udevadm trigger'
     - use_vt: true
-    - runas: user
+    - require:
+      - pkg: '{{ vm_name }}'
 
 
 {% endif %}
