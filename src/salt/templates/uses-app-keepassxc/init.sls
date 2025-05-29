@@ -26,6 +26,9 @@
 
 {% else %}
 
+qubes-usb-proxy:
+  pkg.installed
+
 keepassxc:
   pkg.installed
 

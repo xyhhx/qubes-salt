@@ -50,6 +50,7 @@
     - user: user
     - group: user
     - mode: "0750"
+    - makedirs: true
   cmd.run:
     - names:
       - 'HTTPS_PROXY=127.0.0.1:8082 pipx install onlykey onlykey-agent'
