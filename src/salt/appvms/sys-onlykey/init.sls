@@ -9,7 +9,7 @@
     - present:
       - template: provides-onlykey
       - label: yellow
-      - netvm: none
+      - netvm: ""
     - tags:
       - add:
         - sys-vm
