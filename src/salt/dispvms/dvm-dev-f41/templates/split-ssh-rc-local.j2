@@ -1,0 +1,14 @@
+# vim: set syn=sh :
+
+# The following vars can be set with env vars
+QUBES_SPLIT_SSH_VAULT_VM="${QUBES_SPLIT_SSH_VAULT_VM:-{{ ssh_vault_vm }}}"
+QUBES_SPLIT_SSH_SOCK_DIR="${QUBES_SPLIT_SSH_SOCK_DIR:-"/var/run/user/1000/qubes-split-ssh/${QUBES_SPLIT_SSH_VAULT_VM}"}"
+QUBES_SPLIT_SSH_SOCK_NAME="S.qubes-split-ssh"
+
+if [ -n "${SSH_VAULT_VM}" ]; then
+  mkdir -p "${QUBES_SPLIT_SSH_SOCK_DIR}"
+  export SSH_SOCK="${QUBES_SPLIT_SSH_SOCK_DIR}/${QUBES_SPLIT_SSH_SOCK_NAME}"
+  rm -f "${SSH_SOCK}"
+  sudo -u user /bin/sh -c "umask 177 && exec socat 'UNIX-LISTEN:${SSH_SOCK},fork' 'EXEC:qrexec-client-vm ${SSH_VAULT_VM} qubes.SshAgent'" &
+fi
+
