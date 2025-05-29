@@ -58,4 +58,14 @@
     - defaults:
         ssh_vault_vm: sys-onlykey
 
+/home/user/.config/oh-my-zsh/user.d:
+  file.recurse:
+    - source: salt://dispvms/dvm-dev-f41/files/user.d
+    - user: 1000
+    - group: 1000
+    - file_mode: "0640"
+    - dir_mode: "0750"
+    - makedirs: true
+
+
 {% endif %}

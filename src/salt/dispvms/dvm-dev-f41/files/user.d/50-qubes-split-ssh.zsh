@@ -1,0 +1,2 @@
+[ -n "${QUBES_SPLIT_SSH_SOCK}" ] && export SSH_AUTH_SOCK="${QUBES_SPLIT_SSH_SOCK}"
+

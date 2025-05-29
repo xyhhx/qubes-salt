@@ -14,11 +14,3 @@ plugins=(git tmux direnv)
 
 source "${ZSH}/oh-my-zsh.sh"
 
-export EDITOR=nvim
-alias qgpg="qubes-gpg-client-wrapper"
-
-# nvm start
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "${NVM_DIR}/nvm.sh" ] && \. "${NVM_DIR}/nvm.sh" # This loads nvm
-
-[ -n "${QUBES_SPLIT_SSH_SOCK}" ] && export SSH_AUTH_SOCK="${QUBES_SPLIT_SSH_SOCK}"
