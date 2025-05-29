@@ -10,6 +10,11 @@
       - template: provides-onlykey
       - label: yellow
       - netvm: none
+    - tags:
+      - add:
+        - sys-vm
+        - onlykey-server
+        - gpg-server
 
 /etc/qubes/policy.d/user.d/49-onlykey.policy:
   file.managed:

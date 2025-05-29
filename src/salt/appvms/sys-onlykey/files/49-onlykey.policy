@@ -2,14 +2,14 @@
 
 # CTAP Policies
 
-u2f.Register      *  @anyvm  sys-onlykey  allow notify=yes 
-u2f.Authenticate  *  @anyvm  sys-onlykey  allow notify=yes
-u2f.Authenticate  +  @anyvm  sys-onlykey  allow notify=yes
+u2f.Register      *  @anyvm  @tag:onlykey-server  allow notify=yes
+u2f.Authenticate  *  @anyvm  @tag:onlykey-server  allow notify=yes
+u2f.Authenticate  +  @anyvm  @tag:onlykey-server  allow notify=yes
 
-ctap.GetInfo   *  @anyvm  sys-onlykey  allow notify=yes
-ctap.ClientPin *  @anyvm  sys-onlykey  allow notify=yes
+ctap.GetInfo   *  @anyvm  @tag:onlykey-server  allow notify=yes
+ctap.ClientPin *  @anyvm  @tag:onlykey-server  allow notify=yes
 
-policy.RegisterArgument  +u2f.Authenticate  sys-onlykey  @anyvm  allow target=@adminvm
+policy.RegisterArgument  +u2f.Authenticate  @tag:onlykey-server  @anyvm  allow target=@adminvm
 
 # SSH Agent Policies
 
