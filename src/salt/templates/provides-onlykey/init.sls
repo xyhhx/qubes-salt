@@ -54,7 +54,7 @@
     - makedirs: true
   cmd.run:
     - names:
-      - 'HTTPS_PROXY=127.0.0.1:8082 pipx install onlykey onlykey-agent'
+      - 'https_proxy=127.0.0.1:8082 pipx install --global onlykey onlykey-agent'
       - 'udevadm control --reload-rules'
       - 'udevadm trigger'
     - use_vt: true
