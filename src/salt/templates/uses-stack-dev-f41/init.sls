@@ -84,6 +84,7 @@ bat-extras:
       - /etc/environment:
         - contents: |
             QUBES_SPLIT_SSH_VAULT_VM=sys-onlykey
+        - mode: '0644'
 
   user.present:
     - name: user
