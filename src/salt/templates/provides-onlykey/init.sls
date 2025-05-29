@@ -10,6 +10,7 @@
   qvm.vm:
     - actions:
       - clone
+      - features
       - prefs
       - tags
     - clone:
