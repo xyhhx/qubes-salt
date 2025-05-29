@@ -4,6 +4,9 @@
 {% set name = "common.theme.fonts" %}
 {% if grains.id != 'dom0' %}
 
+include:
+  - common.https_proxy
+
 '{{ name }}':
   pkg.installed:
     - pkgs:
@@ -23,7 +26,7 @@
       - liberation-fonts-all
       - rsms-inter-fonts
 {% endif %}
-    - skip_suggestions: true
-    - install_recommends: false
+    - require:
+      - sls: common.https_proxy
 
 {% endif %}

@@ -6,6 +6,5 @@ user:
   'dom0 or {{ vm_name }}':
     - dispvms.dvm-dev-f41
   '{{ vm_name }}':
-    - common
     - common.neovim
     - common.oh-my-zsh
