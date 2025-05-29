@@ -55,5 +55,7 @@
     - name: /rw/config/rc.local
     - source: salt://dispvms/dvm-dev-f41/templates/split-ssh-rc-local.j2
     - template: jinja2
+    - defaults:
+        ssh_vault_vm: sys-onlykey
 
 {% endif %}
