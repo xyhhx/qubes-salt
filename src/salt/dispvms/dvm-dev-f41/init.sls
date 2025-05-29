@@ -53,6 +53,7 @@
       TMUX_PLUGIN_MANAGER_PATH: '/home/user/.config/tmux/plugins/'
   file.append:
     - name: /rw/config/rc.local
-    - template: salt://dispvms/dvm-dvm-dev-f41/templates/split-ssh-rc-local.j2
+    - source: salt://dispvms/dvm-dvm-dev-f41/templates/split-ssh-rc-local.j2
+    - template: jinja2
 
 {% endif %}
