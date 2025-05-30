@@ -2,7 +2,7 @@
 # vim: set syn=sh :
 set -xeuo pipefail
 
-log(){
+log() {
   logger --tag "qubes-split-ssh" "${1}"
 }
 
@@ -14,9 +14,9 @@ QUBES_SPLIT_SSH_SOCK_DIR="${QUBES_SPLIT_SSH_SOCK_DIR:-"/tmp/qubes-split-ssh/${QU
 QUBES_SPLIT_SSH_SOCK_NAME="${QUBES_SPLIT_SSH_SOCK_NAME:-"agent.${RANDOM}"}"
 QUBES_SPLIT_SSH_SOCK="${QUBES_SPLIT_SSH_SOCK:-"${QUBES_SPLIT_SSH_SOCK_DIR}/${QUBES_SPLIT_SSH_SOCK_NAME}"}"
 
-if [ -n "${QUBES_SPLIT_SSH_VAULT}" ]; then
+if [ "${QUBES_SPLIT_SSH_VAULT}" != "" ]; then
 
-  log "SETTING UP SPLIT SSH FOR VAULT QUBE "${QUBES_SPLIT_SSH_VAULT}
+  log "SETTING UP SPLIT SSH FOR VAULT QUBE ${QUBES_SPLIT_SSH_VAULT}"
 
   # make sure sock dir exists
   install \
@@ -35,5 +35,3 @@ if [ -n "${QUBES_SPLIT_SSH_VAULT}" ]; then
 else
   log "\$QUBES_SPLIT_SSH_VAULT IS NOT DEFINED, ABORTING"
 fi
-
-

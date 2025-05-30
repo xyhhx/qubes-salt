@@ -8,6 +8,7 @@
   pkg.installed:
     - pkgs:
       - curl
+      - notification-daemon
       - xclip
 {% if grains.os_family|lower == 'debian' %}
       - vim

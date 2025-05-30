@@ -1,0 +1,16 @@
+# vim: set syn=systemd :
+[Unit]
+Description=onlykey-agent SSH agent
+Requires=onlykey-ssh-agent.socket
+ConditionPathExists=!/run/qubes/this-is-templatevm
+ConditionPathExists=/usr/local/bin/onlykey-agent
+
+[Service]
+Type=simple
+Restart=always
+Environment=DISPLAY=:0
+Environment=ONLYKEY_SSH_SOCK=%t/onlykey/ssh/S.agent
+Environment=ONLYKEY_SSH_CONF=/home/user/.config/onlykey/ssh-agent.conf
+ExecStart=/usr/local/bin/onlykey-agent --foreground --sock-path $ONLYKEY_SSH_SOCK $ONLYKEY_SSH_CONF
+User=user
+Group=user

@@ -1,17 +1,15 @@
-# vi: set ts=2 sw=2 et number
+# vim: set ts=2 sw=2 et number :
 
+# Policies               # Args             # Source             # Dest               # Action  # Options
+#
 # CTAP Policies
-
-u2f.Register      *  @anyvm  @tag:onlykey-server  allow notify=yes
-u2f.Authenticate  *  @anyvm  @tag:onlykey-server  allow notify=yes
-u2f.Authenticate  +  @anyvm  @tag:onlykey-server  allow notify=yes
-
-ctap.GetInfo   *  @anyvm  @tag:onlykey-server  allow notify=yes
-ctap.ClientPin *  @anyvm  @tag:onlykey-server  allow notify=yes
-
-policy.RegisterArgument  +u2f.Authenticate  @tag:onlykey-server  @anyvm  allow target=@adminvm
+u2f.Register             *                  @anyvm               @tag:onlykey-server  allow     notify=yes
+u2f.Authenticate         *                  @anyvm               @tag:onlykey-server  allow     notify=yes
+u2f.Authenticate         +                  @anyvm               @tag:onlykey-server  allow     notify=yes
+ctap.GetInfo             *                  @anyvm               @tag:onlykey-server  allow     notify=yes
+ctap.ClientPin           *                  @anyvm               @tag:onlykey-server  allow     notify=yes
+policy.RegisterArgument  +u2f.Authenticate  @tag:onlykey-server  @anyvm               allow     target=@adminvm
 
 # SSH Agent Policies
-
-onlykey.SshAgent * @anyvm  @anyvm ask
+onlykey.SshAgent         *                  @anyvm               @anyvm               ask
 

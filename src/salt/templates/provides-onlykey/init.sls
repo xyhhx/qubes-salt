@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = "provides-onlykey" %}
+{% set vm_name = 'provides-onlykey' %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}
@@ -38,13 +38,24 @@
       - qubes-ctap
   file.managed:
     - names:
-      - '/etc/qubes-rpc/onlykey.SshAgent':
-        - source: "salt://templates/provides-onlykey/files/onlykey.SshAgent"
+      - '/etc/qubes-rpc/qubes.SshAgent':
+        - source: 'salt://templates/provides-onlykey/files/qubes.SshAgent'
+        - mode: '0755'
       - '/etc/udev/rules.d/49-onlykey.rules':
-        - source: "salt://templates/provides-onlykey/files/49-onlykey.rules"
-    - user: user
-    - group: user
-    - mode: "0750"
+        - source: 'salt://templates/provides-onlykey/files/49-onlykey.rules'
+      - '/etc/environment.d/49-onlykey-ssh.conf':
+        - source: 'salt://templates/provides-onlykey/files/49-onlykey-ssh.conf'
+      - '/etc/systemd/system/onlykey-ssh-agent.service':
+        - source: 'salt://templates/provides-onlykey/files/onlykey-ssh-agent.service'
+      - '/etc/systemd/system/onlykey-ssh-agent.socket':
+        - source: 'salt://templates/provides-onlykey/files/onlykey-ssh-agent.socket'
+      - '/etc/skel/.config/onlykey/ssh-agent.conf':
+        - contents: ''
+          user: root
+          group: root
+    - user: root
+    - group: root
+    - mode: '0644'
     - makedirs: true
   cmd.run:
     - names:
@@ -54,6 +65,9 @@
     - use_vt: true
     - require:
       - pkg: '{{ vm_name }}'
-
+  service.enabled:
+    - names:
+      - onlykey-ssh-agent.service
+      - onlykey-ssh-agent.socket
 
 {% endif %}
