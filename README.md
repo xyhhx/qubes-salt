@@ -6,15 +6,13 @@ an attempt to rewrite my qubes os setup as saltstack configuration.
 
 mirrors:
 
+[![codeberg](https://img.shields.io/badge/codeberg-2185d0?style=for-the-badge&logo=codeberg&logoColor=fff)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user)
 [![sourcehut](https://img.shields.io/badge/srht-212529?style=for-the-badge&logo=sourcehut&logoColor=fff)](https://git.sr.ht/~xyhhx/qubes-mgmt-salt-user)
 [![0xacab](https://img.shields.io/badge/0xacab-ea4636?style=for-the-badge&logo=gitlab&logoColor=fff)](https://0xacab.org/xyhhx/qubes-mgmt-salt-user)
-[![codeberg](https://img.shields.io/badge/codeberg-2185d0?style=for-the-badge&logo=codeberg&logoColor=fff)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user)
 
 ---
 
 [![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](LICENSE.md)
-[![main build status](https://0xacab.org/xyhhx/qubes-mgmt-salt-user/badges/main/pipeline.svg)](https://0xacab.org/xyhhx/qubes-mgmt-salt-user/-/commits/main)
-[![Latest release](https://0xacab.org/xyhhx/qubes-mgmt-salt-user/-/badges/release.svg)](https://0xacab.org/xyhhx/qubes-mgmt-salt-user/-/releases)
 
 ---
 

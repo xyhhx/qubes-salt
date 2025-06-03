@@ -14,7 +14,7 @@ QUBES_SPLIT_SSH_SOCK_DIR="${QUBES_SPLIT_SSH_SOCK_DIR:-"/tmp/qubes-split-ssh/${QU
 QUBES_SPLIT_SSH_SOCK_NAME="${QUBES_SPLIT_SSH_SOCK_NAME:-"agent.${RANDOM}"}"
 QUBES_SPLIT_SSH_SOCK="${QUBES_SPLIT_SSH_SOCK:-"${QUBES_SPLIT_SSH_SOCK_DIR}/${QUBES_SPLIT_SSH_SOCK_NAME}"}"
 
-if [ "${QUBES_SPLIT_SSH_VAULT}" != "" ]; then
+if [ "$QUBES_SPLIT_SSH_VAULT" != "" ]; then
 
   log "SETTING UP SPLIT SSH FOR VAULT QUBE ${QUBES_SPLIT_SSH_VAULT}"
 
@@ -23,7 +23,7 @@ if [ "${QUBES_SPLIT_SSH_VAULT}" != "" ]; then
     -o 1000 \
     -g 1000 \
     -m 0700 \
-    -d "${QUBES_SPLIT_SSH_SOCK_DIR}"
+    -d "$QUBES_SPLIT_SSH_SOCK_DIR"
 
   # start the proxy
   sudo -u user socat \
