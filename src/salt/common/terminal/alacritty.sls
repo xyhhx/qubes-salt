@@ -1,22 +1,28 @@
 # vim: set ts=2 sw=2 sts=2 et :
-
 ---
 
 {% set name = "common.terminal.alacritty" %}
 
-{% if grains.id != 'dom0' %}
+{%- set conf = salt['grains.filter_by'](
+  {
+    'RedHat': {
+      'pkgs': [ 'libxkbcommon', 'libxkbcommon-x11' ],
+      'config_file': 'alacritty.toml'
+    },
+    'Debian': {
+      'pkgs': [ 'libxkbcommon-x11-0' ],
+      'config_file': 'alacritty.yml'
+    }
+  },
+  default='RedHat'
+)
+-%}
+
+{% if salt['pillar.get']('qubes:type') == 'template' %}
 
 '{{ name }}':
   pkg.installed:
-    - pkgs:
-      - alacritty
-{% if grains.os_family|lower == 'debian' %}
-      - libxkbcommon-x11-0
-{% elif grains.os_family|lower == 'redhat' %}
-      - libxkbcommon
-      - libxkbcommon-x11
-{% endif %}
-
+    - pkgs: {{ conf.pkgs }}
   cmd.run:
     - names:
       - 'update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/bin/alacritty 50'
@@ -24,20 +30,12 @@
     - use_vt: true
     - onchanges:
       - pkg: '{{ name }}'
-
   file.managed:
     - makedirs: true
     - names:
-{% if grains.os_family|lower == 'debian' %}
-      - /home/user/.config/alacritty/alacritty.yml:
-        - source: salt://common/terminal/files/alacritty.yml
-      - /etc/skel/.config/alacritty/alacritty.yml:
-        - source: salt://common/terminal/files/alacritty.yml
-{% elif grains.os_family|lower == 'redhat' %}
-      - /home/user/.config/alacritty/alacritty.toml:
-        - source: salt://common/terminal/files/alacritty.toml
-      - /etc/skel/.config/alacritty/alacritty.toml:
-        - source: salt://common/terminal/files/alacritty.toml
-{% endif %}
+      - '/home/user/.config/alacritty/{{ conf.config_file }}':
+        - source:  'salt://common/terminal/files/{{ conf.config_file }}'
+      - '/etc/skel/.config/alacritty/{{ conf.config_file }}':
+        - source: 'salt://common/terminal/files/{{ conf.config_file }}'
 
 {% endif %}

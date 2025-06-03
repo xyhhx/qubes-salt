@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% if grains.id != 'dom0' %}
+{% if salt['pillar.get']('qubes:type') == 'template' %}
 
 include:
   - base: update.qubes-vm

@@ -18,8 +18,6 @@
           - source: 'salt://dom0/files/10-updates.policy'
       - '/etc/qubes/policy.d/user.d/30-sys-audio.policy':
           - source: 'salt://dom0/files/30-sys-audio.policy'
-      - '/etc/qubes/policy.d/user.d/30-sys-gui.policy':
-          - source: 'salt://dom0/files/30-sys-gui.policy'
       - '/etc/qubes/policy.d/user.d/35-gpg.policy':
           - source: 'salt://dom0/files/35-gpg.policy'
       - '/etc/qubes/policy.d/user.d/35-peripherals.policy':

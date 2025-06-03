@@ -13,6 +13,9 @@
       - label: yellow
       - flags:
         - net
+      - require:
+        - qvm: '{{ template }}'
+        - qvm: '{{ netvm }}'
     - prefs:
       - netvm: '{{ netvm }}'
     - features:
@@ -20,9 +23,6 @@
         - service.clocksync
       - set:
         - menu-items: Alacritty.desktop IVPN.desktop
-    - require:
-      - qvm: '{{ template }}'
-      - qvm: '{{ netvm }}'
 
 {% else %}
 

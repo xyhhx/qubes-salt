@@ -9,9 +9,10 @@
     - present:
       - template: provides-onlykey
       - label: yellow
-      - netvm: ""
       - require:
         - qvm: provides-onlykey
+    - prefs:
+      - netvm: ""
     - tags:
       - add:
         - sys-vm

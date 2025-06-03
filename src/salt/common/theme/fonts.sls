@@ -1,32 +1,34 @@
 # vim: set ts=2 sw=2 sts=2 et :
-
 ---
-{% set name = "common.theme.fonts" %}
-{% if grains.id != 'dom0' %}
 
-include:
-  - common.https_proxy
+{%- set pkgs = salt['grains.filter_by']({
+    'Debian': [
+      'fonts-fantasque-sans',
+      'fonts-ibm-plex',
+      'fonts-inter',
+      'fonts-inter-variable',
+      'fonts-liberation2',
+      'fonts-noto',
+      'fonts-noto-color-emoji'
+    ],
+    'RedHat': [
+      'cascadia-fonts-all',
+      'google-noto-color-emoji-fonts',
+      'google-noto-fonts-all',
+      'ibm-plex-fonts-all',
+      'liberation-fonts-all',
+      'rsms-inter-fonts'
+    ]
+  },
+  default='RedHat'
+)
+-%}
+
+{% set name = "common.theme.fonts" %}
+{% if salt['pillar.get']('qubes:type') in ['admin', 'template'] %}
 
 '{{ name }}':
   pkg.installed:
-    - pkgs:
-{% if grains.os_family|lower == 'debian' %}
-      - fonts-fantasque-sans
-      - fonts-ibm-plex
-      - fonts-inter
-      - fonts-inter-variable
-      - fonts-liberation2
-      - fonts-noto
-      - fonts-noto-color-emoji
-{% elif grains.os_family|lower == 'redhat' %}
-      - cascadia-fonts-all
-      - google-noto-color-emoji-fonts
-      - google-noto-fonts-all
-      - ibm-plex-fonts-all
-      - liberation-fonts-all
-      - rsms-inter-fonts
-{% endif %}
-    - require:
-      - sls: common.https_proxy
+    - pkgs: {{ pkgs }}
 
 {% endif %}

@@ -14,7 +14,7 @@
     - prefs:
       - template-for-dispvms: true
     - features:
-      - enable:
+      - list:
         - appmenus-dispvm
         - service.qubes-ctap-proxy
       - set:

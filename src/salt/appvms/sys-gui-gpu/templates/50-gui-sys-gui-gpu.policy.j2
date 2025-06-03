@@ -1,0 +1,43 @@
+# vim: set ts=2 sw=2 et number :
+
+# Policies               # Args                  # Source                 # Dest                           # Action  # Options
+#
+policy.EvalGUI           +qubes.ClipboardPaste   {{ vm_name }}             dom0                             allow
+qubes.GetImageRGBA       *                       {{ vm_name }}             @tag:guivm-{{ vm_name }}         allow
+qubes.GetAppmenus        *                       {{ vm_name }}             @tag:guivm-{{ vm_name }}         allow
+qubes.ClipboardCopy      +                       {{ vm_name }}             @tag:guivm-{{ vm_name }}         allow
+qubes.ClipboardPaste     +                       {{ vm_name }}             @tag:guivm-{{ vm_name }}         allow
+qubes.GetAppmenus        *                       {{ vm_name }}             @type:TemplateVM                 allow
+qubes.SetMonitorLayout   *                       {{ vm_name }}             @tag:guivm-{{ vm_name }}         allow
+qubes.StartApp           *                       {{ vm_name }}             @tag:guivm-{{ vm_name }}         allow
+qubes.StartApp           *                       {{ vm_name }}             @dispvm:@tag:guivm-{{ vm_name }} allow
+qubes.SyncAppMenus       *                       @tag:guivm-{{ vm_name }}  dom0                             allow    target={{ vm_name }}
+qubes.WindowIconUpdater  *                       @tag:guivm-{{ vm_name }}  dom0                             allow    target={{ vm_name }}
+qubes.WaitForSession     *                       {{ vm_name }}             @tag:guivm-{{ vm_name }}         allow
+
+{%- if 'psu' in salt['pillar.get']('qvm:' + vm_name + ':dummy-modules', []) %}
+qubes.PowerSupply        *                       {{ vm_name }}             @default                         allow    target=dom0
+{%- endif %}
+
+{%- if 'backlight' in salt['pillar.get']('qvm:' + vm_name + ':dummy-modules', []) %}
+qubes.SetBrightness      *                       {{ vm_name }}             @default                         allow    target=dom0
+{%- endif %}
+
+# Parts of Admin API necessary for GUI-related tools to work
+# Policies                   # Args             # Source             # Dest                   # Action  # Options
+#
+admin.vm.List                 *                  {{ vm_name }}        dom0                     allow
+admin.vm.List                 *                  {{ vm_name }}        @tag:guivm-{{ vm_name }} allow     target=dom0
+admin.Events                  *                  {{ vm_name }}        dom0                     allow
+admin.Events                  *                  {{ vm_name }}        @tag:guivm-{{ vm_name }} allow     target=dom0
+admin.label.Get               *                  {{ vm_name }}        dom0                     allow
+admin.label.Index             *                  {{ vm_name }}        dom0                     allow
+admin.vm.feature.Set          +keyboard-layout   {{ vm_name }}        {{ vm_name }}            allow     target=dom0
+admin.vm.property.Get         *                  {{ vm_name }}        dom0                     allow
+admin.vm.volume.List          *                  {{ vm_name }}        dom0                     allow
+admin.vm.device.pci.Available *                  {{ vm_name }}        dom0                     allow
+admin.vm.device.mic.Available *                  {{ vm_name }}        dom0                     allow
+admin.vm.feature.Get          +internal          {{ vm_name }}        dom0                     allow
+admin.vm.feature.Get          +servicevm         {{ vm_name }}        dom0                     allow
+admin.vm.CurrentState         *                  {{ vm_name }}        dom0                     allow
+

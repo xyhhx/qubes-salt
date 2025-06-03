@@ -1,15 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
-
 ---
-{% set name = "common.theme.gtk" %}
 
-{% if grains.id != 'dom0' %}
-{% if grains.os_family|lower == 'redhat' %}
-deepin-gtk-theme:
-  pkg.installed:
-    - skip_suggestions: true
-    - install_recommends: false
-{% endif %}
+{% if salt['pillar.get']('qubes:type') == 'template' %}
 
 /etc/gtk-3.0/settings.ini:
   file.managed:

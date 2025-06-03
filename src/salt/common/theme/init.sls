@@ -6,8 +6,8 @@
 
 include:
   - common.theme.fonts
-  - common.theme.gtk
-  - common.theme.icons
+  - common.theme.gtk-tweaks
+  - common.theme.deepin
   - common.theme.dconf
 
 {% endif %}

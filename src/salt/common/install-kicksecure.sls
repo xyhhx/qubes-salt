@@ -2,7 +2,9 @@
 ---
 
 {% set name = "common.install-kicksecure" %}
-{% if grains.id != 'dom0' and grains.os_family|lower == 'debian' %}
+{% if grains.get('qubes:type') == 'template' %}
+
+{% if grains.os_family|lower == 'debian' %}
 
 include:
   - common.https_proxy
@@ -39,4 +41,5 @@ include:
     - contents: ''
     - contents_newline: False
 
+{% endif %}
 {% endif %}
