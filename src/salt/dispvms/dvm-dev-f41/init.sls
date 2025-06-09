@@ -20,9 +20,7 @@
     - features:
       - enable:
         - appmenus-dispvm
-        - service.qubes-ctapproxy@sys-onlykey
-      - disable:
-        - service.qubes-ctapproxy
+        - service.qubes-ctap-proxy
       - set:
         - menu-items: Alacritty.desktop
 

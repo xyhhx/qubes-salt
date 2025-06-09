@@ -6,10 +6,11 @@ Description=onlykey-agent SSH agent socket
 ListenStream=%t/onlykey/ssh/S.agent
 FileDescriptorName=ssh
 Service=onlykey-ssh-agent.service
-SocketMode=0600
-DirectoryMode=0700
+DirectoryMode=0777
 User=user
 Group=user
+SocketUser=user
+SocketGroup=user
 
 [Install]
 WantedBy=sockets.target
