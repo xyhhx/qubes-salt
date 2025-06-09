@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% if grains.id == 'dom0' or grains.get('qubes:type') == 'template' %}
+{% if grains.id == 'dom0' or salt['pillar.get']('qubes:type') == 'template' %}
 {#
 
 {%- set xresources = salt['grains.filter_by'](

@@ -2,7 +2,7 @@
 ---
 
 {% set name = "common.install-kicksecure" %}
-{% if grains.get('qubes:type') == 'template' %}
+{% if salt['pillar.get']('qubes:type') == 'template' %}
 
 {% if grains.os_family|lower == 'debian' %}
 
