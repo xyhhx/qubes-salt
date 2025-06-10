@@ -6,7 +6,7 @@ dispvms:
   firewall_wifi_mirageos: "disp-sys-firewall-mirageos-wifi"
   fedora_xfce: "dvm-fedora-41-xfce"
   librewolf: "dvm-librewolf-f41"
-  sys_net_lan: "disp-sys-net-lan"
+  sys_net_eth: "disp-sys-net-lan"
   trivalent: "dvm-trivalent"
 
 appvms:
@@ -18,14 +18,19 @@ sysvms:
   audio: "sys-audio"
   gui: "sys-gui-gpu"
   onlykey: "sys-onlykey"
-  vpn: "sys-vpn-ivpn"
-  whonix: "sys-whonix"
-  firewall_lan: "sys-firewall-lan"
-  firewall_mirageos_lan: "sys-firewall-mirageos-lan"
-  firewall_mirageos_wifi: "sys-firewall-mirageos-wifi"
-  firewall_wifi: "sys-firewall-wifi"
-  net_lan: "sys-net-lan"
-  net_wifi: "sys-net-wifi"
+
+net:
+  eth:
+    net: "sys-net-eth"
+    firewall_linux: "sys-firewall-linux-eth"
+    firewall_mirage: "disp-sys-firewall-mirageos-wifi"
+  wifi:
+    net: "sys-net-wifi"
+    firewall_linux: "sys-firewall-wifi"
+    firewall_mirage: "disp-sys-firewall-mirageos-eth"
+  vpn:
+    ivpn: "sys-vpn-ivpn"
+    tor: "sys-whonix"
 
 templates:
   os:

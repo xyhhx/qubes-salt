@@ -1,7 +1,7 @@
 # vim: set syn=salt ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = salt["pillar.get"]("names:dispvms:trivalent") -%}
+{%- set vm_name = salt["pillar.get"]("names:dispvms:trivalent") - -%}
 
 user:
   'dom0 or {{ vm_name }}':
