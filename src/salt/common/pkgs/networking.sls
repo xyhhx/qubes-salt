@@ -5,7 +5,7 @@
 
 {% if grains.id != 'dom0' %}
 
-'{{ name }} - install':
+'{{ name }}':
   pkg.installed:
     - pkgs:
       - pciutils

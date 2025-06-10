@@ -1,11 +1,10 @@
 # vim: set ts=2 sw=2 sts=2 et :
-
 ---
 
 {% set name = "common.pkgs.audio_vm" %}
-{% if grains.id != 'dom0' %}
+{% if grains.id != 'dom0' and salt['pillar.get']('qubes:type') == 'template' %}
 
-'{{ name }} - install':
+'{{ name }}':
   pkg.installed:
     - pkgs:
       - alsa-utils

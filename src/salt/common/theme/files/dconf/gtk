@@ -1,0 +1,7 @@
+[org/gnome/desktop/interface]
+font-name='{{ prefs.get['sans_font'] }}'
+gtk-theme='{{ prefs.get['gtk_theme'] }}'
+icon-theme='{{ prefs.get['icon_theme'] }}'
+monospace-font-name='{{ prefs.get['mono_font'] }}'
+scaling-factor=uint32 1
+

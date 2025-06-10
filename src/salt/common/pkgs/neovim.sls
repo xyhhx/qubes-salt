@@ -12,24 +12,21 @@
 include:
   - common.https_proxy
 
-bottom:
-  pkgrepo.managed:
-    - copr: atim/bottom
+{%- load_yaml as copr_repos -%}
+  - atim/bottom
+  - faramirza/gdu
+  - atim/lazygit
+  - agriffis/neovim-nightly
+{%- endload -%}
 
-gdu:
+{%- for repo in copr_repos %}
+'{{ repo | regex_search('[^/]\+$)') }}':
   pkgrepo.managed:
-    - copr: faramirza/gdu
+    - copr: {{ repo }}
 
-lazygit:
-  pkgrepo.managed:
-    - copr: atim/lazygit
-
-neovim-nightly:
-  pkgrepo.managed:
-    - copr: agriffis/neovim-nightly
-
-/usr/share/fonts/blex-mono-nerd-font:
+'{{ name }}':
   archive.extracted:
+    - name: /usr/share/fonts/blex-mono-nerd-font
     - source:
       - https://github.com/ryanoasis/nerd-fonts/releases/download/v3.3.0/IBMPlexMono.tar.xz
       - salt://common/pkgs/files/IBMPlexMono.tar.xz
@@ -39,8 +36,6 @@ neovim-nightly:
     - enforce_toplevel: false
     - onlyif: |-
         [[ -z $(fc-list : family | grep 'BlexMono Nerd Font') ]]
-
-'{{ name }} - pkg.installed':
   pkg.installed:
     - pkgs:
       - bottom

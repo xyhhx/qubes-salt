@@ -3,6 +3,22 @@
 {% set name = "common.pkgs.split-gpg" %}
 {% if grains.id != 'dom0' %}
 
+{%- set prefs = salt['match.filter_by']({
+    'template': {
+      'name': '/etc/skel/.gitconfig',
+      'user': 'root'
+      'group': 'root'
+    },
+    'else': {
+      'name': '/home/user/.gitconfig',
+      'user': 'user',
+      'group': 'user'
+    }
+  },
+  minion_id=salt['pillar.get']('qubes:type'),
+  default='default'
+  )
+-%}
 
 '{{ name }}':
   pkg.installed:
@@ -15,13 +31,6 @@
     - source: salt://common/pkgs/templates/gitconfig.j2
     - template: jinja
     - mode: '0640'
-{% if salt['pillar.get']('qubes:type') == 'template' %}
-    - name: /etc/skel/.gitconfig
-    - user: root
-    - group: root
-{% else %}
-    - name: /home/user/.gitconfig
-    - user: 1000
-    - group: 1000
+{{ prefs | dict_to_sls_yaml_params | indent }}
 {% endif %}
 {% endif %}

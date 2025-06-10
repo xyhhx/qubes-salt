@@ -1,6 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
-
 ---
+
+{# TODO: Configure debian docker hosts #}
 
 {% set name = "common.pkgs.docker" %}
 {% if grains.id != 'dom0' %}

@@ -4,17 +4,23 @@
 
 {% if grains.id != 'dom0' %}
 
+{%- load_yaml as common_pkgs -%}
+  - curl
+  - notification-daemon
+  - xclip
+{%- endload -%}
+
+{%- set os_pkgs = salt['grains.filter_by']({
+  'RedHat': ['vim'],
+  'Debian': ['vim-common']
+  },
+  default='RedHat'
+)
+-%}
+
 '{{ name }}':
   pkg.installed:
-    - pkgs:
-      - curl
-      - notification-daemon
-      - xclip
-{% if grains.os_family|lower == 'debian' %}
-      - vim
-{% elif grains.os_family|lower == 'redhat' %}
-      - vim-common
-{% endif %}
+    - pkgs: {{ common_pkgs | union(os_pkgs) }}
     - skip_suggestions: true
     - install_recommends: false
 

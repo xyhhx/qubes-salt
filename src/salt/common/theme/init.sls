@@ -6,8 +6,9 @@
 
 include:
   - common.theme.fonts
-  - common.theme.gtk-tweaks
-  - common.theme.deepin
-  - common.theme.dconf
+  - common.theme.gtk-themes
+  - common.theme.icon-themes
+  - common.theme.win-10-darker
+  - common.theme.config
 
 {% endif %}

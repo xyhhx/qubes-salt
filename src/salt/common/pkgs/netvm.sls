@@ -4,23 +4,34 @@
 {% set name = "common.pkgs.netvm" %}
 {% if grains.id != 'dom0' %}
 
+{%- load_yaml as common_pkgs -%}
+  - gnome-keyring
+  - notification-daemon
+  - qubes-core-agent-network-manager
+  - qubes-core-agent-networking
+{%- endload -%}
+
+
+{%- set pkgs = salt['grains.filter_by']({
+  'RedHat': [
+    'NetworkManager-wifi',
+    'network-manager-applet',
+    'polkit'
+  ],
+  'Debian': [
+    'lspi',
+    'network-manager',
+    'ntpd',
+    'wpasupplicant'
+  ]
+  },
+  default='RedHat'
+  )
+-%}
+
 '{{ name }}':
   pkg.installed:
-    - pkgs:
-      - gnome-keyring
-      - notification-daemon
-      - qubes-core-agent-network-manager
-      - qubes-core-agent-networking
-{% if grains.os_family|lower == 'redhat' %}
-      - NetworkManager-wifi
-      - network-manager-applet
-      - polkit
-{% elif grains.os_family|lower == 'debian' %}
-      - lspci
-      - network-manager
-      - ntpd
-      - wpasupplicant
-{% endif %}
+    - pkgs: {{ pkgs | union(common_pkgs) }}
     - skip_suggestions: true
     - install_recommends: false
 

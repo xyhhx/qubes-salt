@@ -3,6 +3,7 @@
 
 {%- set pkgs = salt['grains.filter_by']({
     'Debian': [
+      'fonts-cascadia-code',
       'fonts-fantasque-sans',
       'fonts-ibm-plex',
       'fonts-inter',

@@ -6,8 +6,8 @@ padding = { x = 16, y = 16 }
 dynamic_padding = true
 
 [font]
-size = 10
-normal.family = "IBM Plex Mono Light"
+size = 10.5
+normal.family = "IBM Plex Mono"
 
 [selection]
 save_to_clipboard = true
