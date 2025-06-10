@@ -2,10 +2,12 @@
 ---
 
 dispvms:
-  trivalent: "dvm-trivalent"
-  browsers_kicksecure: "dvm-browsers-kicksecure"
+  dev: "dvm-dev-f41"
   firewall_wifi_mirageos: "disp-sys-firewall-mirageos-wifi"
+  fedora_xfce: "dvm-fedora-41-xfce"
+  librewolf: "dvm-librewolf-f41"
   sys_net_lan: "disp-sys-net-lan"
+  trivalent: "dvm-trivalent"
 
 appvms:
   libreoffice: "app-libreoffice"
