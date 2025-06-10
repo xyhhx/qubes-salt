@@ -3,5 +3,5 @@
 
 user:
   '*':
-    - names
+    - vm_names
     - config
