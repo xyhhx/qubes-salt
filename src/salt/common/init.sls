@@ -2,8 +2,8 @@
 ---
 
 include:
-    - common.pkgs.update
-    - common.pkgs.base
-    - common.dconf
-    - common.terminal
-    - common.theme
+  - common.pkgs.update
+  - common.pkgs.base
+  - common.dconf
+  - common.terminal
+  - common.theme

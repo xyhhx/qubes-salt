@@ -1,0 +1,12 @@
+on:
+  - push
+
+jobs:
+  test:
+    runs-on: docker
+    name: Salt Lint
+    steps:
+    - uses: actions/checkout@v1
+    - name: Run salt-lint
+      uses: alpine:latest
+      run: ci/salt-lint.sh
