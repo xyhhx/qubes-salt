@@ -4,15 +4,14 @@
 
 {% if salt['pillar.get']('qubes:type') == 'template' %}
 
-{%- load_yaml as defaults %}
+{% load_yaml as defaults %}
   gtk_theme: 'Flat-Remix-Gtk-White-Darkest'
   icon_theme: 'Flat-Remix-Black-Dark'
   cursor_theme: 'Adwaita'
   sans_font: 'Liberation Sans 10'
   mono_font: 'IBM Plex Mono 11'
-{% endload -%}
-{%- import_yaml 'osmap.yml' as osmap -%}
-{%- set pkgs = salt['grains.filter_by'](osmap) -%}
+{% endload %}
+{%- from 'osmap.jinja' import pkgs with context -%}
 
 '{{ name }}':
   pkg.installed:
