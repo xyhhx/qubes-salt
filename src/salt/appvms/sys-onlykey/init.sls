@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = "sys-onlykey" %}
+{% set vm_name = salt["pillar.get"]("vm_names:sysvms:onlykey") %}
 {% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':

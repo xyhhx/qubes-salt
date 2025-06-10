@@ -2,7 +2,7 @@
 ---
 
 {% set name = "templates.provides-firewall-linux.init" %}
-{% set vm_name = 'provides-firewall-linux' %}
+{% set vm_name = salt["pillar.get"]("vm_names:templates:providers:firewall_linux") %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}

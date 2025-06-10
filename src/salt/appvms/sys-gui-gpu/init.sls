@@ -1,8 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 {% set name = "appvms.sys-gui-gpu.vm" %}
-{% set vm_name = "sys-gui-gpu" %}
-{% set template = "provides-gui" %}
+{% set vm_name = salt["pillar.get"]("vm_names:sysvms:gui") %}
+{% set template = salt["pillar.get"]("vm_names:templates:providers:gui") %}
 
 {% if grains.id == 'dom0' %}
 

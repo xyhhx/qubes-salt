@@ -2,7 +2,7 @@
 
 ---
 {% set name = "templates.provides-flatpak.init" %}
-{% set vm_name = "provides-flatpak" %}
+{% set vm_name = salt["pillar.get"]("vm_names:templates:providers:flatpak") %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}

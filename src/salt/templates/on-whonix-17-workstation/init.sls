@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 
 ---
-{% set vm_name = "on-whonix-17-workstation" %}
+{% set vm_name = salt["pillar.get"]("vm_names:templates:os:whonix_ws") %}
 {% set base_template = 'whonix-workstation-17' %}
 
 {% if grains.id == 'dom0' %}

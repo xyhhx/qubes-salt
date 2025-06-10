@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 {% set vm_name = pillar.names.sysvms.vpn_ivpn %}
-{% set template = 'provides-ivpn' %}
+{% set template = salt["pillar.get"]("vm_names:templates:providers:ivpn") %}
 {% set netvm = 'disp-sys-firewall-mirageos-wifi' %}
 
 {% if grains.id == 'dom0' %}
