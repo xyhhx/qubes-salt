@@ -1,7 +1,6 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
-{% set name = 'common.neovim.init' %}
-{% if grains.id != 'dom0' %}
+{% if grains.id != 'dom0' and salt['pillar.get']('qvm:type') != 'template' %}
 
 https://github.com/AstroNvim/template.git:
   git.cloned:

@@ -1,0 +1,59 @@
+# vim: set syn=yaml ts=2 sw=2 sts=2 et :
+---
+
+RedHat:
+  fonts:
+    - cascadia-fonts-all
+    - google-noto-color-emoji-fonts
+    - google-noto-fonts-all
+    - ibm-plex-fonts-all
+    - liberation-fonts-all
+    - rsms-inter-fonts
+  gtk_themes:
+    - adwaita-gtk2-theme
+    - deepin-gtk-theme
+    - flat-remix-gtk2-theme
+    - flat-remix-gtk3-theme
+    - flat-remix-gtk4-theme
+    - gnome-themes-extra
+    - greybird-light-theme
+    - materia-gtk-theme
+  icon_themes:
+    - adwaita-icon-theme
+    - breeze-icon-theme
+    - breeze-icon-theme-fedora
+    - deepin-icon-theme
+    - elementary-icon-theme
+    - elementary-xfce-icon-theme
+    - flat-remix-icon-theme
+    - numix-icon-theme
+    - oxygen-icon-theme
+    - paper-icon-theme
+    - paper-icon-theme-dark
+    - paper-icon-theme-light
+
+Debian:
+  fonts:
+    - fonts-cascadia-code
+    - fonts-fantasque-sans
+    - fonts-ibm-plex
+    - fonts-inter
+    - fonts-inter-variable
+    - fonts-liberation2
+    - fonts-noto
+    - fonts-noto-color-emoji
+  gtk_themes:
+    - blackbird-gtk-theme
+    - gnome-themes-extra
+    - greybird-gtk-theme
+    - materia-gtk-theme
+    - numix-gtk-theme
+  icon_themes:
+    - adwaita-icon-theme
+    - breeze-icon-theme
+    - deepin-icon-theme
+    - elementary-icon-theme
+    - elementary-xfce-icon-theme
+    - numix-icon-theme
+    - oxygen-icon-theme
+    - paper-icon-theme

@@ -5,7 +5,8 @@ user:
   'dom0 or provides-gui':
     - templates.provides-gui
   'provides-gui':
+    - common
     - common.pkgs.base
-    - common.dconf
+    - common.theme
+    - common.custom-themes.win-10-darker
     - common.terminal
-    - common.theme.fonts
