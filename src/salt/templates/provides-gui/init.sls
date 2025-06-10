@@ -25,9 +25,6 @@ dummy-psu-sender:
 
 {% else %}
 
-include:
-  - common.https_proxy
-
 '{{ grains.id }}':
   pkg.installed:
     - pkgs:
