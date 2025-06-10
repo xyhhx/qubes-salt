@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 {% set vm_name = "app-thunderbird" %}
-{% set template = "uses-app-thunderbird" %}
+{% set template = salt["pillar.get"]("vm_names:templates:uses:thunderbird") %}
 {% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':

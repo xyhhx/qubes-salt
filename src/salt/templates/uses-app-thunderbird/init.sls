@@ -2,7 +2,7 @@
 
 ---
 {% set name = 'templates.uses-app-thunderbird.configure' %}
-{% set vm_name = "uses-app-thunderbird" %}
+{% set vm_name = salt["pillar.get"]("vm_names:templates:uses:-thunderbird") %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}

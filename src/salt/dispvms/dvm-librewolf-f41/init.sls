@@ -1,8 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = "dvm-librewolf-f41" %}
-{% set template_name = "uses-app-librewolf-f41" %}
+{% set vm_name = salt["pillar.get"]("vm_names:dispvms:librewolf") %}
+{% set template_name = salt["pillar.get"]("vm_names:templates:uses:librewolf") %}
 
 {% if grains.id == 'dom0' %}
 

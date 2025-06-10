@@ -1,8 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = "dvm-trivalent" %}
-{% set template_name = "uses-app-trivalent" %}
+{%- set vm_name = salt["pillar.get"]("vm_names:dispvms:trivalent") -%}
+{%- set template_name = salt["pillar.get"]("vm_names:templates:uses:trivalent") -%}
 
 {% if grains.id == 'dom0' %}
 

@@ -1,8 +1,9 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
-{% set vm_name = 'disp-sys-firewall-mirageos-wifi' %}
-{% set template = 'dvm-firewall-mirageos' %}
-{% set netvm = 'sys-net-wifi' %}
+
+{% set vm_name = salt["pillar.get"]("vm_names:net:wifi:firewall_mirage") %}
+{% set template = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") %}
+{% set netvm = salt["pillar.get"]("vm_names:net:wifi:net") %}
 
 {% if grains.id == 'dom0' %}
 

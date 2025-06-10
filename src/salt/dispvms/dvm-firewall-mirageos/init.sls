@@ -1,8 +1,8 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
 
-{% set vm_name = "dvm-firewall-mirageos" %}
-{% set template_name = "provides-firewall-mirageos" %}
+{% set vm_name = salt["pillar.get"]("vm_names:dispvms:firewall_mirageos") %}
+{% set template_name = salt["pillar.get"]("vm_names:providers:firewall_mirageos") %}
 
 {% if grains.id == 'dom0' %}
 

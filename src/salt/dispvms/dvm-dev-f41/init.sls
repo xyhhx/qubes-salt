@@ -2,8 +2,8 @@
 ---
 
 {% set name = "dispvms.dvm-dev-f41.init" %}
-{% set vm_name = "dvm-dev-f41" %}
-{% set template_name = "uses-stack-dev-f41" %}
+{% set vm_name = salt["pillar.get"]("vm_names:dispvms:dev") %}
+{% set template_name = salt["pillar.get"]("vm_names:templates:stack:dev_f41") %}
 
 {% if grains.id == 'dom0' %}
 

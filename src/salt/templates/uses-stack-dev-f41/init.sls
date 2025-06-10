@@ -2,7 +2,7 @@
 
 ---
 {% set name = 'templates.uses-stack-dev-f41.configure' %}
-{% set vm_name = "uses-stack-dev-f41" %}
+{% set vm_name = salt["pillar.get"]("vm_names:tempaltes:uses:stack-dev-f41") %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}
