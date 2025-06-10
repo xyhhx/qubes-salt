@@ -1,7 +1,7 @@
 # vim: set ts=2 sw=2 sts=2 et :
 
 ---
-{% set vm_name = pillar.names.templates.base.kicksecure %}
+{% set vm_name = salt["pillar.get"]("vm_names:templates:os:kicksecure") %}
 {% set base_template = 'debian-12-minimal' %}
 
 {% if grains.id == 'dom0' %}

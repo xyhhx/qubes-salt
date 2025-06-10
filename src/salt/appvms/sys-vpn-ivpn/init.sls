@@ -1,6 +1,6 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
-{% set vm_name = pillar.names.sysvms.vpn_ivpn %}
+{% set vm_name = salt["pillar.get"]("vm_names:net:vpn:ivpn") %}
 {% set template = salt["pillar.get"]("vm_names:templates:providers:ivpn") %}
 {% set netvm = 'disp-sys-firewall-mirageos-wifi' %}
 
