@@ -12,7 +12,7 @@
       - flags:
         - quiet
     - prefs:
-      - kernel: '{{ "mirage-firewall-" ~ salt["pillar.get"]("config.versions.mirageos") }}'
+      - kernel: '{{ "mirage-firewall-" ~ salt["pillar.get"]("config:versions:mirageos") }}'
       - kernelopts: ''
       - include_in_backups: false
       - memory: 32

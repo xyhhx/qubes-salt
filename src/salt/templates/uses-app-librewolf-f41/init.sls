@@ -3,7 +3,7 @@
 ---
 
 {% set name = 'templates.uses-app-librewolf-f41.configure' %}
-{% set vm_name = salt["pillar.get"]("vm_names:templates:uses:-librewolf-f41") %}
+{% set vm_name = salt["pillar.get"]("vm_names:templates:uses:librewolf") %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}

@@ -8,7 +8,7 @@ appvms:
 
 dispvms:
   dev: "dvm-dev-f41"
-  firewall_wifi_mirageos: "disp-sys-firewall-mirageos-wifi"
+  firewall_mirageos: "dvm-firewall-mirageos"
   fedora_xfce: "dvm-fedora-41-xfce"
   librewolf: "dvm-librewolf-f41"
   sys_net_eth: "disp-sys-net-lan"
