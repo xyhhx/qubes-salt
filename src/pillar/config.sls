@@ -5,5 +5,6 @@ guivm:
   name: sys-gui-gpu
   dpi: 96
 
+dom0_user: whomst
 
 
