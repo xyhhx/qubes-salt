@@ -179,7 +179,7 @@ dummy-psu-sender:
     - name: root
     - password: '!!'
 
-'{{ name }} - purge extraneous pkgs':
+'{{ name }} - pkg.purged':
   pkg.purged:
     - pkgs:
       - asunder
@@ -205,6 +205,9 @@ dummy-psu-sender:
 'dnf autoremove -y':
   cmd.run:
     - use_vt: true
+    - onchanges_any:
+      - pkg: '{{ name }}'
+      - pkg: '{{ name }} - pkg.purged'
 {% endif %}
 
 {% endif %}
