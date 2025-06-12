@@ -10,7 +10,6 @@
     - present:
       - template: '{{ template }}'
       - label: yellow
-      - netvm: none
     - tags:
       - add:
         - anon-vm

@@ -10,7 +10,7 @@
     - present:
       - template: '{{ template }}'
       - label: yellow
-      - netvm: none
+      - netvm: ""
 
 /etc/qubes/policy.d/user.d/30-sys-audio.policy:
   file.managed:
