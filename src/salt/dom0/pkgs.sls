@@ -2,7 +2,7 @@
 ---
 
 {% set name = "dom0.pkgs" %}
-{% set user = pillar.config.dom0_user %}
+{% set user = salt["pillar.get"]("config.dom0_user") %}
 
 {% if grains.id == 'dom0' %}
 

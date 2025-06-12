@@ -2,7 +2,7 @@
 
 ---
 {% set name = 'templates.uses-app-trivalent.configure' %}
-{% set vm_name = salt["pillar.get"]("vm_names:templates:uses:-trivalent") %}
+{% set vm_name = salt["pillar.get"]("vm_names:templates:uses:trivalent") %}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}
