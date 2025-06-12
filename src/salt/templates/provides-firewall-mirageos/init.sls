@@ -6,6 +6,9 @@
 {%- set mirage_version = salt["pillar.get"]("opts:versions:mirageos") -%}
 {%- set kernel = "mirage-firewall" ~ mirage_version -%}
 
+include:
+  - .kernel
+
 '{{ vm_name }}':
   qvm.vm:
     - present:
