@@ -12,9 +12,8 @@ dispvms:
   firewall_mirageos: "dvm-firewall-mirageos"
   fedora_xfce: "dvm-fedora-41-xfce"
   librewolf: "dvm-librewolf-f41"
-  sys_net_eth: "disp-sys-net-lan"
+  sys_net: "dvm-sys-net"
   trivalent: "dvm-trivalent"
-
 
 sysvms:
   audio: "sys-audio"
@@ -23,7 +22,7 @@ sysvms:
 
 net:
   eth:
-    net: "sys-net-eth"
+    net: "disp-sys-net-eth"
     firewall_linux: "sys-firewall-linux-eth"
     firewall_mirage: "disp-sys-firewall-mirageos-wifi"
   wifi:
@@ -50,11 +49,11 @@ templates:
     firewall_linux: "provides-firewall-linux"
     firewall_mirageos: "provides-firewall-mirageos"
     flatpak: "provides-flatpak"
+    gpg: "provides-gpg"
     gui: "provides-gui"
     ivpn: "provides-ivpn"
     net: "provides-net"
     onlykey: "provides-onlykey"
-    gpg: "provides-gpg"
     usb: "provides-usb"
 
   uses:
