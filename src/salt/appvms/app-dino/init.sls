@@ -1,7 +1,8 @@
-# vim: set ts=2 sw=2 sts=2 et :
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 ---
-{% set vm_name = "app-dino" %}
-{% set template = "uses-app-dino" %}
+
+{%- set vm_name = salt["pillar.get"]("vm_names:appvms:dino") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:uses:dino") -%}
 {% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':

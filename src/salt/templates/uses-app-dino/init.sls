@@ -1,8 +1,8 @@
-# vim: set ts=2 sw=2 sts=2 et :
-
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 ---
-{% set vm_name = "uses-app-dino" %}
-{% set base_template = 'fedora-41-minimal' %}
+
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:dino") -%}
+{%- set base_template = 'fedora-41-minimal' -%}
 
 {% if grains.id == 'dom0' %}
 
