@@ -1,11 +1,10 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 ---
 
-
 {% if grains.id == 'dom0' %}
 
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") -%}
-{%- set mirage_version = salt["pillar.get"]("config:versions:mirageos") -%}
+{%- set mirage_version = salt["pillar.get"]("opts:versions:mirageos") -%}
 {%- set kernel = "mirage-firewall" ~ mirage_version -%}
 
 '{{ vm_name }}':

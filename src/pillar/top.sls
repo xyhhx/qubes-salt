@@ -4,4 +4,4 @@
 user:
   '*':
     - vm_names
-    - config
+    - opts

@@ -5,7 +5,7 @@
 {% set name = "templates.provides-firewall-mirageos.kernel" %}
 {% set vm_name = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") %}
 
-{% set version = salt["pillar.get"]("config:versions:mirageos", "latest") %}
+{% set version = salt["pillar.get"]("opts:versions:mirageos", "latest") %}
 {% set kernel = "qubes-firewall.xen" %}
 {% set checksum = "qubes-firewall-release.sha256" %}
 {% set download_base = "https://github.com/mirage/qubes-mirage-firewall/releases/download/" ~ version ~ "/" %}
