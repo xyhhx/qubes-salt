@@ -23,11 +23,11 @@ vm_names:
     eth:
       net: "disp-sys-net-eth"
       firewall_linux: "sys-firewall-linux-eth"
-      firewall_mirage: "disp-sys-firewall-mirageos-wifi"
+      firewall_mirage: "disp-sys-firewall-mirageos-eth"
     wifi:
       net: "sys-net-wifi"
       firewall_linux: "sys-firewall-wifi"
-      firewall_mirage: "disp-sys-firewall-mirageos-eth"
+      firewall_mirage: "disp-sys-firewall-mirageos-wifi"
     vpn:
       ivpn: "sys-vpn-ivpn"
       tor: "sys-whonix"
