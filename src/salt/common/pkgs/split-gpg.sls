@@ -16,7 +16,7 @@
     }
   },
   minion_id=salt['pillar.get']('qubes:type'),
-  default='default'
+  default='else'
   )
 -%}
 
