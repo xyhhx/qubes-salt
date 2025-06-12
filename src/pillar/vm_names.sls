@@ -61,7 +61,6 @@ templates:
     keepassxc: "uses-app-keepassxc"
     libreoffice: "uses-app-libreoffice"
     librewolf: "uses-app-librewolf-f41"
-    simplex: "uses-app-simple-x"
     thunderbird: "uses-app-thunderbird"
     trivalent: "uses-app-trivalent"
 
