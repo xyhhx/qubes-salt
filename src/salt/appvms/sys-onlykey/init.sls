@@ -1,15 +1,17 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 {%- set vm_name = salt["pillar.get"]("vm_names:sysvms:onlykey") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:providers:onlykey") -%}
+
 {% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':
   qvm.vm:
     - present:
-      - template: provides-onlykey
+      - template: '{{ template }}'
       - label: yellow
       - require:
-        - qvm: provides-onlykey
+        - qvm: '{{ template }}'
     - prefs:
       - netvm: ""
     - tags:

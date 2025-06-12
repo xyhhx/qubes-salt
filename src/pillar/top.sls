@@ -2,6 +2,6 @@
 
 user:
   '*':
-    - .vm_names
-    - .opts
     - .base_templates
+    - .opts
+    - .vm_names

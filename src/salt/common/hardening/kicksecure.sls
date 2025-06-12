@@ -1,46 +1,60 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set name = "common.install-kicksecure" -%}
+{%- set name = "common.hardening.kicksecure" -%}
 
-{% if salt['pillar.get']('qubes:type') == 'template' %}
+{% if salt['pillar.get']('qubes:type') == 'template' and grains.os_family | lower == 'debian' %}
 
-{% if grains.os_family|lower == 'debian' %}
+{%- load_yaml as repo_dist %}
+  channel: 'stable'
+  transport: 'onion'
+{% endload -%}
 
-{# TODO: Is this necessary? #}
 include:
   - common.https_proxy
 
-'{{ name }} - preamble':
+'{{ name }} - pkgs.installed':
   pkg.installed:
     - pkgs:
       - adduser
       - extrepo
     - skip_suggestions: true
     - install_recommends: false
+
+console:
   group.present:
-    - name: console
     - system: true
     - members:
       - user
-  cmd.run:
-    - name: 'extrepo enable kicksecure'
-    - use_vt: true
 
-'{{ name }} - install':
+'extrepo enable kicksecure':
+  cmd.run:
+    - use_vt: true
+    - onchanges:
+      - pkg: extrepo
+
+kicksecure-qubes-cli:
   pkg.installed:
-    - pkgs:
-      - kicksecure-qubes-cli
     - skip_suggestions: true
     - install_recommends: false
+    - onchanges:
+      - cmd: 'extrepo enable kicksecure'
+
+'repo-dist':
   cmd.run:
-    - names:
-      - 'repository-dist --enable --repository stable --transport onion'
-      - 'extrepo disable kicksecure'
+    - name: 'repository-dist --enable --repository {{ repo_dist.channel }} --transport {{ repo_dist.transport }}'
     - use_vt: true
+
+'extrepo disable kicksecure':
+  cmd.run:
+    - use_vt: true
+
+/etc/apt/sources.list:
   file.managed:
-    - name: '/etc/apt/sources.list'
     - contents: ''
     - contents_newline: False
+    - listen_in:
+      - cmd: 'repo-dist'
+    - require:
+      - pkg: kicksecure-qubes-cli
 
-{% endif %}
 {% endif %}
