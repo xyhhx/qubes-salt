@@ -1,5 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
----
+
 
 {%- set name = "templates.provides-gui.init" -%}
 {% if grains.id == 'dom0' %}

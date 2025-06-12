@@ -1,10 +1,10 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
----
-{% set name = "appvms.sys-audio.vm" %}
-{% set vm_name = salt["pillar.get"]("vm_names:") %}
+
+{%- set vm_name = salt["pillar.get"]("vm_names:sysvms:audio") -%}
+
 {% if grains.id == 'dom0' %}
 
-'{{ name }}':
+'{{ vm_name }}':
   qvm.vm:
     - present:
       - template: provides-audio

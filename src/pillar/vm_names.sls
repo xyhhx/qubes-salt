@@ -1,11 +1,11 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
----
+
 vm_names:
   appvms:
     dino: "app-dino"
     libreoffice: "app-libreoffice"
-    simple-x: "app-simple-x"
+    simple_x: "app-simple-x"
     thunderbird: "app-thunderbird"
 
   dispvms:

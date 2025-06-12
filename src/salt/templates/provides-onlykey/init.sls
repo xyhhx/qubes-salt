@@ -1,5 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
----
+
 
 {% set vm_name = 'provides-onlykey' %}
 {% set base_template = 'fedora-41-minimal' %}

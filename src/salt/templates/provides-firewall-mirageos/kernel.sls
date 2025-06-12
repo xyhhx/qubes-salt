@@ -1,5 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
----
+
 {% if grains.id == 'dom0' %}
 
 {% set name = "templates.provides-firewall-mirageos.kernel" %}
