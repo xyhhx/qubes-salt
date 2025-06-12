@@ -4,7 +4,7 @@
 
 '/usr/share/themes/Windows-10-Darker':
   file.recurse:
-    - source: salt://common/theme/Windows-10-Darker
+    - source: salt://common/custom-themes/Windows-10-Darker
     - user: root
     - group: root
     - file_mode: '0644'
