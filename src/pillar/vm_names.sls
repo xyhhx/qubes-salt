@@ -1,5 +1,10 @@
 # vim: set ts=2 sw=2 sts=2 et :
 ---
+appvms:
+  dino: "app-dino"
+  libreoffice: "app-libreoffice"
+  simple-x: "app-simple-x"
+  thunderbird: "app-thunderbird"
 
 dispvms:
   dev: "dvm-dev-f41"
@@ -9,10 +14,6 @@ dispvms:
   sys_net_eth: "disp-sys-net-lan"
   trivalent: "dvm-trivalent"
 
-appvms:
-  libreoffice: "app-libreoffice"
-  simple-x: "app-simple-x"
-  thunderbird: "app-thunderbird"
 
 sysvms:
   audio: "sys-audio"
@@ -56,6 +57,7 @@ templates:
     usb: "provides-usb"
 
   uses:
+    dino: "uses-app-dino"
     keepassxc: "uses-app-keepassxc"
     libreoffice: "uses-app-libreoffice"
     librewolf: "uses-app-librewolf-f41"
