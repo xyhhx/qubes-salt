@@ -31,6 +31,13 @@
     - source: salt://common/pkgs/templates/gitconfig.j2
     - template: jinja
     - mode: '0640'
-{{ prefs | dict_to_sls_yaml_params | indent }}
+    - context:
+        gpg_user: '{{ salt["pillar.get"]("opts:gpg:user") }}'
+        gpg_email: '{{ salt["pillar.get"]("opts:gpg:email") }}'
+        gpg_pubkey: '{{ salt["pillar.get"]("opts:gpg:pubkey") }}'
+{% for pref in prefs %}
+    - {{ pref }}: {{ prefs[pref] }}
+{% endfor %}
+
 {% endif %}
 {% endif %}

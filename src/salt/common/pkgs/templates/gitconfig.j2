@@ -2,9 +2,7 @@
   program = qubes-gpg-client-wrapper
 [commit]
   gpgSign = true
-{% if salt["pillar.get"]("config:gpg:user") and salt["pillar.get"]("config:gpg:email") and salt["pillar.get"]("config:gpg:pubkey") %}
 [user]
-  name = {{ salt["pillar.get"]("config:gpg:user") }}
-  email = {{ salt["pillar.get"]("config:gpg:email") }}
-  signingKey = {{ salt["pillar.get"]("config:gpg:pubkey") }}
-{% endif %}
+  name = {{ gpg_user }}
+  email = {{ gpg_email }}
+  signingKey = {{ gpg_pubkey }}
