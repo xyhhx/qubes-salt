@@ -5,7 +5,6 @@ vm_names:
   appvms:
     dino: "app-dino"
     libreoffice: "app-libreoffice"
-    simple_x: "app-simple-x"
     thunderbird: "app-thunderbird"
 
   dispvms:
