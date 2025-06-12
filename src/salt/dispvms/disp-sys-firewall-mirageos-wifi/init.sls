@@ -28,8 +28,5 @@
       - enable:
         - qubes-firewall
         - no-default-kernelopts
-    - require:
-      - qvm: '{{ template }}'
-      - qvm: '{{ netvm }}'
 
 {% endif %}
