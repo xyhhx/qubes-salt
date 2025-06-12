@@ -2,6 +2,6 @@
 ---
 
 include:
-  - common.hardening.dconf
-  - common.hardening.hardened_malloc
-  - common.hardening.system
+  - .dconf
+  - .hardened_malloc
+  - .system

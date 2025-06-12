@@ -2,9 +2,9 @@
 ---
 
 include:
-  - common.pkgs.base
-  - common.terminal
-  - common.theme
-  - common.xdpi
-  - common.hardening
+  - .pkgs.base
+  - .terminal
+  - .theme
+  - .xdpi
+  - .hardening
   - base: update.qubes-vm

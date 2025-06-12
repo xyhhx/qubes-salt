@@ -3,5 +3,5 @@
 
 user:
   '*':
-    - vm_names
-    - opts
+    - .vm_names
+    - .opts
