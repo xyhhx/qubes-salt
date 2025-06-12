@@ -26,6 +26,4 @@
     - mode: "0640"
     - makedirs: true
 
-{% else %}
-
 {% endif %}
