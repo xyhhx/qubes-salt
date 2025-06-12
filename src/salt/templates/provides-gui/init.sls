@@ -1,7 +1,8 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
 {%- set name = "templates.provides-gui.init" -%}
+{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
+
 {% if grains.id == 'dom0' %}
 
 qubes-input-proxy-sender:
@@ -13,7 +14,7 @@ dummy-psu-sender:
 'provides-gui':
   qvm.vm:
     - clone:
-      - source: 'fedora-41-minimal'
+      - source: '{{ base_template }}'
     - prefs:
       - class: TemplateVM
       - label: gray

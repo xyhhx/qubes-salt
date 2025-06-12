@@ -1,6 +1,6 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{% set name = "common.pkgs.split-gpg" %}
+{%- set name = "common.pkgs.split-gpg" -%}
 {% if grains.id != 'dom0' %}
 
 {%- set prefs = salt['match.filter_by']({

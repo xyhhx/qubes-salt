@@ -1,8 +1,8 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{% set vm_name = salt["pillar.get"]("vm_names:net:vpn:ivpn") %}
-{% set template = salt["pillar.get"]("vm_names:templates:providers:ivpn") %}
-{% set netvm = 'disp-sys-firewall-mirageos-wifi' %}
+{%- set vm_name = salt["pillar.get"]("vm_names:net:vpn:ivpn") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:providers:ivpn") -%}
+{%- set netvm = salt["pillar.get"]("vm_names:net:wifi:firewall_mirage") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -35,6 +35,5 @@
     - content: |-
         nft add rule qubes custom-forward oifname eth0 counter drop
         nft add rule ip6 qubes custom-forward oifname eth0 counter drop
-
 
 {% endif %}

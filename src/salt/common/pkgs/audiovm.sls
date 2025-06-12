@@ -1,7 +1,7 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 
-{% set name = "common.pkgs.audio_vm" %}
+{%- set name = "common.pkgs.audio_vm" -%}
 {% if grains.id != 'dom0' and salt['pillar.get']('qubes:type') == 'template' %}
 
 '{{ name }}':

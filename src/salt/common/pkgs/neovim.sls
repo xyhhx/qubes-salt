@@ -4,7 +4,7 @@
 # Avoid applying the state by mistake to dom0
 {% if grains.id != 'dom0' %}
 
-{% set name = "common.pkgs.neovim" %}
+{%- set name = "common.pkgs.neovim" -%}
 
 # TODO: accomodate debian-based distros
 {% if grains.os_family|lower == 'redhat' %}

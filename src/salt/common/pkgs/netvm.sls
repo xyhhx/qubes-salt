@@ -1,7 +1,7 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 
-{% set name = "common.pkgs.netvm" %}
+{%- set name = "common.pkgs.netvm" -%}
 {% if grains.id != 'dom0' %}
 
 {%- load_yaml as common_pkgs -%}

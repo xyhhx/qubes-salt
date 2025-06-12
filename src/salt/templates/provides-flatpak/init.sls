@@ -1,9 +1,9 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 
-{% set name = "templates.provides-flatpak.init" %}
-{% set vm_name = salt["pillar.get"]("vm_names:templates:providers:flatpak") %}
-{% set base_template = 'fedora-41-minimal' %}
+{%- set name = "templates.provides-flatpak.init" -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:flatpak") -%}
+{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
 {% if grains.id == 'dom0' %}
 

@@ -1,6 +1,6 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{% set name = "dom0.base-templates" %}
+{%- set name = "dom0.base-templates" -%}
 {% if grains.id == 'dom0' %}
 
 '{{ name }}':

@@ -1,8 +1,7 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
-{% set vm_name = salt["pillar.get"]("vm_names:templates:os:whonix_gw") %}
-{% set base_template = 'whonix-gateway-17' %}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:os:whonix_gw") -%}
+{%- set base_template = salt["pillar.get"]("base_templates:whonix:gw") -%}
 
 {% if grains.id == 'dom0' %}
 

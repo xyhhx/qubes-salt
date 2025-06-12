@@ -1,9 +1,9 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 
-{% set vm_name = salt["pillar.get"]("vm_names:net:wifi:firewall_mirage") %}
-{% set template = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") %}
-{% set netvm = salt["pillar.get"]("vm_names:net:wifi:net") %}
+{%- set vm_name = salt["pillar.get"]("vm_names:net:wifi:firewall_mirage") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") -%}
+{%- set netvm = salt["pillar.get"]("vm_names:net:wifi:net") -%}
 
 {% if grains.id == 'dom0' %}
 

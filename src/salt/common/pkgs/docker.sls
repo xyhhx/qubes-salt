@@ -3,7 +3,7 @@
 
 {# TODO: Configure debian docker hosts #}
 
-{% set name = "common.pkgs.docker" %}
+{%- set name = "common.pkgs.docker" -%}
 {% if grains.id != 'dom0' %}
 
 {% if grains.os_family|lower == 'redhat' %}

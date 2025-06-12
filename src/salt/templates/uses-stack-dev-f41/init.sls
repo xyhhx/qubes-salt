@@ -1,9 +1,7 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
-{% set name = 'templates.uses-stack-dev-f41.configure' %}
-{% set vm_name = salt["pillar.get"]("vm_names:templates:stack:dev_f41") %}
-{% set base_template = 'fedora-41-minimal' %}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:stack:dev_f41") -%}
+{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -27,11 +25,10 @@
 
 {% else %}
 
-bat-extras:
+'{{ vm_name }}':
   pkgrepo.managed:
+    - name: bat-extras
     - copr: awood/bat-extras
-
-'{{ name }}':
   pkg.installed:
     - pkgs:
       - bat
@@ -85,12 +82,10 @@ bat-extras:
         - contents: |
             QUBES_SPLIT_SSH_SOCK=/var/run/user/1000/sys-onlykey
         - mode: '0644'
-
   user.present:
     - name: user
     - uid: 1000
     - gid: 1000
     - shell: /bin/zsh
-
 
 {% endif %}

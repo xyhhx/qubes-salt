@@ -1,8 +1,8 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 
-{% set vm_name = salt["pillar.get"]("vm_names:dispvms:fedora_xfce") %}
-{% set template_name = salt["pillar.get"]("vm_names:templates:os:fedora_xfce") %}
+{%- set vm_name = salt["pillar.get"]("vm_names:dispvms:fedora_xfce") -%}
+{%- set template_name = salt["pillar.get"]("vm_names:templates:os:fedora_xfce") -%}
 
 {% if grains.id == 'dom0' %}
 

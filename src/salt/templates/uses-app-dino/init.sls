@@ -2,7 +2,7 @@
 
 
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:dino") -%}
-{%- set base_template = 'fedora-41-minimal' -%}
+{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
 {% if grains.id == 'dom0' %}
 

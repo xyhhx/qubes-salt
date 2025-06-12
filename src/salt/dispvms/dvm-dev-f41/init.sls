@@ -1,9 +1,9 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 
-{% set name = "dispvms.dvm-dev-f41.init" %}
-{% set vm_name = salt["pillar.get"]("vm_names:dispvms:dev") %}
-{% set template_name = salt["pillar.get"]("vm_names:templates:stack:dev_f41") %}
+{%- set name = "dispvms.dvm-dev-f41.init" -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:dispvms:dev") -%}
+{%- set template_name = salt["pillar.get"]("vm_names:templates:stack:dev_f41") -%}
 
 {% if grains.id == 'dom0' %}
 
