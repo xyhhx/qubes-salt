@@ -5,4 +5,5 @@
 
 user:
   'dom0 or {{ vm_name }}':
-    - appvms.sys-vpn-ivpn
+    - appvms.sys-whonix
+

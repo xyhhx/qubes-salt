@@ -1,6 +1,7 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 ---
 
+{%- set name = "templates.provides-gui.init" -%}
 {% if grains.id == 'dom0' %}
 
 qubes-input-proxy-sender:
@@ -25,7 +26,7 @@ dummy-psu-sender:
 
 {% else %}
 
-'{{ grains.id }}':
+'{{ name }}':
   pkg.installed:
     - pkgs:
 
@@ -177,7 +178,7 @@ dummy-psu-sender:
     - name: root
     - password: '!!'
 
-'{{ grains.id }} - purge extraneous pkgs':
+'{{ name }} - purge extraneous pkgs':
   pkg.purged:
     - pkgs:
       - asunder
