@@ -4,10 +4,10 @@
 
 user:
   'dom0 or {{ vm_name }}':
-    - templates.{{ vm_name }}
+    - templates.provides-gui
   '{{ vm_name }}':
     - common
     - common.pkgs.base
     - common.theme
-    - common.custom-themes.win-10-darker
+    - common.custom-themes.Windows-10-Darker
     - common.terminal
