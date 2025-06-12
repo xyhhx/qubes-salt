@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
 {%- set name = "common.pkgs.netvm" -%}
 {% if grains.id != 'dom0' %}
 
@@ -10,7 +9,6 @@
   - qubes-core-agent-network-manager
   - qubes-core-agent-networking
 {%- endload -%}
-
 
 {%- set pkgs = salt['grains.filter_by']({
   'RedHat': [

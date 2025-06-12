@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
 {%- set name = "templates.provides-firewall-linux.init" -%}
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:firewall_linux") -%}
 {%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}

@@ -11,7 +11,6 @@
 {%- set download_base = "https://github.com/mirage/qubes-mirage-firewall/releases/download/" ~ version ~ "/" -%}
 {%- set mirage_install_dir = "/var/lib/qubes/vm-kernels/mirage-firewall-" ~ version -%}
 
-
 # TODO: rewrite this in pure salt functions
 '{{ name }} - download kernel':
   cmd.script:

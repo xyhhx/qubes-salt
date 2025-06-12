@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
 {%- set name = "common.terminal.alacritty" -%}
 
 {%- set conf = salt['grains.filter_by'](

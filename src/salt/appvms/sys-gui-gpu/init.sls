@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
 {%- set name = "appvms.sys-gui-gpu.vm" -%}
 {%- set vm_name = salt["pillar.get"]("vm_names:sysvms:gui") -%}
 {%- set template = salt["pillar.get"]("vm_names:templates:providers:gui") -%}

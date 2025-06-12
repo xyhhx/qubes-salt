@@ -28,4 +28,3 @@ https://github.com/AstroNvim/template.git:
 
 {% endif %}
 
-

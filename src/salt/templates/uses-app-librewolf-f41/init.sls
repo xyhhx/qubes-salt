@@ -1,7 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
-
 {%- set name = 'templates.uses-app-librewolf-f41.configure' -%}
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:librewolf") -%}
 {%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}

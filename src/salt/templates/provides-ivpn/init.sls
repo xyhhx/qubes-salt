@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
 {%- set name = "templates.provides-ivpn.init" -%}
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:ivpn") -%}
 {%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}

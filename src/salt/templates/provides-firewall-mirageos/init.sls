@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
 {% if grains.id == 'dom0' %}
 
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") -%}

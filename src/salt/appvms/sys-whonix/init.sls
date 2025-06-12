@@ -21,5 +21,4 @@
     - mode: "0640"
     - makedirs: true
 
-
 {% endif %}

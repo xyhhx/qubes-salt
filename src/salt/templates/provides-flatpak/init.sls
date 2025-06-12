@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
 {%- set name = "templates.provides-flatpak.init" -%}
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:flatpak") -%}
 {%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
@@ -26,7 +25,6 @@
       - qvm: '{{ base_template }}'
 
 {% else %}
-
 
 {# unfortunately salt doesn't support --user args for systemctl so i gotta do it manually #}
 
@@ -90,6 +88,5 @@
     - atomic: true
     - require:
       - file: '{{ name }}'
-
 
 {% endif %}
