@@ -49,7 +49,7 @@ templates:
     firewall_linux: "provides-firewall-linux"
     firewall_mirageos: "provides-firewall-mirageos"
     flatpak: "provides-flatpak"
-    gpg: "provides-gpg"
+    gpg: "provides-split-gpg"
     gui: "provides-gui"
     ivpn: "provides-ivpn"
     net: "provides-net"

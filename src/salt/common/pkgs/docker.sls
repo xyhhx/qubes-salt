@@ -6,8 +6,7 @@
 {% set name = "common.pkgs.docker" %}
 {% if grains.id != 'dom0' %}
 
-{% if grains.os_family|lower == 'debian' %}
-{% elif grains.os_family|lower == 'redhat' %}
+{% if grains.os_family|lower == 'redhat' %}
 
 docker-ce-stable:
   pkgrepo.managed:

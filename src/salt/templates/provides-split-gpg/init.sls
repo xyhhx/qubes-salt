@@ -1,6 +1,6 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 ---
-{% set vm_name = 'provides-split-gpg' %}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:gpg") -%}
 {% set base_template = 'fedora-41-minimal' %}
 
 {% if grains.id == 'dom0' %}
@@ -19,8 +19,6 @@
     - features:
       - set:
         - menu-items: Alacritty.desktop
-    - require:
-      - qvm: '{{ base_template }}'
 
 {% else %}
 
