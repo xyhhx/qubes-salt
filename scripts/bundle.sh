@@ -3,10 +3,28 @@ set -xeuo pipefail
 
 # workdir is probably the parent directory
 workdir="$(realpath "${0%"${0##*/}"}/..")"
-outdir="$(mktemp -d /tmp/"$(basenme "$workdir")"-XXXXXX)"
-OUT_FILE="${OUT_FILE:-"${outdir}/bundles.tar.gz"}"
+hostname="$(hostname)"
+default_domu_bundle_path="/tmp/bundles/bundles.tar.gz"
+default_dom0_bundles_path="${workdir}/.bundles"
 
-# we can loop through all the submodules and creates bundles
-git submodule foreach "git bundle create ${outdir}/\$(basename \$sm_path).bundle --all"
-git bundle create "${outdir}/$(basename "$workdir").bundle" --all
-find "$outdir" -type f | tar czT- >"$OUT_FILE"
+do_domu() {
+  output="${1:-${default_domu_bundle_path}}"
+  output_dir="${output%/"${output##*/}"}"
+
+  # we can loop through all the submodules and creates bundles
+  git submodule foreach "git bundle create ${output_dir}/\$(basename \${sm_path}).bundle --all"
+  git bundle create "${output_dir}/$(basename "${workdir}")".bundle --all
+  find "${output_dir}" -type f | tar czT- >"${output}"
+}
+
+do_dom0(){
+  guest_domain="${1}"
+
+  qvm-run -p "${guest_domain}" "cat ${default_domu_bundle_path}" | tar xvC "${default_dom0_bundles_path}" -T-
+  enable=all
+
+}
+
+if [[ "${hostname}" == "dom0" ]]; then do_dom "${@}"; else do_domu "${@}"; fi
+
+# NOTE: yeah this is cooked, i know
