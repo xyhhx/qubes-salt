@@ -9,7 +9,7 @@
   sans_font: 'Liberation Sans 10'
   mono_font: 'IBM Plex Mono 11'
 {% endload %}
-{%- from 'osmap.jinja' import pkgs with context -%}
+{%- import 'osmap.jinja' with context -%}
 
 '{{ name }}':
   pkg.installed:
