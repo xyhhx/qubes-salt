@@ -11,11 +11,7 @@ jobs:
     container: alpine:latest
     name: Salt Lint
     steps:
-      - run: |
-            set -xeu
-            apk update
-            apk add git
-            git clone "${GITHUB_SERVER}/${GITHUB_REPOSITORY}" .
+      - uses: actions/checkout@v4
 
       - name: Run salt-lint
         run: scripts/salt-lint.sh
