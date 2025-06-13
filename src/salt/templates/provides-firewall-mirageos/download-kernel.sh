@@ -4,9 +4,8 @@ set -eo pipefail
 date="$(date "+%F_+%s")"
 
 for v in VERSION KERNEL_URL DIGEST_URL; do
-  # shellcheck disable=SC2154
   [[ -z "${v}" ]] &&
-    echo "The following env vars are required: ${VERSION} ${KERNEL_URL} ${DIGEST_URL}" &&
+    echo "The following env vars are required: ${VERSION:?} ${KERNEL_URL:?} ${DIGEST_URL:?}" &&
     exit 1
 done
 

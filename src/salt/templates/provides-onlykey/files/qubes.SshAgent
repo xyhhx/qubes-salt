@@ -3,7 +3,7 @@
 set -axeo pipefail
 
 [[ -z "${SSH_AUTH_SOCK}" ]] &&
-  echo "\${SSH_AUTH_SOCK} not defined. Aborting" &&
+  echo "\$SSH_AUTH_SOCK not defined. Aborting" &&
   exit 1
 
 self="$(qubesdb-read /name)"
