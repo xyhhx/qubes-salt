@@ -2,7 +2,7 @@
 set -xeuo pipefail
 
 # workdir is probably the parent directory
-workdir="$(realpath "${0%"${0##*/}"}/..")"
+workdir="$(git rev-parse --show-toplevel)"
 hostname="$(hostname)"
 default_domu_bundle_path="/tmp/bundles/bundles.tar.gz"
 default_dom0_bundles_path="${workdir}/.bundles"
@@ -17,11 +17,10 @@ do_domu() {
   find "${output_dir}" -type f | tar czT- >"${output}"
 }
 
-do_dom0(){
+do_dom0() {
   guest_domain="${1}"
 
   qvm-run -p "${guest_domain}" "cat ${default_domu_bundle_path}" | tar xvC "${default_dom0_bundles_path}" -T-
-  enable=all
 
 }
 
