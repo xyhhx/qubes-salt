@@ -8,11 +8,13 @@ defaults:
 jobs:
   test:
     runs-on: codeberg-tiny
+    container: alpine:latest
     name: Salt Lint
     steps:
       - run: |
-            set -xeuo pipefail
-
+            set -xeu
+            apk update
+            apk add git
             git clone "${GITHUB_SERVER}/${GITHUB_REPOSITORY}" .
 
       - name: Run salt-lint
