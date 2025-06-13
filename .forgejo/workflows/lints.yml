@@ -9,4 +9,4 @@ jobs:
     - uses: actions/checkout@v1
     - name: Run salt-lint
       uses: alpine:latest
-      run: ci/salt-lint.sh
+      run: scripts/salt-lint.sh
