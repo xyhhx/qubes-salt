@@ -13,6 +13,7 @@ vm_names:
     librewolf: "dvm-librewolf-f41"
     sys_net: "dvm-sys-net"
     trivalent: "dvm-trivalent"
+    salt_mgmt: "dvm-salt-mgmt"
 
   sysvms:
     audio: "sys-audio"
@@ -53,7 +54,9 @@ vm_names:
       ivpn: "provides-ivpn"
       net: "provides-net"
       onlykey: "provides-onlykey"
+      salt_mgmt: "provides-salt-mgmt"
       usb: "provides-usb"
+
 
     uses:
       dino: "uses-app-dino"

@@ -1,0 +1,9 @@
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
+
+{%- set vm_name = salt["pillar.get"]("vm_names:dispvms:salt_mgmt") -%}
+
+user:
+  'dom0 or {{ vm_name }}':
+    - dispvms.dvm-salt-mgmt
+  '{{ vm_name }}':
+    - common
