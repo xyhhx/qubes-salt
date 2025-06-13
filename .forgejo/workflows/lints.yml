@@ -6,12 +6,18 @@ defaults:
     shell: "sh -e {0}"
 
 jobs:
-  test:
+  salt-lint:
     runs-on: codeberg-tiny
     container: alpine:latest
     name: Salt Lint
     steps:
       - uses: actions/checkout@v4
+      - run: scripts/salt-lint.sh
 
-      - name: Run salt-lint
-        run: scripts/salt-lint.sh
+  shellcheck:
+    runs-on: codeberg-tiny
+    container: alpine:latest
+    name: Salt Lint
+    steps:
+      - uses: actions/checkout@v4
+      - run: scripts/shellcheck.sh
