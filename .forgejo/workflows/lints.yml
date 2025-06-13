@@ -10,7 +10,10 @@ jobs:
     runs-on: codeberg-tiny
     name: Salt Lint
     steps:
-    - uses: actions/checkout@v2
+      - run: |
+            set -xeuo pipefail
 
-    - name: Run salt-lint
-      run: scripts/salt-lint.sh
+            git clone "${GITHUB_SERVER}/${GITHUB_REPOSITORY}" .
+
+      - name: Run salt-lint
+        run: scripts/salt-lint.sh
