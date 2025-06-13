@@ -11,10 +11,10 @@
     - names:
       - /etc/login.prefs:
         - key: UMASK
-        - value: 077
+        - value: '077'
       - /etc/bashrc:
         - key: umask
-        - value: 077
+        - value: '077'
 
 /etc/login.defs:
   file.comment:
