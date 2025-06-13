@@ -3,7 +3,7 @@ on:
 
 jobs:
   test:
-    runs-on: docker
+    runs-on: codeberg-tiny
     name: Salt Lint
     steps:
     - uses: actions/checkout@v1
