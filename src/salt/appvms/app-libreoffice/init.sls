@@ -1,8 +1,11 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:appvms:libreoffice") -%}
-{%- set template = salt["pillar.get"]("vm_names:templates:uses:libreoffice") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:appvms:libreoffice", "app-libreoffice") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:uses:libreoffice", "uses-app-libreoffice") -%}
 {% if grains.id == 'dom0' %}
+
+include:
+  - templates.{{ template }}
 
 '{{ vm_name }}':
   qvm.vm:
@@ -22,6 +25,6 @@
             libreoffice-math.desktop
             libreoffice-writer.desktop
     - require:
-      - qvm: '{{ template }}'
+      - sls: 'templates.{{ template }}'
 
 {% endif %}

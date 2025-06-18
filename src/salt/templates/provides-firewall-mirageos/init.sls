@@ -3,7 +3,7 @@
 {% if grains.id == 'dom0' %}
 
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") -%}
-{%- set mirage_version = salt["pillar.get"]("opts:versions:mirageos") -%}
+{%- set mirage_version = salt["pillar.get"]("qvm:versions:mirageos", "v0.9.4") -%}
 {%- set kernel = "mirage-firewall" ~ mirage_version -%}
 
 include:

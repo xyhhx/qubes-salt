@@ -1,9 +1,12 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:net:vpn:tor") -%}
-{%- set template = salt["pillar.get"]("vm_names:templates:os:whonix_gw") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:net:vpn:tor", "sys-whonix") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:os:whonix_gw", "on-whonix-gateway-17") -%}
 
 {% if grains.id == 'dom0' %}
+
+include:
+  - templates.{{ template }}
 
 '{{ vm_name }}':
   qvm.vm:
@@ -16,6 +19,8 @@
     - tags:
       - add:
         - anon-vm
+    - require:
+      - sls: templates.{{ template }}
 
 /etc/qubes/policy.d/user.d/80-whonix.policy:
   file.managed:

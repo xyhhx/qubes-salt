@@ -1,7 +1,6 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set name = "templates.provides-gui.init" -%}
-{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:providers:gui", "provides-gui") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -11,23 +10,12 @@ qubes-input-proxy-sender:
 dummy-psu-sender:
   pkg.installed
 
-'provides-gui':
-  qvm.vm:
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - class: TemplateVM
-      - label: gray
-      - include-in-backups: false
-    - tags:
-      - add:
-        - salt-managed
-        - fedora
-        - fedora-41
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{{ templatevm(vm_name) }}
 
 {% else %}
 
-'{{ name }}':
+'{{ vm_name }}':
   pkg.installed:
     - pkgs:
 
@@ -55,6 +43,7 @@ dummy-psu-sender:
       - lightdm-gtk
       - lightdm-gtk-greeter-settings
       - lightdm-settings
+      - slick-greeter
       - xscreensaver-base
 
       # GTK engines
@@ -172,14 +161,17 @@ dummy-psu-sender:
     - clean: true
     - makedirs: true
     - replace: true
-  cmd.run:
-    - name: 'systemctl enable lightdm'
-    - use_vt: true
   user.present:
     - name: root
     - password: '!!'
 
-'{{ name }} - pkg.purged':
+# enabling lightdm will fail right now because the qubes service isn't enabled on the templatevm
+'systemctl enable lightdm &2>/dev/null':
+  cmd.run:
+    - onchanges:
+      - pkg: lightdm
+
+'{{ slsdotpath }}.pkg.purged':
   pkg.purged:
     - pkgs:
       - asunder
@@ -206,8 +198,8 @@ dummy-psu-sender:
   cmd.run:
     - use_vt: true
     - onchanges_any:
-      - pkg: '{{ name }}'
-      - pkg: '{{ name }} - pkg.purged'
+      - pkg: '{{ vm_name }}'
+      - pkg: '{{ slsdotpath }}.pkg.purged'
 {% endif %}
 
 {% endif %}

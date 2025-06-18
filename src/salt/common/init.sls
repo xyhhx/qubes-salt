@@ -6,4 +6,4 @@ include:
   - .theme
   - .xdpi
   - .hardening
-  - base: update.qubes-vm
+{#  - base: update.qubes-vm #}

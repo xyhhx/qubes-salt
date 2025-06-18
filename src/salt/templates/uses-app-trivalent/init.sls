@@ -1,34 +1,15 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set name = 'templates.uses-app-trivalent.configure' -%}
-{%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:trivalent") -%}
-{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:trivalent", "uses-app-trivalent") -%}
 
 {% if grains.id == 'dom0' %}
 
-'{{ vm_name }}':
-  qvm.vm:
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - label: gray
-    - tags:
-      - add:
-        - salt-managed
-        - fedora
-        - fedora-41
-        - uses-app
-    - features:
-      - enable:
-        - service.qubes-ctap-proxy
-      - set:
-        - menu-items: Alacritty.desktop
-    - require:
-      - qvm: '{{ base_template }}'
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{{ templatevm(vm_name) }}
 
 {% else %}
 
-'{{ name }}':
+'{{ vm_name }}':
   pkgrepo.managed:
     - names:
       - secureblue:
@@ -39,14 +20,13 @@
         - gpgkey: https://repo.secureblue.dev/secureblue.gpg
         - require_in:
           - pkg: trivalent
-    - trivalent-copr:
-      - copr: secureblue/trivalent
-      - require_in:
-        - pkg: trivalent-subresource-filter
+      - trivalent-copr:
+        - copr: secureblue/trivalent
+        - require_in:
+          - pkg: trivalent-subresource-filter
   pkg.installed:
     - pkgs:
       - psutils
-      - qubes-ctap
       - trivalent
       - trivalent-subresource-filter
   file.managed:
@@ -67,12 +47,5 @@
         - source: salt://templates/uses-app-trivalent/files/02-titanium-managed-chromium.json
       - /etc/trivalent/policies/recommended/02-titanium-recommended-chromium.json:
         - source: salt://templates/uses-app-trivalent/files/02-titanium-recommended-chromium.json
-
-qubes-ctapproxy@sys-usb.service:
-  service.disabled
-
-qubes-ctapproxy@sys-onlykey.service:
-  service.running:
-    - enable: true
 
 {% endif %}

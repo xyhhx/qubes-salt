@@ -1,27 +1,11 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:onlykey") -%}
-{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:onlykey", "provides-onlykey") -%}
 
 {% if grains.id == 'dom0' %}
 
-'{{ vm_name }}':
-  qvm.vm:
-    - actions:
-      - clone
-      - features
-      - prefs
-      - tags
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - label: gray
-    - tags:
-      - add:
-        - salt-managed
-    - features:
-      - enable:
-        - service.updates-proxy-setup
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{{ templatevm(vm_name) }}
 
 {% else %}
 

@@ -1,9 +1,12 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:sysvms:audio") -%}
-{%- set template = salt["pillar.get"]("vm_names:templates:providers:audio") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:sysvms:audio", "sys-audio") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:providers:audio", "provides-audio") -%}
 
 {% if grains.id == 'dom0' %}
+
+include:
+  - templates.{{ template }}
 
 '{{ vm_name }}':
   qvm.vm:
@@ -15,6 +18,8 @@
       - template: '{{ template }}'
       - label: yellow
       - netvm: ""
+    - require:
+      - sls: templates.{{ template }}
 
 /etc/qubes/policy.d/user.d/30-sys-audio.policy:
   file.managed:
