@@ -1,15 +1,20 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
-{% set name = "appvms.sys-audio.vm" %}
-{% set vm_name = "sys-audio" %}
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
+
+{%- set vm_name = salt["pillar.get"]("vm_names:sysvms:audio") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:providers:audio") -%}
+
 {% if grains.id == 'dom0' %}
 
-'{{ name }}':
+'{{ vm_name }}':
   qvm.vm:
     - present:
-      - template: provides-audio
+      - template: '{{ template }}'
       - label: yellow
-      - netvm: none
+      - netvm: ""
+    - prefs:
+      - template: '{{ template }}'
+      - label: yellow
+      - netvm: ""
 
 /etc/qubes/policy.d/user.d/30-sys-audio.policy:
   file.managed:

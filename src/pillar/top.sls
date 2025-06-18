@@ -1,10 +1,7 @@
-# vim: set ts=2 sw=2 sts=2 et :
-#
-
-# ===== User Defined Salt Pillars =============================================
-
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 user:
   '*':
-    - names
-    - config
+    - .base_templates
+    - .opts
+    - .vm_names

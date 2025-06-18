@@ -1,12 +1,11 @@
-# vim: set ts=2 sw=2 sts=2 et :
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
----
+{# TODO: Configure debian docker hosts #}
 
-{% set name = "common.pkgs.docker" %}
+{%- set name = "common.pkgs.docker" -%}
 {% if grains.id != 'dom0' %}
 
-{% if grains.os_family|lower == 'debian' %}
-{% elif grains.os_family|lower == 'redhat' %}
+{% if grains.os_family|lower == 'redhat' %}
 
 docker-ce-stable:
   pkgrepo.managed:

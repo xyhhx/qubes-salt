@@ -1,11 +1,10 @@
-# vim: set ts=2 sw=2 sts=2 et :
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
----
-{% set name = "common.pkgs.networking" %}
+{%- set name = "common.pkgs.networking" -%}
 
 {% if grains.id != 'dom0' %}
 
-'{{ name }} - install':
+'{{ name }}':
   pkg.installed:
     - pkgs:
       - pciutils

@@ -1,0 +1,14 @@
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
+
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:stack:dev") -%}
+
+user:
+  'dom0 or {{ vm_name }}':
+    - templates.uses-stack-dev
+  '{{ vm_name }}':
+    - common
+    - common.pkgs.ctap-proxy
+    - common.pkgs.docker
+    - common.pkgs.neovim
+    - common.pkgs.networking
+    - common.pkgs.split-gpg

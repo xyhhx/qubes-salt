@@ -1,15 +1,18 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
-{% set name = "appvms.sys-whonix.init" %}
-{% set vm_name = "sys-whonix" %}
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
+
+{%- set vm_name = salt["pillar.get"]("vm_names:net:vpn:tor") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:os:whonix_gw") -%}
+
 {% if grains.id == 'dom0' %}
 
-'{{ name }}':
+'{{ vm_name }}':
   qvm.vm:
     - present:
-      - template: whonix-gateway-17
+      - template: '{{ template }}'
       - label: yellow
-      - netvm: none
+    - prefs:
+      - template: '{{ template }}'
+      - label: yellow
     - tags:
       - add:
         - anon-vm
@@ -21,6 +24,5 @@
     - group: 1000
     - mode: "0640"
     - makedirs: true
-
 
 {% endif %}

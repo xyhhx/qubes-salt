@@ -1,7 +1,7 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 {% if grains.id == 'dom0' or salt['pillar.get']('qubes:type') == 'template' %}
+{# TODO: This should be an QREXEC policy that can dynamically set the X DPI of the guest #}
 {#
 
 {%- set xresources = salt['grains.filter_by'](

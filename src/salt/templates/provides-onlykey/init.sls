@@ -1,8 +1,7 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{% set vm_name = 'provides-onlykey' %}
-{% set base_template = 'fedora-41-minimal' %}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:onlykey") -%}
+{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -36,6 +35,7 @@
       - qubes-usb-proxy
       - qubes-input-proxy-sender
       - qubes-ctap
+      - xfce4-notifyd
   file.managed:
     - names:
       - '/etc/qubes-rpc/qubes.SshAgent':
@@ -51,8 +51,6 @@
         - source: 'salt://templates/provides-onlykey/files/onlykey-ssh-agent.socket'
       - '/etc/skel/.config/onlykey/ssh-agent.conf':
         - contents: ''
-          user: root
-          group: root
     - user: root
     - group: root
     - mode: '0644'

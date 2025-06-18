@@ -1,16 +1,15 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
+
 {% if grains.id == 'dom0' %}
 
-{% set name = "templates.provides-firewall-mirageos.kernel" %}
-{% set vm_name = "provides-firewall-mirageos" %}
+{%- set name = "templates.provides-firewall-mirageos.kernel" -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") -%}
 
-{% set version = pillar.config.versions.mirageos %}
-{% set kernel = "qubes-firewall.xen" %}
-{% set checksum = "qubes-firewall-release.sha256" %}
-{% set download_base = "https://github.com/mirage/qubes-mirage-firewall/releases/download/" ~ version ~ "/" %}
-{% set mirage_install_dir = "/var/lib/qubes/vm-kernels/mirage-firewall-" ~ version %}
-
+{%- set version = salt["pillar.get"]("opts:versions:mirageos", "latest") -%}
+{%- set kernel = "qubes-firewall.xen" -%}
+{%- set checksum = "qubes-firewall-release.sha256" -%}
+{%- set download_base = "https://github.com/mirage/qubes-mirage-firewall/releases/download/" ~ version ~ "/" -%}
+{%- set mirage_install_dir = "/var/lib/qubes/vm-kernels/mirage-firewall-" ~ version -%}
 
 # TODO: rewrite this in pure salt functions
 '{{ name }} - download kernel':

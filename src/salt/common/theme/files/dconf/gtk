@@ -1,0 +1,9 @@
+[org/gnome/desktop/interface]
+font-name='{{ sans_font }}'
+gtk-theme='{{ gtk_theme }}'
+icon-theme='{{ icon_theme }}'
+monospace-font-name='{{ mono_font }}'
+scaling-factor=uint32 1
+color-scheme='prefer-dark'
+
+{#- vim: set syn=jinja : -#}

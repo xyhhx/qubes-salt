@@ -1,2 +1,4 @@
 .env
-config.yml
+*.env
+!*.example
+*.bundle

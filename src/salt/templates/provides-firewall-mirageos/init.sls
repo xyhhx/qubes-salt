@@ -1,8 +1,13 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
-{% set vm_name = pillar.names.templates.providers.mirageos_firewall %}
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 {% if grains.id == 'dom0' %}
+
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") -%}
+{%- set mirage_version = salt["pillar.get"]("opts:versions:mirageos") -%}
+{%- set kernel = "mirage-firewall" ~ mirage_version -%}
+
+include:
+  - .kernel
 
 '{{ vm_name }}':
   qvm.vm:
@@ -12,7 +17,7 @@
       - flags:
         - quiet
     - prefs:
-      - kernel: '{{ "mirage-firewall-" ~ pillar.config.versions.mirageos }}'
+      - kernel: '{{ kernel }}'
       - kernelopts: ''
       - include_in_backups: false
       - memory: 32

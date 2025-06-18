@@ -2,9 +2,7 @@
   program = qubes-gpg-client-wrapper
 [commit]
   gpgSign = true
-{% if pillar.config.gpg_user and pillar.config.gpg_email and pillar.config.gpg_pubkey %}
 [user]
-  name = {{ pillar.config.gpg_user }}
-  email = {{ pillar.config.gpg_email }}
-  signingKey = {{ pillar.config.gpg_pubkey }}
-{% endif %}
+  name = {{ gpg_user }}
+  email = {{ gpg_email }}
+  signingKey = {{ gpg_pubkey }}

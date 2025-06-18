@@ -1,0 +1,478 @@
+* {
+  -GtkToolButton-icon-spacing: 4;
+  -GtkTextView-error-underline-color: #bf1717;
+  -GtkScrolledWindow-scrollbar-spacing: 0;
+  -GtkToolItemGroup-expander-size: 11;
+  -GtkWidget-text-handle-width: 20;
+  -GtkWidget-text-handle-height: 24;
+  -GtkDialog-button-spacing: 4;
+  -GtkDialog-action-area-border: 0;
+/*
+  outline-color: alpha(currentColor,0.3);
+  outline-style: dashed;
+  outline-offset: -3px;
+  outline-width: 1px;
+*/
+  -gtk-outline-radius: 4px;
+  -gtk-secondary-caret-color: #ffffff; 
+}
+
+
+/*
+* {
+  outline-style: solid;
+  outline-offset: -4px;
+  outline-width: 2px;
+  outline-color: alpha(currentColor,0.07); 
+}
+  
+* button, 
+* button:hover, 
+* button:active, 
+* button:checked, 
+* button:focus {
+    outline-color: alpha(currentColor,0.07); 
+}
+
+*/
+
+
+.background, 
+.background:backdrop,
+headerbar,
+headerbar:backdrop,
+.titlebar:not(headerbar) entry:focus,
+headerbar entry:focus,
+dialog .titlebar:not(headerbar), 
+dialog headerbar,
+.default-decoration.titlebar:not(headerbar),
+headerbar.default-decoration,
+row:selected, 
+row:selected:backdrop, 
+row:selected:active, 
+row.activatable:selected, 
+row.activatable:selected:backdrop, 
+row.activatable:selected:active,
+.sidebar,
+decoration,
+filechooser.unified > deck > box > headerbar,
+filechooser.unified:backdrop > deck > box > headerbar,
+.nautilus-window.unified > deck > box > headerbar,
+.nautilus-window.unified:backdrop > deck > box > headerbar,
+notebook > header,
+notebook > header:backdrop,
+.drop-shadow
+{
+  background: #0d0d0d;
+}
+
+.gtkstyle-fallback:active,
+.gtkstyle-fallback:selected,
+.content-view tile,
+.content-view tile:backdrop,
+label selection,
+treeview entry:focus:dir(rtl), 
+treeview entry:focus:dir(ltr),
+treeview entry.flat, 
+treeview entry,
+treeview.view header button,
+notebook > stack:not(:only-child),
+scrollbar,
+levelbar trough,
+scrolledwindow junction,
+.view, 
+iconview,
+.view text,
+iconview text,
+textview text,
+assistant .sidebar,
+spinbutton:not(.vertical),
+list,
+infobar.action:hover > revealer > box,
+infobar.info:backdrop > revealer > box,
+infobar.info > revealer > box, 
+infobar.question:backdrop > revealer > box, 
+infobar.question > revealer > box,
+infobar.warning:backdrop > revealer > box, 
+infobar.warning > revealer > box, 
+infobar.error:backdrop > revealer > box, 
+infobar.error > revealer > box,
+infobar.info selection, 
+infobar.question selection, 
+infobar.warning selection, 
+infobar.error selection,
+.content-view,
+.content-view:backdrop,
+.keycap,
+list.content > row:not(.expander):not(:active):not(:hover):not(:selected),
+list.content > row:not(.expander):not(:active):hover:not(.activatable):not(:selected), 
+list.content > row.expander row.header:not(:active):not(:hover):not(:selected), 
+list.content > row.expander row.header:not(:active):hover:not(.activatable):not(:selected),
+tabbar .box,
+tabbar .box:backdrop,
+tabbar tab,
+tabbar tab:backdrop,
+infobar selection, 
+infobar.info selection, 
+infobar.question selection, 
+infobar.warning selection, 
+infobar.error selection,
+wnck-pager:selected,
+wnck-pager:hover,
+notebook > header.top > tabs > tab:checked,
+entry
+{
+  background-color: #000;
+  /* color: #fff; */
+}
+
+.gtkstyle-fallback:selected,
+.content-view .tile:active,
+.content-view .tile:selected,
+treeview.view.progressbar,
+treeview.view button.dnd:active, 
+treeview.view button.dnd:selected, 
+treeview.view button.dnd:hover, 
+treeview.view button.dnd,
+treeview.view header.button.dnd:active,
+treeview.view header.button.dnd:selected,
+treeview.view header.button.dnd:hover,
+treeview.view header.button.dnd
+.view:selected:focus, .view:selected,
+.view text:selected:focus,
+textview text:selected:focus,
+.view text:selected,
+textview text:selected, .view text selection:focus, .view text selection,
+textview text selection:focus, 
+textview text selection, 
+iconview:selected:focus, 
+iconview:selected, 
+iconview text selection:focus, 
+iconview text selection, 
+flowbox flowboxchild:selected,
+entry selection, 
+modelbutton.flat:selected,
+.menuitem.button.flat:selected, 
+spinbutton:not(.vertical) selection, 
+treeview.view:selected:focus, 
+treeview.view:selected, 
+row:selected, 
+calendar:selected,
+scale highlight, 
+progressbar progress,
+infobar.info:backdrop > revealer > box, 
+infobar.info > revealer > box, 
+infobar.info.action:hover:backdrop > revealer > box, 
+infobar.info.action:hover > revealer > box,
+filechooser placessidebar.sidebar row.sidebar-row:selected,
+.nautilus-window placessidebar.sidebar row.sidebar-row:selected,
+.nautilus-window .floating-bar
+{
+  background-color: #fff;
+  color: #000;
+}
+
+row:selected button.sidebar-button:not(:active):not(:checked):not(:hover):not(disabled), 
+row:selected button.flat:not(:active):not(:checked):not(:hover):not(disabled) {
+  background-color: transparent;
+  color: #000;
+}
+
+treeview.view.progressbar:selected:focus:backdrop, 
+treeview.view.progressbar:selected:backdrop,
+treeview.view.progressbar:backdrop,
+treeview.view header button:backdrop,
+.view:backdrop, iconview:backdrop,
+.view text:backdrop,
+iconview text:backdrop,
+textview text:backdrop,
+assistant .sidebar:backdrop,
+spinbutton:backdrop:not(.vertical),
+notebook > header tab:hover,
+notebook > stack:not(:only-child):backdrop,
+levelbar trough:backdrop,
+list:backdrop,
+.keycap:backdrop,
+entry:backdrop
+{
+  background-color: #030303;
+  /* color: #cdcdcd; */
+}
+
+button.titlebutton, 
+notebook > header > tabs > arrow,
+button {
+  border: 1px solid;
+  color: #eeeeec;
+  outline-color: rgba(238, 238, 236, 0.3);
+  border-color: #1f1f1f;
+  background-image: image(#1f1f1f);
+  box-shadow: none; 
+}
+
+button.titlebutton, 
+button.sidebar-button, 
+notebook > header > tabs > arrow, 
+notebook > header > tabs > arrow.flat,
+button.flat {
+  border-color: transparent;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+  text-shadow: none;
+  -gtk-icon-shadow: none;
+  transition: none; 
+}
+
+button.titlebutton:hover, 
+button.sidebar-button:hover, 
+notebook > header > tabs > arrow:hover,
+button.flat:hover {
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-duration: 500ms; 
+}
+
+button.titlebutton:hover:active, 
+button.sidebar-button:hover:active, 
+notebook > header > tabs > arrow:hover:active,
+button.flat:hover:active {
+  transition: all 200ms cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+}
+
+notebook > header > tabs > arrow:hover,
+button:hover {
+  color: #eeeeec;
+  outline-color: rgba(238, 238, 236, 0.3);
+  border-color: #1f1f1f;
+  background-image: image(#303030);
+  box-shadow: none;
+  -gtk-icon-effect: highlight; 
+}
+
+notebook > header > tabs > arrow:active, notebook > header > tabs > arrow:checked,
+button:active,
+button:checked {
+  color: #000000;
+  outline-color: rgba(238, 238, 236, 0.3);
+  border-color: #ffffff;
+  background-image: linear-gradient(to right, white, #fafafa);
+  box-shadow: 0 2px 4px rgba(255, 255, 255, 0.25);
+  transition-duration: 50ms; 
+}
+
+notebook > header > tabs > arrow:backdrop,
+button:backdrop.flat,
+button:backdrop {
+  color: #7d7d7c;
+  border-color: #1f1f1f;
+  background-image: image(#1f1f1f);
+  box-shadow: none;
+  transition: 200ms ease-out;
+  -gtk-icon-effect: none; 
+}
+
+notebook > header > tabs > arrow:backdrop:active, 
+notebook > header > tabs > arrow:backdrop:checked,
+button:backdrop.flat:active,
+button:backdrop.flat:checked,
+button:backdrop:active,
+button:backdrop:checked {
+  color: #000000;
+  border-color: #ffffff;
+  background-image: image(#cfcfcf);
+  box-shadow: none; 
+}
+
+notebook > header > tabs > arrow:backdrop:disabled,
+button:backdrop.flat:disabled,
+button:backdrop:disabled {
+  color: #333333;
+  border-color: #1f1f1f;
+  background-image: image(#080808);
+  box-shadow: none; 
+}
+
+notebook > header > tabs > arrow:backdrop:disabled:active, notebook > header > tabs > arrow:backdrop:disabled:checked,
+button:backdrop.flat:disabled:active,
+button:backdrop.flat:disabled:checked,
+button:backdrop:disabled:active,
+button:backdrop:disabled:checked {
+  color: #333333;
+  border-color: #1f1f1f;
+  background-image: image(#010101);
+  box-shadow: none; 
+}
+
+button.titlebutton:backdrop, button.sidebar-button:backdrop, notebook > header > tabs > arrow:backdrop, button.titlebutton:disabled, button.sidebar-button:disabled, notebook > header > tabs > arrow:disabled,
+button.flat:backdrop,
+button.flat:disabled,
+button.flat:backdrop:disabled {
+  border-color: transparent;
+  background-color: transparent;
+  background-image: none;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0);
+  text-shadow: none;
+  -gtk-icon-shadow: none; 
+}
+
+notebook > header > tabs > arrow:disabled,
+button:disabled {
+  color: #7d7d7c;
+  border-color: #1f1f1f;
+  background-image: image(#080808);
+  box-shadow: none; 
+}
+
+notebook > header > tabs > arrow:disabled:active, notebook > header > tabs > arrow:disabled:checked,
+button:disabled:active,
+button:disabled:checked {
+  color: #7d7d7c;
+  border-color: #1f1f1f;
+  background-image: image(black);
+  box-shadow: none; 
+}
+
+combobox:drop(active) button.combo, notebook > header > tabs > arrow:drop(active),
+button:drop(active) {
+  color: #19a187;
+  border-color: #19a187;
+  box-shadow: inset 0 0 0 1px #19a187; 
+}
+
+
+scrolledwindow.frame,
+scrolledwindow viewport.frame,
+frame > border,
+.frame,
+actionbar > revealer > box
+{
+  box-shadow: none;
+  border-radius: 0;
+  border: 1px solid #1f1f1f; 
+}
+
+frame > border.flat,
+.frame.flat {
+  border-style: none;
+}
+
+frame > border:backdrop,
+.frame:backdrop {
+  border-color: #1f1f1f; 
+}
+
+window.csd.messagedialog windowhandle {
+  padding: 1rem;
+}
+
+dialog buttonbox {
+  padding: 6px;
+}
+
+button.font {
+  padding: 6px;
+}
+
+box.inline-toolbar.vertical {
+  padding: 3px;
+}
+
+spinbutton.flat:not(.vertical),
+entry.flat:focus,
+entry.flat:backdrop,
+entry.flat:disabled,
+entry.flat {
+  padding: 4px;
+}
+
+.xfce4-panel button {
+  border: 0;
+  border-radius: 0;
+  min-width: 30px;
+  box-shadow: none;
+  text-shadow: none;
+  background: transparent;
+  color: #eeeeec; 
+}
+
+.xfce4-panel button:hover {
+  background: rgba(0, 0, 0, 0.2); 
+}
+
+.xfce4-panel button:not(#whiskermenu-button):checked, 
+.xfce4-panel button:not(#whiskermenu-button):active {
+  box-shadow: inset 0 -2px 0 #ffffff;
+  background: rgba(0, 0, 0, 0.2); 
+}
+
+#XfceNotifyWindow, 
+.xfsm-logout-dialog, 
+.xfsm-logout-dialog button {
+  border: 1px solid #1f1f1f;
+  border-bottom-width: 2px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  -gtk-icon-style: symbolic; 
+}
+
+.xfsm-logout-dialog > .vertical > .horizontal button {
+  margin: 8px; 
+}
+
+#whiskermenu-window entry {
+  border: 2px solid #ffffff;
+  box-shadow: none; 
+}
+
+#whiskermenu-window button {
+  transition-duration: 0s; 
+}
+
+#whiskermenu-window button:hover {
+  border-color: black;
+  background-color: transparent;
+  background-image: image(#ffffff);
+  color: #000;
+  background-clip: padding-box;
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.1);
+  outline-color: rgba(255, 255, 255, 0.3);
+  border-color: transparent;
+  border-bottom-color: #050505; 
+}
+
+#whiskermenu-window button:hover label {
+  text-shadow: none;
+}
+
+#whiskermenu-window button:checked {
+  border-color: transparent; 
+}
+  
+#whiskermenu-window scrolledwindow.frame {
+  border: 0;
+}
+
+#whiskermenu-window scrolledwindow.frame, 
+#whiskermenu-window scrolledwindow.frame iconview:not(:hover):not(:focus) {
+  background: #050505; 
+}
+
+#whiskermenu-window scrolledwindow.frame treeview {
+  background: transparent;
+}
+
+#whiskermenu-window scrolledwindow.frame treeview:hover, 
+#whiskermenu-window scrolledwindow.frame treeview:active, 
+#whiskermenu-window scrolledwindow.frame treeview:selected {
+  background-color: rgba(0, 0, 0, 0.27);
+  color: inherit; 
+  text-shadow: none;
+}
+
+#XfcePanelWindowWrapper > widget > box > #xfce-panel-button > image {
+  -gtk-icon-style: symbolic;
+  -gtk-icon-transform: scale(0.7); 
+}
+
+  
+  
+  

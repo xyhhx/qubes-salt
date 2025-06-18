@@ -1,8 +1,7 @@
-# vim: set ts=2 sw=2 sts=2 et sts :
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
----
-{% set vm_name = "provides-docker" %}
-{% set base_template = 'fedora-41-minimal' %}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:docker") -%}
+{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -43,6 +42,5 @@
 
 docker:
   service.enabled
-
 
 {% endif %}

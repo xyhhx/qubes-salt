@@ -1,9 +1,8 @@
-# vim: set ts=2 sw=2 sts=2 et :
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
----
-{% set name = 'templates.uses-app-trivalent.configure' %}
-{% set vm_name = "uses-app-trivalent" %}
-{% set base_template = 'fedora-41-minimal' %}
+{%- set name = 'templates.uses-app-trivalent.configure' -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:trivalent") -%}
+{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
 {% if grains.id == 'dom0' %}
 

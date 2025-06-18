@@ -1,10 +1,9 @@
-# vim: set syn=salt ts=2 sw=2 sts=2 et :
----
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{% set vm_name = "dvm-firewall-mirageos" %}
+{%- set vm_name = salt["pillar.get"]("vm_names:dispvms:firewall_mirageos") -%}
 
 user:
   'dom0 or {{ vm_name }}':
-    - dispvms.{{ vm_name }}
+    - dispvms.dvm-firewall-mirageos
   '{{ vm_name }}':
     - common

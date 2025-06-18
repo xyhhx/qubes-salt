@@ -1,8 +1,8 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
-{% set vm_name = 'disp-sys-firewall-mirageos-eth' %}
-{% set template = 'dvm-firewall-mirageos' %}
-{% set netvm = 'disp-sys-net-eth' %}
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
+
+{%- set vm_name = salt["pillar.get"]("vm_names:net:eth:firewall_mirage") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:providers:firewall_mirageos") -%}
+{%- set netvm = salt["pillar.get"]("vm_names:net:eth:net") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -15,9 +15,9 @@
       - class: DispVM
       - template: '{{ template }}'
       - label: orange
-      - flags:
-        - net
     - prefs:
+      - template: '{{ template }}'
+      - label: orange
       - netvm: '{{ netvm }}'
       - memory: 32
       - maxmem: 0
@@ -27,8 +27,5 @@
       - enable:
         - qubes-firewall
         - no-default-kernelopts
-    - require:
-      - qvm: '{{ template }}'
-      - qvm: '{{ netvm }}'
 
 {% endif %}

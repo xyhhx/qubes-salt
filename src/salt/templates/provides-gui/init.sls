@@ -1,5 +1,7 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
+
+{%- set name = "templates.provides-gui.init" -%}
+{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -12,7 +14,7 @@ dummy-psu-sender:
 'provides-gui':
   qvm.vm:
     - clone:
-      - source: 'fedora-41-minimal'
+      - source: '{{ base_template }}'
     - prefs:
       - class: TemplateVM
       - label: gray
@@ -25,10 +27,7 @@ dummy-psu-sender:
 
 {% else %}
 
-include:
-  - common.https_proxy
-
-'{{ grains.id }}':
+'{{ name }}':
   pkg.installed:
     - pkgs:
 
@@ -180,7 +179,7 @@ include:
     - name: root
     - password: '!!'
 
-'{{ grains.id }} - purge extraneous pkgs':
+'{{ name }} - pkg.purged':
   pkg.purged:
     - pkgs:
       - asunder
@@ -206,6 +205,9 @@ include:
 'dnf autoremove -y':
   cmd.run:
     - use_vt: true
+    - onchanges_any:
+      - pkg: '{{ name }}'
+      - pkg: '{{ name }} - pkg.purged'
 {% endif %}
 
 {% endif %}

@@ -1,17 +1,20 @@
-# vim: set ts=2 sw=2 sts=2 et :
----
+{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{% set vm_name = "sys-onlykey" %}
+{%- set vm_name = salt["pillar.get"]("vm_names:sysvms:onlykey") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:providers:onlykey") -%}
+
 {% if grains.id == 'dom0' %}
 
 '{{ vm_name }}':
   qvm.vm:
     - present:
-      - template: provides-onlykey
+      - template: '{{ template }}'
       - label: yellow
       - require:
-        - qvm: provides-onlykey
+        - qvm: '{{ template }}'
     - prefs:
+      - template: '{{ template }}'
+      - label: yellow
       - netvm: ""
     - tags:
       - add:
@@ -24,7 +27,5 @@
     - source: salt://appvms/sys-onlykey/files/49-onlykey.policy
     - mode: "0640"
     - makedirs: true
-
-{% else %}
 
 {% endif %}

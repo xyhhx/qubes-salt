@@ -1,0 +1,35 @@
+{# vim: set ft=salt syn=salt: #}
+---
+
+{%- load_yaml as pkgsmap %}
+RedHat:
+  # fonts
+  - cascadia-fonts-all
+  - google-noto-color-emoji-fonts
+  - google-noto-fonts-all
+  - ibm-plex-fonts-all
+  - liberation-fonts-all
+  - rsms-inter-fonts
+  # gtk themes
+  - flat-remix-gtk2-theme
+  - flat-remix-gtk3-theme
+  - flat-remix-gtk4-theme
+# icon themes
+  - flat-remix-icon-theme
+Debian:
+  # fonts
+  - fonts-cascadia-code
+  - fonts-fantasque-sans
+  - fonts-ibm-plex
+  - fonts-inter
+  - fonts-inter-variable
+  - fonts-liberation2
+  - fonts-noto
+  - fonts-noto-color-emoji
+  # gtk themes
+  - materia-gtk-theme
+  - numix-gtk-theme
+  # icon themes
+  - paper-icon-theme
+{% endload -%}
+{%- set pkgs = salt["grains.filter_by"](pkgsmap, default="RedHat", merge=salt["pillar.get"]("theme", {})) -%}
