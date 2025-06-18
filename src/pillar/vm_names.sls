@@ -7,13 +7,12 @@ vm_names:
     thunderbird: "app-thunderbird"
 
   dispvms:
-    dev: "dvm-dev-f41"
+    dev: "dvm-dev"
     firewall_mirageos: "dvm-firewall-mirageos"
-    fedora_xfce: "dvm-fedora-41-xfce"
-    librewolf: "dvm-librewolf-f41"
+    fedora_xfce: "dvm-fedora-xfce"
+    librewolf: "dvm-librewolf"
     sys_net: "dvm-sys-net"
     trivalent: "dvm-trivalent"
-    salt_mgmt: "dvm-salt-mgmt"
 
   sysvms:
     audio: "sys-audio"
@@ -62,9 +61,9 @@ vm_names:
       dino: "uses-app-dino"
       keepassxc: "uses-app-keepassxc"
       libreoffice: "uses-app-libreoffice"
-      librewolf: "uses-app-librewolf-f41"
+      librewolf: "uses-app-librewolf"
       thunderbird: "uses-app-thunderbird"
       trivalent: "uses-app-trivalent"
 
     stack:
-      dev_f41: "uses-stack-dev-f41"
+      dev: "uses-stack-dev"

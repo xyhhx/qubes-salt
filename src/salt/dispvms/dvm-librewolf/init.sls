@@ -11,6 +11,8 @@
       - template: '{{ template_name }}'
       - label: red
     - prefs:
+      - template: '{{ template_name }}'
+      - label: red
       - template-for-dispvms: true
     - features:
       - enable:

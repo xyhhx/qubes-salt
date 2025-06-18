@@ -7,3 +7,4 @@ user:
     - appvms.sys-vpn-ivpn
   '{{ vm_name }}':
     - common
+    - common.pkg.netvm

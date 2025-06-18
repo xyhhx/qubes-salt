@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set name = "templates.provides-ivpn.init" -%}
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:ivpn") -%}
 {%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
@@ -28,7 +27,7 @@
 include:
   - common.https_proxy
 
-'{{ name }}':
+'{{ vm_name }}':
   pkgrepo.managed:
     - baseurl: "https://repo.ivpn.net/stable/fedora/generic/$basearch"
     - type: "rpm"
@@ -36,6 +35,8 @@ include:
     - gpgcheck: 1
     - repo_gpgcheck: 1
     - gpgkey: "https://repo.ivpn.net/stable/fedora/generic/repo.gpg"
+    - require:
+      - sls: common.https_proxy
   pkg.installed:
     - pkgs:
       - ivpn
@@ -56,7 +57,7 @@ include:
 
 /opt/ivpn/etc/firewall.sh:
   file.patch:
-    - source: '{{ file_dir }}/firewall.patch'
+    - source: 'salt://templates/provides-ivpn/files/firewall.patch'
 
 /rw/bind-dirs/etc/opt/ivpn/mutable:
   file.directory:

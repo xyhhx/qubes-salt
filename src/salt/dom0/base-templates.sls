@@ -9,9 +9,15 @@
       - debian-12-minimal
       - fedora-41-minimal
       - fedora-41-xfce
+      - fedora-42-minimal:
+        - fromrepo: qubes-templates-itl-testing
+      - fedora-42-xfce:
+        - fromrepo: qubes-templates-itl-testing
       - whonix-gateway-17:
         - fromrepo: qubes-templates-community-testing
       - whonix-workstation-17:
+        - fromrepo: qubes-templates-community-testing
+      - archlinux:
         - fromrepo: qubes-templates-community-testing
 
 {% endif %}

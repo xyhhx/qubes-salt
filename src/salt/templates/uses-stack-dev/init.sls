@@ -1,6 +1,6 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:templates:stack:dev_f41") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:stack:dev") -%}
 {%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
 {% if grains.id == 'dom0' %}
@@ -73,11 +73,9 @@
     - makedirs: true
     - names:
       - /etc/skel/.config/tmux/tmux.conf:
-        - source: salt://templates/uses-stack-dev-f41/files/tmux.conf
-        - source_hash: sha512=18d1f41f30a142e5e5f39310026ba815a846f1f85b78d4760cd788992c602fccc829a40fd7fe289c4f28984185e14992077ee9353b7e5ba330e9dfcbb214aa18
+        - source: salt://templates/uses-stack-dev/files/tmux.conf
       - /etc/skel/.vimrc:
-        - source: salt://templates/uses-stack-dev-f41/files/.vimrc
-        - source_hash: sha512=3adc2963b52e1cab729b040a949da587f97033609c3a61937e63a0cc442dba647e677b00b419f924f7afa6fa3a80c5ca671c71f67110e5f071d71c328a831286
+        - source: salt://templates/uses-stack-dev/files/.vimrc
       - /etc/environment:
         - contents: |
             QUBES_SPLIT_SSH_SOCK=/var/run/user/1000/sys-onlykey

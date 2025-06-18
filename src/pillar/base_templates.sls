@@ -11,3 +11,7 @@ base_templates:
   whonix:
     gw: 'whonix-gateway-17'
     ws: 'whonix-workstation-17'
+community_templates:
+  archlinux: 'archlinux'
+  kali: 'kali-core'
+  gentoo: 'gentoo-minimal'

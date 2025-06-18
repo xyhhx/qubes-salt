@@ -9,6 +9,9 @@
     - present:
       - template: '{{ template }}'
       - label: blue
+    - prefs:
+      - template: '{{ template }}'
+      - label: blue
     - features:
       - set:
         - menu-items: >-

@@ -1,6 +1,9 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
+<<<<<<< HEAD
 {%- set name = "appvms.sys-gui-gpu.vm" -%}
+=======
+>>>>>>> main
 {%- set vm_name = salt["pillar.get"]("vm_names:sysvms:gui") -%}
 {%- set template = salt["pillar.get"]("vm_names:templates:providers:gui") -%}
 
@@ -14,11 +17,13 @@
       - template: '{{ template }}'
       - label: gray
     - prefs:
+      - template: '{{ template }}'
+      - label: gray
       - virt_mode: "hvm"
       - netvm: ""
       - guivm: ""
       - audiovm: ""
-      - memory: 4000
+      - memory: 8000
       - maxmem: 0
       - vcpus: 4
       - kernelopts: "nopat iommu=soft swiotlb=8192 root=/dev/mapper/dmroot ro console=hvc0 xen_scrub_pages=0"
@@ -64,7 +69,7 @@
     - mode: "0640"
     - makedirs: true
 
-'{{ name }} - admin api policies':
+'{{ slsdotpath }} - admin api policies':
   file.append:
     - names:
       - /etc/qubes/policy.d/include/admin-local-rwx:

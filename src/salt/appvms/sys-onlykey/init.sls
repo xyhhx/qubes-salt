@@ -13,6 +13,8 @@
       - require:
         - qvm: '{{ template }}'
     - prefs:
+      - template: '{{ template }}'
+      - label: yellow
       - netvm: ""
     - tags:
       - add:

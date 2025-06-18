@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-
 {% if grains.id != 'dom0' %}
 {% if grains.os_family | lower == 'redhat' %}
 
@@ -21,9 +20,11 @@ secureblue/hardened_malloc:
     - makedirs: true
     - names:
       - '/etc/ld.so.preload':
-        - contents: 'libhardened_malloc.so'
+        - contents: |
+            libhardened_malloc.so
       - '/etc/sysctl.d/hardened_malloc.conf':
-        - contents: 'vm.max_map_count = 1048576'
+        - contents: |
+            vm.max_map_count = 1048576
     - require:
       - pkg: hardened_malloc
 

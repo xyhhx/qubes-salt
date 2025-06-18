@@ -1,26 +1,27 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set name = "common.pkgs.split-gpg" -%}
 {% if grains.id != 'dom0' %}
 
-{%- set prefs = salt['match.filter_by']({
-    'template': {
-      'name': '/etc/skel/.gitconfig',
-      'user': 'root'
-      'group': 'root'
-    },
-    'else': {
-      'name': '/home/user/.gitconfig',
-      'user': 'user',
-      'group': 'user'
-    }
-  },
+{%- load_yaml as prefsmap %}
+template:
+  name: "/etc/skel/.gitconfig"
+  user: "root"
+  group: "root"
+default:
+  # TODO: these should be handled better
+  name: "/home/user/.gitconfig"
+  user: "user"
+  group: "user"
+{% endload -%}
+
+{%- set prefs = salt['match.filter_by'](
+  prefsmap,
   minion_id=salt['pillar.get']('qubes:type'),
-  default='else'
+  default='default'
   )
 -%}
 
-'{{ name }}':
+'{{ slsdotpath ~ ".split-gpg" }}':
   pkg.installed:
     - pkgs:
       - qubes-gpg-split
@@ -28,6 +29,7 @@
     - skip_suggestions: true
     - install_recommends: false
   file.managed:
+    - name: "{{ prefs.name }}"
     - source: salt://common/pkgs/templates/gitconfig.j2
     - template: jinja
     - mode: '0640'
@@ -35,9 +37,7 @@
         gpg_user: '{{ salt["pillar.get"]("opts:gpg:user") }}'
         gpg_email: '{{ salt["pillar.get"]("opts:gpg:email") }}'
         gpg_pubkey: '{{ salt["pillar.get"]("opts:gpg:pubkey") }}'
-{% for pref in prefs %}
-    - {{ pref }}: {{ prefs[pref] }}
-{% endfor %}
+    - user: "{{ prefs.user }}"
+    - group: "{{ prefs.group }}"
 
-{% endif %}
 {% endif %}

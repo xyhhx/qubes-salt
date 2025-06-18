@@ -18,6 +18,8 @@
       - flags:
         - net
     - prefs:
+      - template: '{{ template }}'
+      - label: orange
       - netvm: '{{ netvm }}'
       - memory: 32
       - maxmem: 0

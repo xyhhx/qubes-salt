@@ -11,6 +11,13 @@
       - template: '{{ template }}'
       - label: yellow
       - netvm: ""
+<<<<<<< HEAD
+=======
+    - prefs:
+      - template: '{{ template }}'
+      - label: yellow
+      - netvm: ""
+>>>>>>> main
 
 /etc/qubes/policy.d/user.d/30-sys-audio.policy:
   file.managed:

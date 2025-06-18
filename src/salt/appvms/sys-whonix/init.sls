@@ -9,6 +9,12 @@
   qvm.vm:
     - present:
       - template: '{{ template }}'
+<<<<<<< HEAD
+=======
+      - label: yellow
+    - prefs:
+      - template: '{{ template }}'
+>>>>>>> main
       - label: yellow
     - tags:
       - add:

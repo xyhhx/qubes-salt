@@ -12,6 +12,8 @@
       - template: '{{ template_name }}'
       - label: red
     - prefs:
+      - template: '{{ template_name }}'
+      - label: red
       - memory: 32
       - maxmem: 0
       - vcpus: 1

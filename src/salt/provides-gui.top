@@ -6,7 +6,6 @@ user:
   'dom0 or {{ vm_name }}':
     - templates.provides-gui
   '{{ vm_name }}':
-    - common
     - common.pkgs.base
     - common.theme
     - common.custom-themes.Windows-10-Darker

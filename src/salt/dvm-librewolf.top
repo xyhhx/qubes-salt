@@ -4,6 +4,6 @@
 
 user:
   'dom0 or {{ vm_name }}':
-    - dispvms.dvm-librewolf-f41
+    - dispvms.dvm-librewolf
   '{{ vm_name }}':
     - common

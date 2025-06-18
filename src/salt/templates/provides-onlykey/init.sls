@@ -35,6 +35,7 @@
       - qubes-usb-proxy
       - qubes-input-proxy-sender
       - qubes-ctap
+      - xfce4-notifyd
   file.managed:
     - names:
       - '/etc/qubes-rpc/qubes.SshAgent':
@@ -50,8 +51,6 @@
         - source: 'salt://templates/provides-onlykey/files/onlykey-ssh-agent.socket'
       - '/etc/skel/.config/onlykey/ssh-agent.conf':
         - contents: ''
-          user: root
-          group: root
     - user: root
     - group: root
     - mode: '0644'

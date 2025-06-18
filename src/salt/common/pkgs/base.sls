@@ -1,26 +1,23 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set name = "common.pkgs.base" -%}
-
 {% if grains.id != 'dom0' %}
 
-{%- load_yaml as common_pkgs -%}
+{% load_yaml as pkgmap %}
+common:
   - curl
   - notification-daemon
   - xclip
-{%- endload -%}
+RedHat:
+  - vim-common
+Debian:
+  - vim
+{% endload %}
 
-{%- set os_pkgs = salt['grains.filter_by']({
-  'RedHat': ['vim'],
-  'Debian': ['vim-common']
-  },
-  default='RedHat'
-)
--%}
+{%- set pkgs = salt['grains.filter_by'](pkgmap, base='common')-%}
 
-'{{ name }}':
+'{{ slsdotpath }}':
   pkg.installed:
-    - pkgs: {{ common_pkgs | union(os_pkgs) }}
+    - pkgs: {{ pkgs }}
     - skip_suggestions: true
     - install_recommends: false
 

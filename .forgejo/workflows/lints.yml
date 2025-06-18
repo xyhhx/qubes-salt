@@ -9,15 +9,36 @@ jobs:
   salt-lint:
     runs-on: codeberg-tiny
     container: alpine:latest
-    name: Salt Lint
+    name: salt-lint
     steps:
+
+      - run: |
+          apk update
+          apk add git nodejs bash
+
       - uses: actions/checkout@v4
-      - run: scripts/salt-lint.sh
+
+      - run: ./scripts/salt-lint.sh
 
   shellcheck:
     runs-on: codeberg-tiny
     container: alpine:latest
-    name: Salt Lint
+    name: shellcheck
     steps:
+
+      - run: |
+          apk update
+          apk add git nodejs bash tar curl xz
+          curl -LO https://github.com/koalaman/shellcheck/releases/download/v0.10.0/shellcheck-v0.10.0.linux.x86_64.tar.xz
+          cat <<-HASH | sha512sum -c || exit
+          31006830087c2b9ffe9fa36c1ab4a8b11c85078cac8203265d0cfd630c70a4a506e66dd9d7ccde964360ad95045894149de457db34f10cad76708c7a4aa544ca  shellcheck-v0.10.0.linux.x86_64.tar.xz
+          HASH
+          tar xf shellcheck-v0.10.0.linux.x86_64.tar.xz
+          install -m0775 shellcheck-v0.10.0/shellcheck /usr/bin/shellcheck
+
       - uses: actions/checkout@v4
-      - run: scripts/shellcheck.sh
+        with:
+          submodules: true
+
+      - run: |
+          ./scripts/shellcheck.sh

@@ -18,7 +18,7 @@ fi
 
 tmpdir="$(mktemp -d /tmp/mirage-firewall-"${VERSION}"-XXXXXX)"
 
-qvm-run --dispvm "dvm-fedora-41-xfce" -p "$(
+qvm-run --dispvm "dvm-fedora-xfce" -p "$(
   cat <<EOF || true
   set -euo pipefail
   cd \$(mktemp -d)

@@ -1,8 +1,7 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set name = "dispvms.dvm-dev-f41.init" -%}
 {%- set vm_name = salt["pillar.get"]("vm_names:dispvms:dev") -%}
-{%- set template_name = salt["pillar.get"]("vm_names:templates:stack:dev_f41") -%}
+{%- set template_name = salt["pillar.get"]("vm_names:templates:stack:dev") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -12,6 +11,8 @@
       - template: '{{ template_name }}'
       - label: red
     - prefs:
+      - template: '{{ template_name }}'
+      - label: red
       - memory: 8000
       - maxmem: 16000
       - vcpus: 4
@@ -32,7 +33,7 @@
 
 {% else %}
 
-'{{ name }}':
+'{{ vm_name }}':
   git.latest:
     - name: https://github.com/tmux-plugins/tpm.git
     - target: /home/user/.tmux/plugins/tpm
@@ -42,7 +43,7 @@
       - /home/user/.tmux/plugins/tpm/bin/install_plugins
       - '/home/user/.tmux/plugins/tpm/bin/update_plugins all':
         - onchanges:
-          - git: '{{ name }}'
+          - git: 'https://github.com/tmux-plugins/tpm.git'
     - runas: user
     - cwd: /home/user
     - use_vt: true
@@ -50,7 +51,7 @@
       TMUX_PLUGIN_MANAGER_PATH: '/home/user/.config/tmux/plugins/'
   file.managed:
     - name: /rw/config/rc.local
-    - source: salt://dispvms/dvm-dev-f41/templates/split-ssh-rc-local.j2
+    - source: salt://dispvms/dvm-dev/templates/split-ssh-rc-local.j2
     - user: root
     - group: root
     - mode: '0755'
@@ -60,7 +61,7 @@
 
 /home/user/.config/oh-my-zsh/user.d:
   file.recurse:
-    - source: salt://dispvms/dvm-dev-f41/files/user.d
+    - source: salt://dispvms/dvm-dev/iles/user.d
     - user: 1000
     - group: 1000
     - file_mode: "0640"

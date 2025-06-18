@@ -1,6 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set name = 'templates.uses-app-thunderbird.configure' -%}
 {%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:thunderbird") -%}
 {%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
 
@@ -28,12 +27,12 @@
 
 {% import_json  "./files/policies.json" as user_policies %}
 
-'{{ name }}':
+'{{ vm_name }}':
   pkgrepo.managed:
     - name: dove
     - copr: celenity/copr
     - require_in:
-      - pkg: '{{ name }}'
+      - pkg: '{{ vm_name }}'
   pkg.installed:
     - pkgs:
       - dove

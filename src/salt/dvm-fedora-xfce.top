@@ -4,6 +4,6 @@
 
 user:
   'dom0 or {{ vm_name }}':
-    - dispvms.dvm-fedora-41-xfce
+    - dispvms.dvm-fedora-xfce
   '{{ vm_name }}':
     - common

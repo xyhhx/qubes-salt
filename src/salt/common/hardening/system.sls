@@ -2,26 +2,38 @@
 
 {% if salt["pillar.get"]("qubes:type") == 'template' %}
 
-'tighten umask':
-  service.masked:
-    - names:
-      - debug-shell.service
-      - kdump.service
+debug-shell.service:
+  service.masked
+
+kdump.service:
+  service.masked
+
+/etc/login.prefs:
   file.keyvalue:
-    - names:
-      - /etc/login.prefs:
-        - key: UMASK
-        - value: '077'
-      - /etc/bashrc:
-        - key: umask
-        - value: '077'
+    - key: UMASK
+    - value: '077'
+    - separator: ' '
+    - append_if_not_found: true
+    - onlyif:
+      - '[[ test -f /etc/login.prefs ]]'
+
+/etc/bashrc:
+  file.keyvalue:
+    - key: umask
+    - value: '077'
+    - separator: ' '
+    - append_if_not_found: true
+    - onlyif:
+      - '[[ test -f /etc/bashrc ]]'
 
 /etc/login.defs:
   file.comment:
     - regex: "^HOME_MODE"
     - ignore_missing: true
+    - onlyif:
+      - '[[ test -f /etc/login.def ]]'
 
-'hardened confs':
+'{{ slsdotpath }} - hardened confs':
   file.managed:
     - names:
       - /etc/modprobe.d/workstation-blacklist.conf:
@@ -39,23 +51,34 @@
         - contents: |
             JavaScriptCoreUseJIT=0
             GJS_DISABLE_JIT=1
-{%- if grains.os_family | lower == "redhat" -%}
-      - /etc/dnf/dnf.conf:
-        - source: salt://common/hardening/files/dnf.conf
-{%- endif -%}
     - user: root
     - group: root
     - mode: '0600'
     - makedirs: true
     - replace: true
 
-/etc/yum.repos.d/*:
-  file.replace:
-    - pattern: '(^metalink=.*)'
-    - repl: "\1\&protocol=https"
+{% if grains.os_family | lower == "redhat" %}
+/etc/dnf/dnf.conf:
+  file.keyvalue:
+    - key_values:
+        gpgcheck: True
+        installonly_limit: 3
+        clean_requirements_on_remove: True
+        best: False
+        skip_if_unavailable: True
+        max_parallel_downloads: 10
+        deltarpm: False
+        defaultyes: True
+        install_weak_deps: False
+        countme: False
+    - separator: '='
+    - append_if_not_found: true
+{% endif %}
 
 'sysctl -p':
   cmd.run:
     - use_vt: true
+    - onchanges:
+      - file: '/etc/sysctl.d/99-workstation.conf'
 
 {% endif %}

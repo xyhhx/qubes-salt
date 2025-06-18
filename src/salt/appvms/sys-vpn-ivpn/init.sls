@@ -18,6 +18,8 @@
         - qvm: '{{ netvm }}'
     - prefs:
       - netvm: '{{ netvm }}'
+      - template: '{{ template }}'
+      - label: yellow
     - features:
       - enable:
         - service.clocksync
