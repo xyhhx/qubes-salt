@@ -12,12 +12,12 @@ include:
   qvm.vm:
     - present:
       - template: '{{ template }}'
-      - label: yellow
+      - label: gray
       - require:
         - sls: templates.{{ template }}
     - prefs:
       - template: '{{ template }}'
-      - label: yellow
+      - label: gray
       - netvm: ""
     - tags:
       - add:
