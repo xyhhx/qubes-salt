@@ -5,7 +5,7 @@
 https_proxy:
   environ.setenv:
     - name: https_proxy
-    - value: '127.0.0.1:8082'
+    - value: 'http://127.0.0.1:8082'
     - update_minion: True
 
 {% endif %}

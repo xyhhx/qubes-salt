@@ -12,14 +12,13 @@
 '{{ vm_name }}':
   pkg.installed:
     - pkgs:
+      - gnome-keyring
       - libusb1-devel
       - pipx
-      - gnome-keyring
       - qubes-core-agent-networking
-      - qubes-usb-proxy
-      - qubes-input-proxy-sender
       - qubes-ctap
-      - xfce4-notifyd
+      - qubes-input-proxy-sender
+      - qubes-usb-proxy
   file.managed:
     - names:
       - '/etc/qubes-rpc/qubes.SshAgent':
@@ -41,9 +40,15 @@
     - makedirs: true
   cmd.run:
     - names:
-      - 'PIPX_GLOBAL_BIN_DIR=/usr/local.orig/bin/ https_proxy=127.0.0.1:8082 pipx install --global onlykey onlykey-agent'
-      - 'udevadm control --reload-rules'
-      - 'udevadm trigger'
+      - 'pipx install --global onlykey onlykey-agent':
+        - env:
+            - PIPX_GLOBAL_BIN_DIR: "/usr/local.orig/bin/"
+            - https_proxy: "127.0.0.1:8082"
+        - unless:
+          - 'which onlykey'
+          - 'which onlykey-agent'
+      - 'udevadm control --reload-rules && udevadm trigger':
+        - bg: true
     - use_vt: true
     - require:
       - pkg: '{{ vm_name }}'

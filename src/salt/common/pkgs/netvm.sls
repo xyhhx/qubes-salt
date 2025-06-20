@@ -6,7 +6,6 @@
 {%- load_yaml as pkgsmap -%}
 common:
   - gnome-keyring
-  - notification-daemon
   - qubes-core-agent-network-manager
   - qubes-core-agent-networking
 RedHat:
@@ -24,7 +23,7 @@ Debian:
 
 '{{ name }}':
   pkg.installed:
-    - pkgs: {{ pkgs }}
+    - pkgs: {{ pkgs | union(pkgsmap.common) }}
     - skip_suggestions: true
     - install_recommends: false
 
