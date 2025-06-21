@@ -7,4 +7,5 @@ include:
   - .theme
   - .xdpi
   - .hardening
+  - .disable-cisco-openh264
 {#  - base: update.qubes-vm #}
