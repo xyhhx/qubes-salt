@@ -10,7 +10,13 @@ common:
   - qubes-core-agent-networking
 RedHat:
   - NetworkManager-wifi
+  - iwlwifi-dvm-firmware
+  - iwlwifi-mvm-firmware
+  - mesa-dri-drivers
+  - mesa-va-drivers
+  - mesa-vulkan-drivers
   - network-manager-applet
+  - nxpwireless-firmware
   - polkit
 Debian:
   - lspi
