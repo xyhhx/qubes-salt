@@ -15,4 +15,3 @@ gtk-xft-hintstyle="hintfull"
 gtk-xft-rgba="none"
 gtk-modules="gail:atk-bridge"
 gtk-application-prefer-dark-theme=1
-

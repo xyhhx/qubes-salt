@@ -10,3 +10,4 @@ user:
     - common.pkgs.audio
     - common.pkgs.networking
     - common.pkgs.ctap-proxy
+    - common.pkgs.qubes-video-companion

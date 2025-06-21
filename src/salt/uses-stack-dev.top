@@ -12,3 +12,4 @@ user:
     - common.pkgs.neovim
     - common.pkgs.networking
     - common.pkgs.sequoia-pgp
+    - common.pkgs.qubes-video-companion

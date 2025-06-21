@@ -9,9 +9,10 @@ vm_names:
 
   dispvms:
     dev: "dvm-dev"
-    firewall_mirageos: "dvm-firewall-mirageos"
     fedora_xfce: "dvm-fedora-xfce"
+    firewall_mirageos: "dvm-firewall-mirageos"
     librewolf: "dvm-librewolf"
+    salt_mgmt: "dvm-salt-mgmt"
     sys_net: "dvm-sys-net"
     trivalent: "dvm-trivalent"
 
@@ -55,7 +56,9 @@ vm_names:
       ivpn: "provides-ivpn"
       net: "provides-net"
       onlykey: "provides-onlykey"
+      salt_mgmt: "provides-salt-mgmt"
       usb: "provides-usb"
+
 
     uses:
       dino: "uses-app-dino"
