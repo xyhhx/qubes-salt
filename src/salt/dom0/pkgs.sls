@@ -4,8 +4,11 @@
 
 {% if grains.id == 'dom0' %}
 
-qubes-ctap-dom0:
+'{{ slsdotpath }} - pkgs':
   pkg.installed:
+    - pkgs:
+      - qubes-video-companion-dom0
+      - qubes-ctap-dom0
     - skip_suggestions: true
     - install_recommends: false
 
