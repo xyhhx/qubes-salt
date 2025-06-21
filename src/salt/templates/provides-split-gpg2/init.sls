@@ -5,6 +5,7 @@
 {% if grains.id == 'dom0' %}
 
 {% from "utils/macros/create_templatevm.sls" import templatevm %}
+
 {{ templatevm(vm_name) }}
 
 /etc/qubes/policy.d/user.d/39-split-gpg2.policy:

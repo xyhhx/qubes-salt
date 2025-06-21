@@ -5,29 +5,8 @@
 
 {% if grains.id == 'dom0' %}
 
-'{{ vm_name }}':
-  qvm.vm:
-    - clone:
-      - source: '{{ base_template }}'
-    - present:
-      - label: gray
-    - prefs:
-      - label: gray
-      - audiovm: ""
-      - netvm: ""
-      - memory: 300
-      - maxmem: 600
-      - vcpus: 1
-      - include_in_backups: False
-    - features:
-      - set:
-        - menu-items: Alacritty.desktop
-        - default-menu-items: Alacritty.desktop
-    - tags:
-      - add:
-        - salt-managed
-        - fedora
-        - fedora-41
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{{ templatevm(vm_name) }}
 
 {% else %}
 
