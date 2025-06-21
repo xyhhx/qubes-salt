@@ -14,10 +14,10 @@ include:
       - sls: 'templates.{{ template }}'
     - present:
       - template: '{{ template }}'
-      - label: gray
+      - label: black
     - prefs:
       - template: '{{ template }}'
-      - label: gray
+      - label: black
       - virt_mode: "hvm"
       - netvm: ""
       - guivm: ""

@@ -11,10 +11,10 @@ include:
   qvm.vm:
     - present:
       - template: '{{ template }}'
-      - label: gray
+      - label: black
     - prefs:
       - template: '{{ template }}'
-      - label: gray
+      - label: black
       - netvm: ""
       - audiovm: ""
       - memory: 400

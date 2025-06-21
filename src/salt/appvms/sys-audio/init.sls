@@ -12,11 +12,11 @@ include:
   qvm.vm:
     - present:
       - template: '{{ template }}'
-      - label: gray
+      - label: black
       - netvm: ""
     - prefs:
       - template: '{{ template }}'
-      - label: gray
+      - label: black
       - netvm: ""
     - require:
       - sls: templates.{{ template }}
