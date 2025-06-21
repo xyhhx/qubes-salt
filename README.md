@@ -1,8 +1,8 @@
 <!-- vim: set wrap : -->
 
-# my qubes os saltstack configuration
+<div align="center">
 
-an attempt to rewrite my qubes os setup as saltstack configuration.
+# my qubes os saltstack configuration
 
 mirrors:
 
@@ -10,11 +10,12 @@ mirrors:
 [![sourcehut](https://img.shields.io/badge/srht-212529?style=for-the-badge&logo=sourcehut&logoColor=fff)](https://git.sr.ht/~xyhhx/qubes-mgmt-salt-user)
 [![0xacab](https://img.shields.io/badge/0xacab-ea4636?style=for-the-badge&logo=gitlab&logoColor=fff)](https://0xacab.org/xyhhx/qubes-mgmt-salt-user)
 
+
+[![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?style=for-the-badge&label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](LICENSE.md)
+
 ---
 
-[![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](LICENSE.md)
-
----
+</div>
 
 some resources i referenced while working on this (thanks!):
 
