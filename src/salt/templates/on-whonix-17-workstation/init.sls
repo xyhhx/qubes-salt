@@ -5,20 +5,7 @@
 
 {% if grains.id == 'dom0' %}
 
-'{{ vm_name }}':
-  qvm.vm:
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - label: gray
-    - tags:
-      - add:
-        - salt-managed
-        - anon-vm
-        - whonix
-        - whonix-17
-        - whonix-workstation
-    - require:
-      - qvm: '{{ base_template }}'
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{{ templatevm(vm_name, base_template=base_template) }}
 
 {% endif %}

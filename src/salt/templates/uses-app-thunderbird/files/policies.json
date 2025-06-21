@@ -1,35 +1,35 @@
 {
-	"$schema": "https://github.com/mozilla/gecko-dev/raw/HEAD/browser/components/enterprisepolicies/schemas/policies-schema.json",
-	"__COMMENT__ More Information": "https://github.com/mozilla/policy-templates/blob/master/README.md",
-	"policies": {
-		"Preferences": {
-			"mail.openpgp.allow_external_gnupg": {
-				"Value": true,
-				"Status": "locked"
-			},
-			"mail.openpgp.alternative_gpg_path": {
-				"Value": "/usr/bin/qubes-gpg-client-wrapper",
-				"Status": "user"
-			}
-		},
-		"ExtensionSettings": {
-			"*": {
-				"blocked_install_message": "Installing addons is disabled.",
-				"installation_mode": "blocked"
-			},
-			"uBlock0@raymondhill.net": {
-				"installation_mode": "force_installed",
-				"install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
-			},
-			"dkim_verifier@pl": {
-				"install_mode": "force-install",
-				"install_url": "https://addons.thunderbird.net/thunderbird/downloads/latest/dkim-verifier/addon-438634-latest.xpi"
-			}
-		},
-		"SupportMenu": {
-			"Title": "Qubes OS Documentation",
-			"URL": "https://qubes-os.org",
-			"AccessKey": "S"
-		}
-	}
+  "$schema": "https://github.com/mozilla/gecko-dev/raw/HEAD/browser/components/enterprisepolicies/schemas/policies-schema.json",
+  "__COMMENT__ More Information": "https://github.com/mozilla/policy-templates/blob/master/README.md",
+  "policies": {
+    "Preferences": {
+      "mail.openpgp.allow_external_gnupg": {
+        "Value": true,
+        "Status": "locked"
+      },
+      "mail.openpgp.alternative_gpg_path": {
+        "Value": "/usr/bin/gpg-sq",
+        "Status": "user"
+      }
+    },
+    "ExtensionSettings": {
+      "*": {
+        "blocked_install_message": "Installing addons is disabled.",
+        "installation_mode": "blocked"
+      },
+      "uBlock0@raymondhill.net": {
+        "installation_mode": "force_installed",
+        "install_url": "https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi"
+      },
+      "dkim_verifier@pl": {
+        "install_mode": "force-install",
+        "install_url": "https://addons.thunderbird.net/thunderbird/downloads/latest/dkim-verifier/addon-438634-latest.xpi"
+      }
+    },
+    "SupportMenu": {
+      "Title": "Qubes OS Documentation",
+      "URL": "https://qubes-os.org",
+      "AccessKey": "S"
+    }
+  }
 }

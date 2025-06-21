@@ -5,22 +5,8 @@
 
 {% if grains.id == 'dom0' %}
 
-'{{ vm_name }}':
-  qvm.vm:
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - label: gray
-    - tags:
-      - add:
-        - salt-managed
-        - fedora
-        - fedora-41
-    - features:
-      - set:
-        - menu-items: Alacritty.desktop
-    - require:
-      - qvm: '{{ base_template }}'
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{{ templatevm(vm_name) }}
 
 {% else %}
 

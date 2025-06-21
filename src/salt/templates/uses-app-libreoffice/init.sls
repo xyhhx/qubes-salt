@@ -1,27 +1,25 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:libreoffice") -%}
-{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:libreoffice", "uses-app-libreoffice") -%}
 
 {% if grains.id == 'dom0' %}
 
-'{{ vm_name }}':
-  qvm.vm:
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - label: gray
-    - tags:
-      - add:
-        - salt-managed
-        - fedora
-        - fedora-41
-        - uses-app
-    - features:
-      - set:
-        - menu-items: Alacritty.desktop
-    - require:
-      - qvm: '{{ base_template }}'
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{%- load_yaml as vm_options %}
+features:
+  - set:
+    - menu-items: Alacritty.desktop
+    - default-menu-items: >-
+        Alacritty.desktop
+        libreoffice-base.desktop
+        libreoffice-calc.desktop
+        libreoffice-draw.desktop
+        libreoffice-impress.desktop
+        libreoffice-math.desktop
+        libreoffice-writer.desktop
+
+{% endload -%}
+{{ templatevm(vm_name, options=vm_options) }}
 
 {% else %}
 

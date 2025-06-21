@@ -21,8 +21,13 @@
       - enable:
         - appmenus-dispvm
         - service.qubes-ctap-proxy
+        - service.split-gpg2-client
       - set:
         - menu-items: Alacritty.desktop
+    - tags:
+      - add:
+        - split-gpg2-client
+        - dev-vm
 
 'qvm-volume extend {{ vm_name }}:private 12Gi':
   cmd.run:
@@ -48,20 +53,28 @@
     - cwd: /home/user
     - use_vt: true
     - env:
-      TMUX_PLUGIN_MANAGER_PATH: '/home/user/.config/tmux/plugins/'
-  file.managed:
-    - name: /rw/config/rc.local
-    - source: salt://dispvms/dvm-dev/templates/split-ssh-rc-local.j2
+      - TMUX_PLUGIN_MANAGER_PATH: '/home/user/.config/tmux/plugins/'
+  file.recurse:
+    - name: /rw/config/rc.local.d
+    - source:
+      - salt://dispvms/dvm-dev/files/rc.local.d
     - user: root
     - group: root
-    - mode: '0755'
+    - dir_mode: '0755'
+    - file_mode: '0755'
+    - makedirs: true
+    - clean: true
     - template: jinja
     - defaults:
-        ssh_vault_vm: sys-onlykey
+          ssh_vault_vm: sys-onlykey
+          split_gpg2_vault: vault-pgp
+      context:
+          ssh_vault_vm: "{{ salt["pillar.get"]("vm_names:sys_vms:onlykey", "sys-onlykey") }}"
+          split_gpg2_vault: "{{ salt["pillar.get"]("vm_names:appvms:vault_pgp", "vault-pgp") }}"
 
 /home/user/.config/oh-my-zsh/user.d:
   file.recurse:
-    - source: salt://dispvms/dvm-dev/iles/user.d
+    - source: salt://dispvms/dvm-dev/files/user.d
     - user: 1000
     - group: 1000
     - file_mode: "0640"

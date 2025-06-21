@@ -7,3 +7,4 @@ user:
     - dispvms.dvm-trivalent
   '{{ vm_name }}':
     - common
+    - common.pkgs.ctap-proxy

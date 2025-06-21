@@ -1,24 +1,23 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-<<<<<<< HEAD
-{%- set name = "appvms.sys-gui-gpu.vm" -%}
-=======
->>>>>>> main
-{%- set vm_name = salt["pillar.get"]("vm_names:sysvms:gui") -%}
-{%- set template = salt["pillar.get"]("vm_names:templates:providers:gui") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:sysvms:gui", "sys-gui-gpu") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:providers:gui", "provides-gui") -%}
 
 {% if grains.id == 'dom0' %}
+
+include:
+  - templates.{{ template }}
 
 '{{ vm_name }}':
   qvm.vm:
     - require:
-      - qvm: '{{ template }}'
+      - sls: 'templates.{{ template }}'
     - present:
       - template: '{{ template }}'
-      - label: gray
+      - label: black
     - prefs:
       - template: '{{ template }}'
-      - label: gray
+      - label: black
       - virt_mode: "hvm"
       - netvm: ""
       - guivm: ""

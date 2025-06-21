@@ -35,3 +35,5 @@ if [[ "${QUBES_SPLIT_SSH_VAULT}" != "" ]]; then
 else
   log "\${QUBES_SPLIT_SSH_VAULT} IS NOT DEFINED, ABORTING"
 fi
+
+

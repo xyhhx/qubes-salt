@@ -5,6 +5,7 @@ vm_names:
     dino: "app-dino"
     libreoffice: "app-libreoffice"
     thunderbird: "app-thunderbird"
+    vault_pgp: "vault-pgp"
 
   dispvms:
     dev: "dvm-dev"
@@ -49,6 +50,7 @@ vm_names:
       firewall_mirageos: "provides-firewall-mirageos"
       flatpak: "provides-flatpak"
       gpg: "provides-split-gpg"
+      gpg2: "provides-split-gpg2"
       gui: "provides-gui"
       ivpn: "provides-ivpn"
       net: "provides-net"

@@ -1,28 +1,19 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
 {%- set name = "templates.provides-flatpak.init" -%}
-{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:flatpak") -%}
-{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
+{# TODO: This should be a "uses" template #}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:flatpak", "provides-flatpak") -%}
 
 {% if grains.id == 'dom0' %}
 
-'{{ vm_name }}':
-  qvm.vm:
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - label: gray
-    - tags:
-      - add:
-        - salt-managed
-        - fedora
-        - fedora-41
-    - features:
-      - set:
-        - menu-items: Alacritty.desktop
-        - default-menu-items: com.github.tchx84.Flatseal.desktop io.github.flattool.Warehouse Alacritty.desktop
-    - require:
-      - qvm: '{{ base_template }}'
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{%- load_yaml as vm_options %}
+features:
+  - set:
+    - menu-items: Alacritty.desktop
+    - default-menu-items: com.github.tchx84.Flatseal.desktop io.github.flattool.Warehouse Alacritty.desktop
+{% endload -%}
+{{ templatevm(vm_name, options=vm_options) }}
 
 {% else %}
 

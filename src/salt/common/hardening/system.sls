@@ -75,10 +75,4 @@ kdump.service:
     - append_if_not_found: true
 {% endif %}
 
-'sysctl -p':
-  cmd.run:
-    - use_vt: true
-    - onchanges:
-      - file: '/etc/sysctl.d/99-workstation.conf'
-
 {% endif %}

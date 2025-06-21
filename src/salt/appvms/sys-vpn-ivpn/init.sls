@@ -1,10 +1,13 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:net:vpn:ivpn") -%}
-{%- set template = salt["pillar.get"]("vm_names:templates:providers:ivpn") -%}
-{%- set netvm = salt["pillar.get"]("vm_names:net:wifi:firewall_mirage") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:net:vpn:ivpn", "sys-vpn-ivpn") -%}
+{%- set template = salt["pillar.get"]("vm_names:templates:providers:ivpn", "provides-ivpn") -%}
+{%- set netvm = salt["pillar.get"]("vm_names:net:wifi:firewall_mirage", "disp-sys-firewall-mirageos-wifi") -%}
 
 {% if grains.id == 'dom0' %}
+
+include:
+  - templates.{{ template }}
 
 '{{ vm_name }}':
   qvm.vm:
@@ -25,6 +28,8 @@
         - service.clocksync
       - set:
         - menu-items: Alacritty.desktop IVPN.desktop
+    - require:
+      - sls: templates.{{ template }}
 
 {% else %}
 

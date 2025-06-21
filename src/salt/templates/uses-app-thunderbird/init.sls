@@ -1,27 +1,11 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:thunderbird") -%}
-{%- set base_template = salt["pillar.get"]("base_templates:fedora:minimal") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:uses:thunderbird", "uses-app-thunderbird") -%}
 
 {% if grains.id == 'dom0' %}
 
-'{{ vm_name }}':
-  qvm.vm:
-    - clone:
-      - source: '{{ base_template }}'
-    - prefs:
-      - label: gray
-    - tags:
-      - add:
-        - salt-managed
-        - fedora
-        - fedora-41
-        - uses-app
-    - features:
-      - set:
-        - menu-items: Alacritty.desktop
-    - require:
-      - qvm: '{{ base_template }}'
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{{ templatevm(vm_name) }}
 
 {% else %}
 
@@ -36,6 +20,7 @@
   pkg.installed:
     - pkgs:
       - dove
+      - sequoia-octopus-librnp
       - thunderbird
       - thunderbird-qubes
   file.serialize:
@@ -49,5 +34,10 @@
     - show_changes: true
     - name: /etc/thunderbird/policies/policies.json
     - dataset: {{ user_policies }}
+
+'dnf swap thunderbird-librnp-rnp sequoia-octopus-librnp':
+  cmd.run:
+    - onchanges:
+      - pkg: '{{ vm_name }}'
 
 {% endif %}

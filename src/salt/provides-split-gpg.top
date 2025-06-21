@@ -1,9 +1,10 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:gpg") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:templates:providers:gpg", "provides-split-gpg") -%}
 
 user:
   'dom0 or {{ vm_name }}':
     - templates.provides-split-gpg
   '{{ vm_name }}':
     - common
+    - common.pkgs.sequoia-pgp

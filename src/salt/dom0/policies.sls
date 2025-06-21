@@ -1,6 +1,6 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set user = salt["pillar.get"]("opts:dom0_user") -%}
+{%- set user = salt["pillar.get"]("opts:dom0_user", "user") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -15,8 +15,6 @@
           - source: 'salt://dom0/files/10-custom.policy'
       - '/etc/qubes/policy.d/user.d/10-updates.policy':
           - source: 'salt://dom0/files/10-updates.policy'
-      - '/etc/qubes/policy.d/user.d/35-gpg.policy':
-          - source: 'salt://dom0/files/35-gpg.policy'
       - '/etc/qubes/policy.d/user.d/35-peripherals.policy':
           - source: 'salt://dom0/files/35-peripherals.policy'
       - '/etc/qubes/policy.d/user.d/35-ssh.policy':

@@ -15,7 +15,7 @@
       - label: red
       - template-for-dispvms: true
     - features:
-      - list:
+      - enable:
         - appmenus-dispvm
         - service.qubes-ctap-proxy
       - set:
