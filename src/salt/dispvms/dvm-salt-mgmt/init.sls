@@ -5,6 +5,9 @@
 
 {% if grains.id == 'dom0' %}
 
+include:
+  - templates.{{ template_name }}
+
 '{{ vm_name }}':
   qvm.vm:
     - present:
@@ -29,5 +32,7 @@
     - tags:
       - add:
         - salt-mgmt
+    - require:
+      - sls: 'templates.{{ template_name }}'
 
 {% endif %}
