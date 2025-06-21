@@ -1,4 +1,5 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
+export SPLIT_GPG2_SERVER_DOMAIN="{{ split_gpg2_vault }}"
 
 {% if grains.id != 'dom0' %}
 
@@ -25,7 +26,6 @@ default:
   pkg.installed:
     - pkgs:
       - qubes-gpg-split
-      - split-gpg2
     - skip_suggestions: true
     - install_recommends: false
   file.managed:

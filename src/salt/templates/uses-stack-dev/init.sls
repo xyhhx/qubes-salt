@@ -42,6 +42,7 @@
       - rust-analyzer
       - rust-src
       - rustfmt
+      - split-gpg2
       - sqlite
       - texlive-latex
       - tito

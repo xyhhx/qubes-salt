@@ -13,8 +13,6 @@ include:
     - present:
       - template: '{{ template }}'
       - label: gray
-      - require:
-        - sls: templates.{{ template }}
     - prefs:
       - template: '{{ template }}'
       - label: gray
@@ -24,6 +22,8 @@ include:
         - sys-vm
         - onlykey-server
         - gpg-server
+    - require:
+      - sls: templates.{{ template }}
 
 /etc/qubes/policy.d/user.d/49-onlykey.policy:
   file.managed:

@@ -20,6 +20,7 @@
   pkg.installed:
     - pkgs:
       - dove
+      - sequoia-octopus-librnp
       - thunderbird
       - thunderbird-qubes
   file.serialize:
@@ -33,5 +34,10 @@
     - show_changes: true
     - name: /etc/thunderbird/policies/policies.json
     - dataset: {{ user_policies }}
+
+'dnf swap thunderbird-librnp-rnp sequoia-octopus-librnp':
+  cmd.run:
+    - onchanges:
+      - pkg: '{{ vm_name }}'
 
 {% endif %}

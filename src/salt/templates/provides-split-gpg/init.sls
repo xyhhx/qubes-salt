@@ -13,8 +13,6 @@
   pkg.installed:
     - pkgs:
       - qubes-gpg-split
-      - sequoia-sq
-      - sequoia-chameleon-gnupg
       - xfce4-notifyd
     - skip_suggestions: true
     - install_recommends: false
