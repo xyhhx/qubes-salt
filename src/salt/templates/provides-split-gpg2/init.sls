@@ -11,9 +11,9 @@
 /etc/qubes/policy.d/user.d/39-split-gpg2.policy:
   file.managed:
     - contents: |
-        qubes.Gpg2 + @anyvm                 @tag:split-gpg2-server ask   default_target=vault-pgp
         qubes.Gpg2 + @tag:split-gpg2-client @tag:split-gpg2-server allow notify=yes
         qubes.Gpg2 + @tag:dev-vm            @tag:split-gpg2-server allow notify=yes
+        qubes.Gpg2 + @anyvm                 @tag:split-gpg2-server ask   default_target=vault-pgp
 
 {% else %}
 
