@@ -10,7 +10,6 @@ prefs:
   - kernel: "*default*"
   - kernelopts: ""
   - pci-strictreset: true
-  - pcidevs: []
   - virt-mode: pvh
 
   - audiovm: "*default*"
