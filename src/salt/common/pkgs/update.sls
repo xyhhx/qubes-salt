@@ -2,6 +2,7 @@
 
 {% if grains.id != 'dom0' %}
 
+{#
 {%- load_yaml as cmdmap %}
 RedHat: 'dnf update -y'
 Debian: 'apt update -y && apt upgrade -y'
@@ -11,5 +12,10 @@ Debian: 'apt update -y && apt upgrade -y'
 '{{ update_cmd }}':
   cmd.run:
     - use_vt: true
+#}
+
+"system update":
+  pkg.uptodate:
+    - refresh: true
 
 {% endif %}
