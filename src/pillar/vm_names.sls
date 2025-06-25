@@ -57,9 +57,7 @@ vm_names:
       ivpn: "provides-ivpn"
       net: "provides-net"
       onlykey: "provides-onlykey"
-      salt_mgmt: "provides-salt-mgmt"
       usb: "provides-usb"
-
 
     uses:
       dino: "uses-app-dino"
