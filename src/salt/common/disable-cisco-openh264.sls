@@ -2,9 +2,15 @@
 
 {% if grains.id != 'dom0' %}
 
-{%- if salt["grains.get"]("qubes:type") == "template" and grains.os_family | lower == 'redhat' %}
+{% if salt["pillar.get"]("qubes:type") == "template" and grains.os_family | lower == 'redhat' %}
+include:
+  - .pkgs.update
+
 fedora-cisco-openh264:
-  rpkrepo.disabled
+  pkgrepo.managed:
+    - enabled: 0
+    - require_in:
+      - pkg: "system update"
 {% endif %}
 
 {% endif %}

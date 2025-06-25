@@ -73,6 +73,8 @@ kdump.service:
         countme: False
     - separator: '='
     - append_if_not_found: true
+    - key_ignore_case: true
+    - value_ignore_case: true
 {% endif %}
 
 {% endif %}

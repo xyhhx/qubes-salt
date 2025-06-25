@@ -2,7 +2,7 @@
 
 {% if grains.id != 'dom0' %}
 
-{%- if salt["grains.get"]("qubes:type") == "template" %}
+{%- if salt["pillar.get"]("qubes:type") == "template" %}
 
 qubes-ctap:
   pkg.installed:
