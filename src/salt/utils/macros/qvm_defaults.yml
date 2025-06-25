@@ -4,8 +4,8 @@ prefs:
   - label: gray
 
   - memory: 400
-  - maxmem: 4000
-  - vcpus: 2
+  - maxmem: 2000
+  - vcpus: 1
 
   - kernel: "*default*"
   - kernelopts: ""
