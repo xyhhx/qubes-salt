@@ -5,6 +5,7 @@ vm_names:
     dino: "app-dino"
     libreoffice: "app-libreoffice"
     thunderbird: "app-thunderbird"
+    vault_onlykey: "vault-onlykey"
     vault_pgp: "vault-pgp"
 
   dispvms:
@@ -65,6 +66,7 @@ vm_names:
       keepassxc: "uses-app-keepassxc"
       libreoffice: "uses-app-libreoffice"
       librewolf: "uses-app-librewolf"
+      onlykey: "uses-app-onlykey"
       thunderbird: "uses-app-thunderbird"
       trivalent: "uses-app-trivalent"
 

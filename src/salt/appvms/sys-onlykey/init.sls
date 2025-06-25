@@ -21,14 +21,18 @@ include:
       - add:
         - sys-vm
         - onlykey-server
-        - gpg-server
     - require:
       - sls: templates.{{ template }}
 
 /etc/qubes/policy.d/user.d/49-onlykey.policy:
   file.managed:
     - source: salt://appvms/sys-onlykey/files/49-onlykey.policy
-    - mode: "0640"
+    - template: jinja
+    - mode: "0644"
     - makedirs: true
+    - defaults:
+        onlykey_vm: "sys-onlykey"
+    - context:
+        onlykey_vm: "{{ vm_name }}"
 
 {% endif %}

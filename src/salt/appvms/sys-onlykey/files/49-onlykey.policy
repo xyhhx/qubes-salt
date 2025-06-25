@@ -11,5 +11,6 @@ ctap.ClientPin           *                  @anyvm               @tag:onlykey-se
 policy.RegisterArgument  +u2f.Authenticate  @tag:onlykey-server  @anyvm               allow     target=@adminvm
 
 # SSH Agent Policies
-onlykey.SshAgent         *                  @anyvm               @anyvm               ask
+qubes.SshAgent         *                    @tag:onlykey-client  @tag:onlykey-server  allow     notify=yes
+qubes.SshAgent         *                    @anyvm               @tag:onlykey-server  ask
 

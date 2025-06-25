@@ -27,6 +27,7 @@
     - tags:
       - add:
         - split-gpg2-client
+        - onlykey-client
         - dev-vm
 
 'qvm-volume extend {{ vm_name }}:private 12Gi':

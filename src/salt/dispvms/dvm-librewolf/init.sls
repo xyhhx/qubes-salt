@@ -21,5 +21,8 @@
       - set:
         - menu-items: librewolf.desktop
         - menu-favorites: "@disp:librewolf"
+      - tags:
+        - add:
+          - onlykey-client
 
 {% endif %}

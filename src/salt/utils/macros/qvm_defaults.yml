@@ -8,7 +8,7 @@ prefs:
   - vcpus: 1
 
   - kernel: "*default*"
-  - kernelopts: ""
+  - kernelopts: "*default*"
   - pci-strictreset: true
   - virt-mode: pvh
 

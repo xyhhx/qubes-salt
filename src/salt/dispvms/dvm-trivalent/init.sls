@@ -21,5 +21,8 @@
       - set:
         - menu-items: trivalent.desktop
         - menu-favorites: "@disp:trivalent"
+      - tags:
+        - add:
+          - onlykey-client
 
 {% endif %}
