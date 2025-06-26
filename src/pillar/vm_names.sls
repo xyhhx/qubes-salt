@@ -53,7 +53,7 @@ vm_names:
       flatpak: "provides-flatpak"
       gpg: "provides-split-gpg"
       gpg2: "provides-split-gpg2"
-      gui: "provides-gui"
+      guivm: "provides-guivm"
       ivpn: "provides-ivpn"
       net: "provides-net"
       onlykey: "provides-onlykey"
