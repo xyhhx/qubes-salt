@@ -3,14 +3,11 @@
 {% if grains.id != 'dom0' %}
 
 {% if salt["pillar.get"]("qubes:type") == "template" and grains.os_family | lower == 'redhat' %}
-include:
-  - .pkgs.update
 
 fedora-cisco-openh264:
   pkgrepo.managed:
     - enabled: 0
-    - require_in:
-      - pkg: "system update"
+    - order: 0
 {% endif %}
 
 {% endif %}
