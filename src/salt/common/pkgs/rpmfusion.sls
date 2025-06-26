@@ -10,7 +10,7 @@
   cmd.run:
     - names:
 {% for license in licenses %}
-      - 'curl -sL https://download1.rpmfusion.org/{{ license }}/fedora/rpmfusion-{{ license }}-release-{{ release }}.noarch.rpm | dnf in -y '
+      - 'dnf in -y <( curl -sL https://download1.rpmfusion.org/{{ license }}/fedora/rpmfusion-{{ license }}-release-{{ release }}.noarch.rpm )'
 {% endfor %}
 
 {% for license, variant in licenses | product(["", "-updates"]) %}
