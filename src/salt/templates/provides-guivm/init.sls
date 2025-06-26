@@ -19,6 +19,27 @@ include:
   - common.pkgs.rpmfusion
   - common.pkgs.nvidia
 
+vm.swappiness:
+  sysctl.present:
+    - value: 0
+
+/usr/share/X11/xorg.conf.d/nvidia.conf:
+  file.absent:
+    - require:
+      - loop: '{{ slsdotpath }}.nvidia - pkg.installed'
+
+/etc/default/grub:
+  file.append:
+    - text: 'GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX rd.driver.blacklist=nouveau"'
+    - require:
+      - loop: '{{ slsdotpath }}.nvidia - pkg.installed'
+
+'grub2-mkconfig -o /boot/grub2/grub.cfg':
+  cmd.run:
+    - use_vt: true
+    - require:
+      - file: '/etc/default/grub'
+
 '{{ vm_name }}':
   pkg.installed:
     - pkgs:

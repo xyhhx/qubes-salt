@@ -24,19 +24,4 @@ grubby-dummy:
       - pkg: akmod-nvidia
       - pkg: xorg-x11-drv-nvidia-cuda
 
-/usr/share/X11/xorg.conf.d/nvidia.conf:
-  file.absent:
-    - require:
-      - loop: '{{ slsdotpath }}.nvidia - pkg.installed'
-
-/etc/default/grub:
-  file.append:
-    - text: 'GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX rd.driver.blacklist=nouveau"'
-
-'grub2-mkconfig -o /boot/grub2/grub.cfg':
-  cmd.run:
-    - use_vt: true
-    - require:
-      - file: '/etc/default/grub'
-
 {% endif %}
