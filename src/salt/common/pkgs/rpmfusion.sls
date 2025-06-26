@@ -4,7 +4,7 @@
 
 {%- if grains.os_family | lower == 'redhat' -%}
 
-{%- set fedora_release = salt["cmd.run"]("rpm -E %fedora") -%}
+{%- set fedora_release = salt["cmd.run"]('rpm -E \%fedora') -%}
 {%- set licenses = ["free", "nonfree"] -%}
 {%- set repos_variants = ["", "-updates"] -%}
 
