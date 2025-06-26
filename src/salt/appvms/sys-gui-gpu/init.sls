@@ -36,7 +36,6 @@ include:
         - gui-allow-fullscreen
         - input-dom0-proxy
         - no-default-kernelopts
-        - service.dummy-backlight
         - service.dummy-psu
         - service.guivm
         - service.lightdm
@@ -50,14 +49,14 @@ include:
         - group: root
         - mode: '0644'
       - /etc/qubes/policy.d/user.d/45-sys-gui-gpu.policy:
-        - source: salt://appvms/sys-gui-gpu/templates/45-sys-gui-gpu.policy.j2
+        - source: salt://appvms/sys-gui-gpu/files/45-sys-gui-gpu.policy
         - defaults:
             gui_vm: 'sys-gui-gpu'
             usb_vm: 'disp-sys-usb'
         - context:
             gui_vm: '{{ vm_name }}'
       - /etc/qubes/policy.d/user.d/50-gui-sys-gui-gpu.policy:
-        - source: salt://appvms/sys-gui-gpu/templates/50-gui-sys-gui-gpu.policy.j2
+        - source: salt://appvms/sys-gui-gpu/files/50-gui-sys-gui-gpu.policy
         - defaults:
             vm_name: "sys-gui-gpu"
         - context:
