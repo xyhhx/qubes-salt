@@ -15,6 +15,9 @@ dummy-psu-sender:
 
 {% else %}
 
+include:
+  - common.pkgs.rpmfusion
+
 '{{ vm_name }}':
   pkg.installed:
     - pkgs:
