@@ -162,7 +162,7 @@ vm.swappiness:
   file.recurse:
     - names:
       - /etc/systemd/system/lightdm.service.d:
-        - source: salt://templates/provides-guivm/files/lightdm
+        - source: salt://templates/provides-guivm/files/lightdm.service.d
       - /etc/environment.d:
         - source: salt://templates/provides-guivm/files/environment.d
     - user: root
@@ -175,6 +175,12 @@ vm.swappiness:
   user.present:
     - name: root
     - password: '!!'
+
+'/etc/lightdm/lightdm.conf':
+  file.managed:
+    - sources:
+      - 'salt://templates/provides-guivm/files/lightdm/user.conf'
+{#-      - 'salt://templates/provides-guivm/files/lightdm/autologin.conf' -#}
 
 'systemctl enable lightdm':
   cmd.run:
