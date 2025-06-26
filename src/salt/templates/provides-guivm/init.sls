@@ -1,6 +1,6 @@
 {# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
 
-{%- set vm_name = salt["pillar.get"]("vm_names:providers:gui", "provides-gui") -%}
+{%- set vm_name = salt["pillar.get"]("vm_names:providers:guivm", "provides-guivm") -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -151,9 +151,9 @@ dummy-psu-sender:
   file.recurse:
     - names:
       - /etc/systemd/system/lightdm.service.d:
-        - source: salt://templates/provides-gui/files/lightdm
+        - source: salt://templates/provides-guivm/files/lightdm
       - /etc/environment.d:
-        - source: salt://templates/provides-gui/files/environment.d
+        - source: salt://templates/provides-guivm/files/environment.d
     - user: root
     - group: root
     - dir_mode: '0755'
