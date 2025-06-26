@@ -2,11 +2,6 @@
 
 {% if grains.id != 'dom0' %}
 
-{% if grains.os_family | lower == 'redhat' %}
-include:
-  - .rpmfusion
-{% endif %}
-
 'mount /tmp -o remount,size=12G':
   cmd.run
 
@@ -33,5 +28,15 @@ grubby-dummy:
   file.absent:
     - require:
       - loop: '{{ slsdotpath }}.nvidia - pkg.installed'
+
+/etc/default/grub:
+  file.append:
+    - text: 'GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX rd.driver.blacklist=nouveau"'
+
+'grub2-mkconfig -o /boot/grub2/grub.cfg':
+  cmd.run:
+    - use_vt: true
+    - require:
+      - file: '/etc/default/grub'
 
 {% endif %}
