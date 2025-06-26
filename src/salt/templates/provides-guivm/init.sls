@@ -151,11 +151,9 @@ dummy-psu-sender:
     - name: root
     - password: '!!'
 
-# enabling lightdm will fail right now because the qubes service isn't enabled on the templatevm
-'systemctl enable lightdm &2>/dev/null':
+'systemctl enable lightdm':
   cmd.run:
-    - onchanges:
-      - pkg: lightdm
+    - use_vt: true
 
 '{{ slsdotpath }}.pkg.purged':
   pkg.purged:
