@@ -10,7 +10,7 @@
 
 {%- for license in licenses -%}
 
-'curl -sL https://download1.rpmfusion.org/{{ license }}/fedora/rpmfusion-{{ license }}-release-{{ fedora_release }}.noarch.rpm':
+'curl -sL https://download1.rpmfusion.org/{{ license }}/fedora/rpmfusion-{{ license }}-release-{{ fedora_release }}.noarch.rpm | dnf in -y ':
   cmd.run:
     - use_vt: true
     - env:
