@@ -3,16 +3,14 @@
 {%- if grains.id != 'dom0' -%}
 {%- if grains.os_family | lower == 'redhat' -%}
 
-{%- set fedora_release = salt["cmd.run"]('rpm -E \%fedora') -%}
 {%- set licenses = ["free", "nonfree"] -%}
-{%- set repos_variants = ["", "-updates"] -%}
-
+{%- set release = salt["grains.get"]("osrelease", "41") -%}
 
 'rpmfusion':
   cmd.run:
     - names:
 {% for license in licenses %}
-      - 'curl -sL https://download1.rpmfusion.org/{{ license }}/fedora/rpmfusion-{{ license }}-release-{{ fedora_release }}.noarch.rpm | dnf in -y '
+      - 'curl -sL https://download1.rpmfusion.org/{{ license }}/fedora/rpmfusion-{{ license }}-release-{{ release }}.noarch.rpm | dnf in -y '
 {% endfor %}
 
 {% for license, variant in licenses | product(["", "-updates"]) %}
