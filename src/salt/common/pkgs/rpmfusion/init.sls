@@ -22,22 +22,22 @@
   pkgrepo.managed:
     - names:
       - 'rpmfusion-free':
-        - name: 'RPM Fusion for Fedora {{ osrelease }} - Free'
+        - humanname: 'RPM Fusion for Fedora {{ osrelease }} - Free'
         - baseurl: 'http://download1.rpmfusion.org/free/fedora/releases/{{ osrelease }}/Everything/$basearch/os/'
         - metalink: 'https://mirrors.rpmfusion.org/metalink?repo=free-fedora-{{ osrelease }}&arch=$basearch'
         - gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-{{ osrelease }}'
       - 'rpmfusion-free-updates':
-        - name: 'RPM Fusion for Fedora {{ osrelease }} - Free - Updates'
+        - humanname: 'RPM Fusion for Fedora {{ osrelease }} - Free - Updates'
         - baseurl: 'http://download1.rpmfusion.org/free/fedora/updates/{{ osrelease }}/$basearch/'
         - metalink: 'https://mirrors.rpmfusion.org/metalink?repo=free-fedora-updates-released-{{ osrelease }}&arch=$basearch'
         - gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-free-fedora-{{ osrelease }}'
       - 'rpmfusion-nonfree':
-        - name: 'RPM Fusion for Fedora {{ osrelease }} - Nonfree'
+        - humanname: 'RPM Fusion for Fedora {{ osrelease }} - Nonfree'
         - baseurl: 'http://download1.rpmfusion.org/nonfree/fedora/releases/{{ osrelease }}/Everything/$basearch/os/'
         - metalink: 'https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-{{ osrelease }}&arch=$basearch'
         - gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ osrelease }}'
       - 'rpmfusion-nonfree-updates':
-        - name: 'RPM Fusion for Fedora {{ osrelease }} - Nonfree - Updates'
+        - humanname: 'RPM Fusion for Fedora {{ osrelease }} - Nonfree - Updates'
         - baseurl: 'http://download1.rpmfusion.org/nonfree/fedora/updates/{{ osrelease }}/$basearch/'
         - metalink: 'https://mirrors.rpmfusion.org/metalink?repo=nonfree-fedora-updates-released-{{ osrelease }}&arch=$basearch'
         - gpgkey: 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmfusion-nonfree-fedora-{{ osrelease }}'

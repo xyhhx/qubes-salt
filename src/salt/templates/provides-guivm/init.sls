@@ -17,6 +17,7 @@ dummy-psu-sender:
 
 include:
   - common.pkgs.rpmfusion
+  - common.pkgs.nvidia
 
 '{{ vm_name }}':
   pkg.installed:
