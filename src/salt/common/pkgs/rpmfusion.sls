@@ -8,15 +8,15 @@
 {%- set licenses = ["free", "nonfree"] -%}
 {%- set repos_variants = ["", "-updates"] -%}
 
-{%- for license in licenses -%}
 
-"curl -sL https://download1.rpmfusion.org/{{ license }}/fedora/rpmfusion-{{ license }}-release-{{ fedora_release }}.noarch.rpm | dnf in -y ":
+'rpmfusion':
   cmd.run:
+    - names:
+{% for license in licenses %}
+      - 'curl -sL https://download1.rpmfusion.org/{{ license }}/fedora/rpmfusion-{{ license }}-release-{{ fedora_release }}.noarch.rpm | dnf in -y '
+{% endfor %}
     - use_vt: true
-    - env:
-      - https_proxy: http://127.0.0.1:8082
 
-{%- endfor -%}
 
 {%- endif -%}
 {%- endif -%}
