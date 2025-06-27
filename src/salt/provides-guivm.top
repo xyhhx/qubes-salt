@@ -7,6 +7,7 @@ user:
     - templates.provides-guivm
   '{{ vm_name }}':
     - common.pkgs.base
+    - common.pkgs.qubes-video-companion
     - common.theme
     - common.custom-themes.Windows-10-Darker
     - common.terminal

@@ -11,7 +11,13 @@ dummy-psu-sender:
   pkg.installed
 
 {% from "utils/macros/create_templatevm.sls" import templatevm %}
-{{ templatevm(vm_name) }}
+{%- load_yaml as vm_options %}
+prefs:
+  - virt_mode: hvm
+  - kernel: ""
+  - kernelopts: ""
+{% endload -%}
+{{ templatevm(vm_name, options=vm_options) }}
 
 {% else %}
 
