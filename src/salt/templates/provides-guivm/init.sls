@@ -24,15 +24,13 @@ vm.swappiness:
     - value: 0
 
 /usr/share/X11/xorg.conf.d/nvidia.conf:
-  file.absent:
-    - require:
-      - loop: '{{ slsdotpath }}.nvidia - pkg.installed'
+  file.absent
 
 /etc/default/grub:
   file.append:
     - text: 'GRUB_CMDLINE_LINUX="$GRUB_CMDLINE_LINUX rd.driver.blacklist=nouveau"'
     - require:
-      - loop: '{{ slsdotpath }}.nvidia - pkg.installed'
+      - sls: common.pkgs.nvidia
 
 'grub2-mkconfig -o /boot/grub2/grub.cfg':
   cmd.run:
@@ -180,7 +178,6 @@ vm.swappiness:
   file.managed:
     - sources:
       - 'salt://templates/provides-guivm/files/lightdm/user.conf'
-{#-      - 'salt://templates/provides-guivm/files/lightdm/autologin.conf' -#}
 
 'systemctl enable lightdm':
   cmd.run:
