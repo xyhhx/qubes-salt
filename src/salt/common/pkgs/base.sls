@@ -5,6 +5,7 @@
 {% load_yaml as pkgmap %}
 RedHat:
   - curl
+  - procps-ng
   - vim-common
   - xclip
   - xfce4-notifyd
@@ -20,7 +21,5 @@ Debian:
 '{{ slsdotpath }}':
   pkg.installed:
     - pkgs: {{ pkgs }}
-    - skip_suggestions: true
-    - install_recommends: false
 
 {% endif %}

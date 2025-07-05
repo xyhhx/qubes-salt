@@ -15,6 +15,9 @@ qubes.SyncAppMenus       *                       @tag:guivm-{{ vm_name }}  dom0 
 qubes.WindowIconUpdater  *                       @tag:guivm-{{ vm_name }}  dom0                             allow    target={{ vm_name }}
 qubes.WaitForSession     *                       {{ vm_name }}             @tag:guivm-{{ vm_name }}         allow
 
+# Allow guivm to launch root shell in domains it launches
+qubes.VMShell            *                       {{ vm_name }}             @tag:guivm-{{ vm_name }}         allow user=root
+
 {%- if 'psu' in salt['pillar.get']('qvm:' + vm_name + ':dummy-modules', []) %}
 qubes.PowerSupply        *                       {{ vm_name }}             @default                         allow    target=dom0
 {%- endif %}
