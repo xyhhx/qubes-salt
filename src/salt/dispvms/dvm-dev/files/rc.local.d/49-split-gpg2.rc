@@ -1,5 +1,0 @@
-#!/bin/bash --
-# vim: set syn=sh :
-set -xeuo pipefail
-
-export SPLIT_GPG2_SERVER_DOMAIN="{{ split_gpg2_vault }}"

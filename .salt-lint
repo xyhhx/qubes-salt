@@ -1,9 +1,0 @@
-# vim: ft=yaml :
----
-exclude_paths: ['/tmp']
-verbosity: 1
-skip_list:
-  - 205
-rules:
-  all: enable
-severity: True

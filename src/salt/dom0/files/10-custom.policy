@@ -1,7 +1,0 @@
-# vi: set ts=2 sw=2 et number :
-qubes.WindowIconUpdater *  @anyvm            @anyvm    allow
-qubes.WindowIconUpdater *  @anyvm            dom0      allow
-
-qubes.ConnectTCP        *  @anyvm            @anyvm    allow
-qubes.Xdpi              *  @anyvm            @adminvm  allow  notify=yes
-qubes.ClipboardPaste    *  @anyvm            @anyvm    allow

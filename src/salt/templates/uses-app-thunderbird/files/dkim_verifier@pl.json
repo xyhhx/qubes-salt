@@ -1,9 +1,0 @@
-{
-	"name": "dkim_verifier@pl",
-	"description": "ignored",
-	"type": "storage",
-	"data": {
-		"arh.read": true,
-		"dns.nameserver": "1.1.1.1"
-	}
-}

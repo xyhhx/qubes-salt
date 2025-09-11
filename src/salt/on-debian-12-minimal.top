@@ -1,9 +1,0 @@
-{# vim: set syn=salt ts=2 sw=2 sts=2 et : #}
-
-{%- set vm_name = salt["pillar.get"]("vm_names:templates:os:debian") -%}
-
-user:
-  'dom0 or {{ vm_name }}':
-    - templates.on-debian-12-minimal
-  '{{ vm_name }}':
-    - common

@@ -1,5 +1,0 @@
-616a617,620
->       #QUBES OS - specific operation
->       systemctl restart systemd-resolved || echo "Error: systemd-resolved" # this line is required for Qubes OS 4.2 (tested on Qubes OS 4.2-RC4)
->       /usr/lib/qubes/qubes-setup-dnat-to-ns || echo "Error: failed to run '/usr/lib/qubes/qubes-setup-dnat-to-ns'" 
-> 
