@@ -1,0 +1,34 @@
+#!/bin/env bash
+set -xeuo pipefail
+
+# ran in guest
+guest_name="$(qubesdb-read /name)"
+src_dir="/usr/local/src/qubes-mgmt-salt-user"
+install_script="$(mktemp -u /tmp/clone-qubes-mgmt-salt-user.XXXXXX)"
+
+# piped to bash in dom0
+cat <<-DOM0
+
+cat <<-INSTALL > ${install_script}
+
+  set -x
+
+  sudo mkdir -p ${src_dir}
+  sudo chown \${USER}:\${USER} -R ${src_dir}
+  qvm-run -p ${guest_name} 'cd ${src_dir} && make bundle'
+  qvm-run -p ${guest_name} 'cat ${src_dir}/.bundles/qubes-mgmt-salt-user' > /tmp/qubes-mgmt-salt-user.bundle
+  git clone /tmp/qubes-mgmt-salt-user.bundle ${src_dir}
+  pushd ${src_dir}
+  sed 's/GUEST=/&${guest_name}/' .env.example > .env
+  sudo make install
+  popd
+
+  set +x
+
+INSTALL
+
+chmod +x ${install_script}
+
+${install_script}
+
+DOM0

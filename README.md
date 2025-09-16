@@ -2,9 +2,11 @@
 
 <div align="center">
 
-# my qubes os saltstack configuration
+# Qubes OS workstation configuration
 
-mirrors:
+Documenting the configuration of my Qubes OS workstation through config-as-code with salt
+
+Mirrors:
 
 [![codeberg](https://img.shields.io/badge/codeberg-2185d0?style=for-the-badge&logo=codeberg&logoColor=fff)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user)
 [![sourcehut](https://img.shields.io/badge/srht-212529?style=for-the-badge&logo=sourcehut&logoColor=fff)](https://git.sr.ht/~xyhhx/qubes-mgmt-salt-user)
@@ -17,11 +19,16 @@ mirrors:
 
 </div>
 
-some resources i referenced while working on this (thanks!):
+### First time set up
 
-- <https://git.drkhsh.at/salt-n-pepper/file/README.md.html>
-- <https://forum.qubes-os.org/t/qubes-salt-beginners-guide/20126>
-- <https://github.com/ben-grande/qusal>
-- <https://github.com/gonzalo-bulnes/qubes-mgmt-salt-user>
-- <https://github.com/unman/shaker>
-- <https://github.com/freedomofpress/securedrop-workstation>
+- In a guest VM, clone the repo into `/usr/local/src` (this avoids username conflicts later)
+
+  ```sh
+  git clone ssh://git@codeberg.org/xyhhx/qubes-mgmt-salt-user.git /usr/local/src/qubes-mgmt-salt-user
+  ```
+
+- From dom0, run the first-time set up script
+
+  ```sh
+  qvm-run -p "${GUEST}" 'cat /usr/local/src/qubes-mgmt-salt-user/bin/install' | bash
+  ```
