@@ -1,34 +1,14 @@
 #!/bin/env bash
-set -xeuo pipefail
+set -xeu
 
-# ran in guest
-guest_name="$(qubesdb-read /name)"
-src_dir="/usr/local/src/qubes-mgmt-salt-user"
-install_script="$(mktemp -u /tmp/clone-qubes-mgmt-salt-user.XXXXXX)"
+qvm-run ${GUEST} 'cd ${SRC_DIR} && make bundle'
+qvm-run -p ${GUEST} 'cat ${SRC_DIR}/.bundles/qubes-mgmt-salt-user' > /tmp/qubes-mgmt-salt-user.bundle </dev/null
 
-# piped to bash in dom0
-cat <<-DOM0
+sudo install -dD -oroot -groot -m0755 ${SRC_DIR}
+pushd ${SRC_DIR}
+sudo git init -b main
+sudo git pull /tmp/qubes-mgmt-salt-user.bundle
+sed 's/GUEST=/&${GUEST}' .env.example | sudo tee .env >/dev/null
+sudo make install
+popd
 
-cat <<-INSTALL > ${install_script}
-
-  set -x
-
-  sudo mkdir -p ${src_dir}
-  sudo chown \${USER}:\${USER} -R ${src_dir}
-  qvm-run -p ${guest_name} 'cd ${src_dir} && make bundle'
-  qvm-run -p ${guest_name} 'cat ${src_dir}/.bundles/qubes-mgmt-salt-user' > /tmp/qubes-mgmt-salt-user.bundle
-  git clone /tmp/qubes-mgmt-salt-user.bundle ${src_dir}
-  pushd ${src_dir}
-  sed 's/GUEST=/&${guest_name}/' .env.example > .env
-  sudo make install
-  popd
-
-  set +x
-
-INSTALL
-
-chmod +x ${install_script}
-
-${install_script}
-
-DOM0

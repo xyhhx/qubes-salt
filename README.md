@@ -30,5 +30,8 @@ Mirrors:
 - From dom0, run the first-time set up script
 
   ```sh
-  qvm-run -p "${GUEST}" 'cat /usr/local/src/qubes-mgmt-salt-user/bin/install' | bash
+  (
+    export GUEST=development-qube SRC_DIR=/usr/local/src/qubes-mgmt-salt-user; \
+    qvm-run -p "${GUEST}" "cat ${SRC_DIR}/bin/install" | envsubst
+  ) | bash
   ```
