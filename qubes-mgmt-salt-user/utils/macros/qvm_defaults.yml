@@ -1,0 +1,30 @@
+---
+prefs:
+  - label: gray
+
+  - memory: 400
+  - maxmem: 2000
+  - vcpus: 1
+
+  - kernel: "*default*"
+  - kernelopts: "*default*"
+  - pci-strictreset: true
+  - virt-mode: pvh
+
+  - audiovm: "*default*"
+  - guivm: "*default*"
+  - netvm: "*default*"
+
+  - autostart: false
+  - debug: false
+  - default-user: user
+  - include-in-backups: false
+  - internal: false
+  - qrexec-timeout: 120
+
+features:
+  - set:
+    - menu-items: Alacritty.desktop
+    - default-menu-items: Alacritty.desktop
+
+# vim: ft=salt ts=2 sw=2 sts=2 et :

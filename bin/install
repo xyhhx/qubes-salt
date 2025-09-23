@@ -8,7 +8,7 @@ sudo install -dD -oroot -groot -m0755 ${SRC_DIR}
 pushd ${SRC_DIR}
 sudo git init -b main
 sudo git pull /tmp/qubes-mgmt-salt-user.bundle
-sed 's/GUEST=/&${GUEST}' .env.example | sudo tee .env >/dev/null
+sed 's/GUEST=/&${GUEST}/' .env.example | sudo tee .env >/dev/null
 sudo make install
 popd
 

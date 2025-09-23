@@ -8,7 +8,6 @@ USR_LOCAL    					 := /usr/local
 SRC_DIR			 					 := $(USR_LOCAL)/src/$(PROJECT_NAME)
 MINION_CONF_DIR_GLOBAL := /etc/salt/minion.d
 MINION_CONF_DIR_USER   := $(USR_LOCAL)/etc/salt/minion.d
-USER_SRV               := $(USR_LOCAL)/srv/$(SALTENV)
 
 # ----------
 #  task guards
@@ -38,7 +37,7 @@ guard-domu:
 #  dom0
 
 .PHONY: install
-install: guard-host-dom0 $(MINION_CONF_DIR_GLOBAL)/z_user.conf $(MINION_CONF_DIR_USER)/overrides.conf $(USER_SRV)/salt
+install: guard-host-dom0 $(MINION_CONF_DIR_GLOBAL)/z_user.conf $(MINION_CONF_DIR_USER)/overrides.conf /srv/$(SALTENV)/salt
 	$(MAKE) lift-bundle
 
 .PHONY: clean
@@ -47,8 +46,8 @@ clean: guard-host-dom0
 
 .PHONY: lift-bundle
 lift-bundle: guard-host-dom0 guard-env-GUEST $(SRC_DIR)/.bundles
-	qvm-run -p $(GUEST) 'cd $(SRC_DIR) && make bundle'
-	qvm-run -p $(GUEST) 'cat $(SRC_DIR)' > $(SRC_DIR)/.bundles/$(PROJECT_NAME)
+	qvm-run $(GUEST) 'cd $(SRC_DIR) && make bundle'
+	qvm-run -p $(GUEST) 'cat $(SRC_DIR)/.bundles/$(PROJECT_NAME)' > $(SRC_DIR)/.bundles/$(PROJECT_NAME) </dev/null
 
 $(MINION_CONF_DIR_GLOBAL)/z_user.conf:
 	install -D -oroot -groot -m0644 conf/z_user.conf $@
@@ -59,8 +58,8 @@ $(MINION_CONF_DIR_USER)/overrides.conf:
 $(SRC_DIR)/.bundles:
 	install -dD -oroot -groot -m0755 $@
 
-$(USER_SRV)/salt:
-	install -Dd -o$(USER) -g$(USER) -m0755 $(USER_SRV)
+/srv/$(SALTENV)/salt:
+	install -Dd -o$(USER) -g$(USER) -m0755 /srv/$(SALTENV)
 	ln -s $(SRC_DIR)/$(PROJECT_NAME) $@
 
 # ----------
