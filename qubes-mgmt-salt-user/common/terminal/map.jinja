@@ -1,0 +1,14 @@
+{%- import_yaml './defaults.yml' as defaults -%}
+{%- import_yaml './maps/grains.os_family.yml' as osfamily_map -%}
+{%- import_yaml './maps/pillar.qubes_type.yml' as qubestype_map -%}
+
+{%- set terminal = {} -%}
+{%- for to_merge in [
+  defaults,
+  salt['grains.filter_by'](osfamily_map, default={}),
+  salt['pillar.filter_by'](qubestype_map, 'qubes:type', default={})
+] -%}
+  {%- do salt['defaults.merge'](terminal, to_merge, in_place=true) -%}
+{%- endfor -%}
+
+{# vim: set ts=2 sw=2 sts=2 et : #}
