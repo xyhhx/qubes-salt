@@ -7,8 +7,9 @@
 {% do salt["defaults.merge"](vm, salt["pillar.get"]("qvm_defaults", default={}), in_place=true) %}
 {% do salt["defaults.merge"](vm, options, in_place=true) %}
 
-"{{ base_template }}":
-  qvm.template_installed
+"{{ sls }}:{{ name }}:qvm.template_installed":
+  qvm.template_installed:
+    - name: "{{ base_template }}"
 
 "{{ name }}":
   qvm.vm:
