@@ -1,0 +1,4 @@
+{{ policy }}  *  @tag:{{ client_tag }}  @default  ask target={{ ssh_vault }}
+{{ policy }}  *  @tag:{{ client_tag }}  @tag:{{ server_tag }} allow notify=yes
+
+# vim: set ft=jinja ts=2 sw=2 sts=2 et number :

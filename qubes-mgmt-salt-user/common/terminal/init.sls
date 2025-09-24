@@ -27,7 +27,6 @@
     - group: '{{ terminal.config_file.group }}'
     - mode: '{{ terminal.config_file.mode }}'
     - makedirs: true
-    - merge_if_exists: true
     - show_changes: true
 
 {% endif %}

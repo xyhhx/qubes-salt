@@ -1,0 +1,11 @@
+#!/bin/bash --
+set -euo pipefail
+
+notify-send \
+  "$(qubesdb-read /name) Split SSH" \
+  "SSH agent access from ${QREXEC_REMOTE_DOMAIN} granted"
+
+socat - "UNIX-CONNECT:${SSH_AUTH_SOCK}"
+
+# vim: set ts=2 sw=2 sts=2 et number:
+
