@@ -16,7 +16,7 @@
         - service.custom-persist
       - set:
         - menu-items: org.keepassxc.KeePassXC.desktop
-        - custom-persist.keepassxc_config: 'dir:user:user:0700:/home/user/.config/keepassxc'
+        - custom-persist.keepassxc_config: 'file:user:user:0600:/home/user/.config/keepassxc/keepassxc.ini'
         - custom-persist.usrlocal: 'dir:user:user:0700:/usr/local/share/keepassxc'
 
 {% else %}
