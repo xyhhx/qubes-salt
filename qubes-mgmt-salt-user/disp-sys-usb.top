@@ -1,0 +1,8 @@
+{%- set vm_name = "disp-sys-usb" -%}
+
+user:
+  'dom0':
+    - dispvms.dvm-sys-usb
+    - dispvms.disp-sys-usb
+
+{# vim: set ft=salt ts=2 sw=2 sts=2 et : #}

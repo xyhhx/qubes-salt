@@ -22,8 +22,8 @@
     - template: 'jinja'
     - replace: true
     - user: root
-    - group: root
-    - mode: '0600'
+    - group: qubes
+    - mode: '0640'
     - makedirs: true
     - defaults:
         client_tag: 'split-ssh-client'

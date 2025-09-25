@@ -1,0 +1,5 @@
+{{ keyboard_policy }}  *  {{ usb_qube }}  @adminvm  {{ keyboard_policy_action }} default_target=@adminvm
+{{ mouse_policy }}     *  {{ usb_qube }}  @adminvm  {{ mouse_policy_action }} default_target=@adminvm
+{{ tablet_policy }}    *  {{ usb_qube }}  @adminvm  {{ tablet_policy_action }}
+
+# vim: set ft=jinja ts=2 sw=2 sts=2 et number :

@@ -1,0 +1,29 @@
+{%- set vm_name = "provides-usb" -%}
+{%- set base_template = "fedora-42-minimal" -%}
+
+{% if grains.id == 'dom0' %}
+
+{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{{ templatevm(vm_name, base_template=base_template) }}
+
+'{{ sls }} ~ qubes-ctap-dom0':
+  pkg.installed:
+    - pkgs:
+      - qubes-ctap-dom0
+    - install_recommends: false
+    - skip_suggestions: true
+
+{% else %}
+
+'{{ vm_name }}':
+  pkg.installed:
+    - pkgs:
+      - qubes-ctap
+      - qubes-input-proxy-sender
+      - qubes-usb-proxy
+    - install_recommends: false
+    - skip_suggestions: true
+
+{% endif %}
+
+{# vim: set ft=salt ts=2 sw=2 sts=2 et : #}

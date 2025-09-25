@@ -1,0 +1,7 @@
+{%- set usb_pcidevs = salt['grains.get']('pci_usb_devs', []) -%}
+{%- for param, value in salt['grains.get']('kernelparams', []) if param is eq 'rd.qubes.dom0_usb' and value is string -%}
+  {%- for dev in value.split(',') -%}
+    {%- do usb_pcidevs.remove(dev) if dev is in usb_pcidevs -%}
+  {%- endfor -%}
+{%- endfor -%}
+{# vim: set ft=salt ts=2 sw=2 sts=2 et : #}
