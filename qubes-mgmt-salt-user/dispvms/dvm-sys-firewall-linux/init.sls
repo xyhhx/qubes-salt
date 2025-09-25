@@ -17,6 +17,7 @@
       - template-for-dispvms: true
     - require:
       - qvm: provides-firewall-linux
+      - qvm: sys-net
 
 {% endif %}
 

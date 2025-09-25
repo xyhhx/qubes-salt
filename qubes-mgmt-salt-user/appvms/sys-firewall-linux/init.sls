@@ -16,6 +16,7 @@
       - memory: 500
     - require:
       - qvm: provides-firewall-linux
+      - qvm: sys-net
 
 {% endif %}
 

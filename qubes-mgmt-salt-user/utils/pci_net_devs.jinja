@@ -1,0 +1,20 @@
+{%- set pci_net_devs = salt['grains.get']('pci_net_devs', []) -%}
+{%- set pci_devs = salt['cmd.shell']('qvm-pci', '').split('\n') | map('trim') | list -%}
+
+{%- set wifi_devs = [] -%}
+{%- set eth_devs = [] -%}
+{%- for dev in pci_devs if dev | lower | regex_search('eth') is not none -%}
+  {%- set dev_pci = dev.split()[0].split(':')[1] -%}
+  {%- do salt['log.debug']("found eth dev: " ~ dev_pci) -%}
+
+  {%- do eth_devs.append(dev_pci) if dev_pci | substring_in_list(pci_net_devs) -%}
+{%- endfor -%}
+
+{%- for dev in pci_devs if dev | lower | regex_search('wifi|wi-fi|wireless') is not none -%}
+  {%- set dev_pci = dev.split()[0].split(':')[1] -%}
+  {%- do salt['log.debug']("found wifi dev: " ~ dev_pci) -%}
+
+  {%- do wifi_devs.append(dev_pci) if dev_pci | substring_in_list(pci_net_devs) -%}
+{%- endfor -%}
+
+{# vim: set ft=salt ts=2 sw=2 sts=2 et : #}
