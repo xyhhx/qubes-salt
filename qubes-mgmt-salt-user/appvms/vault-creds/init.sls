@@ -31,4 +31,4 @@
 
 {% endif %}
 
-{# vim: set ft=salt ts=2 sw=2 sts=2 et : #}
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 

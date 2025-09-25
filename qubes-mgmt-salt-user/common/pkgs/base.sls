@@ -1,6 +1,6 @@
 {% if grains.id != 'dom0' %}
 
-{#- todo: handle debian and other os family -#}
+#- todo: handle debian and other os family -
 {% load_yaml as pkgmap %}
 RedHat:
   - curl
@@ -17,4 +17,4 @@ RedHat:
 
 {% endif %}
 
-{# vim: set ft=salt ts=2 sw=2 sts=2 et : #}
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 
