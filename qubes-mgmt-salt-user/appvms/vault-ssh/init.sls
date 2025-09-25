@@ -29,11 +29,11 @@
         client_tag: 'split-ssh-client'
         policy: 'qubes.SshAgent'
         server_tag: 'split-ssh-client'
-        ssh_vault: 'vault-ssh'
+        vault_vm: 'vault-ssh'
     - context:
-        ssh_vault: '{{ vm_name }}'
+        vault_vm: '{{ vm_name }}'
 
 {% endif %}
 
-# vim: set syn=salt ts=2 sw=2 sts=2 et : 
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
 
