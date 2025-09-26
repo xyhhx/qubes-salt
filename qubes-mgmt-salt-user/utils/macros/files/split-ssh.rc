@@ -6,7 +6,6 @@ SSH_VAULT_VM="${SSH_VAULT_VM:-@default}"
 sock_dir="/var/run/qubes-split-ssh/${SSH_VAULT_VM}"
 install -Dd -o$(id -nu 1000) -gqubes "${sock_dir}"
 export SSH_SOCK="${sock_dir}/S.agent"
-rm -f "${SSH_SOCK}"
-sudo -u user /bin/sh -c "umask 177 && exec socat 'UNIX-LISTEN:${SSH_SOCK},fork' 'EXEC:qrexec-client-vm ${SSH_VAULT_VM} user.SshAgent'" &
+sudo -u user /bin/sh -c "umask 177 && exec socat 'UNIX-LISTEN:${SSH_SOCK},unlink-early,fork' 'EXEC:qrexec-client-vm ${SSH_VAULT_VM} qubes.SshAgent'" &
 
-# vim: set syn=sh ts=2 sw=2 sts=2 number :
+# vim: set syntax=sh ts=2 sw=2 sts=2 number :

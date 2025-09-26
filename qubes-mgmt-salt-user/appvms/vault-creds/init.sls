@@ -11,6 +11,7 @@
     - prefs:
       - template: '{{ template_name }}'
       - label: gray
+      - netvm: ''
     - features:
       - enable:
         - service.custom-persist
@@ -31,4 +32,4 @@
 
 {% endif %}
 
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :

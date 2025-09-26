@@ -11,20 +11,23 @@
     - prefs:
       - template: '{{ template_name }}'
       - label: gray
+      - netvm: ''
     - features:
       - enable:
         - service.custom-persist
       - set:
         - custom-persist.user_ssh: 'dir:user:user:0700:/home/user/.ssh'
+        - custom-persist.ssh_autostart: 'file:user:user:0600:/home/user/.config/autostart/ssh-add.desktop'
+
+'/etc/qubes/policy.d/30-split-ssh.policy':
   file.managed:
-    - name: '/etc/qubes/policy.d/30-split-ssh.policy'
     - source: 'salt://appvms/vault-ssh/files/split-ssh.policy'
     - template: 'jinja'
-    - replace: true
     - user: root
     - group: qubes
     - mode: '0640'
     - makedirs: true
+    - replace: true
     - defaults:
         client_tag: 'split-ssh-client'
         policy: 'qubes.SshAgent'
@@ -32,6 +35,17 @@
         vault_vm: 'vault-ssh'
     - context:
         vault_vm: '{{ vm_name }}'
+
+{% else %}
+
+'/home/user/.config/autostart/ssh-add.desktop':
+  file.managed:
+    - source: 'salt://appvms/vault-ssh/files/ssh-add.desktop'
+    - user: user
+    - group: user
+    - mode: '0600'
+    - makedirs: true
+    - replace: true
 
 {% endif %}
 

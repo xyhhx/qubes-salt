@@ -14,7 +14,6 @@
       - NetworkManager-wifi
       - gnome-keyring
       - network-manager-applet
-      - notification-daemon
       - polkit
       - qubes-core-agent-network-manager
       - qubes-core-agent-networking
@@ -23,4 +22,4 @@
 
 {% endif %}
 
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :

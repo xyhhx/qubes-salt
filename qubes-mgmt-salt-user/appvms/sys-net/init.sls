@@ -16,6 +16,7 @@
       - virt-mode: hvm
       - provides-network: true
       - pcidevs: {{ salt['grains.get']('pci_net_devs', []) | yaml }}
+      - pci_strictreset: false
     - require:
       - qvm: provides-net
     - service:
@@ -27,4 +28,4 @@
 
 {% endif %}
 
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :

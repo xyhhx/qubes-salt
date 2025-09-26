@@ -1,27 +1,30 @@
-{%- from "./map.jinja" import terminal with context -%}
+{%- from './map.jinja' import terminal with context -%}
 
 {% if salt['pillar.get']('qubes:type') == 'template' %}
 
-'{{ sls }} ~ install pkgs':
+'{{ slsdotpath }}':
   pkg.installed:
     - pkgs: {{ terminal.pkgs }}
-
-'{{ sls }} ~ update alternatives':
-  cmd.run:
-    - names:
-      - 'update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator {{ terminal.bin }} 50'
-      - 'update-alternatives --set x-terminal-emulator {{ terminal.bin }}'
-    - use_vt: true
+  alternatives.install:
+    - name: x-terminal-emulator
+    - link: /usr/bin/x-terminal-emulator
+    - path: '{{ terminal.bin }}'
+    - priority: 50
     - onchanges:
-      - pkg: '{{ sls }} ~ install pkgs'
+      - pkg: '{{ slsdotpath }}'
+
+'x-terminal-emulator':
+  alternatives.set:
+    - path: '{{ terminal.bin }}'
+    - onchanges:
+      - alternatives: '{{ slsdotpath }}'
 
 {% endif %}
 
 {% if salt['pillar.get']('qubes:type') in ['appvm', 'template'] %}
 
-'{{ sls }} ~ config file':
+'{{ terminal.config_file.path }}/{{ terminal.config_file.name }}':
   file.managed:
-    - name: '{{ terminal.config_file.path }}/{{ terminal.config_file.name }}'
     - source: 'salt://{{ slspath }}/files/{{ terminal.config_file.name }}'
     - user: '{{ terminal.config_file.user }}'
     - group: '{{ terminal.config_file.group }}'
@@ -31,4 +34,4 @@
 
 {% endif %}
 
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 
+{# vim: set syntax=salt.jinja.yaml.yaml ts=2 sw=2 sts=2 et : #}

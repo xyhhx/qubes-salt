@@ -1,0 +1,3 @@
+[org/gnome/desktop/interface]
+font-name='{{ sans_font }}'
+monospace-font-name='{{ mono_font }}'

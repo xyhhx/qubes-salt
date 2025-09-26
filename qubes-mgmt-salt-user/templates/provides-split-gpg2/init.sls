@@ -11,7 +11,6 @@
 '{{ vm_name }}':
   pkg.installed:
     - pkgs:
-      - notification-daemon
       - pinentry-qt
       - sequoia-chameleon-gnupg
       - sequoia-keystore-server

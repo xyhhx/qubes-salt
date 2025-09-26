@@ -1,4 +1,14 @@
 ---
+ui:
+  prefs:
+    theme:
+      cursor: "Adwaita"
+      gtk: "Adwaita"
+      icon: "Adwaita"
+    fonts:
+      mono: "IBM Plex Mono 10"
+      sans: "Liberation Sans 10"
+      serif: "Liberation Serif 10"
 
 # set the defaults for qubes created with salts from this repo
 qvm_defaults:

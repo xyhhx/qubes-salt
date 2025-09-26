@@ -3,15 +3,11 @@
 
 {% if grains.id == 'dom0' %}
 
+include:
+  - dom0.pkgs.qubes-ctap
+
 {% from "utils/macros/create_templatevm.sls" import templatevm %}
 {{ templatevm(vm_name, base_template=base_template) }}
-
-'{{ sls }} ~ qubes-ctap-dom0':
-  pkg.installed:
-    - pkgs:
-      - qubes-ctap-dom0
-    - install_recommends: false
-    - skip_suggestions: true
 
 {% else %}
 
@@ -26,4 +22,4 @@
 
 {% endif %}
 
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :

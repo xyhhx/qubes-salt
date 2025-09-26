@@ -1,5 +1,7 @@
 include:
-  - .terminal
   - .pkgs.base
+  - .pkgs.fonts
+  - .pkgs.notifications
+  - .terminal
 
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :

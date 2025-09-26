@@ -47,6 +47,8 @@ features:
 
     {{ vm | dict_to_sls_yaml_params | indent }}
 
+    - order: 1
+
 {% endmacro %}
 
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :

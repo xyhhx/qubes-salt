@@ -26,8 +26,7 @@ split-gpg2-dom0:
         - service.custom-persist
       - set:
         - custom-persist.gnupg_home: 'dir:user:user:0700:/home/user/.gnupg'
-        - custom-persist.split_gpg2_conf: 'file:user:user:0600:/home/user/.config/qubes-split-gpg2/qubes-split-gpg2.conf'
-        - custom-persist.split_gpg2_conf_d: 'dir:user:user:0700:/home/user/.config/qubes-split-gpg2/conf.d'
+        - custom-persist.home_config: 'dir:user:user:0700:/home/user/.config'
         - custom-persist.home_local_share: 'dir:user:user:0700:/home/user/.local/share'
     - require:
       - sls: templates.{{ template_name }}

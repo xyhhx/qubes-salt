@@ -1,8 +1,8 @@
-{%- set vm_name = "provides-firewall-linux" -%}
+{%- set vm_name = "on-fedora-42-xfce" -%}
 
 user:
   'dom0 or {{ vm_name }}':
-    - templates.provides-firewall-linux
+    - templates.on-fedora-42-xfce
   '{{ vm_name }}':
     - common
     - common.theme
