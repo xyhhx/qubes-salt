@@ -5,12 +5,14 @@
     - names:
       - '/etc/qubes/policy.d/10-user-includes.policy':
         - source: 'salt://{{ tpldir }}/files/etc/qubes/policy.d/10-user-includes.policy.j2'
+        - context:
+            user: '{{ user }}'
         - defaults:
             user: 'user'
         - template: jinja
       - '/etc/qubes/policy.d/20-salt-includes.policy':
         - source: 'salt://{{ tpldir }}/files/etc/qubes/policy.d/20-salt-includes.policy.j2'
-    - owner: 'root'
+    - user: 'root'
     - group: 'root'
     - mode: '0644'
     - attrs: i
@@ -22,7 +24,7 @@
     - names:
       - '/home/{{ user }}/.config/qubes/policy.d/available'
       - '/home/{{ user }}/.config/qubes/policy.d/enabled'
-    - owner: '{{ user }}'
+    - user: '{{ user }}'
     - group: '{{ user }}'
     - mode: '0700'
     - attrs: i
