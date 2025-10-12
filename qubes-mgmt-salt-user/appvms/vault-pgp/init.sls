@@ -30,14 +30,16 @@ split-gpg2-dom0:
         - custom-persist.home_local_share: 'dir:user:user:0700:/home/user/.local/share'
     - require:
       - sls: templates.{{ template_name }}
+
+'/usr/local/etc/qubes/policy.d/available/30-split-gpg2.policy':
   file.managed:
-    - name: '/etc/qubes/policy.d/30-split-gpg2.policy'
-    - source: 'salt://appvms/vault-pgp/files/split-gpg2.policy'
+    - source: 'salt://{{ tpldir }}/files/split-gpg2.policy.j2'
     - template: 'jinja'
     - replace: true
-    - user: root
-    - group: qubes
+    - user: 'root'
+    - group: 'qubes'
     - mode: '0640'
+    - attrs: 'i'
     - makedirs: true
     - defaults:
         client_tag: 'split-gpg2-client'
@@ -47,6 +49,13 @@ split-gpg2-dom0:
     - context:
         vault_vm: '{{ vm_name }}'
 
+'/usr/local/etc/qubes/policy.d/enabled/30-split-gpg2.policy':
+  file.symlink:
+    - target: '/usr/local/etc/qubes/policy.d/available/30-split-gpg2.policy'
+    - user: 'root'
+    - group: 'qubes'
+    - mode: '0640'
+    - makedirs: true
 
 {% endif %}
 

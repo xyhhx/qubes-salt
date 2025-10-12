@@ -28,15 +28,17 @@
         - meminfo-writer
       - enable:
         - minimal-usbvm
+
+'/usr/local/etc/qubes/policy.d/available/30-dispvm-usb-input.policy':
   file.managed:
-    - name: '/etc/qubes/policy.d/30-dispvm-usb-input.policy'
-    - source: 'salt://dispvms/disp-sys-usb/files/usb-input.policy'
+    - source: 'salt://{{ tpldir }}/files/usb-input.policy.j2'
     - template: 'jinja'
-    - replace: true
-    - user: root
-    - group: qubes
+    - user: 'root'
+    - group: 'qubes'
     - mode: '0640'
+    - attrs: 'i'
     - makedirs: true
+    - replace: true
     - defaults:
         usb_qube: '{{ vm_name }}'
         keyboard_policy: 'qubes.InputKeyboard'
@@ -45,6 +47,14 @@
         mouse_policy_action: 'ask'
         tablet_policy: 'qubes.InputTablet'
         tablet_policy_action: 'deny'
+
+'/usr/local/etc/qubes/policy.d/enabled/30-dispvm-usb-input.policy':
+  file.symlink:
+    - target: '/usr/local/etc/qubes/policy.d/available/30-dispvm-usb-input.policy'
+    - user: 'root'
+    - group: 'qubes'
+    - mode: '0640'
+    - makedirs: true
 
 {% endif %}
 
