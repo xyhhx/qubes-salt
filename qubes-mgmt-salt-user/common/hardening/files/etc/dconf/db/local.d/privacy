@@ -1,0 +1,16 @@
+[org/gnome/system/location]
+enabled=false
+
+[org/gnome/desktop/privacy]
+remember-app-usage=false
+remember-recent-files=false
+remove-old-temp-files=true
+remove-old-trash-files=true
+report-technical-problems=false
+send-software-usage-stats=false
+
+[org/gnome/desktop/remote-desktop/rdp]
+enable=false
+
+[org/gnome/desktop/remote-desktop/vnc]
+enable=false

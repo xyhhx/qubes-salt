@@ -8,8 +8,8 @@
 
 {% else %}
 
-dnf-plugins-core:
-  pkg.installed
+include:
+  - common.pkgs.dnf-plugins-core
 
 '{{ sls }}:{{ vm_name }}':
   pkgrepo.managed:
@@ -35,4 +35,4 @@ dnf-plugins-core:
 
 {% endif %}
 
-# vim: set syntax=yaml ts=2 sw=2 sts=2 et : 
+# vim: set syntax=yaml ts=2 sw=2 sts=2 et :
