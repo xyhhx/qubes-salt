@@ -17,7 +17,7 @@
     - show_changes: true
     - makedirs: true
 
-'{{ slsdotpath }}:set_up_rpc_includes':
+'{{ slsdotpath }}:set_up_rpc_user_dirs':
   file.directory:
     - names:
       - '/home/{{ user }}/.config/qubes/policy.d/available'
