@@ -23,6 +23,14 @@ include:
       - sequoia-chameleon-gnupg
       - split-gpg2
       - thunderbird
+  file.managed:
+    - name: '/etc/thunderbird/defaults/pref/dove-overrides.js'
+    - source: 'salt://{{ tpldir }}/files/dove-overrides.js'
+    - user: 'root'
+    - group: 'root'
+    - mode: '0640'
+    - attrs: 'i'
+    - makedirs: true
 
 {% endif %}
 

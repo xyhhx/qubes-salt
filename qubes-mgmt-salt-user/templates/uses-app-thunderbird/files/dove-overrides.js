@@ -1,0 +1,10 @@
+pref('browser.tabs.inTitlebar', 0, locked);
+pref('browser.theme.content-theme', 0, locked);
+pref('browser.theme.toolbar-theme', 0, locked);
+pref('extensions.activeThemeID', 'thunderbird-compact-dark@mozilla.org', locked);
+pref('extensions.webextensions.uuids', '{"default-theme@mozilla.org":"d2855893-9aff-4e4f-8d9a-97e80c9a4803","uBlock0@raymondhill.net":"98ed9c41-bf9c-459e-96a0-b9e3c45f397f","thunderbird-compact-dark@mozilla.org":"522f2cdd-d92e-43ff-b7cb-96a03db52346","dkim_verifier@pl":"1009fe84-6dcc-4b85-a06a-ddd33d890de6"}', locked);
+pref('font.name.monospace-x-western', 'IBM Plex Mono', locked);
+pref('font.name.sans-serif-x-western', 'Liberation Sans', locked);
+pref('font.name.serif-x-western', 'Liberation Serif', locked);
+pref('mail.tabs.autohide', true, locked);
+pref('widget.gtk.non-native-titlebar-buttons.enabled', false, locked);
