@@ -11,23 +11,23 @@
 include:
   - common.pkgs.dnf-plugins-core
 
-'{{ sls }}:{{ vm_name }}':
+'{{ slsdotpath }}':
   pkgrepo.managed:
     - names:
       - secureblue:
-        - baseurl: https://repo.secureblue.dev
+        - baseurl: 'https://repo.secureblue.dev'
         - enabled: 1
         - gpgcheck: 1
         - repo_gpgcheck: 1
-        - gpgkey: https://repo.secureblue.dev/secureblue.gpg
+        - gpgkey: 'https://repo.secureblue.dev/secureblue.gpg'
         - require_in:
-          - pkg: trivalent
+          - pkg: 'trivalent'
       - trivalent-copr:
-        - copr: secureblue/trivalent
+        - copr: 'secureblue/trivalent'
         - require:
-          - pkg: dnf-plugins-core
+          - pkg: 'dnf-plugins-core'
         - require_in:
-          - pkg: trivalent-subresource-filter
+          - pkg: 'trivalent-subresource-filter'
   pkg.installed:
     - pkgs:
       - qubes-core-agent-networking
