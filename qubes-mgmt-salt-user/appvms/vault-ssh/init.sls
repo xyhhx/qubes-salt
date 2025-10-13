@@ -17,7 +17,7 @@
         - service.custom-persist
       - set:
         - custom-persist.user_ssh: 'dir:user:user:0700:/home/user/.ssh'
-        - custom-persist.ssh_autostart: 'file:user:user:0600:/home/user/.config/autostart/ssh-add.desktop'
+        - custom-persist.ssh_autostart: 'file:user:user:0700:/home/user/.config/autostart/ssh-add.desktop'
 
 '/usr/local/etc/qubes/policy.d/available/30-split-ssh.policy':
   file.managed:

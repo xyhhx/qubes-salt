@@ -16,6 +16,7 @@
         - service.custom-persist
         - service.split-gpg2-client
       - set:
+        - custom-persist.home_autostart_thunderbird: 'dir:user:user:0700:/home/user/.config/autostart'
         - custom-persist.home_cache_thunderbird: 'dir:user:user:0700:/home/user/.cache/thunderbird'
         - custom-persist.home_gnupg: 'dir:user:user:0700:/home/user/.gnupg'
         - custom-persist.home_mozilla: 'dir:user:user:0700:/home/user/.mozilla'
@@ -26,6 +27,17 @@
     - tags:
       - add:
         - split-gpg2-client
+
+{% else %}
+
+'/home/user/.config/autostart/net.thunderbird.Thunderbird.desktop':
+  file.symlink:
+    - target: '/usr/share/applications/net.thunderbird.Thunderbird.desktop'
+    - user: 'user'
+    - group: 'user'
+    - mode: '0700'
+    - attrs: 'i'
+    - makedirs: true
 
 {% endif %}
 
