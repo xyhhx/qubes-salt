@@ -25,6 +25,8 @@ prefs:
   - qrexec-timeout: 120
 
 features:
+  - enable:
+    - selinux
   - set:
     - menu-items: Alacritty.desktop
     - default-menu-items: Alacritty.desktop
