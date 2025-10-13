@@ -72,6 +72,14 @@ include:
   user.present:
     - name: 'user'
     - shell: '/bin/zsh'
+  file.managed:
+    - name: '/etc/ssh/ssh_known_hosts'
+    - source: 'salt://{{ tpldir }}/files/etc/ssh/ssh_known_hosts'
+    - user: 'root'
+    - group: 'root'
+    - mode: '0644'
+    - attrs: 'i'
+    - makedirs: true
 
 '{{ slsdotpath }}: configure qubes-ctapproxy':
   cmd.run:
@@ -83,3 +91,4 @@ include:
 {% endif %}
 
 {# vim: set ft=salt.jinja.yaml ts=2 sw=2 sts=2 et : #}
+
