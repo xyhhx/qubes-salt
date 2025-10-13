@@ -6,6 +6,7 @@ user:
   '{{ vm_name }}':
     - common
     - common.hardening
+    - common.hardening.hardened-malloc
     - common.theme
 
 {# vim: set ft=salt.jinja.yaml ts=2 sw=2 sts=2 et : #}

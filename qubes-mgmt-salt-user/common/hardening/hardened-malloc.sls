@@ -19,12 +19,23 @@ include:
   file.managed:
     - contents: |
         libhardened_malloc.so
-    - user: root
-    - group: root
+    - user: 'root'
+    - group: 'root'
     - mode: '0644'
+    - attrs: 'i'
 {% endif %}
     - prereq:
       - pkg: 'hardened_malloc'
+
+'/etc/sysctl.d/30-hardened_malloc-mapcount.conf':
+  file.managed:
+    - contents: |
+        vm.max_map_count = 1048576
+    - user: 'root'
+    - group: 'root'
+    - mode: '0644'
+    - attrs: 'i'
+    - makedirs: true
 
 
 {#- vim: set syntax=yaml.salt.jinja ts=2 sw=2 sts=2 et : -#}

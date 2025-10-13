@@ -28,6 +28,9 @@ split-gpg2-dom0:
         - custom-persist.gnupg_home: 'dir:user:user:0700:/home/user/.gnupg'
         - custom-persist.home_config: 'dir:user:user:0700:/home/user/.config'
         - custom-persist.home_local_share: 'dir:user:user:0700:/home/user/.local/share'
+    - tags:
+      - add:
+        - split-gpg2-server
     - require:
       - sls: templates.{{ template_name }}
 

@@ -1,4 +1,4 @@
-'{{ slsdotpath }}.{{ sls }}':
+'{{ slsdotpath }}: {{ sls }}':
   file.managed:
     - names:
 {% for file in [
@@ -10,8 +10,8 @@
         - source: 'salt://{{ tpldir }}/files/{{ file }}'
 {% endfor %}
     - makedirs: true
-    - user: root
-    - group: root
+    - user: 'root'
+    - group: 'root'
     - mode: '0640'
 
 {#- vim: set syntax=yaml.salt.jinja ts=2 sw=2 sts=2 et : -#}

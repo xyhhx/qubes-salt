@@ -1,4 +1,4 @@
-'{{ slsdotpath }}.{{ sls }}':
+'{{ slsdotpath }}: homedirs':
   file.keyvalue:
     - names:
       - '/etc/login.defs':
@@ -9,7 +9,7 @@
         - key_values:
             umask: '077'
     - separator: ' '
-    - append_if_missing: true
+    - append_if_not_found: true
     - uncomment: '#'
     - key_ignore_case: true
 

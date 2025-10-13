@@ -6,8 +6,8 @@
   pkg.installed:
     - pkgs: {{ terminal.pkgs }}
   alternatives.install:
-    - name: x-terminal-emulator
-    - link: /usr/bin/x-terminal-emulator
+    - name: 'x-terminal-emulator'
+    - link: '/usr/bin/x-terminal-emulator'
     - path: '{{ terminal.bin }}'
     - priority: 50
     - onchanges:

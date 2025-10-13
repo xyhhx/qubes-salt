@@ -9,8 +9,8 @@
 '/etc/ssh/ssh_config.d/10-custom.conf':
   file.managed:
     - source: 'salt://{{ tpldir }}/files/etc/ssh/ssh_config.d/10-custom.conf'
-    - user: root
-    - group: root
+    - user: 'root'
+    - group: 'root'
     - mode: '0644'
     - makedirs: true
 

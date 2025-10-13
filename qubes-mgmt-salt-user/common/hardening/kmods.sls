@@ -89,10 +89,10 @@ https://github.com/secureblue/secureblue/blob/124d6f2cf8f5b097502ea2b3d7edac7ab9
 '/etc/modprobe.d/99-disallowed.conf':
   file.managed:
     - file: 'salt://{{ tpldir }}/files/etc/modprobe.d/99-disallowed.conf.j2'
-    - template: jinja
-    - user: root
-    - group: root
-    - mode: 0644
+    - template: 'jinja'
+    - user: 'root'
+    - group: 'root'
+    - mode: '0644'
     - replace: true
     - makedirs: true
 

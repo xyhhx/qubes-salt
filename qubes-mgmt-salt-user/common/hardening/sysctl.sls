@@ -44,7 +44,7 @@ https://github.com/Metropolis-nexus/Common-Files/blob/c752e0b3a2a092e889e7108c5a
 'vm.unprivileged_userfaultfd': 0
 {%- endload -%}
 
-/etc/sysctl.d/99-custom-hardening.conf:
+'/etc/sysctl.d/99-custom-hardening.conf':
   file.keyvalue:
     - key_values: {{ sysctls }}
     - separator: ' = '

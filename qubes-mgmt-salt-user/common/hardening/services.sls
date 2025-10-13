@@ -1,4 +1,4 @@
-'{{ slsdotpath }}.{{ sls }}':
+'{{ slsdotpath }}: {{ sls }}':
   service.masked:
     - names:
       - debug-shell
