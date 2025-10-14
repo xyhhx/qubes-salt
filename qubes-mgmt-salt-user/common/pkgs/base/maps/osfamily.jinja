@@ -4,6 +4,11 @@ RedHat:
   - procps-ng
   - vim-common
   - xclip
+Debian:
+  - curl
+  - procps
+  - vim
+  - xclip
 {%- endload -%}
 {{ salt['grains.filter_by'](osfamily, default={}) }}
 {#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

@@ -5,6 +5,9 @@ RedHat:
   - libnotify
   - qubes-notification-agent
   - xfce4-notifyd
+Debian:
+  - libnotify4
+  - xfce4-notifyd
 {%- endload -%}
 {{ salt['grains.filter_by'](osfamily, default={}) }}
 {#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}
