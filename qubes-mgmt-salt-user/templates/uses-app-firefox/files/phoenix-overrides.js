@@ -1,0 +1,21 @@
+//
+// pref('browser.pageActions.persistedActions', '{"ids":["bookmark","_testpilot-containers","_1ea2fa75-677e-4702-b06a-50fc7d06fe7e_"],"idsInUrlbar":["_testpilot-containers","_1ea2fa75-677e-4702-b06a-50fc7d06fe7e_","bookmark"],"idsInUrlbarPreProton":[],"version":1}');
+pref('browser.policies.runOncePerModification.extensionInstall', '["https://addons.mozilla.org/firefox/downloads/latest/ublock-origin/latest.xpi", https://addons.mozilla.org/firefox/downloads/file/3812704/umatrix-1.4.4.xpi","https://addons.mozilla.org/firefox/downloads/file/4515410/javascript_restrictor-0.21.xpi","https://addons.mozilla.org/firefox/downloads/file/4588498/temporary_containers_plus-2.0.2.xpi","https://addons.mozilla.org/firefox/downloads/file/4494279/multi_account_containers-8.3.0.xpi","https://addons.mozilla.org/firefox/downloads/file/3954735/black21-3.0.2.xpi"]');
+pref('browser.tabs.inTitlebar', 0, locked);
+pref('browser.theme.content-theme', 0, locked);
+pref('browser.theme.toolbar-theme', 0, locked);
+pref('browser.uiCustomization.state', '{"placements":{"widget-overflow-fixed-list":[],"unified-extensions-area":[],"nav-bar":["sidebar-button","back-button","forward-button","vertical-spacer","stop-reload-button","urlbar-container","_testpilot-containers-browser-action","fxa-toolbar-menu-button","reset-pbm-toolbar-button","developer-button","ublock0_raymondhill_net-browser-action","downloads-button","unified-extensions-button"],"toolbar-menubar":["menubar-items"],"TabsToolbar":[],"vertical-tabs":["tabbrowser-tabs"],"PersonalToolbar":["personal-bookmarks"]},"seen":["reset-pbm-toolbar-button","developer-button","_testpilot-containers-browser-action","ublock0_raymondhill_net-browser-action","screenshot-button"],"dirtyAreaCache":["nav-bar","vertical-tabs","PersonalToolbar","unified-extensions-area","TabsToolbar","toolbar-menubar"],"currentVersion":23,"newElementCount":7}');
+pref('browser.uiCustomization.navBarWhenVerticalTabs', '["sidebar-button","back-button","forward-button","vertical-spacer","stop-reload-button","urlbar-container","_testpilot-containers-browser-action","fxa-toolbar-menu-button","reset-pbm-toolbar-button","developer-button","ublock0_raymondhill_net-browser-action","downloads-button","unified-extensions-button"]', locked);
+pref('extensions.activeThemeID', '{9b84b6b4-07c4-4b4b-ba21-394d86f6e9ee}', locked);
+pref('extensions.ml.enabled', false, locked);
+// pref('extensions.webextensions.ExtensionStorageIDB.migrated.@testpilot-containers', true);
+// pref('extensions.webextensions.ExtensionStorageIDB.migrated.jsr@javascriptrestrictor', true);
+// pref('extensions.webextensions.ExtensionStorageIDB.migrated.uBlock0@raymondhill.net', true);
+// pref('extensions.webextensions.ExtensionStorageIDB.migrated.uMatrix@raymondhill.net', true);
+// pref('extensions.webextensions.ExtensionStorageIDB.migrated.{1ea2fa75-677e-4702-b06a-50fc7d06fe7e}', true);
+// pref('extensions.webextensions.uuids', '{"formautofill@mozilla.org":"f121d1f0-b414-4f14-8269-81bfee549b0e","ipp-activator@mozilla.com":"e226db10-c88c-4f1d-91c1-e1dc53366072","pictureinpicture@mozilla.org":"7bfaabeb-b5aa-48a5-aa9c-5b4c96e28841","addons-search-detection@mozilla.com":"1e038adc-f2a9-4204-9f5e-14e92a292614","webcompat@mozilla.org":"9a310967-e580-48bf-b3e8-4eafebbc122d","newtab@mozilla.org":"8a9b80e7-fa9a-4bfd-b8a1-b4d35e06eb86","default-theme@mozilla.org":"79e07fa3-0d65-48ca-85fc-9cae590eeaf9","uBlock0@raymondhill.net":"4a85af6a-a264-45c3-96f6-a37f16fc9e44","@testpilot-containers":"1ef535bf-479b-419b-8b29-220bd78bb6ec","{1ea2fa75-677e-4702-b06a-50fc7d06fe7e}":"53557a17-2553-44ec-9bf6-a75da31e6d07","jsr@javascriptrestrictor":"76fabc59-0898-4a26-b214-2203d94e4bbc","uMatrix@raymondhill.net":"84dd3bb1-4fe3-49bf-b865-4438064bd820"}');
+pref('font.name.monospace-x-western', 'IBM Plex Mono', locked);
+pref('font.name.sans-serif-x-western', 'Liberation Sans', locked);
+pref('font.name.serif-x-western', 'Liberation Serif', locked);
+pref('sidebar.visibility', 'hidden');
+pref('widget.gtk.non-native-titlebar-buttons.enabled', false, locked);

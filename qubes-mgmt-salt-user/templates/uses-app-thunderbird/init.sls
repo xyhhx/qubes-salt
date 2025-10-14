@@ -28,8 +28,7 @@ include:
     - source: 'salt://{{ tpldir }}/files/dove-overrides.js'
     - user: 'root'
     - group: 'root'
-    - mode: '0640'
-    - attrs: 'i'
+    - mode: '0644'
     - makedirs: true
 
 {% endif %}
