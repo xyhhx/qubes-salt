@@ -1,0 +1,9 @@
+{%- set vm_name = "dvm-fedora-42-minimal" -%}
+
+user:
+  'dom0':
+    - dispvms.dvm-fedora-42-minimal
+  '{{ vm_name }}':
+    - common.theme
+
+# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
