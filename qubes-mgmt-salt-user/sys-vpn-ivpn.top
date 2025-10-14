@@ -1,0 +1,7 @@
+{%- set vm_name = "sys-vpn-ivpn" -%}
+
+user:
+  'dom0':
+    - appvms.sys-vpn-ivpn
+
+# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
