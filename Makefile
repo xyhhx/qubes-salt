@@ -71,7 +71,7 @@ pull-bundle: guard-host-dom0 guard-env-GUEST $(SRC_DIR)/.bundles
 
 .PHONY: apply
 apply: guard-host-dom0 guard-env-GUEST
-	run0 $(QUBESCTL) $(if $(TARGETS),--targets $(VM_TARGETS)) $(BATCH_TARGETS) state.apply
+	run0 $(QUBESCTL) $(if $(TARGETS),--targets $(VM_TARGETS)) $(BATCH_TARGETS) state.apply $(if $(DEBUG),-l debug)
 
 .PHONY: enable
 enable: guard-host-dom0 guard-env-GUEST

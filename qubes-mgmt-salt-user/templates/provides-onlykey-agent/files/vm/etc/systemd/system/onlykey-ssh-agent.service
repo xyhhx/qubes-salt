@@ -1,3 +1,5 @@
+{%- include 'utils/banner.jinja' -%}
+
 [Unit]
 Description=onlykey-agent SSH agent
 Requires=onlykey-ssh-agent.socket
@@ -14,3 +16,4 @@ ExecStart=/opt/onlykey-agent --foreground --sock-path $ONLYKEY_SSH_SOCK $ONLYKEY
 User=user
 Group=user
 
+{#- vim: set ft=systemd syn=systemd.jinja : -#}

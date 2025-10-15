@@ -40,6 +40,5 @@ qubes-templates-community-testing:
     - fromrepo: 'qubes-templates-community-testing'
 
 {%- endif -%}
-
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
+{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
 

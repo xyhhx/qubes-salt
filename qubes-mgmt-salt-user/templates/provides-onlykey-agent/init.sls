@@ -33,7 +33,6 @@
         - mode: '0755'
       - '/etc/environment.d/30-onlykey-ssh.conf':
         - source: 'salt://{{ tpldir }}/files/vm/etc/environment.d/30-onlykey-ssh.conf.j2'
-        - template: 'jinja'
         - defaults:
             user: 'user'
         - context:
@@ -43,6 +42,7 @@
     - mode: '0644'
     - attrs: 'i'
     - makedirs: true
+    - template: 'jinja'
   cmd.run:
     - names:
       - 'pipx install --global onlykey onlykey-agent':

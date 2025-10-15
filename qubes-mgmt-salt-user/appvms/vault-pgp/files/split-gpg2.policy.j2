@@ -1,4 +1,4 @@
-### THIS FILE IS MANAGED BY SALT, DON'T EDIT OR IT WILL BE REPLACED ###
+{%- include 'utils/banner.jinja' -%}
 
 {{ policy }}  +  @tag:{{ client_tag }}  @default  allow target={{ vault_vm }} notify=yes
 {{ policy }}  +  @tag:{{ client_tag }}  @tag:{{ server_tag }} allow notify=yes

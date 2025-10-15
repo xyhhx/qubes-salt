@@ -1,0 +1,25 @@
+{%- include 'utils/banner.jinja' -%}
+
+[general]
+live_config_reload = true
+
+[selection]
+save_to_clipboard = true
+
+[colors.primary]
+background = "#000000"
+
+[env]
+WINIT_X11_SCALE_FACTOR = "2.0"
+
+[window]
+padding = { x = 16, y = 16 }
+dynamic_padding = true
+decorations = "none"
+dimensions = { columns = 128, lines = 48 }
+
+[font]
+size = 10.5
+normal.family = "DejaVu Sans Mono"
+
+{#- vim: set syn=jinja.tomml : -#}

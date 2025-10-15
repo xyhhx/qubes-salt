@@ -1,0 +1,92 @@
+xsettings:
+  .Net.ThemeName: 'deepin-dark'
+  .Net.IconThemeName: 'bloom-dark'
+  .Gtk.FontName: 'Liberation Sans 10'
+  .Gtk.MonospaceFontName: 'DejaVu Sans Mono 10'
+  .Gdk.WindowScalingFactor: 2
+
+pointers:
+  .Elan_Touchpad.Properties.libinput_Tapping_Enabled: 1
+
+xfce4-desktop:
+  .backdrop.screen0.monitoreDP-1.workspace0.image-style: 5
+  .backdrop.screen0.monitoreDP-1.workspace0.last-image: '/home/{{ user }}/Pictures/Wallpapers/wpjpg'
+
+xfce4-keyboard-shortcuts:
+  .commands.custom.Print: 'xfce4-screenshooter -r'
+  .commands.custom.<Super>C: 'x-center-active-window'
+  .commands.custom.<Super>Space: 'xfce4-appfinder'
+  .commands.custom.<Primary>F12: 'alacritty'
+  .commands.custom.<Primary>F10: 'x-open-terminal-focused-qube'
+  .commands.custom.<Primary><Shift>F10: 'x-open-terminal-focused-qube -r'
+
+xfce4-panel:
+  .panels.panel-1.size: 32
+  .panels.panel-1.icon-size: 16
+  .panels.panel-1.background-style: 1
+  .panels.panel-1.background-rgba:
+    - 0
+    - 0
+    - 0
+    - 1
+  .panels.panel-1.dark-mode: 1
+  .panels.panel-1.plugin-ids:
+    - 11
+    - 10
+    - 4
+    - 3
+    - 15
+    - 7
+    - 8
+    - 6
+    - 2
+    - 5
+    - 9
+  .plugins.plugin-2: 'separator'
+  .plugins.plugin-2.style: 0
+  .plugins.plugin-3.flat-buttons: true
+  .plugins.plugin-3.show-handle: false
+  .plugins.plugin-4.rows: 1
+  .plugins.plugin-4.miniature-view: false
+  .plugins.plugin-4.workspace-scrolling: false
+  .plugins.plugin-5.digital-layout: 3
+  .plugins.plugin-5.digital-time-font: 'Liberation Sans 10'
+  .plugins.plugin-7.enable-keyboard-shortcuts: true
+  .plugins.plugin-6.icon-size: 16
+  .plugins.plugin-6.single-row: true
+  .plugins.plugin-6.square-icons: true
+  .plugins.plugin-9: 'separator'
+  .plugins.plugin-9.style: 0
+  .plugins.plugin-10: 'launcher'
+  .plugins.plugin-10.show-label: false
+  .plugins.plugin-11: 'whiskermenu'
+  .plugins.plugin-11.button-icon: 'start-here'
+  .plugins.plugin-11.profile-shape: 1
+  .plugins.plugin-11.view-mode: 0
+  .plugins.plugin-11.hover-switch-category: true
+  .plugins.plugin-11.favorites-in-recent: true
+  .plugins.plugin-11.position-categories-horizontal: false
+  .plugins.plugin-11.position-categories-alternate: true
+  .plugins.plugin-11.position-search-alternate: true
+  .plugins.plugin-11.position-commands-alternate: false
+  .plugins.plugin-11.position-profile-alternate: true
+  .plugins.plugin-11.category-show-name: true
+  .plugins.plugin-11.launcher-show-name: true
+
+xfwm4:
+  .general.workspace_count: 12
+  .general.workspace_names:
+    - '·'
+    - '·'
+    - '·'
+    - '▪'
+    - '·'
+    - '·'
+    - '·'
+    - '▪'
+    - '·'
+    - '·'
+    - '·'
+    - '▪'
+
+{#- vim: set syntax=yaml.jinja : -#}

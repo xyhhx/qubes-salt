@@ -1,5 +1,7 @@
+{%- include 'utils/banner.jinja' -%}
+
 ONLYKEY_SSH_CONF=/home/{{ user }}/.config/onlykey/ssh-agent.conf
 SSH_AUTH_SOCK=/run/onlykey/ssh/S.agent
 PATH=${PATH}:/opt
 
-{#- vim: set ft=jinja : -#}
+{#- vim: set ft=jinja.env : -#}

@@ -1,0 +1,16 @@
+#!/bin/env bash
+set -xeuo pipefail
+
+windowid="$(xdotool getwindowfocus)"
+target="$(xprop _QUBES_VMNAME -id "${windowid}" | cut -f2 -d\" )"
+
+[[ "${target}" == "_QUBES_VMNAME not found" ]] \
+  && notify-send "Couldn't get active qube" \
+  && exit 1
+
+[[ "${1}" == "-r" ]] || [[ "${1}" == "--root" ]] \
+  && root="-u root"
+
+qvm-run "${root:-""}" "${target}" -- x-terminal-emulator
+
+# vim: set ts=2 sw=2 et number:

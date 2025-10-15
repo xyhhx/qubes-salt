@@ -1,4 +1,5 @@
-{%- from 'utils/user_info.jinja' import user -%}
+{%- if grains.id == 'dom0' -%}
+{%- from 'utils/user_info.jinja' import user with context -%}
 
 '{{ slsdotpath }}:set_up_rpc_includes':
   file.managed:
@@ -9,7 +10,6 @@
             user: '{{ user }}'
         - defaults:
             user: 'user'
-        - template: jinja
       - '/etc/qubes/policy.d/20-salt-includes.policy':
         - source: 'salt://{{ tpldir }}/files/etc/qubes/policy.d/20-salt-includes.policy.j2'
     - user: 'root'
@@ -18,6 +18,7 @@
     - attrs: i
     - show_changes: true
     - makedirs: true
+    - template: 'jinja'
 
 '{{ slsdotpath }}:set_up_rpc_user_dirs':
   file.directory:
@@ -31,5 +32,5 @@
     - show_changes: true
     - makedirs: true
 
-
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
+{%- endif -%}
+{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :-#}

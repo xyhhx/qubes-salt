@@ -1,0 +1,61 @@
+{%- import_yaml tpldir ~ '/channel-settings.yml' as xfce_channel_settings with context -%}
+
+{#-
+  Build out the xfconf-query command calls
+-#}
+
+{#-
+  Helper function to get type from a value in a way compatible with xfconf-query
+-#}
+{%- macro get_type(value) -%}
+  {%- if value is string -%}
+  string
+  {%- elif value is number -%}
+  int
+  {%- elif value is boolean -%}
+  bool
+  {%- endif -%}
+{%- endmacro -%}
+
+{#-
+  Build the command
+-#}
+{%- macro build_xfconf_query_cmd(channel, property, value) -%}
+
+  {%- set args = [] -%}
+
+  {%- do args.extend(['-c', channel, '-n', '-p', property]) -%}
+
+  {%- if value | is_list -%}
+
+    {%- for v in value -%}
+    {%- do args.extend(['-t', "'" ~ get_type(v) ~ "'"]) -%}
+    {%- endfor -%}
+    {%- for v in value -%}
+    {%- do args.extend(['-s', "'" ~ v ~ "'"]) -%}
+    {%- endfor -%}
+
+  {%- else -%}
+
+    {%- do args.extend(['-t', "'" ~ get_type(value) ~ "'", '-s', "'" ~ value ~ "'" ]) -%}
+
+  {%- endif -%}
+
+  xfconf-query {{ args | join(' ') }}
+
+{%- endmacro -%}
+
+{%- set commands = [] -%}
+{#-
+  Parse the config and prepare cmds
+-#}
+{%- for channel, property in xfce_channel_settings | items -%}
+{%- for key, value in property | items -%}
+
+  {%- set p = key | regex_replace('\.','/') -%}
+  {%- do commands.append(build_xfconf_query_cmd(channel, p, value)) -%}
+
+{%- endfor -%}
+{%- endfor -%}
+
+{# vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : #}

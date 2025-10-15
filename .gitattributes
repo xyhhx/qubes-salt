@@ -1,0 +1,2 @@
+*.sls     linguist-language=jinja
+*.top     linguist-language=jinja
