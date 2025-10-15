@@ -9,6 +9,24 @@ SRC_DIR			 					 := $(USR_LOCAL)/src/$(PROJECT_NAME)
 MINION_CONF_DIR_GLOBAL := /etc/salt/minion.d
 MINION_CONF_DIR_USER   := $(USR_LOCAL)/etc/salt/minion.d
 
+QUBESCTL := qubesctl
+QUBESCTL += --show-output
+QUBESCTL += --force-color
+QUBESCTL += $(if $(SKIP_DOM0), --skip-dom0)
+QUBESCTL += $(if $(TARGETS), --targets $(TARGETS))
+
+comma := ,
+empty :=
+space := $(empty) $(empty)
+
+TARGET_TYPES := all templates standalones apps
+
+ifeq (apply, $(firstword $(MAKECMDGOALS)))
+	TARGETS       := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+	VM_TARGETS    := $(subst $(space),$(comma),$(filter-out $(TARGET_TYPES),$(TARGETS)))
+	BATCH_TARGETS := $(foreach wrd,$(filter $(TARGET_TYPES),$(TARGETS)),--$(wrd))
+endif
+
 # ----------
 #  task guards
 
@@ -44,10 +62,15 @@ install: guard-host-dom0 $(MINION_CONF_DIR_GLOBAL)/z_user.conf $(MINION_CONF_DIR
 clean: guard-host-dom0
 	rm -f $(MINION_CONF_DIR_GLOBAL)/z_user.conf $(MINION_CONF_DIR_USER)/overrides.conf
 
-.PHONY: lift-bundle
-lift-bundle: guard-host-dom0 guard-env-GUEST $(SRC_DIR)/.bundles
-	qvm-run $(GUEST) 'cd $(SRC_DIR) && make bundle'
-	qvm-run -p $(GUEST) 'cat $(SRC_DIR)/.bundles/$(PROJECT_NAME)' > $(SRC_DIR)/.bundles/$(PROJECT_NAME) </dev/null
+.PHONY: pull-bundle
+pull-bundle: guard-host-dom0 guard-env-GUEST $(SRC_DIR)/.bundles
+	qvm-run -- $(GUEST) 'cd $(SRC_DIR) && make bundle'
+	qvm-run -p -- $(GUEST) 'cat $(SRC_DIR)/.bundles/$(PROJECT_NAME)' | run0 tee $(SRC_DIR)/.bundles/$(PROJECT_NAME)  >/dev/null
+	git pull --rebase
+
+.PHONY: apply
+apply: guard-host-dom0 guard-env-GUEST
+	run0 $(QUBESCTL) $(if $(TARGETS),--targets $(VM_TARGETS)) $(BATCH_TARGETS) state.apply
 
 $(MINION_CONF_DIR_GLOBAL)/z_user.conf:
 	install -D -oroot -groot -m0644 conf/z_user.conf $@
@@ -68,3 +91,6 @@ $(SRC_DIR)/.bundles:
 bundle: guard-domu
 	mkdir -p .bundles
 	git bundle create - --all > .bundles/qubes-mgmt-salt-user
+
+%:
+	@;
