@@ -38,7 +38,16 @@ Mirrors:
   ) | bash
   ```
 
-### Getting started
+### Using the Make tasks
+
+> [!Note]
+> The Make tasks requires a `GUEST` variable to be set. It should be the name of the guest domain that holds the repo's source code. You can either pass it directly (`GUEST=my-dev-qube make...`)
+
+> [!Tip]
+> You can export the `GUEST` variable to the environment to make life easier
+
+> [!Warning]
+> While the Make tasks try to ensure that commands are only ran in the appropriate domains (i.e. dom0 or guests), the checks are frail. Be mindful of what you're running!
 
 #### Enabling/disabling top files
 
@@ -67,7 +76,7 @@ Make is used to interact with `qubesctl` and offers a few helper tasks to make w
     make disable-all
     ```
 
-    > [!Note]
+    > [!Tip]
     > This is handy when first setting the repo up. You can run `make enable-all` to quickstart the repo
 
   - Enable _only_ some tops:
@@ -113,3 +122,16 @@ Bundling changes and lifting them to dom0 is also easily done with the available
 # In dom0
 make pull-bundle
 ```
+
+---
+
+## Acknowledgments
+
+The following resources were very useful for learning Salt, especially in the context of Qubes OS; and for getting inspiration about how to design my own states (thanks!):
+
+- <https://github.com/ben-grande/qusal>
+- <https://git.drkhsh.at/salt-n-pepper/file/README.md.html>
+- <https://github.com/gonzalo-bulnes/qubes-mgmt-salt-user>
+- <https://github.com/unman/shaker>
+- <https://github.com/freedomofpress/securedrop-workstation>
+- <https://forum.qubes-os.org/t/qubes-salt-beginners-guide/20126>
