@@ -1,12 +1,10 @@
 appvm:
-  config_file:
-    path: '/home/user/.config/alacritty'
-    user: 1000
-    group: 1000
-    mode: '0600'
+  config_path: '/home/user/.config'
+  user: 1000
+  group: 1000
+  mode: '0600'
 template:
-  config_file:
-    path: '/etc/skel/.config/alacritty'
-    user: root
-    group: root 
-    mode: '0644'
+  config_path: '/etc/skel/.config'
+  user: root
+  group: root
+  mode: '0644'

@@ -1,0 +1,17 @@
+#!/bin/env bash
+set -axeuo pipefail
+
+[[ -z "${SSH_AUTH_SOCK}" ]] &&
+  echo "\$SSH_AUTH_SOCK not defined. Aborting" &&
+  exit 1
+
+self="$(qubesdb-read /name)"
+
+notify-send \
+  -i "pgp-keys" \
+  "SSH agent access: ${self}" \
+  "${self}: SSH agent access from ${QREXEC_REMOTE_DOMAIN:?}"
+
+socat - "unix-connect:${SSH_AUTH_SOCK}"
+
+# vim: set syn=sh :

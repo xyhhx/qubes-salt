@@ -1,0 +1,8 @@
+{%- set vm_name = "sys-onlykey" -%}
+
+user:
+  'dom0':
+    - appvms.sys-onlykey
+
+
+{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

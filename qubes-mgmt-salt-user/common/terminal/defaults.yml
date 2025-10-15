@@ -1,10 +1,10 @@
 bin: /usr/bin/alacritty
+config_path: /home/user/.config
 config_file:
   name: alacritty.toml
-  path: /home/user/.config/alacritty
-  mode: '0600'
-  group: 1000
-  user: 1000
   serializer: tomlmod
+mode: '0600'
+group: 1000
+user: 1000
 pkgs:
   - alacritty

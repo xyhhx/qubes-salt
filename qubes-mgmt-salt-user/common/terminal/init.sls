@@ -23,12 +23,16 @@
 
 {% if salt['pillar.get']('qubes:type') in ['appvm', 'template'] %}
 
-'{{ terminal.config_file.path }}/{{ terminal.config_file.name }}':
+'{{ slsdotpath }}: set configs':
   file.managed:
-    - source: 'salt://{{ slspath }}/files/{{ terminal.config_file.name }}'
-    - user: '{{ terminal.config_file.user }}'
-    - group: '{{ terminal.config_file.group }}'
-    - mode: '{{ terminal.config_file.mode }}'
+    - names:
+      - '{{ terminal.config_path }}/alacritty/{{ terminal.config_file.name }}':
+        - source: 'salt://{{ slspath }}/files/{{ terminal.config_file.name }}'
+    - '{{ terminal.config_path }}/profile.d/50-set-ps1.conf':
+      - source: 'salt://{{ tpldir }}/files/50-set-ps1.conf'
+    - user: '{{ terminal.user }}'
+    - group: '{{ terminal.group }}'
+    - mode: '{{ terminal.mode }}'
     - makedirs: true
     - show_changes: true
 

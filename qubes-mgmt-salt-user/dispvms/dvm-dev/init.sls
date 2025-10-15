@@ -19,8 +19,14 @@
       - set:
         - menu-items: Alacritty.desktop
         - menu-favorites: "@disp:Alacritty"
+    - tags:
+      - add:
+        - onlykey-ssh-client
 
 {% else %}
+
+include:
+  - common.split-ssh-client
 
 '{{ slsdotpath }}:init':
   cmd.run:

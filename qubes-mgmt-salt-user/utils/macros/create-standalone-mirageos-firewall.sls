@@ -26,11 +26,11 @@ label: 'yellow'
 {%- do salt["defaults.merge"](vm, vm_defaults, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, vm_options, in_place=true) -%}
 
-{%- if vm_options.netvm is not defined -%}
+{%- if vm_options.netvm is defined -%}
+{%- set netvm = vm_options.netvm -%}
+{%- else -%}
 {%- set default_netvm = salt['cmd.shell']('qubes-prefs -- default_netvm') -%}
 {%- set netvm = salt['cmd.shell']('qvm-prefs -- ' ~ default_netvm ~ ' netvm') -%}
-{%- else -%}
-{%- set netvm = vm_options.netvm -%}
 {%- endif -%}
 
 '{{ vm_name }}':

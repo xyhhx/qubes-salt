@@ -1,0 +1,15 @@
+[Unit]
+Description=onlykey-agent SSH agent socket
+
+[Socket]
+ListenStream=%t/onlykey/ssh/S.agent
+FileDescriptorName=ssh
+Service=onlykey-ssh-agent.service
+SocketMode=0777
+DirectoryMode=0777
+SocketUser=user
+SocketGroup=user
+
+[Install]
+WantedBy=sockets.target
+

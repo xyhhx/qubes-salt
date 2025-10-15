@@ -1,0 +1,17 @@
+#!/bin/env sh
+set -xae
+
+SSH_VAULT_VM="${SSH_VAULT_VM:-@default}"
+SSH_SOCK_DIR="${SSH_SOCK_DIR:-"/var/run/qubes-split-ssh/${SSH_VAULT_VM}"}"
+
+install -Dd -o"$(id -nu 1000)" -gqubes "${SSH_SOCK_DIR}"
+export SSH_SOCK="${SSH_SOCK_DIR}/S.agent"
+
+user="$(id -nu 1000)"
+
+exec socat \
+  "UNIX-LISTEN:${SSH_SOCK},unlink-early,fork,user=${user},group=${user},mode=700" \
+  "EXEC:qrexec-client-vm ${SSH_VAULT_VM} qubes.SshAgent"
+
+# vim: set syn=sh:
+

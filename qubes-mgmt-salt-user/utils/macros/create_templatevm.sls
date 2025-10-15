@@ -2,7 +2,7 @@
 
 {%- load_yaml as defaults -%}
 prefs:
-  - label: gray
+  - label: black
 
   - memory: 400
   - maxmem: 2000

@@ -5,7 +5,7 @@
 
 {%- set mfw_name = 'sys-mfw-ivpn' -%}
 {%- from 'utils/macros/create-standalone-mirageos-firewall.sls' import create_standalone_mirageos_firewall -%}
-{{ create_standalone_mirageos_firewall(mfw_name) }}
+{{ create_standalone_mirageos_firewall(mfw_name, vm_options={ 'netvm': 'sys-net' }) }}
 
 '{{ vm_name }}':
   qvm.vm:
