@@ -19,6 +19,7 @@ comma := ,
 empty :=
 space := $(empty) $(empty)
 
+ALL_TOPS     := $(shell ls -1 qubes-mgmt-salt-user/*.top | sed 's/.*\/\(.*\)\.top/\1/')
 TARGET_TYPES := all templates standalones apps
 
 ifeq (apply, $(firstword $(MAKECMDGOALS)))
@@ -71,6 +72,29 @@ pull-bundle: guard-host-dom0 guard-env-GUEST $(SRC_DIR)/.bundles
 .PHONY: apply
 apply: guard-host-dom0 guard-env-GUEST
 	run0 $(QUBESCTL) $(if $(TARGETS),--targets $(VM_TARGETS)) $(BATCH_TARGETS) state.apply
+
+.PHONY: enable
+enable: guard-host-dom0 guard-env-GUEST
+	run0 $(QUBESCTL) top.$@ $(wordlist 2, $(words MAKECMDGOALS), $(MAKECMDGOALS))
+
+.PHONY: disable
+disable: guard-host-dom0 guard-env-GUEST
+	run0 $(QUBESCTL) top.$@ $(wordlist 2, $(words MAKECMDGOALS), $(MAKECMDGOALS))
+
+.PHONY: enable-all
+enable-all: guard-host-dom0 guard-env-GUEST
+	run0 $(QUBESCTL) top.enable $(ALL_TOPS)
+
+.PHONY: disable-all
+disable-all: guard-host-dom0 guard-env-GUEST
+	run0 $(QUBESCTL) top.disable $(ALL_TOPS)
+
+.PHONY: enable-only
+enable-only: guard-host-dom0 guard-env-GUEST disable-all enable
+
+.PHONY: enable-all
+enable-all: guard-host-dom0 guard-env-GUEST
+	run0 $(QUBESCTL) top.enable $(ALL_TOPS)
 
 $(MINION_CONF_DIR_GLOBAL)/z_user.conf:
 	install -D -oroot -groot -m0644 conf/z_user.conf $@
