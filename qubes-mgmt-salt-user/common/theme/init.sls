@@ -45,6 +45,8 @@
     - makedirs: true
     - replace: true
     - template: jinja
+    - onchanges_in:
+      - cmd: 'dconf update'
 
 'dconf update':
   cmd.run:

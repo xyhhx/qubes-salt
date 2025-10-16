@@ -1,0 +1,5 @@
+{%- import_yaml './maps/grains.os_family.yml' as osfamily_map with context -%}
+
+{%- set filepaths = salt['grains.filter_by'](osfamily_map, default={}) -%}
+
+{#- vim: set ft=salt syn=salt.jinja : -#}

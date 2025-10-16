@@ -75,11 +75,11 @@ apply: guard-host-dom0 guard-env-GUEST
 
 .PHONY: enable
 enable: guard-host-dom0 guard-env-GUEST
-	run0 $(QUBESCTL) top.$@ $(wordlist 2, $(words MAKECMDGOALS), $(MAKECMDGOALS))
+	run0 $(QUBESCTL) top.$@ $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 
 .PHONY: disable
 disable: guard-host-dom0 guard-env-GUEST
-	run0 $(QUBESCTL) top.$@ $(wordlist 2, $(words MAKECMDGOALS), $(MAKECMDGOALS))
+	run0 $(QUBESCTL) top.$@ $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 
 .PHONY: enable-all
 enable-all: guard-host-dom0 guard-env-GUEST
@@ -113,4 +113,4 @@ bundle: guard-domu
 	git bundle create - --all > .bundles/qubes-mgmt-salt-user
 
 %:
-	@;
+	@:

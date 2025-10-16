@@ -4,6 +4,7 @@
 qubes-templates-itl:
   - fedora-42-minimal
 qubes-templates-itl-testing:
+  - debian-12-minimal
   - debian-13
   - debian-13-minimal
   - debian-13-xfce

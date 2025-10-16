@@ -1,3 +1,5 @@
+{%- from './map.jinja' import filepaths with context -%}
+
 '{{ slsdotpath }}: homedirs':
   file.keyvalue:
     - names:
@@ -5,7 +7,7 @@
         - key_values:
             UMASK: '077'
             HOME_MODE: '700'
-      - '/etc/bashrc':
+      - '{{ filepaths.bashrc }}':
         - key_values:
             umask: '077'
     - separator: ' '

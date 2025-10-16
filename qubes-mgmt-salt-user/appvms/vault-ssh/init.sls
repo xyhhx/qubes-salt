@@ -32,7 +32,7 @@
     - defaults:
         client_tag: 'split-ssh-client'
         policy: 'qubes.SshAgent'
-        server_tag: 'split-ssh-client'
+        server_tag: 'split-ssh-server'
         vault_vm: 'vault-ssh'
     - context:
         vault_vm: '{{ vm_name }}'

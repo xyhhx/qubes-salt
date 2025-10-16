@@ -28,8 +28,8 @@
     - names:
       - '{{ terminal.config_path }}/alacritty/{{ terminal.config_file.name }}':
         - source: 'salt://{{ slspath }}/files/{{ terminal.config_file.name }}'
-    - '{{ terminal.config_path }}/profile.d/50-set-ps1.conf':
-      - source: 'salt://{{ tpldir }}/files/50-set-ps1.conf'
+      - '{{ terminal.config_path }}/profile.d/50-set-ps1.conf':
+        - source: 'salt://{{ tpldir }}/files/50-set-ps1.conf'
     - user: '{{ terminal.user }}'
     - group: '{{ terminal.group }}'
     - mode: '{{ terminal.mode }}'

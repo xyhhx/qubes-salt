@@ -1,0 +1,4 @@
+RedHat:
+  bashrc: '/etc/bashrc'
+Debian:
+  bashrc: '/etc/bash.bashrc'

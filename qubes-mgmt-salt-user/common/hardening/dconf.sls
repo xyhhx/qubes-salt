@@ -9,5 +9,7 @@
     - makedirs: true
   cmd.run:
     - name: 'dconf update'
+    - onchanges:
+      - file: '/etc/dconf/db/local.d'
 
 {#- vim: set syntax=salt.jinja.yaml.salt.jinja ts=2 sw=2 sts=2 et : -#}
