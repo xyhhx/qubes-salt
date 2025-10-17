@@ -21,7 +21,7 @@
 
 {% endif %}
 
-{% if salt['pillar.get']('qubes:type') in ['appvm', 'template'] %}
+{% if salt['pillar.get']('qubes:type') in ['app', 'template'] %}
 
 '{{ slsdotpath }}: set configs':
   file.managed:

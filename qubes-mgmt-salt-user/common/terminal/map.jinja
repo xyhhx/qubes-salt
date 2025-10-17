@@ -1,6 +1,8 @@
-{%- import_yaml './defaults.yml' as defaults -%}
-{%- import_yaml './maps/grains.os_family.yml' as osfamily_map -%}
-{%- import_yaml './maps/pillar.qubes_type.yml' as qubestype_map -%}
+{%- from 'utils/user_info.jinja' import user with context -%}
+
+{%- import_yaml tpldir ~ '/defaults.yml' as defaults with context -%}
+{%- import_yaml tpldir ~ '/maps/grains.os_family.yml' as osfamily_map -%}
+{%- import_yaml tpldir ~ '/maps/pillar.qubes_type.yml' as qubestype_map with context -%}
 
 {%- set terminal = {} -%}
 {%- for to_merge in [

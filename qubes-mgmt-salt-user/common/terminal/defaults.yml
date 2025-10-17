@@ -4,7 +4,7 @@ config_file:
   name: alacritty.toml
   serializer: tomlmod
 mode: '0600'
-group: 1000
-user: 1000
+group: {{ user }}
+user: {{ user }}
 pkgs:
   - alacritty

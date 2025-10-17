@@ -1,7 +1,7 @@
-appvm:
+app:
   config_path: '/home/user/.config'
-  user: 1000
-  group: 1000
+  user: {{ user }}
+  group: {{ user }}
   mode: '0600'
 template:
   config_path: '/etc/skel/.config'
