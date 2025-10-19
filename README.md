@@ -127,6 +127,18 @@ Bundling changes and lifting them to dom0 is also easily done with the available
 make pull-bundle
 ```
 
+### Render a statefile
+
+You can check what the Jinja renderer outputs by with the `render` task:
+
+```sh
+# in dom0
+make render $(pwd)/qubes-mgmt-salt-user/common/hardening/kmods.sls
+```
+
+> [!Note]
+> The parameter must be an absolute path
+
 ---
 
 ## Acknowledgments
