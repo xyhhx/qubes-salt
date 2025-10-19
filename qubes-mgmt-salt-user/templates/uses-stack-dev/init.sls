@@ -18,7 +18,7 @@ include:
         - copr: atim/bottom
       - 'lazygit':
         - copr: dejan/lazygit
-    - requires:
+    - require:
       - pkg: dnf-plugins-core
   pkg.installed:
     - pkgs:

@@ -23,7 +23,15 @@
         - custom-persist.home_docs: 'dir:user:user:0700:/home/user/Documents'
         - custom-persist.home_templates: 'dir:user:user:0700:/home/user/Templates'
         - custom-persist.home_local_fonts: 'dir:user:user:0700:/home/user/.local/share/fonts'
-        - menu-items: 'libreoffice-base.desktop libreoffice-calc.desktop libreoffice-draw.desktop libreoffice-impress.desktop libreoffice-math.desktop libreoffice-writer.desktop thunar.desktop'
+        - menu-items: {{ [
+  'libreoffice-base.desktop',
+  'libreoffice-calc.desktop',
+  'libreoffice-draw.desktop',
+  'libreoffice-impress.desktop',
+  'libreoffice-math.desktop',
+  'libreoffice-writer.desktop',
+  'thunar.desktop'
+].join(' ') }}
 
 {% endif %}
 

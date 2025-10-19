@@ -1,14 +1,27 @@
 #!/bin/env bash
 set -xeu
 
-qvm-run ${GUEST} 'cd ${SRC_DIR} && make bundle'
-qvm-run -p ${GUEST} 'cat ${SRC_DIR}/.bundles/qubes-mgmt-salt-user' > /tmp/qubes-mgmt-salt-user.bundle </dev/null
+if [[ -z "${GUEST+x}" ]]; then
+  echo "\$GUEST is not defined, exiting"
+  exit 1
+fi
 
-sudo install -dD -oroot -groot -m0755 ${SRC_DIR}
-pushd ${SRC_DIR}
+if [[ -z "${SRC_DIR+x}" ]]; then
+  echo "\$SRC_DIR is not defined, exiting"
+  exit 1
+fi
+
+# shellcheck disable=SC2016
+qvm-run "${GUEST}" 'cd ${SRC_DIR} && make bundle'
+# shellcheck disable=SC2016
+qvm-run -p "${GUEST}" 'cat ${SRC_DIR}/.bundles/qubes-mgmt-salt-user' > /tmp/qubes-mgmt-salt-user.bundle </dev/null
+
+sudo install -dD -oroot -groot -m0755 "${SRC_DIR}"
+pushd "${SRC_DIR}"
 sudo git init -b main
 sudo git pull /tmp/qubes-mgmt-salt-user.bundle
-sed 's/GUEST=/&${GUEST}/' .env.example | sudo tee .env >/dev/null
+# shellcheck disable=SC2016
+sed 's/GUEST=/&${GUEST}/' .env.example | sudo tee .env >/dev/null || true
 sudo make install
 popd
 

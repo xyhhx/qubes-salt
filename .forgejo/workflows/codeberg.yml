@@ -1,0 +1,49 @@
+on:
+  - push
+
+defaults:
+  run:
+    shell: "sh -e {0}"
+
+jobs:
+  salt-lint:
+    runs-on: codeberg-tiny
+    container: alpine:latest
+    name: salt-lint
+    steps:
+
+      - name: prep container
+        run: |
+          apk update
+          apk add git nodejs bash
+
+      - uses: actions/checkout@v4
+
+      - run: ./ci/salt-lint.sh
+
+  shellcheck:
+    runs-on: codeberg-tiny
+    container: alpine:latest
+    name: shellcheck
+    steps:
+
+      - name: install shellcheck
+        run: |
+          apk update
+          apk add git nodejs bash tar curl xz
+          curl -LO https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.linux.x86_64.tar.xz
+          cat <<-HASH | sha512sum -c || exit
+          25df28923d7d89cfdb9fa8aeef762a887f2bd4ebfbcd43ae71068c60e9458d66250b0f8d6fd66b4bc03723e6cdd47983c547e3ab4f3ea2cbc4bc4028842cc7b9  shellcheck-v0.11.0.linux.x86_64.tar.xz
+          HASH
+          tar xf shellcheck-v0.11.0.linux.x86_64.tar.xz
+          install -m0775 shellcheck-v0.11.0/shellcheck /usr/bin/shellcheck
+
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: run shellcheck script
+        run: |
+          ./ci/shellcheck.sh "$(pwd)"
+

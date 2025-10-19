@@ -1,8 +1,20 @@
 #!/bin/bash --
 set -euo pipefail
 
+if [[ -z "${QREXEC_REMOTE_DOMAIN+x}" ]]; then
+  echo "\$QREXEC_REMOTE_DOMAIN is undefined"
+  exit 1
+fi
+
+if [[ -z "${SSH_AUTH_SOCK+x}" ]]; then
+  echo "\$SSH_AUTH_SOCK is undefined"
+  exit 1
+fi
+
+qube_name="$(qubesdb-read /name)"
+
 notify-send \
-  "$(qubesdb-read /name) Split SSH" \
+  "${qube_name} Split SSH" \
   "SSH agent access from ${QREXEC_REMOTE_DOMAIN} granted"
 
 socat - "UNIX-CONNECT:${SSH_AUTH_SOCK}"

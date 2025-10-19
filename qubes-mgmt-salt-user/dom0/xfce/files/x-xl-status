@@ -5,13 +5,15 @@ gigs(){
   echo "scale=1; ${1} / 1024" | bc
 }
 
-readarray -t mem < <(xl info | grep memory | grep -o '[0-9]\{2,\}')
+xl_mem_stats="$(xl info | grep memory | grep -o '[0-9]\{2,\}')"
+readarray -t mem < "${xl_mem_stats}"
 
 used_memory=$(( mem[0] - mem[1] ))
 
-printf "%sG/%sG (%s)" \
-  "$(gigs "${used_memory}")" \
-  "$(gigs "${mem[0]}")" \
-  "$(echo "scale=2; ${used_memory} / ${mem[0]} * 100" | bc | cut -f1 -d\.)%"
+used_gigs="$(gigs "${used_memory}")"
+total_gigs="$(gigs "${mem[0]}")"
+used_percent="$(echo "scale=2; ${used_memory} / ${mem[0]} * 100" | bc | cut -f1 -d\.)"
+
+printf "%sG/%sG (%s)" "${used_gigs}" "${total_gigs}" "${used_percent}%"
 
 # vim: set ts=2 sw=2 et sts number :
