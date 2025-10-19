@@ -12,6 +12,9 @@
       - template: '{{ template_name }}'
       - label: red
       - template-for-dispvms: true
+      - memory: 8000
+      - maxmem: 16000
+      - vcpus: 4
     - features:
       - enable:
         - appmenus-dispvm
@@ -25,6 +28,8 @@
 
 {% else %}
 
+{%- from 'utils/user_info.jinja' import user with context -%}
+
 include:
   - common.split-ssh-client
 
@@ -33,11 +38,17 @@ include:
     - names:
       - 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended':
         - creates: '/home/user/.oh-my-zsh'
-      - 'git clone --depth 1 https://github.com/AstroNvim/template ~/.config/nvim':
-        - creates: '/home/user/.config/nvim/lua/community.lua'
     - runas: 'user'
-  file.absent:
-    - name: '/home/user/.config/nvim/.git'
+  git.cloned:
+    - names:
+      - 'https://github.com/astronvim/template':
+        - target: '/home/{{ user }}/.config/nvim'
+      - 'https://github.com/folke/lazy.nvim.git':
+        - target: '/home/{{ user }}/.local/share/nvim/lazy/lazy.nvim'
+        - require:
+          - git: 'https://github.com/astronvim/template'
+        - branch: 'stable'
+    - user: '{{ user }}'
 
 {% endif %}
 

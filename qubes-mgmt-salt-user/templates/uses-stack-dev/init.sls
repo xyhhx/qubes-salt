@@ -3,16 +3,8 @@
 
 {% if grains.id == 'dom0' %}
 
-{%- load_yaml as options -%}
-prefs:
-  - memory: 8000
-  - maxmem: 16000
-  - vcpus: 4
-
-{%- endload -%}
-
 {% from "utils/macros/create_templatevm.sls" import templatevm %}
-{{ templatevm(vm_name, base_template=base_template, options=options) }}
+{{ templatevm(vm_name, base_template=base_template) }}
 
 {% else %}
 
@@ -34,6 +26,7 @@ include:
       - bind-utils
       - bottom
       - btop
+      - cascadia-code-nf-fonts
       - cargo
       - clippy
       - direnv
@@ -58,7 +51,9 @@ include:
       - psutils
       - qubes-ctap
       - qubes-core-agent-networking
+      - qubes-core-agent-passwordless-root
       - qubes-usb-proxy
+      - ripgrep
       - rsync
       - rustfmt
       - sqlite
@@ -80,13 +75,25 @@ include:
     - mode: '0644'
     - attrs: 'i'
     - makedirs: true
-
-'{{ slsdotpath }}: configure qubes-ctapproxy':
   cmd.run:
     - names:
-      - 'systemctl disable qubes-ctapproxy@sys-usb.service'
+      - 'systemctl disable qubes-ctapproxy@sys-usb.service':
+        - onlyif: '[ -L /etc/systemd/system/multi-user.target.wants/qubes-ctapproxy@sys-usb.service ]'
       - 'systemctl enable qubes-ctapproxy@disp-sys-usb.service':
         - creates: '/etc/systemd/system/multi-user.target.wants/qubes-ctapproxy@disp-sys-usb.service'
+    - use_vt: true
+
+'{{ slsdotpath }}: install tree-sitter':
+  cmd.run:
+    - name: |
+        vm-run-vm --dispvm -- 'cargo install --locked tree-sitter-cli && cat ~/.cargo/bin/tree-sitter' > /usr/bin/tree-sitter
+    - creates: '/usr/bin/tree-sitter'
+    - uses_vt: true
+  file.managed:
+    - name: '/usr/bin/tree-sitter'
+    - user: 'root'
+    - group: 'root'
+    - mode: '0755'
 
 {% endif %}
 
