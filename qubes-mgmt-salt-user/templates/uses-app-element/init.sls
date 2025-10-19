@@ -36,6 +36,7 @@ features:
     - pkgs:
       - element-desktop
       - element-nightly
+      - gnome-keyring
       - qubes-core-agent-networking
 
 {% endif %}
