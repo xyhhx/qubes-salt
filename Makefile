@@ -92,6 +92,10 @@ disable-all: guard-host-dom0 guard-env-GUEST
 .PHONY: enable-only
 enable-only: guard-host-dom0 guard-env-GUEST disable-all enable
 
+.PHONY: render
+render: guard-host-dom0
+	run0 $(QUBESCTL) slsutil.renderer $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS)) default_renderer=jinja
+
 $(MINION_CONF_DIR_GLOBAL)/z_user.conf:
 	install -D -oroot -groot -m0644 conf/z_user.conf $@
 
