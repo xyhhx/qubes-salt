@@ -14,6 +14,10 @@ Mirrors:
 
 
 [![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?style=for-the-badge&label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](LICENSE.md)
+[![Latest Release](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/release.svg?style=for-the-badge)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/releases)
+[![Stars](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/stars.svg?style=for-the-badge)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/stars)
+[![Open Issues](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/issues/open.svg?style=for-the-badge)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/issues)
+[![Latest Build](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/workflows/codeberg.yml/badge.svg?style=for-the-badge)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/actions?workflow=codeberg.yml&actor=0&status=0)
 
 ---
 
