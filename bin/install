@@ -1,15 +1,15 @@
 #!/bin/env bash
-set -xeu
+set -eu
 
-if [[ -z "${GUEST+x}" ]]; then
-  echo "\$GUEST is not defined, exiting"
+missing_env() {
+  printf "The environment variable %s is required but not set. Exiting" "${1}"
   exit 1
-fi
+}
 
-if [[ -z "${SRC_DIR+x}" ]]; then
-  echo "\$SRC_DIR is not defined, exiting"
-  exit 1
-fi
+if [[ -z "${GUEST}" ]]; then missing_env "GUEST"; fi
+if [[ -z "${SRC_DIR}" ]]; then missing_env "SRC_DIR"; fi
+
+set -x
 
 # shellcheck disable=SC2016
 qvm-run "${GUEST}" 'cd ${SRC_DIR} && make bundle'
