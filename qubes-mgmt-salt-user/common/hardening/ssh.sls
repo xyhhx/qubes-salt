@@ -2,21 +2,17 @@
 {#-
   Set post quantum crypto policies
 -#}
-{#- select only pq or at least curve based crypto -#}
-{%- set accepted_kex_alogs = [
-  'mlkem768x25519-sha256',
-  'sntrup761x25519-sha512',
-  'sntrup761x25519-sha512@openssh.com',
-  'curve25519-sha256',
-  'curve25519-sha256@libssh.org',
-] -%}
+
+{%- set policy = "DEFAULT:TEST-PQ" -%}
 
 oqsprovider:
   pkg.installed
 
-'update-crypto-libraries --set DEFAULT:TEST-PQ':
+'update-crypto-policies --set {{ policy }}':
   cmd.run:
     - use_vt: true
+    - onlyif:
+      - "test $(cat /etc/crypto-policies/state/current) = {{ policy }}"
 
 '/etc/crypto-policies/back-ends':
   file.directory:
@@ -28,12 +24,18 @@ oqsprovider:
 '/etc/crypto-policies/back-ends/openssh.config':
   file.keyvalue:
     - key_values:
-        KexAlgorithms: {{ accepted_kex_alogs | join(',') }}
+        KexAlgorithms: {{ [
+  'mlkem768x25519-sha256',
+  'sntrup761x25519-sha512',
+  'sntrup761x25519-sha512@openssh.com',
+  'curve25519-sha256',
+  'curve25519-sha256@libssh.org',
+] | join(',') }}
     - separator: ' '
     - create_if_missing: true
     - uncomment: '#'
 
-{%- endif -%}
+{%- endif %}
 
 '/etc/ssh/ssh_config.d/10-custom.conf':
   file.managed:
