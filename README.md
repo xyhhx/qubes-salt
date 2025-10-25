@@ -124,7 +124,7 @@ Bundling changes and lifting them to dom0 is also easily done with the available
 
 ```sh
 # In dom0
-make pull-bundle
+make pull-bundles
 ```
 
 ### Render a statefile
