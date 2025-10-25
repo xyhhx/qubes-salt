@@ -14,14 +14,16 @@ set -x
 # shellcheck disable=SC2016
 qvm-run "${GUEST}" 'cd ${SRC_DIR} && make bundle'
 # shellcheck disable=SC2016
-qvm-run -p "${GUEST}" 'cat ${SRC_DIR}/.bundles/qubes-mgmt-salt-user' > /tmp/qubes-mgmt-salt-user.bundle </dev/null
+qvm-run -p "${GUEST}" 'cat ${SRC_DIR}/.bundles/qubes-mgmt-salt-user.bundle' \
+  > /tmp/qubes-mgmt-salt-user.bundle </dev/null
 
 sudo install -dD -oroot -groot -m0755 "${SRC_DIR}"
 pushd "${SRC_DIR}"
 sudo git init -b main
 sudo git pull /tmp/qubes-mgmt-salt-user.bundle
 # shellcheck disable=SC2016
-sed 's/GUEST=/&${GUEST}/' .env.example | sudo tee .env >/dev/null || true
+sed 's/GUEST=/&${GUEST}/' .env.example \
+  | sudo tee .env >/dev/null || true
 sudo make install
 popd
 

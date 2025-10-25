@@ -1,0 +1,198 @@
+#!/usr/bin/env bash
+set -ueo pipefail
+
+SCRIPT="bin/bundles"
+DEBUG="${DEBUG:-}"
+SYNOPSIS="bundles [-dh] pack|unpack <guest> [<src_dir>]"
+
+
+die_usage()
+{
+  args=$*
+  >&2 echo "${SCRIPT}: ${args}"
+  >&2 echo "Usage: ${SYNOPSIS}"
+  exit 1
+}
+
+die()
+{
+  opts=$*
+  CODE=$1
+  shift
+  >&2 echo "${opts}"
+  exit "${CODE}"
+}
+
+try()
+{
+  args=$*
+  debug_log "...Trying '${args}'"
+  "$@" || die 2 "${args} ... failed"
+}
+
+log()
+{
+  msg="${2:-$1}"
+  test -z "${2+x}" && shift
+  log_level="${1:-info}"
+  printf "[%s]\t%s\n" "${log_level}" "${msg}"
+}
+
+debug_log()
+{
+  test -z "${DEBUG}" || >&2 log "debug" "$@"
+}
+
+pushd_hush()
+{
+  try pushd "$@" >/dev/null
+}
+
+popd_hush()
+{
+  try popd >/dev/null
+}
+
+missing_env() {
+  printf "The environment variable %s is required but not set. Exiting" "${1}"
+  exit 1
+}
+
+get_base_dir()
+{
+  local script_path script_dir
+  script_path="${1}"
+  script_dir="$(dirname -- "${script_path}")"
+  cd -- "${script_dir}/.." &>/dev/null && pwd
+}
+
+bundle()
+{
+  path="${1}"
+  repo_name="$(basename "${path}")"
+  refs="${2:?--all}"
+  test -z "${DEBUG}" && q="-q"
+  # shellcheck disable=SC2086
+  try git bundle create ${q:-} - "${refs}" > "${workspace}/.bundles/${repo_name}.bundle"
+}
+
+update_submodule_urls()
+{
+  submodules=$(sed -nE 's/.*path = (.*)/\1/p' .gitmodules)
+  for path in ${submodules}; do
+    repo="${path##/*}"
+    new_remote=".bundles/${path##*/}.bundle"
+
+    log "Updating remote for ${repo}."
+    log "Setting to ${new_remote}"
+
+    try git submodule set-url -- "${path}" "${new_remote}"
+  done
+}
+
+do_pack()
+{
+  workspace="$(get_base_dir "${BASH_SOURCE[0]}")"
+  bundle "${workspace}" --all
+
+  git submodule status | while IFS= read -r status; do
+    read -r submodule_path submodule_head < <(\
+      echo "${status#* }" \
+      | sed -nE 's/.* (.*) \((.*)\)/\1 \2/p'||true\
+    )
+
+    pushd_hush "${submodule_path}"
+    submodule_ref="$(git show-ref | sed -nE "s:.*(refs/${submodule_head}):\1:p")"
+    bundle "${submodule_path}" "${submodule_ref}"
+    # shellcheck disable=SC2119
+    popd_hush
+  done
+}
+
+do_unpack()
+{
+
+  GUEST="${GUEST:-$1}"
+  SRC_DIR="${SRC_DIR:-${2:-/usr/local/src/qubes-mgmt-salt-user}}"
+  git_protocol_file_allow=$(git config --global protocol.file.allow)
+
+  test -z "${GUEST}" && missing_env "GUEST"
+  test -z "${SRC_DIR}" && missing_env "SRC_DIR"
+
+  qvm-run -- "${GUEST}" "cd ${SRC_DIR} && make bundles"
+  qvm-run -p -- "${GUEST}" "tar -C ${SRC_DIR}/.bundles -cvjO ." \
+    | run0 tar -C .bundles -xvj >/dev/null
+
+  try git pull --rebase
+  update_submodule_urls
+  try git config --global protocol.file.allow always
+  try git submodule update
+  try git config --global protocol.file.allow "${git_protocol_file_allow}"
+}
+
+usage_help()
+{
+  cat <<-HELP
+
+NAME
+        ${SCRIPT} - Creating project bundles including vendor submodules
+
+SYNOPSYS
+        ${SCRIPT} [-dh] pack
+        ${SCRIPT} [-dh] unpack <guest> [<src_dir>]
+
+DESCRIPTION
+        Bundles or unbundles this repo as well as all vendor submodules.
+
+        When unpacking vendor submodules in dom0, their remotes are overwritten in
+        .gitmodules to point to their bundles
+
+        Default <src_dir> is /usr/local/src/qubes-mgmt-salt-user
+
+
+        -d
+              Debug output. Can be set with DEBUG environment variable too
+
+        -h
+              Display this help
+
+HELP
+}
+
+main()
+{
+  while getopts "dh" flag
+  do
+      case ${flag} in
+          d) DEBUG=true
+              ;;
+          h) usage_help
+              exit 0
+              ;;
+          *) die_usage "Unknown option."
+      esac
+  done
+
+  # test -z "${DEBUG}" || set -x
+
+  shift $((OPTIND-1))
+  ACTION=$1
+  shift
+
+  case "${ACTION}" in
+      "pack")
+          do_pack "$@"
+          ;;
+      "unpack")
+          do_unpack "$@"
+          ;;
+      "update_modules")
+          update_submodule_urls
+          ;;
+      *)
+          die_usage "Missing or unknown action '${ACTION}'"
+          ;;
+  esac
+}
+
+main "$@"

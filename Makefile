@@ -57,17 +57,16 @@ guard-domu:
 
 .PHONY: install
 install: guard-host-dom0 $(MINION_CONF_DIR_GLOBAL)/z_user.conf $(MINION_CONF_DIR_USER)/overrides.conf /srv/$(SALTENV)/salt
-	$(MAKE) lift-bundle
+	$(MAKE) pull-bundles
 
 .PHONY: clean
 clean: guard-host-dom0
 	rm -f $(MINION_CONF_DIR_GLOBAL)/z_user.conf $(MINION_CONF_DIR_USER)/overrides.conf
 
-.PHONY: pull-bundle
-pull-bundle: guard-host-dom0 guard-env-GUEST $(SRC_DIR)/.bundles
-	qvm-run -- $(GUEST) 'cd $(SRC_DIR) && make bundle'
-	qvm-run -p -- $(GUEST) 'cat $(SRC_DIR)/.bundles/$(PROJECT_NAME)' | run0 tee $(SRC_DIR)/.bundles/$(PROJECT_NAME)  >/dev/null
-	git pull --rebase
+.PHONY: pull-bundles
+pull-bundles: guard-host-dom0 guard-env-GUEST $(SRC_DIR)/.bundles
+	git restore .gitmodules
+	./bin/bundles unpack $(GUEST)
 
 .PHONY: apply
 apply: guard-host-dom0 guard-env-GUEST
@@ -102,7 +101,7 @@ $(MINION_CONF_DIR_GLOBAL)/z_user.conf:
 $(MINION_CONF_DIR_USER)/overrides.conf:
 	install -D -oroot -groot -m0644 conf/overrides.conf $@
 
-$(SRC_DIR)/.bundles:
+$(SRC_DIR)/.bundless:
 	install -dD -oroot -groot -m0755 $@
 
 /srv/$(SALTENV)/salt:
@@ -112,9 +111,9 @@ $(SRC_DIR)/.bundles:
 # ----------
 #  domU
 
-bundle: guard-domu
-	mkdir -p .bundles
-	git bundle create - --all > .bundles/qubes-mgmt-salt-user
+.PHONY: bundles
+bundles: guard-domu
+	./bin/bundles pack
 
 %:
 	@:
