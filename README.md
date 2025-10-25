@@ -12,16 +12,22 @@ Mirrors:
 [![sourcehut](https://img.shields.io/badge/srht-212529?style=for-the-badge&logo=sourcehut&logoColor=fff)](https://git.sr.ht/~xyhhx/qubes-mgmt-salt-user)
 [![0xacab](https://img.shields.io/badge/0xacab-ea4636?style=for-the-badge&logo=gitlab&logoColor=fff)](https://0xacab.org/xyhhx/qubes-mgmt-salt-user)
 
+[![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?style=flat-square&label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](LICENSE.md)
+[![Latest Release](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/release.svg?style=flat-square)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/releases)
+[![Stars](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/stars.svg?style=flat-square)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/stars)
+[![Open Issues](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/issues/open.svg?style=flat-square)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/issues)
+[![Latest Build](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/workflows/codeberg.yml/badge.svg?style=flat-square)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/actions?workflow=codeberg.yml&actor=0&status=0)
+![Community on Matrix](https://img.shields.io/badge/User%20Community%20on%20Matrix-gray?style=flat-square&logo=matrix&labelColor=63a0ff&link=https%3A%2F%2Fmatrix.to%2F%23%2F%23qubes-os-user-community%3A4d2.org)
 
-[![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?style=for-the-badge&label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](LICENSE.md)
-[![Latest Release](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/release.svg?style=for-the-badge)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/releases)
-[![Stars](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/stars.svg?style=for-the-badge)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/stars)
-[![Open Issues](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/issues/open.svg?style=for-the-badge)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/issues)
-[![Latest Build](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/badges/workflows/codeberg.yml/badge.svg?style=for-the-badge)](https://codeberg.org/xyhhx/qubes-mgmt-salt-user/actions?workflow=codeberg.yml&actor=0&status=0)
 
 ---
 
 </div>
+
+> [!Warning]
+> **This repo isn't stable yet and stuff will pretty much surely break.**
+>
+> If you want to use it, feel free; but no promises anything works as expected. Feel free to open issues though!
 
 ## Usage
 
@@ -44,7 +50,7 @@ Mirrors:
 
 ### Using the Make tasks
 
-> [!Note]
+> [!Important]
 > The Make tasks requires a `GUEST` variable to be set. It should be the name of the guest domain that holds the repo's source code. You can either pass it directly (`GUEST=my-dev-qube make...`)
 
 > [!Tip]
