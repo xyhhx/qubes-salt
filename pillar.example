@@ -1,4 +1,5 @@
 ---
+# ui related preferences
 ui:
   prefs:
     theme:
@@ -39,5 +40,15 @@ qvm_defaults:
     - set:
       - menu-items: Alacritty.desktop
       - default-menu-items: Alacritty.desktop
+
+vm_settings:
+  templates:
+    uses_app_trivalent:
+      celenity_titanium:
+        enable: true
+        block_extensions: true
+        allow_trustworthy_extensions: true
+        unbreak_bitwarden: false
+        allow_webusb: false
 
 # vim: ft=yaml ts=2 sw=2 sts=2 et :

@@ -1,12 +1,12 @@
 {%- set vm_name = "uses-app-trivalent" -%}
 {%- set base_template = "fedora-42-minimal" -%}
 
-{% if grains.id == 'dom0' %}
+{%- if grains.id == 'dom0' -%}
 
-{% from "utils/macros/create_templatevm.sls" import templatevm %}
+{%- from "utils/macros/create_templatevm.sls" import templatevm -%}
 {{ templatevm(vm_name, base_template=base_template) }}
 
-{% else %}
+{%- else -%}
 
 include:
   - common.pkgs.dnf-plugins-core
@@ -33,6 +33,8 @@ include:
       - qubes-core-agent-networking
       - trivalent
       - trivalent-subresource-filter
+
+{% include tpldir ~ '/titanium.sls' %}
 
 {% endif %}
 

@@ -1,0 +1,3 @@
+[submodule "qubes-mgmt-salt-user/vendor/celenity-titanium"]
+	path = qubes-mgmt-salt-user/vendor/celenity-titanium
+	url = https://codeberg.org/celenity/Titanium

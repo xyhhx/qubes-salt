@@ -1,0 +1,8 @@
+---
+celenity_titanium:
+  enable: true
+  block_extensions: true
+  allow_trustworthy_extensions: true
+  unbreak_bitwarden: false
+  allow_webusb: false
+
