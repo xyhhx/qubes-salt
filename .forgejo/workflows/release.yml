@@ -5,13 +5,9 @@ on:
     branches:
       - main
 
-defaults:
-  run:
-    shell: "bash -e {0}"
-
 jobs:
   release:
-    if: ! forgejo.ref =~ test$
+    if: ! forgejo.ref == test$
     runs-on: codeberg-tiny
     container: alpine:latest
     name: Create release
@@ -24,7 +20,7 @@ jobs:
       - run: ./ci/release.sh
 
   draft-release:
-    if: forgejo.ref =~ test$
+    if: forgejo.ref == test$
     runs-on: codeberg-tiny
     container: alpine:latest
     name: Create draft release
