@@ -5,58 +5,8 @@ SCRIPT="bin/bundles"
 DEBUG="${DEBUG:-}"
 SYNOPSIS="bundles [-dh] pack|unpack <guest> [<src_dir>]"
 
-
-die_usage()
-{
-  args=$*
-  >&2 echo "${SCRIPT}: ${args}"
-  >&2 echo "Usage: ${SYNOPSIS}"
-  exit 1
-}
-
-die()
-{
-  opts=$*
-  CODE=$1
-  shift
-  >&2 echo "${opts}"
-  exit "${CODE}"
-}
-
-try()
-{
-  args=$*
-  debug_log "...Trying '${args}'"
-  "$@" || die 2 "${args} ... failed"
-}
-
-log()
-{
-  msg="${2:-$1}"
-  test -z "${2+x}" && shift
-  log_level="${1:-info}"
-  printf "[%s]\t%s\n" "${log_level}" "${msg}"
-}
-
-debug_log()
-{
-  test -z "${DEBUG}" || >&2 log "debug" "$@"
-}
-
-pushd_hush()
-{
-  try pushd "$@" >/dev/null
-}
-
-popd_hush()
-{
-  try popd >/dev/null
-}
-
-missing_env() {
-  printf "The environment variable %s is required but not set. Exiting" "${1}"
-  exit 1
-}
+# shellcheck source=bin/lib.sh
+. ./lib.sh
 
 get_base_dir()
 {
@@ -137,7 +87,7 @@ usage_help()
 NAME
         ${SCRIPT} - Creating project bundles including vendor submodules
 
-SYNOPSYS
+SYNOPSIS
         ${SCRIPT} [-dh] pack
         ${SCRIPT} [-dh] unpack <guest> [<src_dir>]
 

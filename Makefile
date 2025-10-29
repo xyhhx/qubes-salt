@@ -115,5 +115,9 @@ $(SRC_DIR)/.bundless:
 bundles: guard-domu
 	./bin/bundles pack
 
+.PHONY: release
+release: guard-domu
+	@$(if $(DEBUG),DEBUG=1) ./bin/release
+
 %:
 	@:

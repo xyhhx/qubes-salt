@@ -1,0 +1,38 @@
+on:
+  push:
+    tags: 'v[0-9]+.[0-9]+.*'
+    branches:
+      - main
+
+defaults:
+  run:
+    shell: "sh -e {0}"
+
+jobs:
+  release:
+    if: ! forgejo.ref =~ test$
+    runs-on: codeberg-tiny
+    container: alpine:latest
+    name: Create release
+    steps:
+      - name: Prep container
+        run: |
+          apk update
+          apk add git jq curl
+
+      - run: ./ci/release.sh
+
+  draft-release:
+    if: forgejo.ref =~ test$
+    runs-on: codeberg-tiny
+    container: alpine:latest
+    name: Create draft release
+    steps:
+      - name: Prep container
+        run: |
+          apk update
+          apk add git jq curl
+
+      - run: ./ci/release.sh
+        env:
+          IS_DRAFT: true

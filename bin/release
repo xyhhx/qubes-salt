@@ -1,0 +1,422 @@
+#!/usr/bin/env bash
+set -euo pipefail
+test -n "${VERBOSE:-}" && set -x
+
+get_base_dir()
+{
+  local script_path script_dir
+  script_path="${1}"
+  script_dir="$(dirname -- "${script_path}")"
+  cd -- "${script_dir}" &>/dev/null && pwd
+}
+
+BASE_DIR=$(get_base_dir "${BASH_SOURCE[0]}")
+WORKSPACE=$(get_base_dir "..")
+SCRIPT=$(basename "${BASH_SOURCE[0]}")
+SYNOPSIS="release [-dh] [minor|patch]"
+
+# shellcheck source=bin/lib.sh
+. "${BASE_DIR}/lib.sh"
+
+: "${DEBUG:-false}"
+
+main()
+{
+  while getopts "dhy" flag; do
+      case ${flag} in
+          d) DEBUG=true
+              ;;
+          h) usage_help
+              exit 0
+              ;;
+          y) YES_ALL=true
+              ;;
+          *) die_usage "Unknown option."
+      esac
+  done
+
+  shift $((OPTIND-1))
+  ACTION="${1:-}"
+  test -n "${ACTION}" && shift
+
+  case "${ACTION}" in
+    "")
+      RELEASE_TYPE="patch"
+      ;;
+    "patch")
+      RELEASE_TYPE="patch"
+      ;;
+    "minor")
+      RELEASE_TYPE="minor"
+      ;;
+    *)
+      die_usage "Missing or unknown action '${ACTION}'"
+      ;;
+  esac
+
+  last_tag=$(get_last_tag)
+  debug_log "Last tag is ${last_tag}"
+
+  check_repo_dirty
+  check_commits
+  checkout_release_branch
+  generate_release_notes
+  write_release_notes
+  tag_release "${release}" "${release_notes}"
+  write_success
+  exit 0
+}
+
+usage_help()
+{
+  cat <<-HELP
+
+NAME
+        ${SCRIPT} - Prepare a release
+
+SYNOPSIS
+        ${SCRIPT} [-dhy] [minor|patch]
+
+DESCRIPTION
+              Prepares a release. By default will increment the patch number
+
+        -d
+              Debug output. Can be set with DEBUG environment variable too
+
+        -h
+              Display this help
+
+        -y
+              Answer "yes" to any yes/no prompts
+
+HELP
+}
+
+# Check if there are any uncommitted changes and exit if so
+check_repo_dirty()
+{
+  debug_log "Checking for unstaged changes"
+  status=$(git status --porcelain)
+  test -n "${status}" \
+    && die 1 "You have uncommited changes"
+  return 0
+}
+
+# Check there are actually some commits since last release
+check_commits()
+{
+  debug_log "Checking if there were commits"
+  commits=$(git log "${last_tag}..HEAD")
+
+  test -z "${commits}" \
+    && die 1 "There are no commits since the last tag."
+  return 0
+}
+
+# Get the last tag. Stored in a function in case more complex logic is needed
+# later
+get_last_tag()
+{
+  debug_log "Getting the last tag"
+  try git describe --tags --first-parent --abbrev=0
+}
+#
+# Gets the name of the current upstream
+get_upstream()
+{
+  debug_log "getting upstream name"
+  head_ref=$(git symbolic-ref -q HEAD)
+  try git for-each-ref --format='%(upstream:short)' "${head_ref}"
+}
+
+# Get the upstream remote
+get_remote()
+{
+  debug_log "getting active remote"
+  try git status -sb \
+    | sed -nE 's/##.*\.\.\.(\w*).*/\1/p'
+}
+
+# Get the current branch name
+get_current_branch()
+{
+  debug_log "determining the current branch"
+  try git branch --no-color \
+  | sed -nE 's/^\* (.*)/\1/p'
+}
+
+# Find a branch in the refs
+find_branch()
+{
+  branch="$1" \
+    || die 1 "No branch passed"
+
+  try git branch --no-color \
+  | try sed -nE "s/\s+(${branch//\//\\/})/\1/p"
+}
+
+# Determines the release we're about to drop
+bump_release_number()
+{
+  debug_log "Determining release number"
+  year=$(date -u "+%Y")
+  long_month=$(date -u "+%m")
+  short_month=${long_month#0*}
+  last_minor=$(echo "${last_tag}" | cut -f3 -d\.)
+  last_patch=${last_tag##*.}
+
+  : "${last_minor:=1}"
+  : "${last_path:=0}"
+
+  test -n "${DEBUG:-}" && cat <<-DEBUG >/dev/null
+  last tag: ${last_tag}
+
+  year: ${year}
+  long_month: ${long_month}
+  short_month: ${short_month}
+  last_minor: ${last_minor}
+  last_patch: ${last_patch}
+DEBUG
+
+  if ! [[ "${last_tag}" =~ ^v[0-9]+.[0-9]+.[0-9]+.[0-9]+ ]]; then
+    printf "%s.%s.1.0" "${year}" "${short_month}"
+    return 0
+  fi
+
+  case "${RELEASE_TYPE}" in
+    "patch")
+      new_patch=$(( last_patch + 1 ))
+      new_minor="${last_minor}"
+      ;;
+    "minor")
+      new_patch="0"
+      new_minor=$(( last_minor + 1 ))
+      ;;
+    *)
+      die "Invalid \$RELEASE_TYPE"
+      ;;
+  esac
+
+  new_release=$(
+    printf "%s.%s.%s.%s" \
+      "${year}" "${short_month}" "${new_minor}" "${new_patch}"
+  )
+
+  log "New release: ${new_release}" >/dev/null
+
+  echo "${new_release}"
+}
+
+# Checks out the release branch, creating it if necessary
+checkout_release_branch()
+{
+  debug_log "preparing to checkout the release branch"
+  last_tag=$(get_last_tag)
+  release=$(bump_release_number)
+  current_branch=$(get_current_branch)
+  upstream=$(get_upstream)
+  remote=$(get_remote)
+
+  release_branch="release/v${release}"
+  release_branch_exists=$(find_branch "${release_branch}")
+
+  remote_branch="${remote}/${release_branch}"
+  remote_branch_exists=$(find_branch "${remote_branch}")
+
+  test -z "${upstream}" \
+    && die 1 "This branch hasn't been pushed yet. Exiting"
+
+  test -n "${DEBUG:-}" \
+  && cat <<-DEBUG
+  last_tag: ${last_tag}
+  release: ${release}
+  current_branch: ${current_branch}
+  upstream: ${upstream}
+  remote: ${remote}
+  release_branch: ${release_branch}
+  remote_branch: ${remote_branch}
+DEBUG
+
+  # If we're already on the release branch, we can just pull changes
+  if test "${current_branch}" == "${release_branch}"; then
+    try git pull "${remote}" "${release_branch}"
+    return 0
+  fi
+
+  # If the release branch exists
+  if test -n "${release_branch_exists}"; then
+    try git checkout "${release_branch}"
+    return 0
+  fi
+
+  # If the remote branch exists, we can just check it out
+  if test -n "${remote_branch_exists}"; then
+    try git checkout --track -b "${release_branch}" "${remote_branch}"
+    return 0
+  fi
+
+  # If none of the above conditions are true, we should create a new branch for
+  # this release.
+
+  if ! test "${YES_ALL:-}"; then
+    # Prompt the user
+    echo "No remote branch found for this release!"
+    echo "Do you want to create one now? It will be branched from ${remote}."
+    read -rn1 -p "(Y/N) " response
+    echo
+
+    # Response wasn't y or Y
+    [[ ! "${response}" =~ ^[yY]$ ]] \
+      && die 0 "Exiting"
+  fi
+
+  # Checkout and pull main, then cut new release branch
+  try git checkout main
+  (git pull "${remote}" main && git checkout -b "${release_branch}") \
+    || git checkout "${current_branch}" \
+    && die 1 "Failed to checkout branch"
+
+  return 0
+}
+
+# Generate the new release notes
+generate_release_notes()
+{
+  git log "${last_tag}..HEAD" --oneline --abbrev-commit \
+  | sed -nE 's/(\w+) (\w+)\(?([^\)])?\)?: (.*)/\1 \2 \4 \3/p' \
+  | while read -r hash type message component; do
+    case ${type@u} in
+      "")
+        ;;
+      "merge")
+        ;;
+      "release")
+        ;;
+      "feat")
+        test -z "${feat_summary:-}" \
+          && feat_summary="### New features\n"
+
+        feat_summary=$(
+          printf "%s\n%s%s (%s)" \
+          "${feat_summary}" "${component}:" "${message}" "${hash}"
+        )
+        ;;
+      "fix")
+        test -z "${fix_summary:-}" \
+          && fix_summary="### New fixes\n"
+
+        fix_summary=$(
+          printf "%s\n%s%s (%s)" \
+          "${fix_summary}" "${component}:" "${message}" "${hash}"
+        )
+        ;;
+      "perf")
+        test -z "${perf_summary:-}" \
+          && perf_summary="### Performance improvements\n"
+
+        perf_summary=$(
+          printf "%s\n%s%s (%s)" \
+          "${perf_summary}" "${component}:" "${message}" "${hash}"
+        )
+        ;;
+      "refactor")
+        test -z "${refactor_summary:-}" \
+          && refactor_summary="### Code refactors\n"
+
+        refactor_summary=$(
+          printf "%s\n%s%s (%s)" \
+          "${refactor_summary}" "${component}:" "${message}" "${hash}"
+        )
+        ;;
+      "revert")
+        test -z "${revert_summary:-}" \
+          && revert_summary="### Reverted changes\n"
+
+        revert_summary=$(
+          printf "%s\n%s%s (%s)" \
+          "${revert_summary}"  "${component}:" "${message}" "${hash}"
+        )
+        ;;
+      *)
+        test -z "${other_summary:-}" \
+          && other_summary="### Other changes\n"
+
+        other_summary=$(
+          printf "%s\n%s%s (%s)" \
+          "${other_summary}" "${component}:" "${message}" "${hash}"
+        )
+        ;;
+    esac
+  done
+
+  summary=$(
+    printf "%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s" \
+      "${feat_summary:-"No new features."}" \
+      "${fix_summary:-"No fixes."}" \
+      "${perf_summary:-"No performance improvements."}" \
+      "${refactor_summary:-"Nothin was refactored."}" \
+      "${revert_summary:-"Nothing was reverted."}" \
+      "${other_summary:-}"
+    )
+
+  log "Generated release notes"
+
+  release_notes=$(printf "## v%s Release Notes\n%s" "${release}" "${summary}")
+}
+
+# Creates the actual release notes file
+write_release_notes()
+{
+  debug_log "Trying to write release notes"
+  release_notes_dir="${WORKSPACE}/docs/release-notes"
+  filepath="${release_notes_dir}/v${release}.md"
+
+  # Make ./docs if it doesn't exist
+  mkdir -p "${release_notes_dir}"
+
+  test -f "${filepath}" \
+    && mv "${filepath}" "${filepath}.bak"
+
+  log "Wrote release notes to ${filepath}"
+  echo "${release_notes}" > "${filepath}"
+  git add "${filepath}"
+}
+
+# Prepares a tag and commit for the release. Accepts two args: the release
+# number, and the tag message (which is pretty much the changelog)
+tag_release()
+{
+  debug_log "Trying to prepare release tag"
+  release_tag="v$1"
+  git commit -am "Release v${release}"
+  git tag -sa "${release_tag}" -m "${release_notes}"
+  log "Tagged tags/v$1"
+}
+
+# Print a success message!
+write_success()
+{
+  cat <<-DONE
+  Success! The release has been prepared locally. A release branch and tag have
+  been prepared; but nothing has been pushed yet.
+
+  Before pushing, you should make sure all the changes are sane. At the very
+  least, eyeball the diffs and the log.
+
+  Release branch:
+    ${release_branch}
+
+  Tag:
+    ${release_tag}
+
+  If everything looks good and you're ready to push, run the following:
+
+  git push -u ${remote} ${release_branch}
+  git push ${remote} ${release_tag}
+
+  You should be prompted to open a PR from the forge. Once it's merged, the
+  forge-side release will be prepared by the build pipeline.
+DONE
+}
+
+main "$@"
