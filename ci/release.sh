@@ -20,6 +20,10 @@ main()
   ${IS_DRAFT:-false}
   ${IS_PRERELEASE:-false}
 
+  if [[ "${TAG}" =~ test$ ]]; then
+    IS_DRAFT=true
+  fi
+
   verify_tag
   publish_release
   verify_release
