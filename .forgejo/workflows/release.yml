@@ -1,16 +1,13 @@
 on:
   push:
-    tags: 'v[0-9]+.[0-9]+.*'
+    tags:
+      - 'v[0-9]+.[0-9]+.*'
     branches:
       - main
 
-defaults:
-  run:
-    shell: "sh -e {0}"
-
 jobs:
   release:
-    if: ! forgejo.ref =~ test$
+    if: ! forgejo.ref == *test
     runs-on: codeberg-tiny
     container: alpine:latest
     name: Create release
@@ -23,7 +20,7 @@ jobs:
       - run: ./ci/release.sh
 
   draft-release:
-    if: forgejo.ref =~ test$
+    if: forgejo.ref == *test
     runs-on: codeberg-tiny
     container: alpine:latest
     name: Create draft release
