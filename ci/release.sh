@@ -1,24 +1,22 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 set -euo pipefail
 
-test "${VERBOSE:-false}" && set -x
+test "${VERBOSE:-}" && set -x
 
 # Publish a release on forgejo
 
 main()
 {
-  verify_context
-
   : "${OWNER:=${FORGEJO_REPOSITORY%%/*}}"
   : "${REPO:=${FORGEJO_REPOSITORY##*/}}"
   : "${SERVER_URL:=${FORGEJO_SERVER_URL}}"
   : "${SHA:=${FORGEJO_SHA}}"
-  : "${TAG=:${FORGEJO_BASE_REF}}"
+  : "${TAG:=${FORGEJO_REF_NAME}}"
   : "${TOKEN:=${FORGEJO_TOKEN}}"
   : "${WORKSPACE:=${FORGEJO_WORKSPACE}}"
 
-  ${IS_DRAFT:-false}
-  ${IS_PRERELEASE:-false}
+  : "${IS_DRAFT:-}"
+  : "${IS_PRERELEASE:-}"
 
   if [[ "${TAG}" =~ test$ ]]; then
     IS_DRAFT=true
