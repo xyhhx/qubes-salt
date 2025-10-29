@@ -11,7 +11,7 @@ main()
   : "${REPO:=${FORGEJO_REPOSITORY##*/}}"
   : "${SERVER_URL:=${FORGEJO_SERVER_URL}}"
   : "${SHA:=${FORGEJO_SHA}}"
-  : "${TAG=:${FORGEJO_BASE_REF}}"
+  : "${TAG:=${FORGEJO_REF_NAME}}"
   : "${TOKEN:=${FORGEJO_TOKEN}}"
   : "${WORKSPACE:=${FORGEJO_WORKSPACE}}"
 
