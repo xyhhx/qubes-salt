@@ -7,8 +7,6 @@ test "${VERBOSE:-false}" && set -x
 
 main()
 {
-  verify_context
-
   : "${OWNER:=${FORGEJO_REPOSITORY%%/*}}"
   : "${REPO:=${FORGEJO_REPOSITORY##*/}}"
   : "${SERVER_URL:=${FORGEJO_SERVER_URL}}"
