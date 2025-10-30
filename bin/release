@@ -112,14 +112,6 @@ check_commits()
     && die 1 "There are no commits since the last tag."
   return 0
 }
-
-# Get the last tag. Stored in a function in case more complex logic is needed
-# later
-get_last_tag()
-{
-  debug_log "Getting the last tag"
-  try git describe --tags --first-parent --abbrev=0
-}
 #
 # Gets the name of the current upstream
 get_upstream()
@@ -283,22 +275,23 @@ DEBUG
 generate_release_notes()
 {
   git log "${last_tag}..HEAD" --oneline --abbrev-commit \
-  | sed -nE 's/(\w+) (\w+)\(?([^\)])?\)?: (.*)/\1 \2 \4 \3/p' \
-  | while read -r hash type message component; do
-    case ${type@u} in
+  | while read -r hash type message; do
+    type="${type%%:}"
+
+    case "${type%%(?*}" in
       "")
         ;;
-      "merge")
+      "Merge")
         ;;
-      "release")
+      "Release")
         ;;
       "feat")
         test -z "${feat_summary:-}" \
           && feat_summary="### New features\n"
 
         feat_summary=$(
-          printf "%s\n%s%s (%s)" \
-          "${feat_summary}" "${component}:" "${message}" "${hash}"
+          printf "%s\n%s: %s (%s)" \
+          "${feat_summary}" "${type}" "${message}" "${hash}"
         )
         ;;
       "fix")
@@ -306,8 +299,8 @@ generate_release_notes()
           && fix_summary="### New fixes\n"
 
         fix_summary=$(
-          printf "%s\n%s%s (%s)" \
-          "${fix_summary}" "${component}:" "${message}" "${hash}"
+          printf "%s\n%s: %s (%s)" \
+          "${fix_summary}" "${type}" "${message}" "${hash}"
         )
         ;;
       "perf")
@@ -315,8 +308,8 @@ generate_release_notes()
           && perf_summary="### Performance improvements\n"
 
         perf_summary=$(
-          printf "%s\n%s%s (%s)" \
-          "${perf_summary}" "${component}:" "${message}" "${hash}"
+          printf "%s\n%s: %s (%s)" \
+          "${perf_summary}" "${type}" "${message}" "${hash}"
         )
         ;;
       "refactor")
@@ -324,8 +317,8 @@ generate_release_notes()
           && refactor_summary="### Code refactors\n"
 
         refactor_summary=$(
-          printf "%s\n%s%s (%s)" \
-          "${refactor_summary}" "${component}:" "${message}" "${hash}"
+          printf "%s\n%s: %s (%s)" \
+          "${refactor_summary}" "${type}" "${message}" "${hash}"
         )
         ;;
       "revert")
@@ -333,8 +326,8 @@ generate_release_notes()
           && revert_summary="### Reverted changes\n"
 
         revert_summary=$(
-          printf "%s\n%s%s (%s)" \
-          "${revert_summary}"  "${component}:" "${message}" "${hash}"
+          printf "%s\n%s: %s (%s)" \
+          "${revert_summary}" "${type}" "${message}" "${hash}"
         )
         ;;
       *)
@@ -342,8 +335,8 @@ generate_release_notes()
           && other_summary="### Other changes\n"
 
         other_summary=$(
-          printf "%s\n%s%s (%s)" \
-          "${other_summary}" "${component}:" "${message}" "${hash}"
+          printf "%s\n%s: %s (%s)" \
+          "${other_summary}" "${type}" "${message}" "${hash}"
         )
         ;;
     esac
