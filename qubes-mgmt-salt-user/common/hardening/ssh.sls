@@ -35,7 +35,7 @@ oqsprovider:
     - create_if_missing: true
     - uncomment: '#'
 
-{%- endif %}
+{% endif %}
 
 '/etc/ssh/ssh_config.d/10-custom.conf':
   file.managed:
