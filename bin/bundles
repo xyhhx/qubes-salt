@@ -1,12 +1,22 @@
 #!/usr/bin/env bash
 set -ueo pipefail
 
-SCRIPT="bin/bundles"
+
+get_base_dir()
+{
+  local script_path script_dir
+  script_path="$1"
+  script_dir="$(dirname -- "${script_path}")"
+  cd -- "${script_dir}" &>/dev/null && pwd
+}
+
+BASE_DIR=$(get_base_dir "${BASH_SOURCE[0]}")
+SCRIPT=$(basename "${BASH_SOURCE[0]}")
 DEBUG="${DEBUG:-}"
 SYNOPSIS="bundles [-dh] pack|unpack <guest> [<src_dir>]"
 
 # shellcheck source=bin/lib.sh
-. ./lib.sh
+. "${BASE_DIR}/lib.sh"
 
 get_base_dir()
 {
