@@ -60,6 +60,7 @@ main()
   check_repo_dirty
   check_commits
   checkout_release_branch
+  cut_release
   generate_release_notes
   write_release_notes
   tag_release "${release}" "${release_notes}"
@@ -270,11 +271,23 @@ DEBUG
       && die 0 "Exiting"
   fi
 
+  git checkout -b "${release_branch}"
+
+  return 0
+}
+
+# Cut the release from main
+cut_release()
+{
   # Checkout and pull main, then cut new release branch
   try git checkout main
-  (git pull "${remote}" main && git checkout -b "${release_branch}") \
-    || git checkout "${current_branch}" \
-    && die 1 "Failed to checkout branch"
+  git pull "${remote}" main
+  git checkout "${release_branch}"
+
+  if ! test "$?" = 0; then
+    git checkout "${current_branch}"
+    die 1 "Failed to checkout branch"
+  fi
 
   return 0
 }
@@ -282,8 +295,16 @@ DEBUG
 # Generate the new release notes
 generate_release_notes()
 {
-  git log "${last_tag}..HEAD" --oneline --abbrev-commit \
-  | while read -r hash type message; do
+
+  features=""
+  fixes=""
+  perfs=""
+  refactors=""
+  reverts=""
+  others=""
+
+  while read -r hash type message; do
+    debug_log "${hash} ${type} ${message}"
     type="${type%%:}"
 
     case "${type%%(?*}" in
@@ -294,75 +315,67 @@ generate_release_notes()
       "Release")
         ;;
       "feat")
-        test -z "${feat_summary:-}" \
-          && feat_summary="### New features\n"
-
-        feat_summary=$(
-          printf "%s\n%s: %s (%s)" \
-          "${feat_summary}" "${type}" "${message}" "${hash}"
+        features=$(
+          printf "%s\n- %s: %s (%s)\n\n" \
+          "${features:-"### New features"}" "${type}" "${message}" "${hash}"
         )
         ;;
       "fix")
-        test -z "${fix_summary:-}" \
-          && fix_summary="### New fixes\n"
-
-        fix_summary=$(
-          printf "%s\n%s: %s (%s)" \
-          "${fix_summary}" "${type}" "${message}" "${hash}"
+        fixes=$(
+          printf "%s\n- %s: %s (%s)\n\n" \
+          "${fixes:-"### Bug fixes"}" "${type}" "${message}" "${hash}"
         )
         ;;
       "perf")
-        test -z "${perf_summary:-}" \
-          && perf_summary="### Performance improvements\n"
-
-        perf_summary=$(
-          printf "%s\n%s: %s (%s)" \
-          "${perf_summary}" "${type}" "${message}" "${hash}"
+        perfs=$(
+          printf "%s\n- %s: %s (%s)\n\n" \
+          "${perfs:-"### Performance optimizations"}" "${type}" "${message}" "${hash}"
         )
         ;;
       "refactor")
-        test -z "${refactor_summary:-}" \
-          && refactor_summary="### Code refactors\n"
-
-        refactor_summary=$(
-          printf "%s\n%s: %s (%s)" \
-          "${refactor_summary}" "${type}" "${message}" "${hash}"
+        refactors=$(
+          printf "%s\n- %s: %s (%s)\n\n" \
+          "${refactors:-"### Refactors"}" "${type}" "${message}" "${hash}"
         )
         ;;
       "revert")
-        test -z "${revert_summary:-}" \
-          && revert_summary="### Reverted changes\n"
-
-        revert_summary=$(
-          printf "%s\n%s: %s (%s)" \
-          "${revert_summary}" "${type}" "${message}" "${hash}"
+        reverts=$(
+          printf "%s\n- %s: %s (%s)\n\n" \
+          "${reverts:-"### Reversions"}" "${type}" "${message}" "${hash}"
         )
         ;;
       *)
-        test -z "${other_summary:-}" \
-          && other_summary="### Other changes\n"
-
-        other_summary=$(
-          printf "%s\n%s: %s (%s)" \
-          "${other_summary}" "${type}" "${message}" "${hash}"
+        others=$(
+          printf "%s\n- %s: %s (%s)\n\n" \
+          "${others:-"### Other changes"}" "${type}" "${message}" "${hash}"
         )
         ;;
     esac
+  done < <(git log "${last_tag}..HEAD" --oneline --abbrev-commit || true)
+
+  for section in "${features}" "${fixes}" "${perfs}" "${refactors}" "${reverts}" "${others}"; do
+    test -n "${section}" && changes=$(printf "%s\n\n%s\n" "${changes:-}" "${section}")
   done
 
-  summary=$(
-    printf "%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s" \
-      "${feat_summary:-"No new features."}" \
-      "${fix_summary:-"No fixes."}" \
-      "${perf_summary:-"No performance improvements."}" \
-      "${refactor_summary:-"Nothin was refactored."}" \
-      "${revert_summary:-"Nothing was reverted."}" \
-      "${other_summary:-}"
-    )
+  footnotes=""
+
+  test -z "${features}" \
+    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "No new features")
+  test -z "${fixes}" \
+    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "No bug fixes")
+  test -z "${perfs}" \
+    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "No performance improvements")
+  test -z "${refactors}" \
+    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "Nothing was refactored")
+  test -z "${reverts}" \
+    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "Nothing was reverted")
 
   log "Generated release notes"
 
-  release_notes=$(printf "## v%s Release Notes\n%s" "${release}" "${summary}")
+  release_notes=$(
+    printf "# v%s Release Notes\n%s\n\n---\n%s" \
+    "${release}" "${changes}" "${footnotes}"
+  )
 }
 
 # Creates the actual release notes file
