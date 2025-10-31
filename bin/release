@@ -112,7 +112,15 @@ check_commits()
     && die 1 "There are no commits since the last tag."
   return 0
 }
-#
+
+# Get the last tag. Stored in a function in case more complex logic is needed
+# later
+get_last_tag()
+{
+  debug_log "Getting the last tag"
+  try git describe --tags --first-parent --abbrev=0
+}
+
 # Gets the name of the current upstream
 get_upstream()
 {
