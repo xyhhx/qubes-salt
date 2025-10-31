@@ -117,7 +117,7 @@ bundles: guard-domu
 
 .PHONY: release
 release: guard-domu
-	@$(if $(DEBUG),DEBUG=1) ./bin/release
+	@$(if $(DEBUG),DEBUG=1) ./bin/release $(wordlist 2, $(words $(MAKECMDGOALS)), $(MAKECMDGOALS))
 
 %:
 	@:
