@@ -12,7 +12,7 @@ oqsprovider:
   cmd.run:
     - use_vt: true
     - onlyif:
-      - "test $(cat /etc/crypto-policies/state/current) = {{ policy }}"
+      - "! test $(cat /etc/crypto-policies/state/current) = {{ policy }}"
 
 '/etc/crypto-policies/back-ends':
   file.directory:
