@@ -1,10 +1,16 @@
-{%- set vm_name = 'provides-vpn-ivpn' -%}
+{%- set vm_name = 'provides-vpn-ivpn-f42' -%}
 {%- set base_template = 'fedora-42-minimal' -%}
 
 {% if grains.id == 'dom0' %}
 
+{%- load_yaml as options -%}
+tags:
+  - add:
+    - whonix-updatevm
+{%- endload -%}
+
 {% from 'utils/macros/create_templatevm.sls' import templatevm %}
-{{ templatevm(vm_name, base_template=base_template) }}
+{{ templatevm(vm_name, base_template=base_template, options=options) }}
 
 {% else %}
 '{{ vm_name }}':
