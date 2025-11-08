@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -xaeuo pipefail
+
+logger -t qubes-vm-scaling-factor "Setting the scale factor..."
+
+scaling_factor="$(qrexec-client-vm dom0 qubes.GetScalingFactor)"
+dpi=$(( 96 * scaling_factor ))
+
+logger -t qubes-vm-scaling-factor "Scaling factor of ${scaling_factor}; calculated DPI is ${dpi}"
+
+case "${XDG_CURRENT_DESKTOP:-}" in
+  "")
+    logger -t qubes-vm-scaling-factor "No desktop environment detected."
+    echo "Xft.dpi: ${dpi}" | DISPLAY=:0 xrdb -merge
+    ;;
+  "XFCE")
+    logger -t qubes-vm-scaling-factor "Detected XFCE"
+    xfconf-query -c xsettings -p /Gdk/WindowScalingFactor -s "${scaling_factor}"
+    xfconf-query -c xsettings -p /Xft/DPI -s "${dpi}"
+    export GDK_DPI_SCALE=0.5
+    exit 0
+    ;;
+  *)
+    logger -t qubes-vm-scaling-factor "Unknown desktop environment"
+    echo "Xft.dpi: ${dpi}" | DISPLAY=:0 xrdb -merge
+    ;;
+esac
+
+logger -t qubes-vm-scaling-factor "Done"
+exit 0
+
+# vim: set ft=sh :

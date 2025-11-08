@@ -1,5 +1,6 @@
 user:
   dom0:
     - dom0
+    - common.scaling-factor
 
 # vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :

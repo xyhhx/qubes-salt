@@ -1,3 +1,5 @@
+{{ banner }}
+
 [colors.primary]
 background = "#000000"
 
@@ -7,7 +9,7 @@ dynamic_padding = true
 
 [font]
 size = 10.5
-normal.family = "IBM Plex Mono"
+normal.family = "IBM Plex Mono Light"
 
 [selection]
 save_to_clipboard = true
@@ -15,3 +17,4 @@ save_to_clipboard = true
 [general]
 live_config_reload = true
 
+{#- vim: set syn=jinja.toml : -#}

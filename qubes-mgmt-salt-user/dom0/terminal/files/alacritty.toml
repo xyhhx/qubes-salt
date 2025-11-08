@@ -19,7 +19,7 @@ decorations = "none"
 dimensions = { columns = 128, lines = 48 }
 
 [font]
-size = 10.5
+size = 9
 normal.family = "DejaVu Sans Mono"
 
-{#- vim: set syn=jinja.tomml : -#}
+{#- vim: set syn=jinja.toml : -#}

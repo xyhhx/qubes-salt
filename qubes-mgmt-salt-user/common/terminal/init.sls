@@ -23,6 +23,8 @@
 
 {% if salt['pillar.get']('qubes:type') in ['app', 'template'] %}
 
+{%- import 'utils/banner.jinja' as banner -%}
+
 '{{ slsdotpath }}: set configs':
   file.managed:
     - names:
@@ -35,7 +37,10 @@
     - mode: '{{ terminal.mode }}'
     - makedirs: true
     - show_changes: true
+    - template: 'jinja'
+    - context:
+        banner: '{{ banner }}'
 
 {% endif %}
 
-{# vim: set syntax=salt.jinja.yaml.yaml ts=2 sw=2 sts=2 et : #}
+{# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : #}

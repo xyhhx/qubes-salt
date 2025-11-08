@@ -1,8 +1,10 @@
+{{ banner }}
+
 live_config_reload: true
 fonts:
   size: 10.5
   normal:
-    family: IBM Plex Mono
+    family: IBM Plex Mono Light
 window:
   dynamic_padding: true
   padding:
@@ -13,3 +15,5 @@ colors:
     background: '#000000'
 selection:
   save_to_clipboard: true
+
+{#- vim: set ft=jinja.yaml : -#}

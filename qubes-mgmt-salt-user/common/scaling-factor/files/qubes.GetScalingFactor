@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export DISPLAY=:0
+user="$(nu 1000)"
+current_desktop="${XDG_CURRENT_DESKTOP:-}"
+
+# TODO: Handle other desktops
+case "${current_desktop}" in
+  "XFCE")
+    sudo -u "${user}" xfconf-query -c xsettings -p /Gdk/WindowScalingFactor
+    ;;
+  *)
+    ;;
+esac
+
+# vim: set ft=sh :
+
