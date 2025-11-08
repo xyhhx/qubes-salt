@@ -1,6 +1,6 @@
-{%- set vm_name = 'app-element' -%}
-{%- set template_name = 'uses-app-element' -%}
-{%- set label = 'green' -%}
+{%- set vm_name = 'app-signal' -%}
+{%- set template_name = 'uses-app-signal' -%}
+{%- set label = 'blue' -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -17,7 +17,8 @@
       - maxmem: 4000
       - vcpus: 2
     - features:
-      - menu-items: element-desktop.desktop element-nightly-desktop.desktop
+      - set:
+        - menu-items: signal-desktop.desktop
 
 {% endif %}
 
