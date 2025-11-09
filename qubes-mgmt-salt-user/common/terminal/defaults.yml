@@ -1,8 +1,5 @@
 bin: /usr/bin/alacritty
 config_path: /home/user/.config
-config_file:
-  name: alacritty.toml
-  serializer: tomlmod
 mode: '0600'
 group: {{ user }}
 user: {{ user }}

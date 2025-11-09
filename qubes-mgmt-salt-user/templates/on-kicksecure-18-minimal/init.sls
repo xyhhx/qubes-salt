@@ -1,5 +1,5 @@
-{%- set vm_name = "on-kicksecure-17-minimal" -%}
-{%- set base_template = "debian-12-minimal" -%}
+{%- set vm_name = "on-kicksecure-18-minimal" -%}
+{%- set base_template = "debian-13-minimal" -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -13,7 +13,7 @@ tags:
 {%- endload -%}
 
 {% from "utils/macros/create_templatevm.sls" import templatevm %}
-{{ templatevm(vm_name, base_template=base_template) }}
+{{ templatevm(vm_name, base_template=base_template, options=options) }}
 
 {% endif %}
 

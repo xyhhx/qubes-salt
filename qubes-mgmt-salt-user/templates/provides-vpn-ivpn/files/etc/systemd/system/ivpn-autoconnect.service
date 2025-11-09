@@ -1,0 +1,18 @@
+[Unit]
+Description=IVPN autoconnect service
+After=network.target ivpn-service.service
+Requires=network-online.target ivpn-service.service
+ConditionPathExists=!/var/run/qubes/this-is-templatevm
+
+[Service]
+Type=oneshot
+Environment=DISPLAY=:0
+ExecStartPre=sleep 2
+ExecStart=/usr/local/bin/ivpn-autoconnect.sh
+ExecStop=ivpn disconnect
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
+
+# vim: set ft=systemd :

@@ -1,6 +1,7 @@
 [Unit]
 Description=Run /usr/lib/qubes/qubes-setup-dnat-to-ns
 StartLimitIntervalSec=0
+ConditionPathExists=!/var/run/qubes/this-is-templatevm
 
 [Service]
 Type=oneshot

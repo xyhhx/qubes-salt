@@ -4,9 +4,6 @@ RedHat:
     - libxkbcommon
     - libxkbcommon-x11
 Debian:
-  config_file:
-    name: alacritty.yml
-    serializer: yaml
   pkgs:
     - alacritty
     - libxkbcommon-x11-0

@@ -1,5 +1,5 @@
 {%- set vm_name = "uses-app-signal" -%}
-{%- set base_template = "debian-12-minimal" -%}
+{%- set base_template = "debian-13-minimal" -%}
 
 {% if grains.id == 'dom0' %}
 

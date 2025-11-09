@@ -23,13 +23,11 @@
 
 {% if salt['pillar.get']('qubes:type') in ['app', 'template'] %}
 
-{%- import 'utils/banner.jinja' as banner -%}
-
 '{{ slsdotpath }}: set configs':
   file.managed:
     - names:
-      - '{{ terminal.config_path }}/alacritty/{{ terminal.config_file.name }}':
-        - source: 'salt://{{ slspath }}/files/{{ terminal.config_file.name }}'
+      - '{{ terminal.config_path }}/alacritty/alacritty.toml':
+        - source: 'salt://{{ slspath }}/files/alacritty.toml.j2'
       - '{{ terminal.config_path }}/profile.d/50-set-ps1.conf':
         - source: 'salt://{{ tpldir }}/files/50-set-ps1.conf'
     - user: '{{ terminal.user }}'
@@ -37,9 +35,6 @@
     - mode: '{{ terminal.mode }}'
     - makedirs: true
     - show_changes: true
-    - template: 'jinja'
-    - context:
-        banner: '{{ banner }}'
 
 {% endif %}
 

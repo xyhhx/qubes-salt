@@ -16,10 +16,11 @@
 '{{ slsdotpath }}:pkgs':
   pkg.installed:
     - pkgs:
-      - console-data
-      - console-common
-      - kbd
-      - keyboard-configuration
+      - 'apt-transport-tor'
+      - 'console-data'
+      - 'console-common'
+      - 'kbd'
+      - 'keyboard-configuration'
     - require:
       - group: 'console'
 

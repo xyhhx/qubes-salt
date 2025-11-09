@@ -31,7 +31,7 @@
   'libreoffice-math.desktop',
   'libreoffice-writer.desktop',
   'thunar.desktop'
-].join(' ') }}
+] | join(' ') }}
 
 {% endif %}
 

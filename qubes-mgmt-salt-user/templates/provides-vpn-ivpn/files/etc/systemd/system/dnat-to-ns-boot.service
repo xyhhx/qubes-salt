@@ -1,10 +1,11 @@
 [Unit]
 Description=Run /usr/lib/qubes/qubes-setup-dnat-to-ns
 After=qubes-network-uplink.service
+ConditionPathExists=!/var/run/qubes/this-is-templatevm
 
 [Service]
 Type=oneshot
-ExecStart=sleep 15
+ExecStartPre=sleep 15
 ExecStart=/usr/lib/qubes/qubes-setup-dnat-to-ns
 
 [Install]

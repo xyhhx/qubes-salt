@@ -1,5 +1,5 @@
 {%- set vm_name = 'sys-vpn-ivpn' -%}
-{%- set template_name = 'provides-vpn-ivpn-k17' -%}
+{%- set template_name = 'provides-vpn-ivpn' -%}
 
 {%- if grains.id == 'dom0' -%}
 

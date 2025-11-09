@@ -1,5 +1,5 @@
 {%- set vm_name = "uses-app-element" -%}
-{%- set base_template = "debian-12-minimal" -%}
+{%- set base_template = "debian-13-minimal" -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -7,10 +7,13 @@
 features:
   - set:
     - selinux: 0
+tags:
+  - add:
+    - whonix-updatevm
 {%- endload -%}
 
 {% from "utils/macros/create_templatevm.sls" import templatevm %}
-{{ templatevm(vm_name, base_template=base_template) }}
+{{ templatevm(vm_name, base_template=base_template, options=options) }}
 
 {%- else -%}
 
