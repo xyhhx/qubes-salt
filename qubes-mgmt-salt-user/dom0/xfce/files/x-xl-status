@@ -6,7 +6,7 @@ gigs(){
 }
 
 xl_mem_stats="$(xl info | grep memory | grep -o '[0-9]\{2,\}')"
-readarray -t mem < "${xl_mem_stats}"
+readarray -t mem < <(echo "${xl_mem_stats}")
 
 used_memory=$(( mem[0] - mem[1] ))
 

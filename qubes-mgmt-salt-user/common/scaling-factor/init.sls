@@ -5,6 +5,7 @@
     - names:
       - '/usr/local/etc/qubes-rpc/qubes.GetScalingFactor':
         - source: 'salt://{{ tpldir }}/files/qubes.GetScalingFactor'
+        - mode: '0755'
       - '/usr/local/etc/qubes/policy.d/available/50-scaling-factor.policy':
         - source: 'salt://{{ tpldir }}/files/scaling-factor.policy.j2'
     - template: 'jinja'

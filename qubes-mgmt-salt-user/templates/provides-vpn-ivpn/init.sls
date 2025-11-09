@@ -46,7 +46,7 @@ include:
   file.managed:
     - user: 'root'
     - group: 'root'
-    - mode: '0640'
+    - mode: '0644'
     - makedirs: true
     - names:
       - '/etc/qubes-bind-dirs.d/30-ivpn.conf':
@@ -54,13 +54,15 @@ include:
       - '/etc/qubes/qubes-firewall.d/30-leak-prevent.sh':
         - source: 'salt://{{ tpldir }}/files/etc/qubes/qubes-firewall.d/30-leak-prevent.sh'
         - mode: '0750'
+      - '/usr/lib/ivpn/ivpn-autoconnect.sh':
+        - source: 'salt://{{ tpldir }}/files/usr/lib/ivpn/ivpn-autoconnect.sh'
+        - mode: '0755'
 {% for file in [
   '/etc/systemd/system/dnat-to-ns.service',
   '/etc/systemd/system/dnat-to-ns.path',
   '/etc/systemd/system/dnat-to-ns-boot.service',
   '/etc/systemd/system/ivpn-autoconnect.service',
   '/etc/systemd/systemd-resolved-conf.d/override-restart-interval.conf',
-  '/usr/lib/ivpn/ivpn-autoconnect.sh'
 ] %}
       - '{{ file }}':
         - source: 'salt://{{ tpldir ~ '/files' ~ file }}'
@@ -73,9 +75,15 @@ include:
       - 'dnat-to-ns.path'
       - 'dnat-to-ns-boot.service'
 
-'/rw/bind-dirs/etc/opt/ivpn/mutable':
+'{{ slsdotpath }}:directories':
   file.directory:
+    - names:
+      - '/rw/bind-dirs/etc/opt/ivpn/mutable'
+      - '/usr/lib/ivpn'
     - makedirs: true
+    - dir_mode: '0755'
+    - recurse:
+      - mode
 
 {%- endif -%}
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

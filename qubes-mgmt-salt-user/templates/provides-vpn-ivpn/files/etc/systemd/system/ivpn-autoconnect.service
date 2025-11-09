@@ -8,7 +8,7 @@ ConditionPathExists=!/var/run/qubes/this-is-templatevm
 Type=oneshot
 Environment=DISPLAY=:0
 ExecStartPre=sleep 2
-ExecStart=/usr/local/bin/ivpn-autoconnect.sh
+ExecStart=/usr/lib/ivpn/ivpn-autoconnect.sh
 ExecStop=ivpn disconnect
 RemainAfterExit=yes
 
