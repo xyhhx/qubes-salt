@@ -18,6 +18,7 @@
       - netvm: '{{ mfw_name }}'
       - template: '{{ template_name }}'
       - label: yellow
+      - vcpus: 2
     - features:
       - enable:
         - service.clocksync

@@ -7,9 +7,11 @@
 features:
   - set:
     - default-menu-items: signal-desktop.desktop
-    - selinux: 0
+  - disable:
+    - selinux
 tags:
   - add:
+    - on-kicksecure
     - whonix-updatevm
 {%- endload -%}
 
@@ -17,10 +19,6 @@ tags:
 {{ templatevm(vm_name, base_template=base_template, options=options) }}
 
 {%- else %}
-
-include:
-  - common.hardening.kicksecure
-
 {% set signing_key = '/usr/share/keyrings/signal-desktop-keyring.gpg' -%}
 
 {%- from 'utils/user_info.jinja' import user -%}

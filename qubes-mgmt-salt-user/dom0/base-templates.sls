@@ -40,6 +40,18 @@ qubes-templates-community-testing:
 {%- endfor %}
     - fromrepo: 'qubes-templates-community-testing'
 
+{%- set all_templates = [] -%}
+{%- set all_templates = all_templates | union(base_templates['qubes-templates-itl']) -%}
+{%- set all_templates = all_templates | union(base_templates['qubes-templates-itl-testing']) -%}
+{%- set all_templates = all_templates | union(base_templates['qubes-templates-community-testing']) -%}
+
+{% for template in all_templates %}
+'{{ template }}':
+  qvm.tags:
+    - add:
+      - base-template
+{% endfor %}
+
 {%- endif -%}
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
 

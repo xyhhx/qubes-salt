@@ -1,0 +1,21 @@
+{#-
+  Common states
+-#}
+
+user:
+  '( N@vm and not I@qubes:tag:base-template )':
+    - match: compound
+    - common
+    - common.hardening
+    - common.theme
+  '( N@vm and not I@qubes:tag:base-template ) and G@os_family:RedHat and I@qubes:type:template':
+    - match: compound
+    - common.hardening.hardened-malloc
+  '( N@vm and not I@qubes:tag:base-template ) and G@os_family:Debian and I@qubes:tag:on-kicksecure and I@qubes:type:template':
+    - match: compound
+    - common.hardening.kicksecure
+  '( N@vm and not I@qubes:tag:base-template ) and G@os_family:Debian and I@qubes:type:template':
+    - match: compound
+    - common.pkgs.autoremove
+
+# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :

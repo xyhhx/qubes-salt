@@ -10,6 +10,7 @@ features:
 tags:
   - add:
     - whonix-updatevm
+    - on-kicksecure
 {%- endload -%}
 
 {%- from 'utils/macros/create_templatevm.sls' import templatevm -%}

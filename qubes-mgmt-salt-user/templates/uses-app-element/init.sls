@@ -5,11 +5,12 @@
 
 {%- load_yaml as options -%}
 features:
-  - set:
-    - selinux: 0
+  - disable:
+    - selinux
 tags:
   - add:
     - whonix-updatevm
+    - on-kicksecure
 {%- endload -%}
 
 {% from "utils/macros/create_templatevm.sls" import templatevm %}
