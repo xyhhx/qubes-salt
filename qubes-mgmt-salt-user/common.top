@@ -6,8 +6,10 @@ user:
   '( not dom0 and not I@qubes:tag:base-template )':
     - match: compound
     - common
-    - common.hardening
     - common.theme
+  'not dom0 and not I@qubes:tag:base-template and not I@qubes:type:template':
+    - match: compound
+    - common.hardening
   '( not dom0 and not I@qubes:tag:base-template ) and G@os_family:RedHat and I@qubes:type:template':
     - match: compound
     - common.hardening.hardened-malloc

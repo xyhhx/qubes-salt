@@ -1,7 +1,6 @@
 {%- set vm_name = "vault-ssh" -%}
 {%- set template_name = "provides-split-ssh" -%}
-
-{% if grains.id == 'dom0' %}
+{%- if grains.id == 'dom0' -%}
 
 '{{ vm_name }}':
   qvm.vm:
@@ -21,7 +20,7 @@
 
 '/usr/local/etc/qubes/policy.d/available/30-split-ssh.policy':
   file.managed:
-    - source: 'salt://appvms/vault-ssh/files/split-ssh.policy.j2'
+    - source: 'salt://{{ tpldir }}/files/split-ssh.policy.j2'
     - template: 'jinja'
     - user: root
     - group: qubes
@@ -45,18 +44,18 @@
     - group: 'qubes'
     - mode: '0777'
 
-{% else %}
+{%- else -%}
+{%- from 'utils/user_info.jinja' import user -%}
 
 '/home/user/.config/autostart/ssh-add.desktop':
   file.managed:
-    - source: 'salt://appvms/vault-ssh/files/ssh-add.desktop'
-    - user: user
-    - group: user
-    - mode: '0600'
+    - source: 'salt://{{ tpldir }}/files/ssh-add.desktop'
+    - user: '{{ user }}'
+    - group: '{{ user }}'
+    - mode: '0700'
     - makedirs: true
     - replace: true
 
 {% endif %}
-
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
+{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
 
