@@ -10,11 +10,14 @@ qubes-templates-itl-testing:
   - debian-13-xfce
   - fedora-42-minimal
   - fedora-42-xfce
+  - fedora-43
+  - fedora-43-minimal
+  - fedora-43-xfce
 qubes-templates-community-testing:
   - archlinux
-  - kicksecure-17
-  - whonix-gateway-17
-  - whonix-workstation-17
+  - kicksecure-18
+  - whonix-gateway-18
+  - whonix-workstation-18
 {% endload %}
 
 '{{ slsdotpath }}: install qubes base templates':
