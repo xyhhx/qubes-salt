@@ -1,5 +1,5 @@
-{%- set vm_name = "on-whonix-workstation-17" -%}
-{%- set base_template = "whonix-workstation-17" -%}
+{%- set vm_name = "on-whonix-workstation-18" -%}
+{%- set base_template = "whonix-workstation-18" -%}
 
 {% if grains.id == 'dom0' %}
 

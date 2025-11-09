@@ -1,5 +1,5 @@
 {%- set vm_name = "provides-tor-whonix" -%}
-{%- set base_template = "whonix-gateway-17" -%}
+{%- set base_template = "whonix-gateway-18" -%}
 
 {% if grains.id == 'dom0' %}
 

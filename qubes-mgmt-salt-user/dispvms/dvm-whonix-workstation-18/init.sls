@@ -1,5 +1,5 @@
-{%- set vm_name = 'dvm-whonix-workstation-17' -%}
-{%- set template_name = 'on-whonix-workstation-17' -%}
+{%- set vm_name = 'dvm-whonix-workstation-18' -%}
+{%- set template_name = 'on-whonix-workstation-18' -%}
 
 {%- if grains.id == 'dom0' -%}
 
@@ -34,5 +34,4 @@
         - sdwdate-gui-client
 
 {%- endif -%}
-
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

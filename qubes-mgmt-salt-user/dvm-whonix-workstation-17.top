@@ -1,7 +1,0 @@
-{%- set vm_name = "dvm-whonix-workstation-17" -%}
-
-user:
-  'dom0':
-    - dispvms.dvm-whonix-workstation-17
-
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
