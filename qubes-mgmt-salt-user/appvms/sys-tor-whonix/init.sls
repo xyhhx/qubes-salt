@@ -16,6 +16,7 @@
       - template: '{{ template_name }}'
       - label: yellow
       - provides-network: true
+      - vcpus: 2
     - features:
       - enable:
         - servicevm
@@ -51,7 +52,6 @@
     - user: 'root'
     - group: 'root'
     - mode: '0640'
-    - attrs: 'i'
     - defaults:
         gateway_vm: '{{ vm_name }}'
 

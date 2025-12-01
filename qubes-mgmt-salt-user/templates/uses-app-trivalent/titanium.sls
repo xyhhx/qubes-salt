@@ -51,7 +51,6 @@
     - user: 'root'
     - group: 'root'
     - mode: '0644'
-    - attrs: 'i'
     - makedirs: true
 
 {%- endif -%}

@@ -1,7 +1,7 @@
-{%- set vm_name = "on-fedora-42-minimal" -%}
+{%- set vm_name = "app-dev" -%}
 
 user:
   'dom0 or {{ vm_name }}':
-    - templates.on-fedora-42-minimal
+    - appvms.app-dev
 
 # vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :

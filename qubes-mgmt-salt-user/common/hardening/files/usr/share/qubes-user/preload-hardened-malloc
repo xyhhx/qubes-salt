@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+set -xeu
+
+if test -f /var/run/qubes-service/hardened_malloc; then
+  echo "libhardened_malloc.so" >> /etc/ld.so.preload
+else
+  sed '/libhardened_malloc/d' -i /etc/ld.so.preload
+fi
+
+ldconfig -v -n /etc/ld.so.preload

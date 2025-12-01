@@ -35,7 +35,6 @@
     - user: 'root'
     - group: 'root'
     - mode: '0644'
-    - attrs: 'i'
     - makedirs: true
     - context:
         vm_name: '{{ vm_name }}'

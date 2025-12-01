@@ -42,7 +42,6 @@ split-gpg2-dom0:
     - user: 'root'
     - group: 'qubes'
     - mode: '0640'
-    - attrs: 'i'
     - makedirs: true
     - defaults:
         client_tag: 'split-gpg2-client'

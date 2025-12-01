@@ -1,5 +1,5 @@
-{%- set vm_name = "on-fedora-42-xfce" -%}
-{%- set base_template = "fedora-42-xfce" -%}
+{%- set vm_name = "on-fedora-43-minimal" -%}
+{%- set base_template = "fedora-43-minimal" -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -8,4 +8,4 @@
 
 {% endif %}
 
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
+# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : 

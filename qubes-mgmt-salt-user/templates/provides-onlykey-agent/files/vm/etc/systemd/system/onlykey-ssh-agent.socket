@@ -1,4 +1,3 @@
-{%- include 'utils/banner.jinja' -%}
 
 [Unit]
 Description=onlykey-agent SSH agent socket

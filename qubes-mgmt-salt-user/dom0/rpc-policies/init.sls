@@ -15,7 +15,6 @@
     - user: 'root'
     - group: 'root'
     - mode: '0644'
-    - attrs: i
     - show_changes: true
     - makedirs: true
     - template: 'jinja'
@@ -28,7 +27,6 @@
     - user: '{{ user }}'
     - group: '{{ user }}'
     - mode: '0700'
-    - attrs: i
     - show_changes: true
     - makedirs: true
 

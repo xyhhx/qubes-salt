@@ -1,0 +1,7 @@
+{%- set vm_name = "dvm-fedora-43-xfce" -%}
+
+user:
+  'dom0':
+    - dispvms.dvm-fedora-43-xfce
+
+# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :

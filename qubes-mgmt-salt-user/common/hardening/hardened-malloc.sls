@@ -1,3 +1,4 @@
+{%- if salt['grains.get']('os_family') | lower == 'redhat' -%}
 include:
   - common.pkgs.dnf-plugins-core
 
@@ -9,33 +10,25 @@ include:
   pkg.installed:
     - require:
       - pkgrepo: 'hardened_malloc'
-
-
-'/etc/ld.so.preload':
-{% if salt['file.file_exists']('/etc/ld.so.preload') %}
-  file.append:
-    - text: 'libhardened_malloc.so'
-{% else %}
   file.managed:
-    - contents: |
-        libhardened_malloc.so
+    - names:
+      - '/etc/sysctl.d/30-hardened_malloc-mapcount.conf':
+        - contents: |
+            vm.max_map_count = 1048576
+      - '/usr/lib/systemd/system/hardened_malloc.service':
+        - source: 'salt://{{ tpldir }}/files/usr/lib/systemd/system/hardened_malloc.service'
+      - '/usr/share/qubes-user/preload-hardened-malloc':
+        - source: 'salt://{{ tpldir }}/files/usr/share/qubes-user/preload-hardened-malloc'
+        - mode: '0755'
     - user: 'root'
     - group: 'root'
     - mode: '0644'
-    - attrs: 'i'
-{% endif %}
-    - prereq:
-      - pkg: 'hardened_malloc'
-
-'/etc/sysctl.d/30-hardened_malloc-mapcount.conf':
-  file.managed:
-    - contents: |
-        vm.max_map_count = 1048576
-    - user: 'root'
-    - group: 'root'
-    - mode: '0644'
-    - attrs: 'i'
     - makedirs: true
+    - require:
+      - pkg: 'hardened_malloc'
+  service.enabled:
+    - require:
+      - file: 'hardened_malloc'
 
-
-{#- vim: set syntax=salt.jinja.yaml.salt.jinja ts=2 sw=2 sts=2 et : -#}
+{%- endif -%}
+{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

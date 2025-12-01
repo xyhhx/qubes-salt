@@ -12,6 +12,8 @@
       - template: '{{ template_name }}'
       - label: 'blue'
     - features:
+      - disable:
+        - service.hardened_malloc
       - enable:
         - service.custom-persist
         - service.split-gpg2-client
@@ -36,7 +38,6 @@
     - user: 'user'
     - group: 'user'
     - mode: '0700'
-    - attrs: 'i'
     - makedirs: true
 
 {% endif %}

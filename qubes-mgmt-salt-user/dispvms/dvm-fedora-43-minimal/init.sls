@@ -1,5 +1,5 @@
-{%- set vm_name = 'dvm-fedora-42-xfce' -%}
-{%- set template_name = 'on-fedora-42-xfce' -%}
+{%- set vm_name = 'dvm-fedora-43-minimal' -%}
+{%- set template_name = 'on-fedora-43-minimal' -%}
 
 {%- if grains.id == 'dom0' -%}
 
@@ -16,8 +16,8 @@
       - enable:
         - appmenus-dispvm
       - set:
-        - menu-items: Alacritty.desktop thunar.desktop org.mozilla.desktop
-        - menu-favorites: "@disp:Alacritty @disp:thunar @disp:org.mozilla.desktop"
+        - menu-items: Alacritty.desktop
+        - menu-favorites: "@disp:Alacritty"
 
 '{{ vm_name }}-offline':
   qvm.vm:
@@ -33,8 +33,8 @@
       - enable:
         - appmenus-dispvm
       - set:
-        - menu-items: Alacritty.desktop thunar.desktop
-        - menu-favorites: "@disp:Alacritty @disp:thunar"
+        - menu-items: Alacritty.desktop
+        - menu-favorites: "@disp:Alacritty"
 
 {%- endif -%}
 

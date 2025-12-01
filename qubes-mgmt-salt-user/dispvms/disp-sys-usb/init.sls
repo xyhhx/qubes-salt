@@ -36,7 +36,6 @@
     - user: 'root'
     - group: 'qubes'
     - mode: '0640'
-    - attrs: 'i'
     - makedirs: true
     - replace: true
     - defaults:

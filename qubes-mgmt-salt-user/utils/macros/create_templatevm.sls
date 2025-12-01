@@ -1,4 +1,4 @@
-{% macro templatevm(name, options={}, base_template="fedora-42-minimal") %}
+{% macro templatevm(name, options={}, base_template="fedora-43-minimal") %}
 
 {%- load_yaml as defaults -%}
 prefs:
@@ -25,17 +25,24 @@ prefs:
   - qrexec-timeout: 120
 
 features:
+  # These remain after cloning the base templates, so they have to be removed
+  - disable:
+    - prohibit-start
+    - skip-updates
+
   - enable:
     - selinux
+    - service.hardened_malloc
+
   - set:
     - menu-items: Alacritty.desktop
     - default-menu-items: Alacritty.desktop
 {%- endload -%}
 
-{% set vm = {} %}
-{% do salt["defaults.merge"](vm, defaults, in_place=true) %}
-{% do salt["defaults.merge"](vm, salt["pillar.get"]("qvm_defaults", default={}), in_place=true) %}
-{% do salt["defaults.merge"](vm, options, in_place=true) %}
+{%- set vm = {} -%}
+{%- do salt["defaults.merge"](vm, defaults, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, salt["pillar.get"]("qvm_defaults", default={}), in_place=true) -%}
+{%- do salt["defaults.merge"](vm, options, in_place=true) -%}
 
 "{{ slsdotpath }}.{{ sls }}:qvm.template_installed":
   qvm.template_installed:
@@ -50,7 +57,8 @@ features:
     {{ vm | dict_to_sls_yaml_params | indent }}
 
     - order: 1
+    - require:
+      - qvm: '{{ slsdotpath }}.{{ sls }}:qvm.template_installed'
 
 {% endmacro %}
-
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
+{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

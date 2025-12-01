@@ -1,5 +1,5 @@
 {%- set vm_name = "provides-split-ssh" -%}
-{%- set base_template = "fedora-42-minimal" -%}
+{%- set base_template = "fedora-43-minimal" -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -23,7 +23,6 @@ include:
     - user: root
     - group: root
     - mode: '0755'
-    - attrs: i
     - makedirs: true
 
 {% endif %}

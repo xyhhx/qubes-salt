@@ -5,8 +5,11 @@
 
 {%- set policy = "DEFAULT:TEST-PQ" -%}
 
+{%- if salt['grains.get']('osrelease') | to_num < 43 -%}
+{#- Fedora 43 ships with a version of OpenSSL that natively supports OQS -#}
 oqsprovider:
   pkg.installed
+{%- endif -%}
 
 'update-crypto-policies --set {{ policy }}':
   cmd.run:

@@ -15,9 +15,10 @@
     - features:
       - enable:
         - appmenus-dispvm
+        - service.hardened_malloc
       - set:
-        - menu-items: gtk-transmission.desktop
-        - menu-favorites: "@disp:gtk-transmission.desktop"
+        - menu-items: transmission-gtk.desktop
+        - menu-favorites: "@disp:transmission-gtk.desktop"
 
 {% endif %}
 

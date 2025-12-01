@@ -1,5 +1,5 @@
 {%- set vm_name = 'provides-onlykey-agent' -%}
-{%- set base_template = 'fedora-42-minimal' -%}
+{%- set base_template = 'fedora-43-minimal' -%}
 
 {%- if grains.id == 'dom0' -%}
 
@@ -18,6 +18,7 @@
       - pipx
       - qubes-ctap
       - qubes-usb-proxy
+      - systemd-devel
   file.managed:
     - names:
 {% for file in [
@@ -40,7 +41,6 @@
     - user: 'root'
     - group: 'root'
     - mode: '0644'
-    - attrs: 'i'
     - makedirs: true
     - template: 'jinja'
   cmd.run:

@@ -1,5 +1,5 @@
 {%- set vm_name = "provides-split-gpg2" -%}
-{%- set base_template = "fedora-42-minimal" -%}
+{%- set base_template = "fedora-43-minimal" -%}
 
 {% if grains.id == 'dom0' %}
 

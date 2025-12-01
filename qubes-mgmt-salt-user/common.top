@@ -2,22 +2,22 @@
   Common states
 -#}
 
+{#- TODO: Figure out how to set up nodegroups in guests -#}
+{%- set base_templates = "L@archlinux,debian-*,gentoo,fedora-*,kicksecure-*,whonix-*" -%}
+
 user:
-  '( not dom0 and not I@qubes:tag:base-template )':
+  # Common states for all qubes
+  'not dom0 and not {{ base_templates }}':
     - match: compound
     - common
     - common.theme
-  'not dom0 and not I@qubes:tag:base-template and not I@qubes:type:template':
+
+  '( not dom0 and not {{ base_templates }} ) and I@qubes:type:template':
     - match: compound
     - common.hardening
-  '( not dom0 and not I@qubes:tag:base-template ) and G@os_family:RedHat and I@qubes:type:template':
-    - match: compound
-    - common.hardening.hardened-malloc
-  '( not dom0 and not I@qubes:tag:base-template ) and G@os_family:Debian and I@qubes:tag:on-kicksecure and I@qubes:type:template':
+
+  '( not dom0 and not {{ base_templates }} ) and I@qubes:tag:on-kicksecure and I@qubes:type:template':
     - match: compound
     - common.hardening.kicksecure
-  '( not dom0 and not I@qubes:tag:base-template ) and G@os_family:Debian and I@qubes:type:template':
-    - match: compound
-    - common.pkgs.autoremove
 
 # vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :

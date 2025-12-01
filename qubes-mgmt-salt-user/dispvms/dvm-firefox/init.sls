@@ -13,6 +13,8 @@
       - label: red
       - template-for-dispvms: true
     - features:
+      - disable:
+        - service.hardened_malloc
       - enable:
         - appmenus-dispvm
         - service.qubes-ctap-proxy

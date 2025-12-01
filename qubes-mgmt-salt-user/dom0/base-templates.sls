@@ -1,47 +1,41 @@
 {%- if grains.id == 'dom0' -%}
 
 {% load_yaml as base_templates %}
-qubes-templates-itl:
-  - fedora-42-minimal
+qubes-templates-itl: []
 qubes-templates-itl-testing:
-  - debian-12-minimal
-  - debian-13
   - debian-13-minimal
   - debian-13-xfce
-  - fedora-42-minimal
-  - fedora-42-xfce
-  - fedora-43
   - fedora-43-minimal
   - fedora-43-xfce
 qubes-templates-community-testing:
-  - archlinux
-  - kicksecure-18
   - whonix-gateway-18
   - whonix-workstation-18
 {% endload %}
 
-'{{ slsdotpath }}: install qubes base templates':
-  qvm.template_installed:
-    - names:
-{%- for template in base_templates['qubes-templates-itl'] %}
-      - '{{ template }}'
-{%- endfor %}
+{%- for repo in [
+  'qubes-templates-itl',
+  'qubes-templates-itl-testing',
+  'qubes-templates-community-testing'
+] -%}
 
-'{{ slsdotpath }}: install qubes testing templates':
-  qvm.template_installed:
-    - names:
-{%- for template in base_templates['qubes-templates-itl-testing'] %}
-      - '{{ template }}'
-{%- endfor %}
-    - fromrepo: 'qubes-templates-itl-testing'
+{%- if base_templates[repo] | length %}
 
-'{{ slsdotpath }}: install qubes community testing templates':
+'{{ slsdotpath }}: install base templates from {{ repo }}':
   qvm.template_installed:
     - names:
-{%- for template in base_templates['qubes-templates-community-testing'] %}
+{%- for template in base_templates[repo] %}
       - '{{ template }}'
 {%- endfor %}
-    - fromrepo: 'qubes-templates-community-testing'
+    - fromrepo: '{{ repo }}'
+
+{% endif -%}
+
+{%- endfor -%}
+
+{#-
+  Base templates should be kept pristine and never be used. Instead, clone them
+  and use those clones to do anything
+-#}
 
 {%- set all_templates = [] -%}
 {%- set all_templates = all_templates | union(base_templates['qubes-templates-itl']) -%}
@@ -50,9 +44,10 @@ qubes-templates-community-testing:
 
 {% for template in all_templates %}
 '{{ template }}':
-  qvm.tags:
-    - add:
-      - base-template
+  qvm.features:
+    - set:
+      - skip-update: true
+      - prohibit-start: "This is a base template. Clone it to use"
 {% endfor %}
 
 {%- endif -%}

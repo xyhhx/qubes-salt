@@ -1,5 +1,5 @@
 {%- set vm_name = "provides-net" -%}
-{%- set base_template = "fedora-42-minimal" -%}
+{%- set base_template = "fedora-43-minimal" -%}
 
 {% if grains.id == 'dom0' %}
 
@@ -13,12 +13,25 @@
     - pkgs:
       - NetworkManager-wifi
       - gnome-keyring
+      - iwlwifi-dvm-firmware
+      - iwlwifi-mld-firmware
+      - iwlwifi-mvm-firmware
+      - linux-firmware
       - network-manager-applet
       - polkit
       - qubes-core-agent-network-manager
       - qubes-core-agent-networking
     - install_recommends: false
     - skip_suggestions: true
+
+'{{ vm_name }}: remove unnecessary firmware':
+  pkg.purged:
+    - pkgs:
+      - amd-audio-firmware
+      - amd-gpu-firmware
+      - intel-audio-firmware
+      - intel-gpu-firmware
+      - nvidia-gpu-firmware
 
 {% endif %}
 

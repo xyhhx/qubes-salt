@@ -1,0 +1,9 @@
+[Unit]
+Description="Configure hardened_malloc linker preload"
+
+[Service]
+ExecStart=/usr/share/qubes-user/preload-hardened-malloc
+
+[Install]
+WantedBy=multi-user.target
+

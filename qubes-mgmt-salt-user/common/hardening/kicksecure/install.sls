@@ -20,7 +20,7 @@ onion_tls:
   url: 'tor+https://deb.w5j6stm77zs6652pgsij4awcjeel3eco7kvipheu6mtr623eyyehj4yd.onion'
 {%- endload -%}
 
-{%- set repo = repos.onion -%}
+{%- set repo = repos.plain_tls_tor -%}
 {%- set derivative_key = '/usr/share/keyrings/derivative.asc' -%}
 {%- set dist = salt['grains.get']('oscodename') -%}
 
@@ -36,9 +36,9 @@ onion_tls:
 '{{ slsdotpath }}: install kicksecure':
   pkg.installed:
     - pkgs:
-{% if salt['grains.get']('osrelease') == '12' %}
+{% if salt['grains.get']('osrelease') | to_num <= 12 %}
       - 'kicksecure-qubes-cli'
-{% elif salt['grains.get']('osrelease') == '13' %}
+{% elif salt['grains.get']('osrelease') | to_num >= 13 %}
       - 'kicksecure-qubes-server'
 {% endif %}
     - install_recommends: false

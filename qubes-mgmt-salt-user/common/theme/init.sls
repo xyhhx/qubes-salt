@@ -3,6 +3,8 @@
 
 {%- set qube_type = salt['pillar.get']('qubes:type') == 'template' -%}
 
+{%- if grains.id != "dom0" -%}
+
 {%- if qube_type is eq 'template' -%}
   {%- set user = 'root' -%}
   {%- set config_dir = '/etc' -%}
@@ -52,4 +54,5 @@
   cmd.run:
     - use_vt: true
 
+{%- endif -%}
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
