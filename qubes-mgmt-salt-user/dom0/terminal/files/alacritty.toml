@@ -9,9 +9,6 @@ save_to_clipboard = true
 [colors.primary]
 background = "#000000"
 
-[env]
-WINIT_X11_SCALE_FACTOR = "2.0"
-
 [window]
 padding = { x = 16, y = 16 }
 dynamic_padding = true

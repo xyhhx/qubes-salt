@@ -8,8 +8,11 @@
 
 {% else %}
 
+{%- from 'utils/user_info.jinja' import user -%}
+
 include:
   - common.pkgs.dnf-plugins-core
+  - common.pkgs.docker
 
 '{{ vm_name }}':
   pkgrepo.managed:
@@ -18,6 +21,8 @@ include:
         - copr: atim/bottom
       - 'lazygit':
         - copr: dejan/lazygit
+      - 'starship':
+        - copr: atim/starship
     - require:
       - pkg: dnf-plugins-core
   pkg.installed:
@@ -26,11 +31,12 @@ include:
       - bind-utils
       - bottom
       - btop
-      - cascadia-code-nf-fonts
       - cargo
+      - cascadia-code-nf-fonts
       - clippy
       - direnv
       - fd-find
+      - fish
       - gawk
       - git
       - git-delta
@@ -49,24 +55,25 @@ include:
       - pnpm
       - podman
       - psutils
-      - qubes-ctap
       - qubes-core-agent-networking
       - qubes-core-agent-passwordless-root
+      - qubes-ctap
       - qubes-usb-proxy
       - ripgrep
       - rsync
       - rustfmt
       - sqlite
+      - starship
       - texlive-latex
       - tmux
       - tree
-      - wget2-wget
       - uv
+      - wget2-wget
       - yq
-      - zsh
-  user.present:
-    - name: 'user'
-    - shell: '/bin/zsh'
+    - require:
+      - pkgrepo: '{{ vm_name }}'
+    - require_in:
+      - sls: common.pkgs.docker
   file.managed:
     - name: '/etc/ssh/ssh_known_hosts'
     - source: 'salt://{{ tpldir }}/files/etc/ssh/ssh_known_hosts'
@@ -80,7 +87,12 @@ include:
         - onlyif: '[ -L /etc/systemd/system/multi-user.target.wants/qubes-ctapproxy@sys-usb.service ]'
       - 'systemctl enable qubes-ctapproxy@disp-sys-usb.service':
         - creates: '/etc/systemd/system/multi-user.target.wants/qubes-ctapproxy@disp-sys-usb.service'
+        - require:
+          - pkg: '{{ vm_name }}'
     - use_vt: true
+  user.present:
+    - name: 'user'
+    - shell: '/usr/bin/fish'
 
 '{{ slsdotpath }}: install tree-sitter':
   cmd.run:

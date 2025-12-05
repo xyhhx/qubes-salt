@@ -34,11 +34,6 @@ include:
   - common.split-ssh-client
 
 '{{ slsdotpath }}:init':
-  cmd.run:
-    - names:
-      - 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended':
-        - creates: '/home/user/.oh-my-zsh'
-    - runas: 'user'
   git.cloned:
     - names:
       - 'https://github.com/astronvim/template':
@@ -49,6 +44,12 @@ include:
           - git: 'https://github.com/astronvim/template'
         - branch: 'stable'
     - user: '{{ user }}'
+  cmd.run:
+    - names:
+      - 'nvim --headless +q'
+      - 'starship init fish | source':
+        - shell: '/usr/bin/fish'
+    - runas: '{{ user }}'
 
 {% endif %}
 
