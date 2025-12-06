@@ -24,24 +24,22 @@ onion_tls:
 {%- set derivative_key = '/usr/share/keyrings/derivative.asc' -%}
 {%- set dist = salt['grains.get']('oscodename') -%}
 
+'apt-transport-tor':
+  pkg.installed
+
 '{{ slsdotpath }}:pkgrepo':
   pkgrepo.managed:
     - name: 'deb [signed-by={{ derivative_key }}] {{ repo.url }} {{ dist }} contrib main non-free'
     - dist: '{{ dist }}'
     - file: '/etc/apt/sources.list.d/derivative.list'
     - key_url: 'salt://{{ tpldir }}/files/derivative.asc'
-    - unless:
-      - 'test -f /etc/apt/sources.list.d/derivative.sources'
+    - require:
+      - pkg: 'apt-transport-tor'
 
 '{{ slsdotpath }}: install kicksecure':
   pkg.installed:
     - pkgs:
-{% if salt['grains.get']('osrelease') | to_num <= 12 %}
-      - 'kicksecure-qubes-cli'
-{% elif salt['grains.get']('osrelease') | to_num >= 13 %}
       - 'kicksecure-qubes-server'
-{% endif %}
-    - install_recommends: false
     - require:
       - pkgrepo: '{{ slsdotpath }}:pkgrepo'
     # sometimes the installation fails out, but works the second time

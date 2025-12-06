@@ -18,6 +18,10 @@ features:
 
 ] | join(' ' ) }}
 
+tags:
+  - add:
+    - on-kicksecure
+    - whonix-updatevm
 {%- endload -%}
 
 {% from "utils/macros/create_templatevm.sls" import templatevm %}

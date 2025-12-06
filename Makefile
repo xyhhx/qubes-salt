@@ -47,7 +47,7 @@ guard-env-%:
 
 .PHONY: guard-domu
 guard-domu:
-	@ if [ "`hostname`" == "`qubesdb-read /name`" ]; then \
+	@ if [ "`hostname`" != "`qubesdb-read /name`" ]; then \
 		echo "This task must be run in a guest domain"; \
 		exit 1; \
 	fi

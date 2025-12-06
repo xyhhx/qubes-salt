@@ -23,6 +23,9 @@ tags:
 
 {%- from 'utils/user_info.jinja' import user -%}
 
+include:
+  - common.hardening.kicksecure
+
 '{{ signing_key }}':
   file.managed:
     - source: 'salt://{{ tpldir }}/files/signal-desktop.gpg'
@@ -30,6 +33,8 @@ tags:
     - group: '{{ user }}'
     - mode: '0644'
     - makedirs: true
+    - require:
+      - sls: common.hardening.kicksecure
 
 'deb [signed-by={{ signing_key }}] tor+https://updates.signal.org/desktop/apt xenial main':
   pkgrepo.managed:

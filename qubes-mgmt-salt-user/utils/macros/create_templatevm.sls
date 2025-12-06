@@ -25,11 +25,6 @@ prefs:
   - qrexec-timeout: 120
 
 features:
-  # These remain after cloning the base templates, so they have to be removed
-  - disable:
-    - prohibit-start
-    - skip-updates
-
   - enable:
     - selinux
     - service.hardened_malloc
@@ -59,6 +54,15 @@ features:
     - order: 1
     - require:
       - qvm: '{{ slsdotpath }}.{{ sls }}:qvm.template_installed'
+
+"{{ name }}:disable-qvm-features":
+  qvm.features:
+    - name: "{{ name }}"
+    # These remain after cloning the base templates, so they have to be removed
+    - disable:
+      - prohibit-start
+      - skip-updates
+
 
 {% endmacro %}
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

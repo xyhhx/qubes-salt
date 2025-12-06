@@ -31,6 +31,7 @@ include:
       - bind-utils
       - bottom
       - btop
+      - bzip2
       - cargo
       - cascadia-code-nf-fonts
       - clippy
@@ -63,6 +64,7 @@ include:
       - rsync
       - rustfmt
       - sqlite
+      - split-gpg2
       - starship
       - texlive-latex
       - tmux
