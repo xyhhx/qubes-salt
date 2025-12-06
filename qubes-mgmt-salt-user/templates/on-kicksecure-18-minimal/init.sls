@@ -16,6 +16,11 @@ tags:
 {% from "utils/macros/create_templatevm.sls" import templatevm %}
 {{ templatevm(vm_name, base_template=base_template, options=options) }}
 
+{%- else -%}
+
+include:
+  - common.hardening.kicksecure
+
 {% endif %}
 
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

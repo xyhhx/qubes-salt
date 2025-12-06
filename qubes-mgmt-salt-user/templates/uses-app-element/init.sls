@@ -17,10 +17,12 @@ tags:
 {{ templatevm(vm_name, base_template=base_template, options=options) }}
 
 {%- else -%}
-
 {%- set signing_key = '/usr/share/keyrings/element-io-archive-keyring.gpg' -%}
-
 {%- from 'utils/user_info.jinja' import user -%}
+
+
+include:
+  - common.hardening.kicksecure
 
 '{{ signing_key }}':
   file.managed:
@@ -29,6 +31,8 @@ tags:
     - group: '{{ user }}'
     - mode: '0644'
     - makedirs: true
+    - require:
+      - sls: common.hardening.kicksecure
 
 'deb [signed-by={{ signing_key }}] https://packages.element.io/debian/ default main':
   pkgrepo.managed:

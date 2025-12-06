@@ -24,17 +24,30 @@ onion_tls:
 {%- set derivative_key = '/usr/share/keyrings/derivative.asc' -%}
 {%- set dist = salt['grains.get']('oscodename') -%}
 
-'apt-transport-tor':
-  pkg.installed
+'{{ slsdotpath }}:prereqs':
+  pkg.installed:
+    - pkgs:
+      - 'apt-transport-tor'
+    - install_recommends: false
+  file.managed:
+    - name: '{{ derivative_key }}'
+    - source: 'salt://{{ tpldir }}/files/derivative.asc'
+    - user: 'root'
+    - group: 'root'
+    - mode: '0644'
+    - makedirs: true
 
 '{{ slsdotpath }}:pkgrepo':
   pkgrepo.managed:
     - name: 'deb [signed-by={{ derivative_key }}] {{ repo.url }} {{ dist }} contrib main non-free'
     - dist: '{{ dist }}'
     - file: '/etc/apt/sources.list.d/derivative.list'
-    - key_url: 'salt://{{ tpldir }}/files/derivative.asc'
+    - key_url: '{{ derivative_key }}'
     - require:
-      - pkg: 'apt-transport-tor'
+      - pkg: '{{ slsdotpath }}:prereqs'
+      - file: '{{ slsdotpath }}:prereqs'
+  pkg.uptodate:
+    - refresh: true
 
 '{{ slsdotpath }}: install kicksecure':
   pkg.installed:
@@ -51,16 +64,19 @@ onion_tls:
     - use_vt: true
     - require:
       - pkg: '{{ slsdotpath }}: install kicksecure'
-    - unless:
-      - 'grep {{ repo.url }} /etc/apt/sources.list.d/derivative.sources'
 
 '/etc/apt/sources.list':
   file.managed:
     - contents: ""
     - require:
       - cmd: '{{ slsdotpath }}: configure repos'
-    - onlyif:
-      - 'test -f /etc/apt/sources.list.d/debian.sources'
+    - onchanges:
+      - pkgrepo: '{{ slsdotpath }}:pkgrepo'
+      - pkg: '{{ slsdotpath }}: install kicksecure'
+      - cmd: '{{ slsdotpath }}: configure repos'
+
+include:
+  - common.hardening.hardened-malloc.service
 
 {%- endif -%}
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

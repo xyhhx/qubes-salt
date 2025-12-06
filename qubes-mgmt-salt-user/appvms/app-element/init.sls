@@ -17,7 +17,8 @@
       - maxmem: 4000
       - vcpus: 2
     - features:
-      - menu-items: element-desktop.desktop element-nightly-desktop.desktop
+      - set:
+        - menu-items: element-desktop.desktop element-nightly-desktop.desktop
 
 {% endif %}
 
