@@ -17,6 +17,7 @@
     - features:
       - enable:
         - service.qubes-ctap-proxy
+        - service.split-gpg2-client
       - set:
         - menu-items: Alacritty.desktop
         - menu-favorites: Alacritty
@@ -30,6 +31,7 @@
 
 include:
   - common.split-ssh-client
+  - common.pkgs.split-gpg2-client
 
 '{{ slsdotpath }}:init':
   git.cloned:

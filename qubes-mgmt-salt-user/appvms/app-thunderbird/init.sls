@@ -32,6 +32,9 @@
 
 {% else %}
 
+include:
+  - common.pkgs.split-gpg2-client
+
 '/home/user/.config/autostart/net.thunderbird.Thunderbird.desktop':
   file.symlink:
     - target: '/usr/share/applications/net.thunderbird.Thunderbird.desktop'
