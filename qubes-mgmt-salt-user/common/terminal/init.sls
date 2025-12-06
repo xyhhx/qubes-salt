@@ -19,6 +19,10 @@
     - onchanges:
       - alternatives: '{{ slsdotpath }}'
 
+'/etc/environment':
+  file.append:
+    - text: "TERMINAL=alacritty"
+
 {% endif %}
 
 {% if salt['pillar.get']('qubes:type') in ['app', 'template'] %}
