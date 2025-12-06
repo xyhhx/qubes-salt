@@ -1,32 +1,45 @@
 
 {%- from './map.jinja' import pkgs, prefs with context -%}
-
-{%- set qube_type = salt['pillar.get']('qubes:type') == 'template' -%}
-
 {%- if grains.id != "dom0" -%}
+{%- set qube_type = salt['pillar.get']('qubes:type') -%}
 
 {%- if qube_type is eq 'template' -%}
-  {%- set user = 'root' -%}
-  {%- set config_dir = '/etc' -%}
 
 '{{ slsdotpath }}:pkg.installed':
   pkg.installed:
     - pkgs: {{ pkgs | unique }}
 
+  {%- set user = 'root' -%}
+  {%- set config_dir = '/etc' -%}
+  {%- set gtk2rc = '/etc/gtk-2.0/gtkrc' -%}
+
 {%- else -%}
+
   {%- from 'utils/user_info.jinja' import user, user_home -%}
+
   {%- set config_dir = user_home ~ '/.config' -%}
-{%- endif -%}
+  {%- set gtk2rc =  user_home ~ '/.gtkrc-2.0' -%}
+
+{% endif %}
 
 '{{ slsdotpath }}':
   file.managed:
     - names:
 {% for db in ['color-scheme', 'fonts', 'gtk-theme', 'icon-theme'] %}
       - '{{ config_dir }}/dconf/db/local.d/{{ db }}':
-        - source: 'salt://common/theme/files/dconf/{{ db }}'
+        - source: 'salt://{{ tpldir }}/files/dconf/{{ db }}'
 {% endfor %}
+      - '{{ config_dir }}/gtk-4.0/settings.ini':
+        - source: 'salt://{{ tpldir }}/files/gtk-3.0-settings.j2'
+        - template: 'jinja'
+      - '{{ config_dir }}/gtk-3.0/settings.ini':
+        - source: 'salt://{{ tpldir }}/files/gtk-3.0-settings.j2'
+        - template: 'jinja'
       - '{{ config_dir }}/gtk-3.0/overrides.css':
-        - source: 'salt://common/theme/files/overrides.css'
+        - source: 'salt://{{ tpldir }}/files/overrides.css'
+      - '{{ gtk2rc }}':
+        - source: 'salt://{{ tpldir }}/files/gtkrc-2.0.j2'
+        - template: 'jinja'
     - context:
         cursor_theme:  '{{ prefs.theme.cursor }}'
         gtk_theme: '{{ prefs.theme.gtk }}'

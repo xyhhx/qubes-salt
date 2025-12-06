@@ -29,6 +29,11 @@ features:
     - selinux
     - service.hardened_malloc
 
+  # These remain after cloning the base templates, so they have to be removed
+  - disable:
+    - prohibit-start
+    - skip-updates
+
   - set:
     - menu-items: Alacritty.desktop
     - default-menu-items: Alacritty.desktop
