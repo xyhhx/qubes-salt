@@ -1,3 +1,15 @@
 [submodule "qubes-mgmt-salt-user/vendor/celenity-titanium"]
 	path = qubes-mgmt-salt-user/vendor/celenity-titanium
 	url = https://codeberg.org/celenity/Titanium
+[submodule "qubes-mgmt-salt-user/vendor/pane-black-gtk-theme"]
+	path = qubes-mgmt-salt-user/vendor/pane-black-gtk-theme
+	url = ssh://git@codeberg.org/xyhhx/pane-black-gtk-theme.git
+[submodule "Tela-icon-theme"]
+	path = Tela-icon-theme
+	url = git@github.com:vinceliuice/Tela-icon-theme.git
+[submodule "qubes-mgmt-salt-user/vendor/Tela-icon-theme"]
+	path = qubes-mgmt-salt-user/vendor/Tela-icon-theme
+	url = git@github.com:vinceliuice/Tela-icon-theme.git
+[submodule "qubes-mgmt-salt-user/vendor/papirus-folders"]
+	path = qubes-mgmt-salt-user/vendor/papirus-folders
+	url = https://github.com/PapirusDevelopmentTeam/papirus-folders.git

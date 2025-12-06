@@ -1,24 +1,23 @@
 {%- load_yaml as osfamily_map -%}
 RedHat:
   pkgs:
-    - breeze-gtk
-    - breeze-icon-theme
-    - breeze-icon-theme-fedora
     - breeze-cursor-theme
+    - papirus-icon-theme
+    - papirus-icon-theme-light
+    - papirus-icon-theme-dark
   prefs:
     theme:
       gtk: Breeze-Dark
-      icon: 'Breeze Dark'
+      icon: Papirus Dark
       cursor: 'Breeze Dark'
 Debian:
   pkgs:
-    - breeze-gtk-theme
-    - breeze-icon-theme
+    - papirus-icon-theme
     - breeze-cursor-theme
   prefs:
     theme:
       gtk: Breeze-Dark
-      icon: 'Breeze Dark'
+      icon: 'Paper-Mono-Dark'
       cursor: 'Breeze Dark'
 {%- endload -%}
 {%- set ui = salt['grains.filter_by'](osfamily_map, default={}) -%}
