@@ -12,6 +12,10 @@ features:
 {% from "utils/macros/create_templatevm.sls" import templatevm %}
 {{ templatevm(vm_name, base_template=base_template, options=options) }}
 
-{% endif %}
+{% else %}
 
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
+{% from "utils/macros/set_papirus_icon_colors.sls" import set_papirus_icon_colors %}
+{{ set_papirus_icon_colors(color="black") }}
+
+{% endif %}
+{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

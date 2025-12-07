@@ -40,6 +40,16 @@
         - menu-items: Alacritty.desktop thunar.desktop
         - menu-favorites: "@disp:Alacritty @disp:thunar"
 
+{%- else -%}
+
+{%- from "utils/macros/macros.html" import set_papirus_icon_colors -%}
+
+{%- if salt['grains.get']('id') == 'dvm-fedora-43-xfce' -%}
+{{ set_papirus_icon_colors(color="carbine") }}
+{%- elif salt['grains.get']('id') == 'dvm-fedora-43-xfce-offline' -%}
+{{ set_papirus_icon_colors(color="grey") }}
+{%- endif -%}
+
 {%- endif -%}
 
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
