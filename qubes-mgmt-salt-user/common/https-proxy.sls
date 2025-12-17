@@ -1,5 +1,4 @@
 {%- if grains.id != 'dom0' -%}
-
 {#- https://www.qubes-os.org/doc/how-to-install-software/#using-the-updates-proxy -#}
 
 updates_proxy:
@@ -12,13 +11,8 @@ updates_proxy:
       - http_proxy
       - https_proxy
     - value: 'http://127.0.0.1:8082'
-
-no_proxy:
-  environ.setenv:
-    - names:
-      - no_proxy
-      - NO_PROXY
-    - value: '127.0.0.1'
+    - update_minion: true
+    - reload_modules: true
 
 {%- endif -%}
 

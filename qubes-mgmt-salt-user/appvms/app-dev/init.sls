@@ -24,6 +24,7 @@
     - tags:
       - add:
         - onlykey-ssh-client
+        - onlykey-gpg-client
 
 {% else %}
 
@@ -31,7 +32,6 @@
 
 include:
   - common.split-ssh-client
-  - common.pkgs.split-gpg2-client
 
 '{{ slsdotpath }}:init':
   git.cloned:

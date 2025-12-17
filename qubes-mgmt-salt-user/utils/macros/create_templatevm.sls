@@ -28,21 +28,24 @@ features:
   - enable:
     - selinux
     - service.hardened_malloc
-
-  # These remain after cloning the base templates, so they have to be removed
-  - disable:
-    - prohibit-start
-    - skip-updates
-
   - set:
     - menu-items: Alacritty.desktop
     - default-menu-items: Alacritty.desktop
+{%- endload -%}
+
+{#- These remain after cloning the base templates, so they have to be removed -#}
+{%- load_yaml as disable_lock_features -%}
+features:
+  - disable:
+    - prohibit-start
+    - skip-update
 {%- endload -%}
 
 {%- set vm = {} -%}
 {%- do salt["defaults.merge"](vm, defaults, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, salt["pillar.get"]("qvm_defaults", default={}), in_place=true) -%}
 {%- do salt["defaults.merge"](vm, options, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, disable_lock_features, in_place=true) -%}
 
 "{{ slsdotpath }}.{{ sls }}:qvm.template_installed":
   qvm.template_installed:
@@ -59,15 +62,6 @@ features:
     - order: 1
     - require:
       - qvm: '{{ slsdotpath }}.{{ sls }}:qvm.template_installed'
-
-"{{ name }}:disable-qvm-features":
-  qvm.features:
-    - name: "{{ name }}"
-    # These remain after cloning the base templates, so they have to be removed
-    - disable:
-      - prohibit-start
-      - skip-updates
-
 
 {% endmacro %}
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

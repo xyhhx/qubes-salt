@@ -1,0 +1,22 @@
+#!/bin/env bash
+set -euo pipefail
+
+# Download a file, check its hash against a provided SHA256 checksum
+# Usage: download <remote_url> <sha256sum>
+
+# TODO: Support other hash algos
+# TODO: Support flags for options
+# TODO: support providing output location
+
+readonly download_url="${FETCH_URL:-$1}"
+readonly checksum="${FETCH_SUM:-$2}"
+# NOTE: This is XDG_RUNTIME_DIR is too small for many binaries
+# readonly tmp_dir="$(mktemp -du "${XDG_RUNTIME_DIR:-/var/run/user/$(id -nu)}/tmp/fetch.XXXXXX")"
+readonly output_dir="${HOME}/downloads/"
+readonly filename="${download_url##*/}"
+
+mkdir -p "${output_dir}"
+curl -sL "${download_url}" -o "${output_dir}/${filename}"
+cd "${output_dir}"
+echo "${checksum}  ${filename}" | sha256sum -c --quiet
+cat "${filename}"

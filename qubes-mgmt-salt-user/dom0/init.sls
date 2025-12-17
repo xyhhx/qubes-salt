@@ -1,6 +1,7 @@
 
 include:
   - .base-templates
+  - .patch-python-modules
   - .rpc-policies
   - .terminal
   - .xfce

@@ -1,0 +1,65 @@
+#!/usr/bin/bash
+set -euo pipefail
+
+show_help(){
+  cat <<-EOF
+Usage: fetch-github-release-asset <repo> <pattern> [<checksum>]
+
+Fetches an asset from a Github release
+
+repo      A Github repository with namespace included (owner/repo)
+
+pattern   A pattern to match against to find the correct filename. This is
+          used against jq's test() function.
+
+checksum  A SHA256 checksum to verify the downloaded file from
+EOF
+  exit 1
+}
+
+oops(){
+  printf "%s\n\n" "$1"
+  show_help
+  exit ${2:-1}
+}
+
+scurl(){
+  sudo -u nobody curl --tlsv1.3 -sL "$1"
+}
+
+test -z "${1:-}" && oops "Repo is missing"
+test -z "${2:-}" && oops "Asset pattern is missing"
+
+readonly repo="$1"
+readonly asset_pattern="$2"
+readonly checksum="${3:-}"
+readonly endpoint_url="https://api.github.com/repos/${repo}/releases"
+readonly tmp_dir="${XDG_RUNTIME_DIR}/tmp/$(mktemp -u "tmp.XXXXXXXX")"
+readonly api_response="$(scurl "${endpoint_url}")"
+readonly download_url="$(\
+  jq\
+  --arg pattern "${asset_pattern}"\
+  -r -- '
+  .
+  | map(select(.name | test("Desktop")))
+  | first
+  | .assets.[]
+  | select(.name | test($pattern))
+  | .browser_download_url
+' <<< ${api_response}
+)"
+
+test -z "${download_url}" && echo "Couldn't get download URL" && exit 1
+
+readonly download_out="${tmp_dir}/${download_url##*/}"
+
+mkdir -p "${tmp_dir}"
+scurl "${download_url}" > "${download_out}"
+
+if test "$(sha256sum "${download_out}" | cut -f1 -d\ )" = "${checksum}" || test -z "${checksum}"; then
+  cat "${download_out}"
+else
+  echo "CHECKSUM MISMATCH!"
+  exit 1
+fi
+
