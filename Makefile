@@ -34,11 +34,11 @@ endif
 .PHONY: guard-host-%
 guard-host-%:
 	@ if [ "`hostname`" != "${*}" ]; then \
-		echo "Task must be in run in ${*}"; \
+		echo "Task must be run in ${*}"; \
 		exit 1; \
 	fi
 
-.PHONY: guest-env-%
+.PHONY: guard-env-%
 guard-env-%:
 	@ if [ "${${*}}" = "" ]; then \
 		echo "Required environment variable ${*} not set"; \
@@ -101,7 +101,7 @@ $(MINION_CONF_DIR_GLOBAL)/z_user.conf:
 $(MINION_CONF_DIR_USER)/overrides.conf:
 	install -D -oroot -groot -m0644 conf/overrides.conf $@
 
-$(SRC_DIR)/.bundless:
+$(SRC_DIR)/.bundles:
 	install -dD -oroot -groot -m0755 $@
 
 /srv/$(SALTENV)/salt:
