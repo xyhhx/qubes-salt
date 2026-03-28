@@ -1,0 +1,14 @@
+[Unit]
+Description=onlykey-agent SSH agent
+Requires=onlykey-ssh-agent.socket
+ConditionPathExists=!/run/qubes/this-is-templatevm
+ConditionPathExists=/var/opt/onlykey/bin/onlykey-agent
+ConditionEnvironment=SSH_AUTH_SOCK
+
+[Service]
+Restart=always
+Environment=DISPLAY=:0
+ExecStart=/var/opt/onlykey/bin/onlykey-agent --foreground --sock-path $SSH_AUTH_SOCK %E/onlykey/ssh-agent.conf
+
+[Install]
+WantedBy=default.target

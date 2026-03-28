@@ -1,0 +1,6 @@
+{%- include 'utils/banner.jinja' -%}
+
+qubes.Gpg   *   @tag:split-gpg-client    @tag:onlykey-gpg-agent-server  allow notify=yes
+qubes.Gpg   *   @tag:onlykey-gpg-client  @default                       ask target={{ vm_name }}
+
+{#- vim: set ft=jinja : -#}

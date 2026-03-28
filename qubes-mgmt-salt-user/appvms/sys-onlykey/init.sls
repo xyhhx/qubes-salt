@@ -4,7 +4,10 @@
 {%- if grains.id == 'dom0' -%}
 
 {%- set policies_dir = '/usr/local/etc/qubes/policy.d' -%}
-{%- set policy_file = '30-onlykey-ssh.policy' -%}
+{%- set policy_files = [
+  '30-onlykey-gpg.policy',
+  '30-onlykey-ssh.policy'
+] -%}
 
 '{{ vm_name }}':
   qvm.vm:
@@ -25,12 +28,21 @@
       - set:
         - menu-items: Alacritty.desktop
         - custom-persist.home_ok_config: 'dir:user:user:0700:/home/user/.config/onlykey'
+        - custom-persist.gnupghome: 'dir:user:user:0700:/home/user/.gnupg'
     - tags:
       - add:
+        - onlykey-gpg-server
         - onlykey-ssh-server
-'{{ policies_dir }}/available/{{ policy_file }}':
+
+'{{ slsdotpath }}:: install policies':
   file.managed:
-    - source: 'salt://{{ tpldir }}/files/dom0{{ policies_dir }}/{{ policy_file }}.j2'
+    - require:
+      - qvm: '{{ vm_name }}'
+    - names:
+{% for file in policy_files %}
+      - '{{ policies_dir | path_join('available', file) }}':
+        - source: 'salt://{{ tpldir | path_join('files/dom0', policies_dir, file ) }}.j2'
+{% endfor %}
     - template: 'jinja'
     - user: 'root'
     - group: 'root'
@@ -39,9 +51,15 @@
     - context:
         vm_name: '{{ vm_name }}'
 
-'{{ policies_dir }}/enabled/{{ policy_file }}':
+'{{ slsdotpath }}:: enable policies':
   file.symlink:
-    - target: '{{ policies_dir }}/available/{{ policy_file }}'
+    - require:
+      - file: '{{ slsdotpath }}:: install policies'
+    - names:
+{% for file in policy_files %}
+      - '{{ policies_dir | path_join('enabled', file) }}':
+        - target: '{{ policies_dir | path_join('available', file) }}'
+{% endfor %}
     - makedirs: true
 
 {%- else -%}
@@ -56,6 +74,16 @@
     - mode: '0700'
     - makedirs: true
     - contents: ""
+
+'/home/user/.config/autostart/ssh-add.desktop':
+  file.managed:
+    - source: 'salt://{{ tpldir | path_join('files/vm/home/user/.config/autostart/ssh-add.desktop') }}'
+    - user: '{{ user }}'
+    - group: '{{ user }}'
+    - mode: '0700'
+    - makedirs: true
+    - replace: true
+
 
 {%- endif -%}
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

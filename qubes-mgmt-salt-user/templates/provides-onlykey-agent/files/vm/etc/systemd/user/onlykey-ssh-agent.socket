@@ -1,17 +1,14 @@
-
 [Unit]
 Description=onlykey-agent SSH agent socket
+ConditionEnvironment=SSH_AUTH_SOCK
 
 [Socket]
-ListenStream=%t/onlykey/ssh/S.agent
+ListenStream=/run/user/%U/onlykey/ssh/S.agent
 FileDescriptorName=ssh
 Service=onlykey-ssh-agent.service
-SocketMode=0777
-DirectoryMode=0777
-SocketUser=user
-SocketGroup=user
+SocketMode=0600
+DirectoryMode=0700
 
 [Install]
 WantedBy=sockets.target
 
-{#- vim: set ft=systemd syn=systemd.jinja : -#}

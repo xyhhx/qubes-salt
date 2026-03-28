@@ -1,6 +1,6 @@
+{#- ONLYKEY_SSH_CONF=/home/{{ user }}/.config/onlykey/ssh-agent.conf -#}
 
-ONLYKEY_SSH_CONF=/home/{{ user }}/.config/onlykey/ssh-agent.conf
-SSH_AUTH_SOCK=/run/onlykey/ssh/S.agent
-PATH=${PATH}:/opt
+SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/onlykey/ssh/S.agent
+PATH=${PATH}:/var/opt/onlykey/bin
 
 {#- vim: set ft=jinja.env : -#}

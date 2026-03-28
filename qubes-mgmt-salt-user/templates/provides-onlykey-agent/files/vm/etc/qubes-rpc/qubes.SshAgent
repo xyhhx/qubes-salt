@@ -1,17 +1,23 @@
-#!/bin/env bash
-set -axeuo pipefail
+#!/bin/bash --
+set -euo pipefail
 
-[[ -z "${SSH_AUTH_SOCK}" ]] &&
-  echo "\$SSH_AUTH_SOCK not defined. Aborting" &&
+if [[ -z "${QREXEC_REMOTE_DOMAIN+x}" ]]; then
+  echo "\$QREXEC_REMOTE_DOMAIN is undefined"
   exit 1
+fi
 
-self="$(qubesdb-read /name)"
+if [[ -z "${SSH_AUTH_SOCK+x}" ]]; then
+  echo "\$SSH_AUTH_SOCK is undefined"
+  exit 1
+fi
+
+qube_name="$(qubesdb-read /name)"
 
 notify-send \
-  -i "pgp-keys" \
-  "SSH agent access: ${self}" \
-  "${self}: SSH agent access from ${QREXEC_REMOTE_DOMAIN:?}"
+  "${qube_name} Split SSH" \
+  "SSH agent access from ${QREXEC_REMOTE_DOMAIN} granted"
 
-socat - "unix-connect:${SSH_AUTH_SOCK}"
+socat - "UNIX-CONNECT:${SSH_AUTH_SOCK}"
 
-# vim: set syn=sh :
+# vim: set ts=2 sw=2 sts=2 et number:
+
