@@ -86,7 +86,9 @@ SYNOPSIS
         ${SCRIPT} [-dhTy] [minor|patch]
 
 DESCRIPTION
-              Prepares a release. By default will increment the patch number
+              Prepares a release. By default will increment the patch number.
+              This script requires the environment variables \$FORGEJO_API_TOKEN
+              and \$GIT_CLIFF_TOKEN to bet set.
 
         -d
               Debug output. Can be set with DEBUG environment variable too
@@ -106,7 +108,7 @@ HELP
 # Utility function for calling cliff
 cliff(){
   podman run -t \
-    -e "GITEA_TOKEN=${FORGEJO_GITCLIFF_TOKEN}" \
+    -e "GITEA_TOKEN=${GIT_CLIFF_TOKEN}" \
     -v "$(pwd):/app:z" \
     "ghcr.io/orhun/git-cliff/git-cliff:${GIT_CLIFF_OCI_TAG:-latest}" $@
 }
@@ -280,87 +282,7 @@ cut_release()
 # Generate the new release notes
 generate_release_notes()
 {
-
-  features=""
-  fixes=""
-  perfs=""
-  refactors=""
-  reverts=""
-  others=""
-
-  while read -r hash type message; do
-    debug_log "${hash} ${type} ${message}"
-    type="${type%%:}"
-
-    case "${type%%(?*}" in
-      "")
-        ;;
-      "Merge")
-        ;;
-      "Release")
-        ;;
-      "feat")
-        features=$(
-          printf "%s\n- %s: %s (%s)\n\n" \
-          "${features:-"### New features"}" "${type}" "${message}" "${hash}"
-        )
-        ;;
-      "fix")
-        fixes=$(
-          printf "%s\n- %s: %s (%s)\n\n" \
-          "${fixes:-"### Bug fixes"}" "${type}" "${message}" "${hash}"
-        )
-        ;;
-      "perf")
-        perfs=$(
-          printf "%s\n- %s: %s (%s)\n\n" \
-          "${perfs:-"### Performance optimizations"}" "${type}" "${message}" "${hash}"
-        )
-        ;;
-      "refactor")
-        refactors=$(
-          printf "%s\n- %s: %s (%s)\n\n" \
-          "${refactors:-"### Refactors"}" "${type}" "${message}" "${hash}"
-        )
-        ;;
-      "revert")
-        reverts=$(
-          printf "%s\n- %s: %s (%s)\n\n" \
-          "${reverts:-"### Reversions"}" "${type}" "${message}" "${hash}"
-        )
-        ;;
-      *)
-        others=$(
-          printf "%s\n- %s: %s (%s)\n\n" \
-          "${others:-"### Other changes"}" "${type}" "${message}" "${hash}"
-        )
-        ;;
-    esac
-  done < <(git log "${last_tag}..HEAD" --oneline --abbrev-commit || true)
-
-  for section in "${features}" "${fixes}" "${perfs}" "${refactors}" "${reverts}" "${others}"; do
-    test -n "${section}" && changes=$(printf "%s\n\n%s\n" "${changes:-}" "${section}")
-  done
-
-  footnotes=""
-
-  test -z "${features}" \
-    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "No new features")
-  test -z "${fixes}" \
-    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "No bug fixes")
-  test -z "${perfs}" \
-    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "No performance improvements")
-  test -z "${refactors}" \
-    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "Nothing was refactored")
-  test -z "${reverts}" \
-    && footnotes=$(printf "%s\n\n%s\n" "${footnotes}" "Nothing was reverted")
-
-  log "Generated release notes"
-
-  release_notes=$(
-    printf "# v%s Release Notes\n%s\n\n---\n%s" \
-    "${release}" "${changes}" "${footnotes}"
-  )
+  release_notes=$(cliff --unreleased --tag "${release}")
 }
 
 # Creates the actual release notes file
