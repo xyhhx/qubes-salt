@@ -1,0 +1,60 @@
+name: Release
+about: Prepare for a new release
+title: '[Release] '
+labels:
+  - Category/Release Engineering
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### Preparation for a new release
+
+        > [!NOTE]
+        > Please make sure you've read the [release procedure docs](/xyhhx/qubes-mgmt-salt-user/src/branch/main/docs/releases.md)
+    visible: [form]
+  - type: markdown
+    attributes:
+      value: |
+        # Release procedure
+    visible: [content]
+  - type: input
+    id: release_version
+    attributes:
+      label: Release version
+      description: What is the upcoming release? Make sure it's formatted as `YYYY.M.X.0`
+      placeholder: YYYY.M.X.0
+    validations:
+      required: true
+      regex: ^[0-9]{4}\.[0-9]{1,2}\.[0-9]\+\.0
+  - type: checkboxes
+    id: todo
+    attributes:
+      label: Release checklist
+      description: The following steps should be done accordingly to prepare the release
+      options:
+      - label: Make sure all scheduled PRs are merged or rejected.
+        visible: [content]
+      - label: Make sure all scheduled issues are closed.
+        visible: [content]
+      - label: Lint and test `main`
+        visible: [content]
+      - label: Create new release branch `release/$RELEASE_VERSION`
+        visible: [content]
+      - label: Generate release notes and add them to `docs/release-notes/$RELEASE_VERSION.md`
+        visible: [content]
+      - label: Tag the commit as `v$RELEAS_VERSION`
+        visible: [content]
+      - label: Push tags and commits
+        visible: [content]
+      - label: Create prerelease for the tag using the [releases script](bin/release)
+        visible: [content]
+      - label: Create a PR merging the release branch into `main`
+        visible: [content]
+      - label: Conduct a final review, then merge manually locally
+        visible: [content]
+      - label: Push branches, tags, commits to finalize the merge of the release
+        visible: [content]
+      - label: Set the release to stable
+        visible: [content]
+      - label: Close this issue
+        visible: [content]

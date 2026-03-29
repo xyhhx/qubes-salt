@@ -1,0 +1,9 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Matrix Contact
+    url: https://matrix.to/#/@xyhhx:4d2.org
+    about: Contact me on Matrix
+  - name: Matrix Space
+    url: https://matrix.to/#/#qubes-os-user-community:4d2.org
+    about: Join the Qubes user community space on Matrix!
+
