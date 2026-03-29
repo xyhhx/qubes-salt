@@ -55,17 +55,11 @@ do_pack()
   bundle "${workspace}" --all
 
   git submodule status | while IFS= read -r status; do
-    submodule_hash="$(echo $status | cut -f1 -d\  )"
-    submodule_path="$(echo $status | cut -f2 -d\  )";
-    submodule_head="$(echo $status | awk '{ print $NF }' | sed -E 's/[()]//g' )";
-
-    # read -r submodule_path submodule_head < <(\
-    #   echo "${status#* }" \
-    #   | sed -nE 's/.* (.*) \((.*)\)/\1 \2/p'||true\
-    # )
+    submodule_hash="$(echo "${status}" | cut -f1 -d\  )"
+    submodule_path="$(echo "${status}" | cut -f2 -d\  )";
 
     pushd_hush "${submodule_path}"
-    submodule_ref="$(git show-ref  | grep $submodule_hash | head -n1 | cut -f2 -d\ | sed -E 's|refs/||g')"
+    submodule_ref="$(git show-ref  | grep "${submodule_hash}" | head -n1 | cut -f2 -d\ | sed -E 's|refs/||g')"
     bundle "${submodule_path}" "${submodule_ref}"
     # shellcheck disable=SC2119
     popd_hush

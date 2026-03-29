@@ -3,7 +3,7 @@
 	url = https://codeberg.org/celenity/Titanium
 [submodule "qubes-mgmt-salt-user/vendor/pane-black-gtk-theme"]
 	path = qubes-mgmt-salt-user/vendor/pane-black-gtk-theme
-	url = ssh://git@codeberg.org/xyhhx/pane-black-gtk-theme.git
+	url = https://codeberg.org/xyhhx/pane-black-gtk-theme.git
 [submodule "Tela-icon-theme"]
 	path = Tela-icon-theme
 	url = git@github.com:vinceliuice/Tela-icon-theme.git

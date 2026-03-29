@@ -72,5 +72,3 @@ filter_unconventional = false
 sort_commits = "newest"
 topo_order = false
 
-[bump]
-bump_type = "patch"

@@ -108,9 +108,9 @@ HELP
 # Utility function for calling cliff
 cliff(){
   podman run -t \
-    -e "GITEA_TOKEN=${GIT_CLIFF_TOKEN}" \
-    -v "$(pwd):/app:z" \
-    "ghcr.io/orhun/git-cliff/git-cliff:${GIT_CLIFF_OCI_TAG:-latest}" $@
+    -e "GITEA_TOKEN=${GIT_CLIFF_TOKEN:?}" \
+    -v "${PWD}:/app:z" \
+    "ghcr.io/orhun/git-cliff/git-cliff:${GIT_CLIFF_OCI_TAG:-latest}" "$@"
 }
 
 # Check if there are any uncommitted changes and exit if so
@@ -168,7 +168,7 @@ get_current_branch()
 
 get_date_from_tag()
 {
-  echo $@ | sed -nE 's/^([0-9]+)\.([0-9]+).*/\1 \2/p'
+  echo "$@" | sed -nE 's/^([0-9]+)\.([0-9]+).*/\1 \2/p'
 }
 
 # Find a branch in the refs
@@ -187,9 +187,10 @@ bump_release_number() {
   year=$(date -u "+%Y")
   long_month=$(date -u "+%m")
   short_month=${long_month#0*}
+  last_release_date="$(get_date_from_tag "${last_tag}")"
 
-  if test "$(get_date_from_tag "${last_tag}")" = "${year} ${short_month}"; then
-    cliff --unreleased --bumped-version
+  if test "${last_release_date}" = "${year} ${short_month}"; then
+    cliff --unreleased --bumped-version "${RELEASE_TYPE}"
   else
     printf "%s.%s.%s.%s" "${year}" "${short_month}" "1" "0"
   fi
