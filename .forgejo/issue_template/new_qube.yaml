@@ -1,0 +1,59 @@
+name: New Qube
+about: Integration of a new qube
+title: 'New Qube(s): '
+labels:
+  - Kind/Task
+  - Category/Feature
+  - Category/New Qube
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Request/plan a new qubes VM
+  - type: input
+    id: vm_name
+    attributes:
+      label: Name
+      description: |
+        The name of the qube, app, or use case the qube will satisfy. If it's
+        for an AppVM that'll offer a specific program, for example, name it so.
+      placeholder: new-qube-name
+    validation:
+      required: true
+  - type: dropdown
+    id: base_template
+    attributes:
+      label: Base template
+      description: What official Qubes template will it be based on?
+      options:
+        - archlinux
+        - fedora-43
+        - fedora-43-minimal
+        - fedora-43-xfce
+        - debian-13
+        - debian-13-minimal
+        - debian-13-xfce
+        - kicksecure-18
+        - whonix-18-gateway
+        - whonix-18-workstation
+    validations:
+      required: false
+  - type: checkboxes
+    id: qube_class
+    attributes:
+      label: Qube Class(es)
+      description: Which kinds of qubes are required for this?
+      options:
+        - label: TemplateVM
+        - label: AppVM
+        - label: DisposableVM
+        - label: StandaloneVM
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Provides some details about what is needed.
+      placeholder: Describe the intended system
+    validation:
+      required: false
+
