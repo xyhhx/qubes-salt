@@ -1,0 +1,76 @@
+[remote.gitea]
+owner = "xyhhx"
+repo = "qubes-mgmt-salt-user"
+
+[changelog]
+
+body = """
+{%- macro remote_url() -%}
+  https://codeberg.org/{{ remote.gitea.owner }}/{{ remote.gitea.repo }}
+{%- endmacro -%}
+
+{% if version %}
+# {{ version }} Release Notes\n
+{% else %}
+# Changelog
+{% endif %}
+
+{% if message %}
+  {{ message }}
+{% endif %}\
+
+{% if previous %}\
+    {% if previous.commit_id and commit_id %}
+        [`{{ previous.commit_id | truncate(length=7, end="") }}...\
+          {{ commit_id | truncate(length=7, end="") }}`]\
+          ({{ self::remote_url() }}/compare/{{ previous.commit_id | truncate(length=7, end="") }}...{{ commit_id | truncate(length=7, end="") }})
+    {% endif %}\
+{% endif %}\
+
+---
+
+{% for group, commits in commits | group_by(attribute="group") %}
+    ### {{ group | upper_first }}
+    {% for commit in commits %}\
+        - {{ commit.id | truncate(length=7, end="") }}: \
+          {{ commit.message | split(pat="\n") | first | trim }} \
+          {% if commit.remote.username and not remote.gitea.owner %} by @{{ commit.remote.username }}{%- endif %} \
+          {%- if commit.remote.pr_number %}(#{{ commit.remote.pr_number }}){% endif %}
+    {% endfor %}\
+{% endfor %}
+"""
+
+footer = """
+\n\n
+---
+
+<small>Generated with <a href="https://git-cliff.org" target="_blank">git-cliff</a></small>
+"""
+
+trim = true
+
+[git]
+commit_parsers = [
+    { message = "^feat", group = "Features" },
+    { message = "^fix", group = "Bug Fixes" },
+    { message = "^doc", group = "Documentation" },
+    { message = "^perf", group = "Performance" },
+    { message = "^refactor", group = "Refactor" },
+    { message = "^style", group = "Styling" },
+    { message = "^test", group = "Testing" },
+    { message = "^chore\\(deps.*\\)", skip = true },
+    { message = "^chore\\(pr\\)", skip = true },
+    { message = "^chore\\(pull\\)", skip = true },
+    { message = "^chore\\(release\\): prepare for", skip = true },
+    { message = "^chore|^ci", group = "Other Changes" },
+    { body = ".*security", group = "Security" },
+]
+
+conventional_commits = true
+filter_commits = false
+filter_unconventional = false
+sort_commits = "newest"
+topo_order = false
+
+[bump]
+bump_type = "patch"

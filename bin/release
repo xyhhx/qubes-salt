@@ -22,18 +22,25 @@ SYNOPSIS="release [-dh] [minor|patch]"
 
 main()
 {
-  while getopts "dhy" flag; do
+  while getopts "dhTy" flag; do
       case ${flag} in
           d) DEBUG=true
               ;;
           h) usage_help
               exit 0
               ;;
+          T) TRACE=true
+              ;;
           y) YES_ALL=true
               ;;
           *) die_usage "Unknown option."
       esac
   done
+
+  if "${TRACE:-}"; then
+      set -x
+      PS4='${BASH_SOURCE[0]}:$LINENO: ${FUNCNAME[0]}:  '
+  fi
 
   shift $((OPTIND-1))
   ACTION="${1:-}"
@@ -76,13 +83,16 @@ NAME
         ${SCRIPT} - Prepare a release
 
 SYNOPSIS
-        ${SCRIPT} [-dhy] [minor|patch]
+        ${SCRIPT} [-dhTy] [minor|patch]
 
 DESCRIPTION
               Prepares a release. By default will increment the patch number
 
         -d
               Debug output. Can be set with DEBUG environment variable too
+
+        -T
+              Enable verbose tracing.
 
         -h
               Display this help
@@ -91,6 +101,14 @@ DESCRIPTION
               Answer "yes" to any yes/no prompts
 
 HELP
+}
+
+# Utility function for calling cliff
+cliff(){
+  podman run -t \
+    -e "GITEA_TOKEN=${FORGEJO_GITCLIFF_TOKEN}" \
+    -v "$(pwd):/app:z" \
+    "ghcr.io/orhun/git-cliff/git-cliff:${GIT_CLIFF_OCI_TAG:-latest}" $@
 }
 
 # Check if there are any uncommitted changes and exit if so
@@ -146,6 +164,11 @@ get_current_branch()
   | sed -nE 's/^\* (.*)/\1/p'
 }
 
+get_date_from_tag()
+{
+  echo $@ | sed -nE 's/^([0-9]+)\.([0-9]+).*/\1 \2/p'
+}
+
 # Find a branch in the refs
 find_branch()
 {
@@ -156,56 +179,18 @@ find_branch()
   | try sed -nE "s/\s+(${branch//\//\\/})/\1/p"
 }
 
-# Determines the release we're about to drop
-bump_release_number()
-{
-  debug_log "Determining release number"
+# Determine the bumped version
+bump_release_number() {
+  last_tag="$(git describe --tags --first-parent --abbrev=0)"
   year=$(date -u "+%Y")
   long_month=$(date -u "+%m")
   short_month=${long_month#0*}
-  last_minor=$(echo "${last_tag}" | cut -f3 -d\.)
-  last_patch=${last_tag##*.}
 
-  : "${last_minor:=1}"
-  : "${last_path:=0}"
-
-  test -n "${DEBUG:-}" && cat <<-DEBUG >/dev/null
-  last tag: ${last_tag}
-
-  year: ${year}
-  long_month: ${long_month}
-  short_month: ${short_month}
-  last_minor: ${last_minor}
-  last_patch: ${last_patch}
-DEBUG
-
-  if ! [[ "${last_tag}" =~ ^v[0-9]+.[0-9]+.[0-9]+.[0-9]+ ]]; then
-    printf "%s.%s.1.0" "${year}" "${short_month}"
-    return 0
+  if test "$(get_date_from_tag "${last_tag}")" = "${year} ${short_month}"; then
+    cliff --unreleased --bumped-version
+  else
+    printf "%s.%s.%s.%s" "${year}" "${short_month}" "1" "0"
   fi
-
-  case "${RELEASE_TYPE}" in
-    "patch")
-      new_patch=$(( last_patch + 1 ))
-      new_minor="${last_minor}"
-      ;;
-    "minor")
-      new_patch="0"
-      new_minor=$(( last_minor + 1 ))
-      ;;
-    *)
-      die "Invalid \$RELEASE_TYPE"
-      ;;
-  esac
-
-  new_release=$(
-    printf "%s.%s.%s.%s" \
-      "${year}" "${short_month}" "${new_minor}" "${new_patch}"
-  )
-
-  log "New release: ${new_release}" >/dev/null
-
-  echo "${new_release}"
 }
 
 # Checks out the release branch, creating it if necessary
@@ -263,7 +248,7 @@ DEBUG
     # Prompt the user
     echo "No remote branch found for this release!"
     echo "Do you want to create one now? It will be branched from ${remote}."
-    read -rn1 -p "(Y/N) " response
+    read -rn1 -p "(y/N) " response
     echo
 
     # Response wasn't y or Y
