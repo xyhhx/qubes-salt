@@ -41,14 +41,37 @@ qvm_defaults:
       - menu-items: Alacritty.desktop
       - default-menu-items: Alacritty.desktop
 
-vm_settings:
+# User custom preferences. These override the defaults set in various salt states
+user_qvms:
+  appvms:
+
+    sys_vpn_ivpn:
+      qvm: {}
+      mfw: {}
+
+  dispvms: {}
+
   templates:
+
+    provides_mirageos_firewall:
+      qvm: {}
+      mirageos_release: {}
+        # version:
+        # checksum:
+
     uses_app_trivalent:
+      qvm: {}
       celenity_titanium:
         enable: true
         block_extensions: true
         allow_trustworthy_extensions: true
         unbreak_bitwarden: false
         allow_webusb: false
+
+    uses_app_tuta:
+      qvm: {}
+      tuta_release: {}
+        # version:
+        # checksum:
 
 # vim: ft=yaml ts=2 sw=2 sts=2 et :

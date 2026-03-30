@@ -1,4 +1,4 @@
-{%- macro download_github_release(state_id, download_url, checksum, output) -%}
+{%- macro download_github_release(download_url, checksum, output) -%}
 {%- if grains.id != 'dom0' -%}
 
 {#-
@@ -11,11 +11,16 @@
     - name: '{{ salt['file.dirname'](output) }}'
     - makedirs: true
 
-'{{ state_id }}':
+'{{ slsdotpath }}:: downloading {{ download_url }}':
   cmd.run:
-    - name: "qvm-run-vm @dispvm:dvm-fetch -- '/usr/share/qubes-user/download {{ download_url }} {{ checksum }}' > {{ output }}"
+    - name: "qvm-run-vm -p @dispvm:dvm-fetch -- '/usr/share/qubes-user/download {{ download_url }} {{ checksum }}' > {{ output }}"
     - require:
       - file: '{{ slsdotpath }}:: parent dir'
+    - unless:
+      - fun: file.check_hash
+        args:
+          - '{{ output }}'
+          - '{{ checksum }}'
 
 {%- endif -%}
 {%- endmacro -%}

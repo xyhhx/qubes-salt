@@ -1,0 +1,15 @@
+{%- set mirageos_release = {} -%}
+
+{%- import_yaml "./defaults.yaml" as defaults -%}
+{%- set pillar_data = salt["pillar.get"]("user_qvms:templates:provides_firewall_mirageos:mirageos_release", default={}) -%}
+
+{%- do salt["defaults.merge"](mirageos_release, defaults["mirageos_release"], in_place=true) -%}
+{%- do salt["defaults.merge"](mirageos_release, pillar_data, in_place=true) -%}
+
+{%- set mirage_dest_dir = '/var/lib/qubes/vm-kernels/mirage-firewall-' ~ mirageos_release.version -%}
+
+{%- set vm_options = {} -%}
+{%- do salt["defaults.merge"](vm_options, defaults["vm"], in_place=true) -%}
+{%- do salt["defaults.merge"](vm_options, salt["pillar.get"]("user_qvms:templates:provides_firewall_mirageos:qvm", default={}), in_place=true) -%}
+
+{#- vim: set ft=jinja syn=jinja : -#}

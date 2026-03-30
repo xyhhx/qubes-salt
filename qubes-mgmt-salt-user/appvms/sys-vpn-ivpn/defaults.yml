@@ -1,0 +1,17 @@
+mirage_fw:
+  name: "sys-mfw-ivpn"
+  netvm: "sys-net"
+
+vm_opts:
+  prefs:
+    - template: "provides-vpn-ivpn"
+    - netvm: "sys-mfw-ivpn"
+    - label: yellow
+    - vcpus: 2
+    - provides-network: true
+  features:
+    - enable:
+      - service.clocksync
+    - set:
+      - menu-items: Alacritty.desktop IVPN.desktop
+

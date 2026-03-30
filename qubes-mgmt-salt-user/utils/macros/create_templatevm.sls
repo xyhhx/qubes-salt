@@ -42,10 +42,10 @@ features:
 {%- endload -%}
 
 {%- set vm = {} -%}
-{%- do salt["defaults.merge"](vm, defaults, in_place=true) -%}
-{%- do salt["defaults.merge"](vm, salt["pillar.get"]("qvm_defaults", default={}), in_place=true) -%}
-{%- do salt["defaults.merge"](vm, options, in_place=true) -%}
-{%- do salt["defaults.merge"](vm, disable_lock_features, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, salt["pillar.get"]("qvm_defaults", default={}), merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, options, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, disable_lock_features, merge_lists=true, in_place=true) -%}
 
 "{{ slsdotpath }}.{{ sls }}:qvm.template_installed":
   qvm.template_installed:

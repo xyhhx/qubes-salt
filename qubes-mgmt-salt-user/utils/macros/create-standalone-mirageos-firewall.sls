@@ -1,62 +1,42 @@
-{%- macro create_standalone_mirageos_firewall(vm_name, mirage_options={}, vm_options={}) -%}
+{%- macro create_standalone_mirageos_firewall(name, netvm, version=None, vm_options={}) -%}
 {%- if grains.id == 'dom0' -%}
 
-{#-
-  This macro creates a standalone mirage firewall instance
--#}
+{%- import_yaml "../../templates/provides-firewall-mirageos/defaults.yaml" as mirage_defaults -%}
 
-{%- load_yaml as mirage_defaults -%}
-release: 'v0.9.4'
-checksum: '0c3c2c0e62a834112c69d7cddc5dd6f70ecb93afa988768fb860ed26e423b1f8'
-{%- endload -%}
-
-{%- set mirage = {} -%}
-{%- do salt['defaults.merge'](mirage, mirage_defaults, in_place=true) -%}
-{%- do salt['defaults.merge'](mirage, mirage_options, in_place=true) -%}
-
-{%- load_yaml as vm_defaults -%}
-memory: 64
-label: 'yellow'
-{%- endload -%}
-
-{%- from 'utils/macros/download_mirage_kernel.sls' import download_mirage_kernel -%}
-{{ download_mirage_kernel(options=mirage) }}
-
-{%- set vm = {} -%}
-{%- do salt["defaults.merge"](vm, vm_defaults, in_place=true) -%}
-{%- do salt["defaults.merge"](vm, vm_options, in_place=true) -%}
-
-{%- if vm_options.netvm is defined -%}
-{%- set netvm = vm_options.netvm -%}
+{%- if version -%}
+{%-   set mirage_version = version -%}
 {%- else -%}
-{%- set default_netvm = salt['cmd.shell']('qubes-prefs -- default_netvm') -%}
-{%- set netvm = salt['cmd.shell']('qvm-prefs -- ' ~ default_netvm ~ ' netvm') -%}
+{%-   set mirage_version = mirage_defaults.mirageos_release.version -%}
 {%- endif -%}
 
-'{{ vm_name }}':
+{#- patch a few things from the template defaults -#}
+{%- load_yaml as defaults -%}
+present:
+  - label: "yellow"
+prefs:
+  - label: "yellow"
+{%- endload -%}
+
+{#- enforce a few settings -#}
+{%- load_yaml as overrides -%}
+present:
+  - class: "StandaloneVM"
+prefs:
+  - kernel: 'mirage-firewall-{{ mirage_version }}'
+  - provides-networking: true
+{%- endload -%}
+
+{%- set vm = {} -%}
+
+{%- do salt["defaults.merge"](vm, mirage_defaults.vm, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, vm_options, merge_lists=true,in_place=true) -%}
+{%- do salt["defaults.merge"](vm, overrides, merge_lists=true, in_place=true) -%}
+
+'{{ name }}':
   qvm.vm:
-    - present:
-      - class: 'StandaloneVM'
-      - label: '{{ vm.label }}'
-    - prefs:
-      - label: '{{ vm.label }}'
-      - memory: {{ vm.memory }}
-      - maxmem: 0
-      - vcpus: 1
-      - netvm: '{{ netvm }}'
-      - kernel: 'mirage-firewall-{{ mirage.release }}'
-      - kernelopts: ''
-      - autostart: false
-      - debug: false
-      - include-in-backups: false
-      - internal: false
-      - provides-network: true
-    - features:
-      - enable:
-        - no-default-kernelopts
-        - skip-update
+    {{ vm | dict_to_sls_yaml_params | indent }}
 
 {%- endif -%}
 {%- endmacro -%}
-
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

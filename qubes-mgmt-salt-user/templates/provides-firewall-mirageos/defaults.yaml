@@ -1,0 +1,22 @@
+mirageos_release:
+  version: 'v0.9.5'
+  checksum: '2bfb49696e59a8ffbb660399e52bd82ffadbd02437d282eb8daab568b3261999'
+
+vm:
+  prefs:
+    - label: 'black'
+    - memory: 64
+    - maxmem: 0
+    - vcpus: 1
+    - kernel: 'mirage-firewall-v0.9.5'
+    - provides-network: true
+    - kernelopts: ''
+    - autostart: false
+    - debug: false
+    - include-in-backups: false
+    - audiovm: ''
+  features:
+    - enable:
+      - no-default-kernelopts
+      - qubes-firewall
+      - skip-update

@@ -1,0 +1,10 @@
+{%- import_yaml "./defaults.yml" as defaults -%}
+
+{%- set ok_agent_pkg = {} -%}
+{%- do salt["defaults.merge"](ok_agent_pkg, defaults["ok_gpg_agent"].release, in_place=true, merge_lists=true) -%}
+{%- do salt["defaults.merge"](ok_agent_pkg, salt["pillar.get"]("user_qvms:templates:provides_onlykey_agent:ok_gpg_pkg", default={}), in_place=true, merge_lists=true) -%}
+
+{%- do ok_agent_pkg.update("release_asset", "ok-gpg-agent-linux.tar.gz") -%}
+{%- do ok_agent_pkg.update("download_url", "https://github.com/svareille/OnlyKey-gpg-agent/releases/download/" | path_join(ok_agent_pkg.release.version, ok_agent_release_asset)) -%}
+
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

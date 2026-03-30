@@ -1,5 +1,6 @@
 
 include:
+  - .create_vm
   - .install
   - .ok-ssh
   - .ok-gpg

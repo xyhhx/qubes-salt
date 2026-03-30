@@ -1,62 +1,37 @@
-{%- macro download_mirage_kernel(options) -%}
+{%- macro download_mirage_kernel(version, checksum) -%}
 {%- if grains.id == 'dom0' -%}
 
 {#-
   This macro will download the mirage kernel and place it in /var/lib/qubes/vm-kernels/mirage-firewall-{{ version }}
 -#}
 
-{%- set mirage_version = options.release -%}
-{%- set mirage_sha256sum = options.checksum -%}
-
 {%- set kernel_filename = 'qubes-firewall.xen' -%}
-{%- set kernel_dl_url = 'https://github.com/mirage/qubes-mirage-firewall/releases/download/' ~ mirage_version ~ '/' ~ kernel_filename -%}
-{%- set dom0_mirage_kernel_directory = '/var/lib/qubes/vm-kernels/mirage-firewall-' ~ mirage_version -%}
+{%- set download_url = 'https://github.com' | path_join('mirage/qubes-mirage-firewall/releases/download', version, kernel_filename) -%}
+{%- set mirage_dest_dir = '/var/lib/qubes/vm-kernels/mirage-firewall-' ~ version -%}
+{%- set tmpdir = salt["cmd.shell"]("mktemp -d") -%}
 
 {#- If the kernel exists, we're done here -#}
-{%- if salt['file.file_exists']( dom0_mirage_kernel_directory ~ '/vmlinuz' ) != true -%}
+{%- if salt['file.file_exists']( mirage_dest_dir | path_join('/vmlinuz') ) != true -%}
 
-{%- if dl_dispvm is eq '' -%}
-{%- set dl_dispvm = salt['cmd.shell']('qubes-prefs default_dispvm') -%}
-{%- endif -%}
+'{{ slsdotpath }}:: download mirage {{ version }}':
+  cmd.run:
+    - name: "qvm-run --dispvm dvm-fetch -p -- '/usr/share/qubes-user/download {{ download_url }} {{ checksum }}' > {{ tmpdir | path_join(kernel_filename) }}"
+    - use_vt: true
 
-'{{ dl_dispvm }}':
-  qvm.vm:
-    - actions:
-      - start
-      - run
-      - shutdown
-    - start:
-      - flags:
-        - dvm
-    - run:
-      - cmd: |
-          mkdir -p -- /tmp/mirage
-          cd /tmp/mirage
-          curl --connect-timeout 10 \
-            --tlsv1.3 --proto =https \
-            -fsSLO {{ kernel_dl_url }}
-          [ sha256sum /tmp/mirage/{{ kernel_filename }} | cut -f2 -d\  = '{{ mirage_sha256sum }}' ] || exit 1
-          cat {{ kernel_filename }}
-      - localcmd: |
-          tee /tmp/mirage-firewall-{{ mirage_version }} >/dev/null
-      - flags:
-        - nogui
-        - pass-io
-    - shutdown
+'{{ slsdotpath }}:: verify and install mirage {{ version }}':
   file.managed:
-    - name: '{{ dom0_mirage_kernel_directory }}/vmlinuz'
-    - source: '/tmp/mirage-firewall-{{ mirage_version }}'
-    - source_hash: 'sha256={{ mirage_sha256sum }}'
+    - require:
+      - cmd: '{{ slsdotpath }}:: download mirage {{ version }}'
+    - name: '{{ mirage_dest_dir | path_join('vmlinuz') }}'
+    - source: '{{ tmpdir | path_join(kernel_filename) }}'
+    - source_hash: 'sha256={{ checksum }}'
     - user: 'root'
-    - group:  'root'
+    - group: 'root'
     - mode: '0644'
     - makedirs: true
-
-'/tmp/mirage-firewall-{{ mirage_version }}':
-  file.absent
 
 {%- endif -%}
 {%- endif -%}
 {%- endmacro -%}
-
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
+

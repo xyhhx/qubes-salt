@@ -1,0 +1,20 @@
+{%- import_yaml "./defaults.yml" as defaults -%}
+
+{%- set pillar_data = salt["pillar.get"]("user_qvms:appvms:sys_vpn_ivpn:qvm", default={}) -%}
+
+{%- set mirage_fw = {} -%}
+{%- do salt["defaults.merge"](mirage_fw, defaults["mirage_fw"], merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](mirage_fw,
+salt["pillar.get"]("user_qvms:appvms:sys_vpn_ivpn:mfw", default={}), merge_lists=true, in_place=true) -%}
+
+{%- load_yaml as overrides -%}
+prefs:
+  - netvm: '{{ defaults.mirage_fw.name }}'
+{%- endload -%}
+
+{%- set vm = {} -%}
+{%- do salt["defaults.merge"](vm, defaults["vm_opts"], merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, pillar_data, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, overrides, merge_lists=true, in_place=true) -%}
+
+{#- vim: set ft=jinja syn=jinja : -#}

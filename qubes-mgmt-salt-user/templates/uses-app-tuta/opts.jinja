@@ -1,0 +1,23 @@
+{%- set vm_options = {} -%}
+{%- import_yaml "./defaults.yaml" as defaults -%}
+{%- do salt["defaults.merge"](vm_options, defaults["vm_options"], merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm_options, salt["pillar.get"]("user_qvms:templates:uses-app-tuta:qvm", default={}), merge_lists=true, in_place=true) -%}
+
+{%- set tuta_release = {} -%}
+{%- set pillar_data = salt["pillar.get"](
+  "vm_settings:templates:uses_app_tuta:tuta_release",
+  default={}
+) -%}
+{%- do salt["defaults.merge"](tuta_release, defaults["tuta_release"], merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](tuta_release, pillar_data, merge_lists=true, in_place=true) -%}
+
+{%- set bin_filename = "tuta-desktop-linux.AppImage" -%}
+{%- set bin_install_dir = "/opt/tuta-desktop-linux" -%}
+{%- set download_url = "https://github.com" | path_join(
+  "tutao/tutanota/releases/download",
+  "tutanota-desktop-release-" ~ tuta_release.version,
+  "tutanota-desktop-linux.AppImage"
+  ) -%}
+{%- set bin_abs_path = bin_install_dir | path_join(bin_filename) -%}
+
+{#- vim: set ft=jinja syn=jinja : -#}

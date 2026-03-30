@@ -11,8 +11,8 @@ fonts:
 {%- endload -%}
 {%- set prefs = {} -%}
 {%- set pkgs = ui.pkgs -%}
-{%- do salt['defaults.merge'](prefs, default_prefs, in_place=true) -%}
-{%- do salt['defaults.merge'](prefs, ui.prefs, in_place=true) -%}
-{%- do salt['defaults.merge'](prefs, salt['pillar.get']('ui:prefs', default={}), in_place=true) -%}
+{%- do salt['defaults.merge'](prefs, default_prefs, merge_lists=true, in_place=true) -%}
+{%- do salt['defaults.merge'](prefs, ui.prefs, merge_lists=true, in_place=true) -%}
+{%- do salt['defaults.merge'](prefs, salt['pillar.get']('ui:prefs', default={}), merge_lists=true, in_place=true) -%}
 {%- do salt['log.debug'](prefs) -%}
 {#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}
