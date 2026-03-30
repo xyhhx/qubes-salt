@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=pactl info
+Exec=pactl info
+Hidden=false
+NoDisplay=false
+Icon=
+Comment=Run `pactl info` at startup
+Path=
+Terminal=false
+StartupNotify=false
+X-GNOME-Autostart-enabled=true

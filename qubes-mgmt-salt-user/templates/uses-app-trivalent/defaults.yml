@@ -6,3 +6,4 @@ celenity_titanium:
   unbreak_bitwarden: false
   allow_webusb: false
 
+ctap_proxy_vm: disp-sys-usb

@@ -1,0 +1,54 @@
+{%- if grains.id != "dom0" -%}
+{%- if salt["grains.get"]("os_family") | lower == "redhat" -%}
+
+{%- import_yaml "./defaults.yml" as defaults -%}
+
+{#-
+  Titanium policies
+-#}
+
+{%- set vm_opts = {} -%}
+{%- do salt["defaults.merge"](vm_opts, defaults, in_place=true) -%}
+{%- do salt["defaults.merge"](vm_opts, salt["pillar.get"]("vm_settings:templates:uses_app_trivalent", default={}), in_place=true) -%}
+
+{%- do salt["log.debug"]("VM_OPTS:") -%}
+{%- do salt["log.debug"](vm_opts | pprint) -%}
+
+{%- if vm_opts.celenity_titanium.enable == true -%}
+{%- set policies = [
+ ("linux/chromium/managed/99-titanium-managed-chromium.json", "/etc/trivalent/policies/managed/99-titanium-managed-chromium.json"),
+ ("linux/chromium/recommended/99-titanium-recommended-chromium.json", "/etc/trivalent/policies/recommended/99-titanium-recommended-chromium.json"),
+ ("linux/managed/00-titanium-managed.json", "/etc/trivalent/policies/managed/00-titanium-managed.json"),
+ ("linux/managed/01-titanium-extensions-mv3.json", "/etc/trivalent/policies/managed/01-titanium-extensions-mv3.json"),
+ ("linux/managed/02-titanium-extension-settings.json", "/etc/trivalent/policies/managed/02-titanium-extension-settings.json"),
+ ("linux/recommended/00-titanium-recommended.json", "/etc/trivalent/policies/recommended/00-titanium-recommended.json"),
+ ("linux/recommended/01-titanium-cookies.json", "/etc/trivalent/policies/recommended/01-titanium-cookies.json")
+] -%}
+
+{#- block extensions -#}
+{%- if vm_opts.celenity_titanium.block_extensions == true -%}
+{%- do policies.append(("linux/managed/99-titanium-optional-extensions-block.json", "/etc/trivalent/policies/managed/99-titanium-optional-extensions-block.json")) -%}
+{%- endif -%}
+
+{#- allow installation of certain trustworthy extensions -#}
+{%- if vm_opts.celenity_titanium.allow_trustworthy_extensions == true -%}
+{%- do policies.append(("linux/managed/99-titanium-optional-extensions-allow.json", "/etc/trivalent/policies/managed/99-titanium-optional-extensions-allow.json")) -%}
+{%- endif -%}
+
+{#- unbreak bitwarden's biometric authentication and firefox bridge -#}
+{%- if vm_opts.celenity_titanium.unbreak_bitwarden == true -%}
+{%- do policies.append(("linux/recommended/99-titanium-optional-native-messaging-allow.json", "/etc/trivalent/policies/recommended/99-titanium-optional-native-messaging-allow.json")) -%}
+{%- endif -%}
+
+{#- unbreak https://grapheneos.org/install/web -#}
+{%- if vm_opts.celenity_titanium.allow_webusb == true -%}
+{%- do policies.append(("linux/recommended/99-titanium-optional-webusb-allow.json", "/etc/trivalent/policies/recommended/99-titanium-optional-webusb-allow.json")) -%}
+{%- endif -%}
+
+{%- endif -%}
+
+{%- set ctap_proxy_vm = salt["pillar.get"]("user_qubes.defaults.usb", default="sys-usb") -%}
+
+{%- endif -%}
+{%- endif -%}
+{#- vim: set syn=salt.jinja.yaml ft=jinja ts=2 sw=2 sts=2 et : -#}

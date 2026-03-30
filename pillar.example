@@ -1,4 +1,5 @@
 ---
+# TODO: These should be put down under "user_qubes"
 # ui related preferences
 ui:
   prefs:
@@ -41,7 +42,17 @@ qvm_defaults:
       - menu-items: Alacritty.desktop
       - default-menu-items: Alacritty.desktop
 
+# User global preferences
+user_qubes:
+  defaults:
+    gpg: sys-onlykey
+    netvm: sys-vpn-ivpn
+    ssh: sys-onlykey
+    sysusb: disp-sys-usb
+    whonix: sys-tor-whonix
+
 # User custom preferences. These override the defaults set in various salt states
+# for various guest VMs
 user_qvms:
   appvms:
 

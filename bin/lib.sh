@@ -1,5 +1,10 @@
 #!/bin/env bash
 
+if [[ -n "${TRACE:-}" ]]; then
+  set -x
+  PS4='${BASH_SOURCE[0]}:$LINENO: ${FUNCNAME[0]:-}:  '
+fi
+
 if [[ -z "${SCRIPT}" ]]; then
   >&2 echo "No \$SCRIPT set. Are you sourcing this properly?"
   exit 1

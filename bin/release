@@ -37,11 +37,6 @@ main()
       esac
   done
 
-  if "${TRACE:-}"; then
-      set -x
-      PS4='${BASH_SOURCE[0]}:$LINENO: ${FUNCNAME[0]}:  '
-  fi
-
   shift $((OPTIND-1))
   ACTION="${1:-}"
   test -n "${ACTION}" && shift

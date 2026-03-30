@@ -1,6 +1,7 @@
 [submodule "qubes-mgmt-salt-user/vendor/celenity-titanium"]
 	path = qubes-mgmt-salt-user/vendor/celenity-titanium
 	url = https://codeberg.org/celenity/Titanium
+	branch = pages
 [submodule "qubes-mgmt-salt-user/vendor/pane-black-gtk-theme"]
 	path = qubes-mgmt-salt-user/vendor/pane-black-gtk-theme
 	url = https://codeberg.org/xyhhx/pane-black-gtk-theme.git
