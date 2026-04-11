@@ -1,0 +1,24 @@
+{%- import_yaml "./defaults.yml" as defaults -%}
+{%- import_yaml "common/defaults/qvm_appvms.yml" as appvm_common_defaults -%}
+
+{%- set template = "uses-app-thunderbird" -%}
+
+{%- set vm = {} -%}
+{%- do salt["defaults.merge"](vm, appvm_common_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, defaults, merge_lists=true, in_place=true) -%}
+
+{%- set pillar_data = salt["pillar.get"]("user_qvms:appvms:app-thunderbird:qvm", default={}) -%}
+{%- do salt["defaults.merge"](vm, pillar_data, merge_lists=true, in_place=true) -%}
+
+{%- load_yaml as overrides -%}
+present:
+  - class: "AppVM"
+  - template: "{{ template }}"
+  - label: "{{ vm.prefs | map(attribute="label") | first }}"
+prefs:
+  - class: "AppVM"
+  - template: "{{ template }}"
+{%- endload -%}
+{%- do salt["defaults.merge"](vm, overrides, merge_lists=true, in_place=true) -%}
+
+{#- vim: set syn=jinja ft=salt.jinja : -#}

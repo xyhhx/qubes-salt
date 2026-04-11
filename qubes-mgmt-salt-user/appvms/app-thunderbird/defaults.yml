@@ -1,0 +1,10 @@
+prefs:
+  - label: "blue"
+features:
+  - disable:
+    - service.hardened_malloc
+  - enable:
+    - service.custom-persist
+  - set:
+    - menu-items: 'net.thunderbird.Thunderbird.desktop'
+    - menu-favorites: 'net.thunderbird.Thunderbird.desktop'
