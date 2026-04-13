@@ -1,0 +1,46 @@
+[global]
+line_length = 80
+flavor = "github"
+exclude = [
+  "LICENSE.md",
+  "qubes-mgmt-salt-user/vendor"
+]
+extend-enable = ["MD077"]
+
+[per-file-ignores]
+"README.md" = ["MD033", "MD041"]
+"AGENTS.md" = ["MD041"]
+
+[MD003]
+style = "atx"
+
+[MD004]
+style = "dash"
+
+[MD007]
+indent = 4
+
+[MD009]
+strict = true
+
+[MD013]
+line-length = 80
+reflow = true
+# reflow-mode = "normalize"
+
+[MD029]
+style = "one_or_ordered"
+
+[MD030]
+ul_single = 3
+ul_multi = 3
+ol_single = 2
+ol_multi = 2
+
+[MD033]
+allowed = ["small", "a"]
+
+[MD046]
+style = "fenced"
+
+
