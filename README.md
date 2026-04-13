@@ -53,16 +53,18 @@ Mirrors:
 
 ### Using the Make tasks
 
-> [!Important] The Make tasks requires a `GUEST` variable to be set. It should
-> be the name of the guest domain that holds the repo's source code. You can
-> either pass it directly (`GUEST=my-dev-qube make...`)
+> [!Important]
+> The Make tasks requires a `GUEST` variable to be set. It should be the name of
+> the guest domain that holds the repo's source code. You can either pass it
+> directly (`GUEST=my-dev-qube make...`)
 
 > [!Tip]
 > You can export the `GUEST` variable to the environment to make life easier
 
-> [!Warning] While the Make tasks try to ensure that commands are only ran in
-> the appropriate domains (i.e. dom0 or guests), the checks are frail. Be
-> mindful of what you're running!
+> [!Warning]
+> While the Make tasks try to ensure that commands are only ran in the
+> appropriate domains (i.e. dom0 or guests), the checks are frail. Be mindful of
+> what you're running!
 
 #### Enabling/disabling top files
 
@@ -92,8 +94,9 @@ make enable-all
 make disable-all
 ```
 
-> [!Tip] This is handy when first setting the repo up. You can run
-> `make enable-all` to quickstart the repo
+> [!Tip]
+> This is handy when first setting the repo up. You can run `make enable-all` to
+> quickstart the repo
 
 -   Enable _only_ some tops:
 
