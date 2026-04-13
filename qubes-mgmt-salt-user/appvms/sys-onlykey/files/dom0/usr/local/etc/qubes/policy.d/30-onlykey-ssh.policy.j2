@@ -1,5 +1,7 @@
-{%- include 'utils/banner.jinja' -%}
+{%- include "utils/banner.jinja" -%}
 
 qubes.SshAgent   *   @tag:split-ssh-client    @tag:onlykey-ssh-agent-server  ask
+qubes.SshAgent   *   @tag:onlykey-ssh-client  @tag:onlykey-ssh-agent-server  allow notify=yes
 qubes.SshAgent   *   @tag:onlykey-ssh-client  @default                       ask target={{ vm_name }}
-{#- vim: set ft=jinja : -#}
+
+{#- vim: set syn=jinja ft=jinja tw& : -#}
