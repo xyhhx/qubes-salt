@@ -169,6 +169,11 @@ Where:
 #### Miscellaneous Coding Styles
 
 1.  Use double-quotes whenever possible
+1.  All SLS files should end with the following vimline comment:
+
+    ```jinja
+    {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
+    ```
 
 [^docs-custom-persist]: https://dev.qubes-os.org/projects/core-admin-client/en/latest/manpages/qvm-features.html#custom-persist
 [^docs-disp-templates]: https://doc.qubes-os.org/en/r4.3/user/how-to-guides/how-to-use-disposables.html#disposable-template
