@@ -1,0 +1,250 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT=$(basename "${BASH_SOURCE[0]}")
+PID=0
+RETURN_VAL=0
+
+: "${SVC_BIN:=/usr/local/bin/tun2proxy-bin}"
+: "${SVC_NAME:="ivpn-tun2proxy"}"
+
+main()
+{
+  parse_args "$@"
+
+  case "${ACTION}" in
+    start|stop|restart|status)
+      "do_${ACTION}"
+      set -u
+      ;;
+    *)
+      show_help
+      exit 1
+      ;;
+  esac
+}
+
+parse_args()
+{
+  ACTION="$1"
+  shift
+
+  arguments=$(getopt -o d:p:vh --long dns:,proxy-addr:,verbose,help -- "$@")
+  eval set -- "${arguments}"
+  unset arguments
+
+  while true
+  do
+    case "$1" in
+      -d | --dns)
+        DNS_ADDR="$2"
+        shift 2
+        ;;
+      -p | --proxy-addr)
+        PROXY="$2"
+        shift 2
+        ;;
+      -v | --verbose)
+        set -x
+        shift
+        ;;
+      -h | --help)
+        show_help
+        exit 1
+        ;;
+      --)
+        break
+        ;;
+      *)
+        ;;
+    esac
+  done
+
+  DEFAULT_DNS="172.16.0.1"
+
+  : "${PROXY:=false}"
+  : "${DNS_ADDR:="${DEFAULT_DNS}"}"
+
+  : "${RESOLV_CONF_BAK:=/etc/resolv.conf.bak}"
+}
+
+show_help()
+{
+  cat <<-HELP
+
+NAME
+        ${SCRIPT} - Start the tun2proxy daemon to connect to IVPN SOCKS5 proxy
+
+SYNOPSIS
+        ${SCRIPT} <ACTION> [OPTIONS]
+
+Arguments:
+  [ACTION] <start|stop|restart|status>
+
+Otions:
+  -d,   --dns <IP>            DNS Resolver IP [default: ${DEFAULT_DNS}]
+  -p,   --proxy-addr  <URL>   Proxy URL in the form of [username[:password]@]host[:port]
+  -v,   --verbose             Enable verbose output
+  -h,   --help                Display this help
+
+HELP
+}
+
+
+
+# shellcheck disable=2329
+rand()
+{
+  min="${2:-1}"
+  max="$1"
+  shuf -i "${min}-${max}" -n 1
+}
+
+# shellcheck disable=2329
+get_servers()
+{
+  jq -r '[.wireguard[].hosts[]]' /var/lib/ivpn/servers.json
+}
+
+# shellcheck disable=2329
+get_random_server()
+{
+  servers=$(get_servers)
+  num_servers=$(echo "${servers}" | jq '. | length')
+  pick=$(rand "${num_servers}")
+
+  echo "${servers}" | jq -r ".[${pick}]"
+}
+
+# shellcheck disable=2329
+backup_resolv_conf()
+{
+  if [[ -f "${RESOLV_CONF_BAK}" ]]
+  then
+    logger -t "${SVC_NAME}" "${RESOLV_CONF_BAK} exists, can't back up /etc/resolv.conf"
+    logger -t "${SVC_NAME}" "Exiting"
+    exit 1
+  fi
+
+  cp /etc/resolv.conf "${RESOLV_CONF_BAK}"
+
+  echo "nameserver 192.18.0.1" > /etc/resolv.conf
+}
+
+# shellcheck disable=2329
+restore_resolv_conf()
+{
+  mv "${RESOLV_CONF_BAK}" /etc/resolv.conf
+}
+
+# shellcheck disable=2329
+send_notif()
+{
+  sudo -u user DISPLAY=:0 \
+    DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus \
+    notify-send -t $(( 10 * 1000 )) -i "net" "$@"
+}
+
+# shellcheck disable=2329
+check_running()
+{
+  PID="$(pgrep -af "${SVC_BIN}" | cut -f1 -d\ )"
+  if [[ -n "${PID}" ]]
+  then
+    return 0
+  else
+    return 1
+  fi
+}
+
+# shellcheck disable=2329
+do_start()
+{
+  if [[ "${PROXY}" == false ]]
+  then
+    server="$(get_random_server)"
+    hostname="$(echo "${server}" | jq -r '.dns_name')"
+    public_ip="$(echo "${server}" | jq -r '.host')"
+    socks_ip="$(getent hosts "socks5.${hostname}" | cut -f1 -d\ )"
+    send_notif "Connecting to SOCKS5 proxy" \
+      "Connected to ${hostname}\n\nPublic IP: ${public_ip} SOCKS5 IP: ${socks_ip}"
+    PROXY="${socks_ip}:1080"
+  else
+    send_notif "Connecting to SOCKS5 proxy" "Proxy address: ${PROXY}"
+  fi
+
+  resolvectl dns eth0 "${socks_ip}"
+
+  "${SVC_BIN}" -s \
+    -p "socks5://${PROXY}" \
+    --dns-addr "${socks_ip%\.*}.1" \
+    -d virtual \
+    -v trace \
+    --exit-on-fatal-error \
+    --daemonize
+
+  cmd_status="$?"
+
+  if [[ ${cmd_status} == 0 ]]
+  then
+    logger -t "${SVC_NAME}" "Started succesfully"
+  else
+    logger -t "${SVC_NAME}" "Failed to start"
+  fi
+}
+
+# shellcheck disable=2329
+do_stop()
+{
+  check_running
+  cmd_status="$?"
+
+  if [[ "${cmd_status}" == 0 ]]
+  then
+
+    kill "${PID}"
+    cmd_status="$?"
+
+    if [[ "${cmd_status}" == 0 ]]
+    then
+      logger -t "${SVC_NAME}" "Stopping ${SVC_NAME} success"
+    else
+      logger -t "${SVC_NAME}" "Stopping ${SVC_NAME} failed"
+    fi
+  else
+    logger -t "${SVC_NAME}" "${SVC_NAME} is stopped"
+
+    RETURN_VAL=1
+  fi
+}
+
+# shellcheck disable=2329
+do_status()
+{
+  check_running
+  cmd_status="$?"
+
+  if [[ "${cmd_status}" == 0 ]]
+  then
+    msg="${SVC_NAME} (pid ${PID}) is running..."
+  else
+    msg="${SVC_NAME} is stopped"
+    RETURN_VAL=1
+  fi
+
+  echo "${msg}"
+  logger -t "${SVC_NAME}" "${msg}"
+}
+
+# shellcheck disable=2329
+do_restart()
+{
+  do_stop
+  sleep 0.5
+  do_start
+}
+
+main "$@"
+
+exit "${RETURN_VAL:-0}"
+# vim: set sw=2 ts=2 sts=2 et number tw=80 cc=80 :

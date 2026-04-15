@@ -1,0 +1,19 @@
+[Unit]
+Description=IVPN tun to SOCKS5 proxy
+After=network.target
+
+[Service]
+Type=forking
+ExecStart={{ svc_bin_path }} start
+ExecReload={{ svc_bin_path }} restart
+ExecStop={{ svc_bin_path }} stop
+PrivateTmp=true
+Restart=on-failure
+RestartSec=35s
+LimitNOFILE=1000000
+LimitCORE=infinity
+
+[Install]
+WantedBy=multi-user.target
+
+{#- vim: set syn=systemd.jinja : -#}

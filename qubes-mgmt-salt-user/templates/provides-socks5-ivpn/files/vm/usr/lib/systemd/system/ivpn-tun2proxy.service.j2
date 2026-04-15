@@ -1,0 +1,12 @@
+[Unit]
+Description=Check connection status against an IVPN endpoint
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart={{ svc_bin_path }} start
+
+[Install]
+WantedBy=multi-user.target
+
+{#- vim: set syn=systemd.jinja : -#}
