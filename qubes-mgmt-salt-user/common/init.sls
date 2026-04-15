@@ -1,4 +1,5 @@
 include:
+  - .patch-salt-templatepy
   - .pkgs.base
   - .pkgs.fonts
   - .pkgs.notifications

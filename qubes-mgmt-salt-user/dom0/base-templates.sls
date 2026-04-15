@@ -45,8 +45,9 @@ qubes-templates-community-testing:
 {% for template in all_templates %}
 '{{ template }}':
   qvm.features:
+    - enable:
+      - skip-update
     - set:
-      - skip-update: true
       - prohibit-start: "This is a base template. Clone it to use"
 {% endfor %}
 

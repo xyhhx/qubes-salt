@@ -118,7 +118,7 @@ check_for_vimline_comment()
   local vimline
 
   state_files=$(echo qubes-mgmt-salt-user/**/*.sls qubes-mgmt-salt-user/*.top)
-  vimline="{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}"
+  vimline="{#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}"
 
   for file in ${state_files}
   do

@@ -96,4 +96,4 @@ https://github.com/secureblue/secureblue/blob/124d6f2cf8f5b097502ea2b3d7edac7ab9
     - replace: true
     - makedirs: true
 
-{#- vim: set syntax=salt.jinja.yaml.salt.jinja ts=2 sw=2 sts=2 et : -#}
+{#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

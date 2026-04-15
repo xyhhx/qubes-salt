@@ -1,4 +1,5 @@
 {%- if grains.os_family | lower == 'debian' -%}
+{%-   if salt["cmd.retcode"]("apt list --installed | grep kicksecure") != 0 -%}
 
 '{{ slsdotpath }}:: prereqs':
   pkg.installed:
@@ -30,5 +31,12 @@
     - require:
       - pkg: '{{ slsdotpath }}::install kicksecure'
 
+{%-   else -%}
+
+"{{ slsdotpath }}:: already installed":
+  test.succeed_without_changes:
+    - name: "Kicksecure is already installed"
+
+{%-   endif -%}
 {%- endif -%}
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

@@ -1,8 +1,8 @@
 
 include:
   - .create_vm
-  - .install
+  - .configure
   - .ok-ssh
   - .ok-gpg
 
-{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
+{#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

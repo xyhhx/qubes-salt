@@ -1,26 +1,26 @@
 {%- macro download_github_release(download_url, checksum, output) -%}
-{%- if grains.id != 'dom0' -%}
+{%- if grains.id != "dom0" -%}
+{%- from "utils/user_info.jinja" import user -%}
 
 {#-
   Downloads a release file from Github, compares it against supplied checksum,
   then copies it over Qubes RPC back to the originating qube
 -#}
 
-'{{ slsdotpath }}:: parent dir':
+"{{ slsdotpath }}:: parent dir":
   file.directory:
-    - name: '{{ salt['file.dirname'](output) }}'
+    - name: "{{ salt["file.dirname"](output) }}"
+    - user: "{{ user }}"
+    - group: "{{ user }}"
+    - mode: "0750"
     - makedirs: true
 
-'{{ slsdotpath }}:: downloading {{ download_url }}':
+"{{ slsdotpath }}:: downloading {{ download_url }}":
   cmd.run:
-    - name: "qvm-run-vm -p @dispvm:dvm-fetch -- '/usr/share/qubes-user/download {{ download_url }} {{ checksum }}' > {{ output }}"
     - require:
-      - file: '{{ slsdotpath }}:: parent dir'
-    - unless:
-      - fun: file.check_hash
-        args:
-          - '{{ output }}'
-          - '{{ checksum }}'
+      - file: "{{ slsdotpath }}:: parent dir"
+    - name: |
+        qvm-run-vm @dispvm:dvm-fetch -- "/usr/share/qubes-user/download {{ download_url }} {{ checksum }}" > {{ output }}
 
 {%- endif -%}
 {%- endmacro -%}

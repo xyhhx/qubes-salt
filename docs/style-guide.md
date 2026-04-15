@@ -175,9 +175,12 @@ Where:
     {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
     ```
 
+1.  Prefer `path_join`[^docs-path-join] over string concatenation for file paths
+
 [^docs-custom-persist]: https://dev.qubes-os.org/projects/core-admin-client/en/latest/manpages/qvm-features.html#custom-persist
 [^docs-disp-templates]: https://doc.qubes-os.org/en/r4.3/user/how-to-guides/how-to-use-disposables.html#disposable-template
 [^docs-named-disposables]: https://doc.qubes-os.org/en/r4.3/user/how-to-guides/how-to-use-disposables.html#named-disposable
+[^docs-path-join]: https://docs.saltproject.io/en/3006/topics/jinja/index.html#path-join
 [^docs-prohib-start]: https://dev.qubes-os.org/projects/core-admin-client/en/latest/manpages/qvm-features.html#prohibit-start
 [^docs-skip-upd]: https://dev.qubes-os.org/projects/core-admin-client/en/latest/manpages/qvm-features.html#skip-update
 [^docs-sls-tpldir]: https://docs.saltproject.io/en/3007/ref/states/vars.html#tpldir

@@ -1,21 +1,6 @@
-{%- set vm_name = "uses-app-libreoffice" -%}
-{%- set base_template = "fedora-43-minimal" -%}
 
-{% if grains.id == 'dom0' %}
+include:
+  - .create_vm
+  - .configure
 
-{% from "utils/macros/create_templatevm.sls" import templatevm %}
-{{ templatevm(vm_name, base_template=base_template) }}
-
-{% else %}
-
-'{{ vm_name }}':
-  pkg.installed:
-    - pkgs:
-      - libreoffice
-      - Thunar
-      - thunar-archive-plugin
-      - qubes-core-agent-thunar
-
-{% endif %}
-
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
+{#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

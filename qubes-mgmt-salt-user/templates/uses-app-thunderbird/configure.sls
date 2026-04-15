@@ -1,5 +1,8 @@
 {%- if grains.id != "dom0" -%}
 
+{%- set overrides_filepath = "/etc/thunderbird/defaults/pref/dove-overrides.js" -%}
+{%- set env_conf_filepath = "/etc/environment.d/30-qubes-gpg-domain-default.conf" -%}
+
 include:
   - common.pkgs.dnf-plugins-core
 
@@ -26,8 +29,8 @@ include:
   file.managed:
     - require:
       - pkg:  "{{ slsdotpath }}:: install pkgs"
-    - name: "/etc/thunderbird/defaults/pref/dove-overrides.js"
-    - source: "salt://{{ tpldir }}/files/dove-overrides.js"
+    - name: "{{ overrides_filepath }}"
+    - source: "salt://{{ tpldir | path_join("files/vm", overrides_filepath ) }}"
     - user: "root"
     - group: "root"
     - mode: "0644"
@@ -37,12 +40,12 @@ include:
   file.managed:
     - require:
       - pkg:  "{{ slsdotpath }}:: install pkgs"
-    - name: "/etc/environment.d/30-qubes-gpg-domain-default.conf"
-    - source: "salt://{{ tpldir }}/files/30-qubes-gpg-domain-default.conf"
+    - name: "{{ env_conf_filepath }}"
+    - source: "salt://{{ tpldir | path_join("files/vm", env_conf_filepath ) }}"
     - user: "root"
     - group: "root"
     - mode: "0644"
     - makedirs: true
 
 {%- endif -%}
-{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
+{#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

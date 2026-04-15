@@ -1,5 +1,6 @@
-include:
-  - .clone
-  - .install
 
-{#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
+include:
+  - .create_vm
+  - .configure
+
+{#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

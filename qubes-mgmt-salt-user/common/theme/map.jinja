@@ -1,18 +1,19 @@
-{%- from './maps/grains.osfamily.jinja' import ui with context -%}
+{%- from "./maps/grains.osfamily.jinja" import ui with context -%}
+
 {%- load_yaml as default_prefs -%}
 theme:
-  cursor: 'Adwaita'
-  gtk: 'Adwaita'
-  icon: 'Adwaita'
+  cursor: "Adwaita"
+  gtk: "Adwaita"
+  icon: "Adwaita"
 fonts:
-  sans: 'Liberation Sans 10'
-  serif: 'Liberation Serif 10'
-  mono: 'IBM Plex Mono 10'
+  sans: "Liberation Sans 10"
+  serif: "Liberation Serif 10"
+  mono: "IBM Plex Mono 10"
 {%- endload -%}
+
 {%- set prefs = {} -%}
 {%- set pkgs = ui.pkgs -%}
-{%- do salt['defaults.merge'](prefs, default_prefs, merge_lists=true, in_place=true) -%}
-{%- do salt['defaults.merge'](prefs, ui.prefs, merge_lists=true, in_place=true) -%}
-{%- do salt['defaults.merge'](prefs, salt['pillar.get']('ui:prefs', default={}), merge_lists=true, in_place=true) -%}
-{%- do salt['log.debug'](prefs) -%}
+{%- do salt["defaults.merge"](prefs, default_prefs, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](prefs, ui.prefs, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](prefs, salt["pillar.get"]("ui:prefs", default={}), merge_lists=true, in_place=true) -%}
 {#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

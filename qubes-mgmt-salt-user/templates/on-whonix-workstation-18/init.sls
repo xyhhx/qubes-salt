@@ -1,47 +1,5 @@
-{%- set vm_name = "on-whonix-workstation-18" -%}
-{%- set base_template = "whonix-workstation-18" -%}
+include:
+  - .create_vm
+  - .configure
 
-{% if grains.id == 'dom0' %}
-
-{%- load_yaml as options -%}
-features:
-  - disable:
-    - selinux
-  - set:
-    - default-menu-items: {{ [
-
-  'Alacritty.desktop'
-  'anondist-torbrowser_update.desktop',
-  'janondisttorbrowser.desktop',
-  'systemcheck.desktop',
-  'thunar.desktop',
-
-] | join(' ' ) }}
-
-tags:
-  - add:
-    - on-kicksecure
-    - whonix-updatevm
-{%- endload -%}
-
-{% from "utils/macros/create_templatevm.sls" import templatevm %}
-{{ templatevm(vm_name, base_template=base_template, options=options) }}
-
-{% else %}
-
-'{{ slsdotpath }}':
-  file.managed:
-    - names:
-      - '/etc/sdwdate-gui.d/50_user.conf':
-        - contents: |
-            gateway=@default
-      - '/etc/firefox-esr/50_prefs.js':
-        - source: 'salt://{{ tpldir }}/files/etc/firefox-esr/50_prefs.js'
-    - user: 'root'
-    - group: 'root'
-    - mode: '0644'
-    - makedirs: true
-
-{% endif %}
-
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
+{#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

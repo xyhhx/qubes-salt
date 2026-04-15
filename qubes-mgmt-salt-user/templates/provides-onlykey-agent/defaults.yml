@@ -1,4 +1,5 @@
 ok_gpg_agent:
   release:
-    version: 'v1.1.2'
-    checksum: 'fd0d0dc493cef830132f84c7d66f5713db9cbf03195354bfe633ab1834b10340'
+    version: "v1.1.2"
+    checksum: "fd0d0dc493cef830132f84c7d66f5713db9cbf03195354bfe633ab1834b10340"
+  release_asset: "ok-gpg-agent-linux.tar.gz"

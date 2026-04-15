@@ -1,23 +1,5 @@
-{%- set vm_name = "provides-appimage" -%}
-{%- set base_template = "fedora-43-minimal" -%}
+include:
+  - .create_vm
+  - .configure
 
-{% if grains.id == 'dom0' %}
-
-{% from "utils/macros/create_templatevm.sls" import templatevm %}
-{{ templatevm(vm_name, base_template=base_template) }}
-
-{% else %}
-
-'{{ vm_name }}':
-  pkg.installed:
-    - pkgs:
-      - fuse
-      - fuse-libs
-      - qubes-core-agent-networking
-      - Thunar
-    - install_recommends: false
-    - skip_suggestions: true
-
-{% endif %}
-
-# vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et :
+{#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}
