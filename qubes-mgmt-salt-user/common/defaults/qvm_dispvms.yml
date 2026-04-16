@@ -1,0 +1,15 @@
+# Named disposables (disp-*)
+present:
+  - template: dvm-*
+  - class: DispVM
+  - label: red
+
+  - flags: []
+
+prefs:
+  - template: dvm-*
+  - class: DispVM
+  - label: red
+
+  - flags: []
+

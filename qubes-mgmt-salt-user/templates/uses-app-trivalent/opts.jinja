@@ -25,22 +25,18 @@
  ("linux/recommended/01-titanium-cookies.json", "/etc/trivalent/policies/recommended/01-titanium-cookies.json")
 ] -%}
 
-{#- block extensions -#}
 {%- if vm_opts.celenity_titanium.block_extensions == true -%}
 {%- do policies.append(("linux/managed/99-titanium-optional-extensions-block.json", "/etc/trivalent/policies/managed/99-titanium-optional-extensions-block.json")) -%}
 {%- endif -%}
 
-{#- allow installation of certain trustworthy extensions -#}
 {%- if vm_opts.celenity_titanium.allow_trustworthy_extensions == true -%}
 {%- do policies.append(("linux/managed/99-titanium-optional-extensions-allow.json", "/etc/trivalent/policies/managed/99-titanium-optional-extensions-allow.json")) -%}
 {%- endif -%}
 
-{#- unbreak bitwarden's biometric authentication and firefox bridge -#}
 {%- if vm_opts.celenity_titanium.unbreak_bitwarden == true -%}
 {%- do policies.append(("linux/recommended/99-titanium-optional-native-messaging-allow.json", "/etc/trivalent/policies/recommended/99-titanium-optional-native-messaging-allow.json")) -%}
 {%- endif -%}
 
-{#- unbreak https://grapheneos.org/install/web -#}
 {%- if vm_opts.celenity_titanium.allow_webusb == true -%}
 {%- do policies.append(("linux/recommended/99-titanium-optional-webusb-allow.json", "/etc/trivalent/policies/recommended/99-titanium-optional-webusb-allow.json")) -%}
 {%- endif -%}
@@ -51,4 +47,4 @@
 
 {%- endif -%}
 {%- endif -%}
-{#- vim: set syn=salt.jinja.yaml ft=jinja ts=2 sw=2 sts=2 et : -#}
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

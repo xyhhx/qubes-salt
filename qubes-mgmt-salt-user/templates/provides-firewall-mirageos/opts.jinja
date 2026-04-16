@@ -12,4 +12,4 @@
 {%- do salt["defaults.merge"](vm_options, defaults["vm"], in_place=true) -%}
 {%- do salt["defaults.merge"](vm_options, salt["pillar.get"]("user_qvms:templates:provides_firewall_mirageos:qvm", default={}), in_place=true) -%}
 
-{#- vim: set ft=jinja syn=jinja : -#}
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

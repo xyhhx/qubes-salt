@@ -1,0 +1,29 @@
+{%- import_yaml "./qvm_templates.yml" as templatevm_default_props -%}
+{%- import_yaml "./qvm_appvms.yml" as appvm_default_props -%}
+{%- import_yaml "./qvm_dvms.yml" as dvm_default_props -%}
+{%- import_yaml "./qvm_dispvms.yml" as dispvm_default_props -%}
+
+{%- set templatevm_defaults = {} -%}
+{%- do salt["defaults.merge"](templatevm_defaults, templatevm_default_props, merge_lists=false, in_place=true) -%}
+
+{%- set appvm_defaults = {} -%}
+{%- do salt["defaults.merge"](appvm_defaults, templatevm_defaults, merge_lists=false, in_place=true) -%}
+{%- do salt["defaults.merge"](appvm_defaults, appvm_default_props, merge_lists=false, in_place=true) -%}
+
+{%- set dvm_defaults = {} -%}
+{%- do salt["defaults.merge"](dvm_defaults, appvm_defaults, merge_lists=false, in_place=true) -%}
+{%- do salt["defaults.merge"](dvm_defaults, dvm_default_props, merge_lists=false, in_place=true) -%}
+
+{%- set dispvm_defaults = {} -%}
+{%- do salt["defaults.merge"](dispvm_defaults, appvm_defaults, merge_lists=false, in_place=true) -%}
+{%- do salt["defaults.merge"](dispvm_defaults, dispvm_default_props, merge_lists=false, in_place=true) -%}
+
+{%- load_yaml as offline_patch -%}
+present:
+  - color: "gray"
+prefs:
+  - color: "gray"
+  - netvm: ""
+{%- endload -%}
+
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

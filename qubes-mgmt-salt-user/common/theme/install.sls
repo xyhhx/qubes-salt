@@ -100,7 +100,7 @@
 
 {%  else %}
 
-"{{ user | path_join(".config/gtk-4.0/gtk.css")}}":
+"{{ user_home | path_join(".config/gtk-4.0/gtk.css")}}":
   file.symlink:
     - target: "/usr/local/share/themes/pane-black-gtk-theme/gtk-4.0/gtk.css"
     - force: true

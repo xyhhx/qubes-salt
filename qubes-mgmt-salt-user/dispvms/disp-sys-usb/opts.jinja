@@ -1,0 +1,29 @@
+{%- set template_name = "dvm-sys-usb" -%}
+{%- from "common/defaults/qvm_defaults.jinja" import dispvm_defaults -%}
+{%- from tpldir ~ "/usb_devices.jinja" import usb_pcidevs with context -%}
+
+{%- load_yaml as dispvm_opts -%}
+present:
+  - template: "{{ template_name }}"
+  - mem: 300
+  - maxmem: 300
+prefs:
+  - virt_mode: hvm
+  - autostart: true
+  - pcidevs: {{ usb_pcidevs | yaml }}
+  - pci_strictreset: false
+  - netvm: "none"
+  - virt_mode: "hvm"
+service:
+  - disable:
+    - network-manager
+  - enable:
+    - minimal-usbvm
+{%- endload -%}
+
+{%- set vm = {} -%}
+{%- do salt["defaults.merge"](vm, dispvm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, dispvm_opts, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": dispvm_opts.present }, merge_lists=true, in_place=true) -%}
+
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

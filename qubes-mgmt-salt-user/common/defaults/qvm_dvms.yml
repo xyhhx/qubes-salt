@@ -1,0 +1,22 @@
+# "Disposable Templates" (dvm-*)
+present:
+  - template: fedora-43-minimal
+  - class: AppVM
+  - label: red
+
+  - flags: []
+
+prefs:
+  - template: fedora-43-minimal
+  - class: AppVM
+  - label: red
+
+  - template-for-dispvms: true
+
+features:
+  - enable:
+    - appmenus-dispvm
+
+  - set:
+    - menu-favorites: "@disp:Alacritty"
+

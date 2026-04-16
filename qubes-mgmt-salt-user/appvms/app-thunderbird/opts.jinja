@@ -14,11 +14,11 @@
 present:
   - class: "AppVM"
   - template: "{{ template }}"
-  - label: "{{ vm.prefs | map(attribute="label") | first }}"
-prefs:
-  - class: "AppVM"
-  - template: "{{ template }}"
 {%- endload -%}
-{%- do salt["defaults.merge"](vm, overrides, merge_lists=true, in_place=true) -%}
 
-{#- vim: set syn=jinja ft=salt.jinja : -#}
+{%- do salt["defaults.merge"](vm, {
+  "present": overrides.present,
+  "prefs": overrides.present
+}, merge_lists=true, in_place=true) -%}
+
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

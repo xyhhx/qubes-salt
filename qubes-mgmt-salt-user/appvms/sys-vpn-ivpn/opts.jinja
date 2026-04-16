@@ -17,4 +17,4 @@ prefs:
 {%- do salt["defaults.merge"](vm, pillar_data, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, overrides, merge_lists=true, in_place=true) -%}
 
-{#- vim: set ft=jinja syn=jinja : -#}
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

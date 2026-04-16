@@ -1,0 +1,23 @@
+{%- from "common/defaults/qvm_defaults.jinja" import dvm_defaults -%}
+{%- set template_name = "provides-usb" -%}
+
+{%- load_yaml as dvm_opts -%}
+present:
+  - template: "{{ template_name }}"
+  - maxmem: 300
+  - mem: 300
+prefs:
+  - netvm: ""
+  - virt_mode: hvm
+features:
+  - enable:
+    - service.hardened_malloc
+    - minimal-usbvm
+{%- endload -%}
+
+{%- set vm = {} -%}
+{%- do salt["defaults.merge"](vm, dvm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, dvm_opts, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": dvm_opts.present }, merge_lists=true, in_place=true) -%}
+
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

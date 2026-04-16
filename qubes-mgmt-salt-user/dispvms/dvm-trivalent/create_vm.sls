@@ -1,23 +1,17 @@
 {%- if grains.id == "dom0" -%}
 {%- set vm_name = "dvm-trivalent" -%}
-{%- set template_name = "uses-app-trivalent" -%}
+{%- from "./opts.jinja" import vm, template_name -%}
+
+"{{ template_name }}:: exists":
+  qvm.exists:
+    - name: "{{ template_name }}"
 
 "{{ vm_name }}":
   qvm.vm:
-    - present:
-      - template: "{{ template_name }}"
-      - label: "red"
-    - prefs:
-      - template: "{{ template_name }}"
-      - label: "red"
-      - template-for-dispvms: true
-    - features:
-      - enable:
-        - appmenus-dispvm
-        - service.qubes-ctap-proxy
-      - set:
-        - menu-items: trivalent.desktop
-        - menu-favorites: "@disp:trivalent"
+    - require:
+      - qvm: "{{ template_name }}:: exists"
+
+    {{ vm | dict_to_sls_yaml_params | indent }}
 
 {%- endif -%}
 {#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

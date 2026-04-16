@@ -1,5 +1,5 @@
 {%- if grains.id == "dom0" -%}
-
+{%-   set vm_name = "sys-onlykey" -%}
 {%-   set policies_dir = "/usr/local/etc/qubes/policy.d" -%}
 {%-   set policy_files = [
   "30-onlykey-gpg.policy",

@@ -1,0 +1,58 @@
+# TemplateVMs
+present:
+  - template: fedora-43-minimal
+  - class: TemplateVM
+  - label: black
+
+  - mem: 400
+  - maxmem: 2000
+  - vcpus: 1
+
+  - root-move-from: # </path/xxx>
+  - root-copy-from: # </path/xxx>
+
+  - flags: []
+
+prefs:
+  - memory: 400
+
+  - provides-network: false
+
+  # - devices-denied: []
+  - kernel: "*default*"
+  - kernelopts: "*default*"
+  # - mac: ""
+  - pci-strictreset: true
+  - pcidevs: []
+  - virt-mode: pvh
+
+  - audiovm: "*default*"
+  - guivm: "*default*"
+  - netvm: "*default*"
+
+  - default-dispvm: "*default*"
+  - default-user: user
+  - management-dispvm: "*default*"
+
+  - autostart: false
+  - debug: false
+  - include-in-backups: false
+  - internal: false
+  - qrexec-timeout: 120
+
+  # - ip:
+  - installed-by-rpm: false
+  # - last-backup:
+
+  - flags: []
+
+features:
+  - disable:
+    - service.hardened_malloc
+  - enable:
+    - selinux
+  - set:
+    - menu-items: Alacritty.desktop
+    - default-menu-items: Alacritty.desktop
+
+

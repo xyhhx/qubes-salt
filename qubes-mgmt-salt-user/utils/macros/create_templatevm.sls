@@ -1,37 +1,6 @@
-{% macro templatevm(name, options={}, base_template="fedora-43-minimal") %}
+{%- macro templatevm(name, options={}, base_template="fedora-43-minimal") -%}
 
-{%- load_yaml as defaults -%}
-prefs:
-  - label: black
-
-  - memory: 400
-  - maxmem: 2000
-  - vcpus: 1
-
-  - kernel: "*default*"
-  - kernelopts: "*default*"
-  - pci-strictreset: true
-  - virt-mode: pvh
-
-  - audiovm: "*default*"
-  - guivm: "*default*"
-  - netvm: "*default*"
-
-  - autostart: false
-  - debug: false
-  - default-user: user
-  - include-in-backups: false
-  - internal: false
-  - qrexec-timeout: 120
-
-features:
-  - enable:
-    - selinux
-    - service.hardened_malloc
-  - set:
-    - menu-items: Alacritty.desktop
-    - default-menu-items: Alacritty.desktop
-{%- endload -%}
+{%- from "common/defaults/qvm_defaults.jinja" import templatevm_defaults -%}
 
 {#- These remain after cloning the base templates, so they have to be removed -#}
 {%- load_yaml as disable_lock_features -%}
@@ -42,7 +11,7 @@ features:
 {%- endload -%}
 
 {%- set vm = {} -%}
-{%- do salt["defaults.merge"](vm, defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, templatevm_defaults, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, salt["pillar.get"]("qvm_defaults", default={}), merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, options, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, disable_lock_features, merge_lists=true, in_place=true) -%}
@@ -53,15 +22,14 @@ features:
 
 "{{ name }}":
   qvm.vm:
+    - order: 1
+    - require:
+      - qvm: '{{ slsdotpath }}.{{ sls }}:qvm.template_installed'
 
     - clone:
       - source: "{{ base_template }}"
 
     {{ vm | dict_to_sls_yaml_params | indent }}
 
-    - order: 1
-    - require:
-      - qvm: '{{ slsdotpath }}.{{ sls }}:qvm.template_installed'
-
-{% endmacro %}
+{%- endmacro -%}
 {#- vim: set syntax=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

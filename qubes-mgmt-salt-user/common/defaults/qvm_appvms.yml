@@ -1,33 +1,15 @@
 # Common defaults for AppVMs
+present:
+  - template: fedora-43-minimal
+  - class: AppVM
+  - label: blue
+
+  - flags: []
 
 prefs:
-  - label: black
 
-  - memory: 400
-  - maxmem: 2000
-  - vcpus: 1
-
-  - kernel: "*default*"
-  - kernelopts: "*default*"
-  - pci-strictreset: true
-  - virt-mode: pvh
-
-  - audiovm: "*default*"
-  - guivm: "*default*"
-  - netvm: "*default*"
-
-  - autostart: false
-  - debug: false
-  - default-user: user
-  - include-in-backups: false
-  - internal: false
-  - qrexec-timeout: 120
+  - flags: []
 
 features:
   - enable:
-    - selinux
     - service.hardened_malloc
-  - set:
-    - menu-items: Alacritty.desktop
-    - default-menu-items: Alacritty.desktop
-

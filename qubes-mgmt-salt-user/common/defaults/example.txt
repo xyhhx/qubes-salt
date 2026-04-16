@@ -1,0 +1,241 @@
+# Meant to keep this handy as a point of reference
+
+# https://github.com/QubesOS/qubes-mgmt-salt-dom0-qvm?tab=readme-ov-file#qvm-present
+qvm.vm:
+
+- actions:
+  - kill: pass
+  - halted: pass
+  - absent: pass
+  - missing
+  - present
+  - exists
+  - prefs
+  - features
+  - start
+  - running
+  - pause
+  - unpause
+  - shutdown
+  - run
+  - clone
+
+- exists:
+  - flags:
+      - quiet
+
+- missing:
+  - flags:
+    - quiet
+
+- running:
+
+- halted:
+
+- start:
+  - drive:
+  - hddisk:
+  - cdrom:
+  - custom-config:
+  - flags:
+    - quiet  # *** salt default ***
+    - no-guid  # *** salt default ***
+    - tray
+    - dvm
+    - debug
+    - install-windows-tools
+
+- shutdown:
+  - exclude: # [exclude_list,]
+  - flags:
+    - quiet
+    - force
+    - wait
+    - all
+    - kill
+
+- kill:
+
+- pause:
+
+- unpause:
+
+- present:
+  - template: fedora-43-minimal
+  - class: AppVM
+  - label: red
+  - mem: 3000
+  - vcpus: 4
+  - root-move-from: # </path/xxx>
+  - root-copy-from: # </path/xxx>
+  - flags:
+    - proxy
+    - hvm
+    - hvm-template
+    - net
+    - standalone
+    - internal
+    - force-root
+    - quiet
+
+- absent:
+  - flags:
+    - just-db
+    - force-root
+    - quiet
+
+- clone:
+  - source: <vmname>
+  - path: </path/xxx>
+  - flags:
+    - shutdown
+    - quiet
+    - force-root
+
+- exists: []
+
+- run:
+  - cmd: gnome-terminal
+  - user: # <string>
+  - exclude: # [sys-net, sys-firewall]
+  - localcmd: # </dev/null>
+  - color-output: 31
+  - flags:
+    - quiet
+    - auto
+    - tray
+    - all
+    - pause
+    - unpause
+    - pass-io
+    - nogui
+    - filter-escape-chars
+    - no-filter-escape-chars
+    - no-color-output
+
+- prefs:
+  - label: green  # red|yellow|green|blue|purple|orange|gray|black
+  - template:           debian-jessie
+  - memory:             400
+  - maxmem:             4000
+  - include-in-backups: True
+  - netvm:              sys-firewall
+  - pcidevs:            ['04:00.0']
+  - pci-strictreset:    false
+  - kernel:             default
+  - vcpus:              2
+  - kernelopts:         nopat iommu=soft swiotlb=8192
+  - mac:                auto
+  - debug:              true
+  - virt-mode:          hvm
+  - default-user:       tester
+  - qrexec-timeout:     120
+  - internal:           true
+  - autostart:          true
+  - flags:
+      - force-root
+
+  # - label:                red|yellow|green|blue|purple|orange|gray|black
+  # - autostart:            true|(false)
+  # - debug:                true|(false)
+  # - default-user:         <string>
+  # - default-dispvm:       <string>
+  # - devices-denied:       <string>
+  # - management-dispvm:    <string>
+  # - guivm:                <string>
+  # - audiovm:              <string>
+  # - template-for-dispvms: true|false
+  # - virt-mode:            (hvm|pv)
+  # - include-in-backups:   true|false
+  # - installed-by-rpm:     true|false
+  # - ip:                   <string>
+  # - kernel:               <string>
+  # - kernelopts:           <string>
+  # - last-backup:          <string>
+  # - mac:                  <string> (auto)
+  # - maxmem:               <int>
+  # - memory:               <int>
+  # - netvm:                <string>
+  #   # pci-strictreset applies only to devices in pcidevs here, for full
+  #   # control use qvm.device (TBD)
+  # - pci-strictreset:      true|false
+  # - pcidevs:              [string,]
+  # - provides-network:     true|false
+  # - template:             <string>
+  # - qrexec-timeout:       <int> (60)
+  # - vcpus:                <int>
+
+- service:
+  - enable:
+    - test
+    - test2
+    - another_test
+    - another_test2
+    - another_test3
+  - disable:
+    - meminfo-writer
+    - test3
+    - test4
+    - another_test4
+    - another_test5
+  - default:
+    - another_test5
+    - does_not_exist
+# - list: []
+# - list: [string,]
+
+- features:
+  - enable:
+    - test
+    - test2
+    - another_test
+    - another_test2
+    - another_test3
+  - disable:
+    - service.meminfo-writer
+    - test3
+    - test4
+    - another_test4
+    - another_test5
+  - default:
+    - another_test5
+    - does_not_exist
+  - set:
+    - example.key: key value
+    - example.test: test value
+#  - list: []
+#  - list: [string,]
+
+- tags:
+  - add:
+    - tag1
+    - tag2
+  - del:
+    - tag3
+    - tag4
+#  - list: []
+#  - list: [string,]
+
+- firewall:
+  - set:
+    - 'action=accept dsthost=example.com'
+    - 'action=accept specialtarget=dns'
+    - 'action=drop'
+  # - list
+
+- start: []
+
+- running: []
+
+- pause: []
+
+- unpause: []
+
+- shutdown: []
+
+- run:
+    - cmd: gnome-terminal
+    - flags:
+        - auto
+
+# vim: set ft=yaml :
