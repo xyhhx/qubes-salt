@@ -31,12 +31,5 @@ include:
     - mode: "0644"
     - makedirs: true
 
-"{{ slsdotpath }}:: configure qubes-ctapproxy":
-  cmd.run:
-    - names:
-      - "systemctl disable qubes-ctapproxy@sys-usb.service"
-      - "systemctl enable qubes-ctapproxy@disp-sys-usb.service":
-        - creates: "/etc/systemd/system/multi-user.target.wants/qubes-ctapproxy@disp-sys-usb.service"
-
 {%- endif -%}
 {#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

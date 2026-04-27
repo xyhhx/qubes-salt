@@ -45,6 +45,7 @@ qvm_defaults:
 # User global preferences
 user_qubes:
   defaults:
+    ctap: sys-onlykey
     gpg: sys-onlykey
     netvm: sys-vpn-ivpn
     ssh: sys-onlykey

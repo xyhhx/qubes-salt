@@ -1,0 +1,16 @@
+{%- include "utils/banner.jinja" -%}
+
+policy.RegisterArgument   +u2f.Authenticate   {{ vm_name }}  @tag:onlykey-ctap-client  allow target=dom0
+
+ctap.GetInfo        *     @tag:onlykey-ctap-client  @default  ask target={{ vm_name }}
+ctap.GetInfo        *     @tag:onlykey-ctap-client  @tag:onlykey-ctap-server  allow notify=yes
+
+ctap.ClientPin      *     @tag:onlykey-ctap-client  @default  ask target={{ vm_name }}
+ctap.ClientPin      *     @tag:onlykey-ctap-client  @tag:onlykey-ctap-server  allow notify=yes
+
+u2f.Register        *     @tag:onlykey-ctap-client  @default  ask target={{ vm_name }}
+u2f.Register        *     @tag:onlykey-ctap-client  @tag:onlykey-ctap-server  allow notify=yes
+
+u2f.Authenticate    *     @tag:onlykey-ctap-client  @default  ask target={{ vm_name }}
+u2f.Authenticate    *     @tag:onlykey-ctap-client  @tag:onlykey-ctap-server  allow notify=yes
+{#- vim: set syn=jinja ft=jinja tw& : -#}

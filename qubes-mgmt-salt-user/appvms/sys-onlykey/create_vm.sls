@@ -24,6 +24,7 @@
         - custom-persist.gnupghome: "dir:user:user:0700:/home/user/.gnupg"
     - tags:
       - add:
+        - onlykey-ctap-server
         - onlykey-gpg-server
         - onlykey-ssh-server
 
