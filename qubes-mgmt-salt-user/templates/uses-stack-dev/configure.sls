@@ -85,17 +85,6 @@ include:
     - mode: "0644"
     - makedirs: true
 
-"{{ slsdotpath }}:: configure qubes-ctapproxy":
-  cmd.run:
-    - require:
-      - pkg: "{{ slsdotpath }}:: install pkgs"
-    - names:
-      - "systemctl disable qubes-ctapproxy@sys-usb.service":
-        - onlyif: "[ -L /etc/systemd/system/multi-user.target.wants/qubes-ctapproxy@sys-usb.service ]"
-      - "systemctl enable qubes-ctapproxy@disp-sys-usb.service":
-        - creates: "/etc/systemd/system/multi-user.target.wants/qubes-ctapproxy@disp-sys-usb.service"
-    - use_vt: true
-
 "{{ slsdotpath }}:: configure user shell":
   user.present:
     - require:

@@ -25,7 +25,6 @@ include:
       - pkgrepo: "{{ slsdotpath }}:: install repos"
     - pkgs:
       - qubes-core-agent-networking
-      - qubes-ctap
       - trivalent
       - trivalent-subresource-filter
 

@@ -17,7 +17,6 @@ include:
     - pkgs:
       - firefox
       - phoenix
-      - qubes-ctap
       - qubes-core-agent-networking
 
 "{{ slsdotpath }}:: install phoenix overrides":

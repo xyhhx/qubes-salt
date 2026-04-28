@@ -9,7 +9,6 @@ include:
 "{{ slsdotpath }}:: install pkgs":
   pkg.installed:
     - pkgs:
-      - qubes-ctap
       - qubes-input-proxy-sender
       - qubes-usb-proxy
     - install_recommends: false
