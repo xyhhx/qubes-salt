@@ -51,6 +51,12 @@ main()
     "minor")
       RELEASE_TYPE="minor"
       ;;
+    "version")
+      RELEASE_TYPE="version"
+      release="${1##v}" # remove leading 'v' if it's present
+      [[ ! "${release}" =~ ^[0-9]{4}\.[0-9]{1,2}\.[0-9]\.[0-9] ]] \
+        && die 1 "Invalid release number"
+      ;;
     *)
       die_usage "Missing or unknown action '${ACTION}'"
       ;;
@@ -61,7 +67,7 @@ main()
 
   check_repo_dirty
   check_commits
-  checkout_release_branch
+  checkout_release_branch "${release}"
   cut_release
   generate_release_notes
   write_release_notes
@@ -78,7 +84,7 @@ NAME
         ${SCRIPT} - Prepare a release
 
 SYNOPSIS
-        ${SCRIPT} [-dhTy] [minor|patch]
+        ${SCRIPT} [-dhTy] [minor|patch|version] [RELEASE]
 
 DESCRIPTION
               Prepares a release. By default will increment the patch number.
@@ -195,13 +201,15 @@ bump_release_number() {
 checkout_release_branch()
 {
   debug_log "preparing to checkout the release branch"
+
+  [[ -z "${release}" ]] && release=$(bump_release_number)
+
   last_tag=$(get_last_tag)
-  release=$(bump_release_number)
   current_branch=$(get_current_branch)
   upstream=$(get_upstream)
   remote=$(get_remote)
 
-  release_branch="release/v${release}"
+  release_branch="release/v${release}" # remove leading 'v' if it was passed
   release_branch_exists=$(find_branch "${release_branch}")
 
   remote_branch="${remote}/${release_branch}"
