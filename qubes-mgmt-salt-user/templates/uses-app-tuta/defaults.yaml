@@ -4,5 +4,5 @@ vm_options:
       - default-menu-items: alacritty.desktop tutanota-desktop.desktop
 
 tuta_release:
-  version: 335.260310.0
-  checksum: 3eb82edd6b0607f7761f7497ff222e79925b8345d755ff6dd44103e26cf88792
+  version: 345.260424.1
+  checksum: 074617a49ef96fa37650d2523b00ddd1b82c338ab32467d85ff10b424f8840ee
