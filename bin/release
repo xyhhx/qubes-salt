@@ -163,7 +163,7 @@ get_current_branch()
 
 get_date_from_tag()
 {
-  echo "$@" | sed -nE 's/^([0-9]+)\.([0-9]+).*/\1 \2/p'
+  echo "$@" | sed -nE 's/^v([0-9]+)\.([0-9]+).*/\1 \2/p'
 }
 
 # Find a branch in the refs
