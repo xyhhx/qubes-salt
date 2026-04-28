@@ -1,0 +1,54 @@
+{%- set netvm = "sys-net" -%}
+{%- set template_name = "provides-net" -%}
+{%- from "common/defaults/qvm_defaults.jinja" import appvm_defaults -%}
+
+{%- load_yaml as vm_defaults -%}
+present:
+  - template: "{{ template_name }}"
+  - label: yellow
+  - flags:
+    - net
+prefs:
+  - netvm: "{{ netvm }}"
+  - provides-network: true
+  - vcpus: 2
+features:
+  - enable:
+    - servicevm
+    - service.qubes-updates-proxy
+  - set:
+    - menu-items: {{ [
+
+  "anon_connection_wizard.desktop",
+  "gateway-nyx.desktop",
+  "whonix-reloadfirewall.desktop",
+  "gateway-reloadtor.desktop",
+  "restart-tor-gui.desktop",
+  "gateway-stoptor.desktop",
+  "systemcheck.desktop",
+  "thunar.desktop",
+  "tor-control-panel.desktop",
+  "gateway-tordata.desktop",
+  "gateway-torrcexamples.desktop",
+  "gateway-torrc.desktop",
+  "xfce4-terminal.desktop",
+  "sdwdate-gui.desktop"
+
+] | join(" ") }}
+    - tags:
+      - add:
+        - anon-gateway
+        - sdwdate-gui-server
+{%- endload -%}
+
+{%- set vm = {} -%}
+{%- do salt["defaults.merge"](vm, appvm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, vm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm,
+  salt["pillar.get"]("user_qvms:appvms:sys_tor_whonix", default={}),
+  merge_lists=true,
+  in_place=true
+) -%}
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

@@ -2,7 +2,7 @@
 {%- from "common/defaults/qvm_defaults.jinja" import dispvm_defaults -%}
 {%- from tpldir ~ "/usb_devices.jinja" import usb_pcidevs with context -%}
 
-{%- load_yaml as dispvm_opts -%}
+{%- load_yaml as vm_defaults -%}
 present:
   - template: "{{ template_name }}"
   - mem: 300
@@ -23,7 +23,13 @@ service:
 
 {%- set vm = {} -%}
 {%- do salt["defaults.merge"](vm, dispvm_defaults, merge_lists=true, in_place=true) -%}
-{%- do salt["defaults.merge"](vm, dispvm_opts, merge_lists=true, in_place=true) -%}
-{%- do salt["defaults.merge"](vm, { "prefs": dispvm_opts.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, vm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm,
+  salt["pillar.get"]("user_qvms:dispvms:disp_sys_usb", default={}),
+  merge_lists=true,
+  in_place=true
+) -%}
 
 {#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

@@ -1,7 +1,7 @@
 {%- from "common/defaults/qvm_defaults.jinja" import dvm_defaults -%}
 {%- set template_name = "on-whonix-workstation-18" -%}
 
-{%- load_yaml as dvm_opts -%}
+{%- load_yaml as vm_defaults -%}
 present:
   - template: "{{ template_name }}"
 prefs:
@@ -28,6 +28,12 @@ tags:
 
 {%- set vm = {} -%}
 {%- do salt["defaults.merge"](vm, dvm_defaults, merge_lists=true, in_place=true) -%}
-{%- do salt["defaults.merge"](vm, dvm_opts, merge_lists=true, in_place=true) -%}
-{%- do salt["defaults.merge"](vm, { "prefs": dvm_opts.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, vm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm,
+  salt["pillar.get"]("user_qvms:dispvms:dvm_whonix_workstation_18", default={}),
+  merge_lists=true,
+  in_place=true
+) -%}
 {#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

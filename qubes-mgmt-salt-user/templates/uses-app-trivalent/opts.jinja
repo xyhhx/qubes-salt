@@ -9,7 +9,7 @@
 
 {%- set vm_opts = {} -%}
 {%- do salt["defaults.merge"](vm_opts, defaults, in_place=true) -%}
-{%- do salt["defaults.merge"](vm_opts, salt["pillar.get"]("vm_settings:templates:uses_app_trivalent", default={}), in_place=true) -%}
+{%- do salt["defaults.merge"](vm_opts, salt["pillar.get"]("user_qvms:templates:uses_app_trivalent", default={}), in_place=true) -%}
 
 {%- do salt["log.debug"]("VM_OPTS:") -%}
 {%- do salt["log.debug"](vm_opts | pprint) -%}

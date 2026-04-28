@@ -1,0 +1,35 @@
+{%- set template_name = "provides-split-gpg2" -%}
+{%- from "common/defaults/qvm_defaults.jinja" import appvm_defaults -%}
+
+{%- load_yaml as vm_defaults -%}
+present:
+  - template: "{{ template_name }}"
+  - label: gray
+  - mem: 400
+prefs:
+  - memory: 400
+  - maxmem: 800
+  - netvm: ""
+features:
+  - enable:
+    - service.custom-persist
+  - set:
+    - custom-persist.gnupg_home: "dir:user:user:0700:/home/user/.gnupg"
+    - custom-persist.home_config: "dir:user:user:0700:/home/user/.config"
+    - custom-persist.home_local_share: "dir:user:user:0700:/home/user/.local/share"
+tags:
+  - add:
+    - split-gpg2-server
+{%- endload -%}
+
+{%- set vm = {} -%}
+{%- do salt["defaults.merge"](vm, appvm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, vm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm,
+  salt["pillar.get"]("user_qvms:appvms:vault_pgp", default={}),
+  merge_lists=true,
+  in_place=true
+) -%}
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

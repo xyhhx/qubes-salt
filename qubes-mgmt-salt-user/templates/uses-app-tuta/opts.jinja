@@ -5,7 +5,7 @@
 
 {%- set tuta_release = {} -%}
 {%- set pillar_data = salt["pillar.get"](
-  "vm_settings:templates:uses_app_tuta:tuta_release",
+  "user_qvms:templates:uses_app_tuta:tuta_release",
   default={}
 ) -%}
 {%- do salt["defaults.merge"](tuta_release, defaults["tuta_release"], merge_lists=true, in_place=true) -%}

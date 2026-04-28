@@ -1,18 +1,24 @@
-{%- from "common/defaults/qvm_defaults.jinja" import dvm_defaults -%}
-{%- set template_name = 'provides-net' -%}
+{%- set template_name = "provides-net" -%}
+{%- from "common/defaults/qvm_defaults.jinja" import appvm_defaults -%}
+
+{%- set pci_devs = salt["grains.get"]("pci_net_devs", []) | yaml -%}
 
 {%- load_yaml as vm_defaults -%}
 present:
+  - class: AppVM
   - template: "{{ template_name }}"
   - label: red
-  - mem: 300
 prefs:
+  - memory: 300
   - netvm: ""
   - virt-mode: hvm
   - provides-network: true
-features:
+  - pcidevs: {{ pci_devs }}
+  - pci_strictreset: false
+require:
+  - qvm: provides-net
+service:
   - enable:
-    - service.hardened_malloc
     - clocksync
     - minimal-netvm
   - disable:
@@ -20,12 +26,12 @@ features:
 {%- endload -%}
 
 {%- set vm = {} -%}
-{%- do salt["defaults.merge"](vm, dvm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, appvm_defaults, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, vm_defaults, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm,
-  salt["pillar.get"]("user_qvms:dispvms:dvm_sys_net", default={}),
+  salt["pillar.get"]("user_qvms:appvms:sys_net", default={}),
   merge_lists=true,
   in_place=true
 ) -%}

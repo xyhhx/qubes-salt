@@ -1,23 +1,32 @@
-{%- set template_name = "on-debian-13-minimal" -%}
-{%- from "common/defaults/qvm_defaults.jinja" import dvm_defaults, offline_patch -%}
+{%- set template_name = "provides-firewall-linux" -%}
+{%- from "common/defaults/qvm_defaults.jinja" import appvm_defaults -%}
 
 {%- load_yaml as vm_defaults -%}
 present:
   - template: "{{ template_name }}"
+  - label: yellow
+  - class: AppVM
+prefs:
+  - netvm: sys-net
+  - provides-network: true
+  - memory: 500
+features:
+  - enable:
+    - clocksync
+    - minimal-netvm
+require:
+  - qvm: provides-firewall-linux
+  - qvm: sys-net
 {%- endload -%}
 
 {%- set vm = {} -%}
-{%- do salt["defaults.merge"](vm, dvm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, appvm_defaults, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, vm_defaults, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm,
-  salt["pillar.get"]("user_qvms:dispvms:dvm_debian_13_minimal", default={}),
+  salt["pillar.get"]("user_qvms:appvms:sys_firewall_linux", default={}),
   merge_lists=true,
   in_place=true
 ) -%}
-
-{%- set offline_vm = {} -%}
-{%- do salt["defaults.merge"](offline_vm, vm, merge_lists=true, in_place=true) -%}
-{%- do salt["slsutil.update"](offline_vm, offline_patch, recursive_update=true, merge_lists=true) -%}
 {#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

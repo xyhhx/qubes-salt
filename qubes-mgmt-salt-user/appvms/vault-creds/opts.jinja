@@ -1,0 +1,30 @@
+{%- set template_name = "provides-app-keepassxc" -%}
+{%- from "common/defaults/qvm_defaults.jinja" import appvm_defaults -%}
+
+{%- load_yaml as vm_defaults -%}
+present:
+  - template: "{{ template_name }}"
+  - label: gray
+prefs:
+  - netvm: ""
+features:
+  - enable:
+    - service.custom-persist
+  - set:
+    - menu-items: org.keepassxc.KeePassXC.desktop
+    - custom-persist.keepassxc_cache: "file:user:user:0600:/home/user/.cache/keepassxc/keepassxc.ini"
+    - custom-persist.keepassxc_config: "file:user:user:0600:/home/user/.config/keepassxc/keepassxc.ini"
+    - custom-persist.usrlocal: "dir:user:user:0700:/usr/local/share/keepassxc"
+{%- endload -%}
+
+{%- set vm = {} -%}
+{%- do salt["defaults.merge"](vm, appvm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, vm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm,
+  salt["pillar.get"]("user_qvms:appvms:vault_creds", default={}),
+  merge_lists=true,
+  in_place=true
+) -%}
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

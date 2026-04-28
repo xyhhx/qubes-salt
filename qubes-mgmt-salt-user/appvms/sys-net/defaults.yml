@@ -1,0 +1,16 @@
+appvm_opts:
+  present:
+    - template: "{{ template_name }}"
+    - label: yellow
+    - class: AppVM
+  prefs:
+    - netvm: sys-net
+    - provides-network: true
+    - memory: 500
+  features:
+    - enable:
+      - clocksync
+      - minimal-netvm
+  require:
+    - qvm: provides-firewall-linux
+    - qvm: sys-net

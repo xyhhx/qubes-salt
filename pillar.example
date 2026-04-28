@@ -57,6 +57,8 @@ user_qubes:
 user_qvms:
   appvms:
 
+    sys_net: {}
+
     sys_vpn_ivpn:
       qvm: {}
       mfw: {}

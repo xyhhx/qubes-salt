@@ -1,5 +1,5 @@
 {%- if grains.id == "dom0" -%}
-{%- set vm_name = "sys-onlykey" -%}
+{%- set vm_name = "vault-creds" -%}
 {%- from "./opts.jinja" import vm, template_name -%}
 
 "{{ slsdotpath }}:: {{ template_name }} exists":
