@@ -1,0 +1,27 @@
+{%- set template_name = "uses-stack-qb" -%}
+{%- set executor_dvm = "dvm-qb-executor" -%}
+{%- from "common/defaults/qvm_defaults.jinja" import appvm_defaults -%}
+
+{%- load_yaml as vm_defaults -%}
+present:
+  - template: "{{ template_name }}"
+  - label: red
+prefs:
+  - memory: 1000
+  - maxmem: 4000
+  - default-dispvm: "{{ executor_dvm }}"
+tags:
+  - onlykey-gpg-client
+{%- endload -%}
+
+{%- set vm = {} -%}
+{%- do salt["defaults.merge"](vm, appvm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, vm_defaults, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm, { "prefs": vm.present }, merge_lists=true, in_place=true) -%}
+{%- do salt["defaults.merge"](vm,
+  salt["pillar.get"]("user_qvms:appvms:app_qb", default={}),
+  merge_lists=true,
+  in_place=true
+) -%}
+{#- vim: set ft=salt syntax=salt.jinja ts=2 sw=2 sts=2 et : -#}

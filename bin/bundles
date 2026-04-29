@@ -87,6 +87,7 @@ do_unpack()
   try git config --global protocol.file.allow always
   try git submodule update
   try git config --global protocol.file.allow "${git_protocol_file_allow}"
+  try git verify-commit HEAD
 }
 
 usage_help()

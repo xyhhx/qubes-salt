@@ -1,20 +1,25 @@
 # TemplateVMs
-present:
-  - template: fedora-43-minimal
+# present:
+#   # - template: fedora-43-minimal
+#   - class: TemplateVM
+#   - label: black
+#
+#   - mem: 400
+#   - maxmem: 2000
+#   - vcpus: 1
+#
+#   # - root-move-from: # </path/xxx>
+#   # - root-copy-from: # </path/xxx>
+#
+#   - flags: []
+
+prefs:
   - class: TemplateVM
   - label: black
 
-  - mem: 400
+  - memory: 400
   - maxmem: 2000
   - vcpus: 1
-
-  - root-move-from: # </path/xxx>
-  - root-copy-from: # </path/xxx>
-
-  - flags: []
-
-prefs:
-  - memory: 400
 
   - provides-network: false
 

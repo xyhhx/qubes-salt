@@ -1,0 +1,7 @@
+{%- set vm_name = "uses-stack-qb-executor" -%}
+
+user:
+  "dom0 or {{ vm_name }}":
+    - templates.uses-stack-qb-executor
+
+{#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

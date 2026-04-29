@@ -1,0 +1,19 @@
+{%- include 'utils/banner.jinja' -%}
+
+admin.vm.CreateDisposable * {{ builder_vm }} dom0 allow target=dom0
+admin.vm.CreateDisposable * {{ builder_vm }} {{ executor_dvm }} allow target=dom0
+
+admin.vm.CurrentState * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow target=dom0
+admin.vm.List         * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow target=dom0
+admin.vm.Start        * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow target=dom0
+admin.vm.Kill         * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow target=dom0
+admin.vm.Remove       * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow target=dom0
+
+qubesbuilder.FileCopyIn  * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow
+qubesbuilder.FileCopyOut * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow
+
+qubes.Filecopy       * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow
+qubes.WaitForSession * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow
+qubes.VMShell        * {{ builder_vm }} @tag:disp-created-by-{{ builder_vm }} allow
+
+{#- vim: set syn=sh.jinja : -#}

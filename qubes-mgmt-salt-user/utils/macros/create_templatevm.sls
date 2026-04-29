@@ -16,6 +16,8 @@ features:
 {%- do salt["defaults.merge"](vm, options, merge_lists=true, in_place=true) -%}
 {%- do salt["defaults.merge"](vm, disable_lock_features, merge_lists=true, in_place=true) -%}
 
+{%- do salt["log.debug"](vm | dict_to_sls_yaml_params | indent) -%}
+
 "{{ slsdotpath }}.{{ sls }}:qvm.template_installed":
   qvm.template_installed:
     - name: "{{ base_template }}"
