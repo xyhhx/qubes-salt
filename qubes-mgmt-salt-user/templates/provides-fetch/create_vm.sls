@@ -1,11 +1,11 @@
 {%- if grains.id == "dom0" -%}
 {%- set vm_name = "provides-fetch" -%}
-{%- set base_template = "fedora-43-minimal" -%}
+{%- set base_template = "fedora-44-minimal" -%}
 
 {%- load_yaml as options -%}
 prefs:
   - audiovm: ""
-  - management_dispvm: "dvm-fedora-43-xfce"
+  - management_dispvm: "dvm-fedora-44-xfce"
 {%- endload -%}
 
 {%- from "utils/macros/create_templatevm.sls" import templatevm -%}

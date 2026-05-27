@@ -46,8 +46,8 @@ include:
       - lua
       - luarocks
       - neovim
-      - nodejs
-      - nodejs-npm
+      # - nodejs
+      # - nodejs-npm
       - opentofu
       - pipx
       - pnpm

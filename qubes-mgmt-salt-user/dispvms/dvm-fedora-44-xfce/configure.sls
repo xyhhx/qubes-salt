@@ -2,8 +2,8 @@
 {%- from "utils/macros/macros.html" import set_papirus_icon_colors -%}
 
 {%- set icon_color = salt["grains.filter_by"]({
-  "dvm-fedora-43-xfce": "carbine",
-  "dvm-fedora-43-xfce": "grey"
+  "dvm-fedora-44-xfce": "carbine",
+  "dvm-fedora-44-xfce": "grey"
 }, default="grey") -%}
 
 {{ set_papirus_icon_colors(color=icon_color) }}

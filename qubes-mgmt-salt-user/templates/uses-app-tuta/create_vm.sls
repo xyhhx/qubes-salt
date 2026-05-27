@@ -1,7 +1,7 @@
 {%- if grains.id == "dom0" -%}
 
 {%- set vm_name = "uses-app-tuta" -%}
-{%- set base_template = "fedora-43-minimal" -%}
+{%- set base_template = "fedora-44-minimal" -%}
 
 {%- from "./opts.jinja" import vm_options -%}
 {%- from "utils/macros/create_templatevm.sls" import templatevm -%}

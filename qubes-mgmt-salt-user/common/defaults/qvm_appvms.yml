@@ -1,6 +1,6 @@
 # Common defaults for AppVMs
 present:
-  - template: fedora-43-minimal
+  - template: fedora-44-minimal
   - class: AppVM
   - label: blue
 

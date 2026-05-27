@@ -2,7 +2,7 @@
 
 include:
   - .dconf
-  - .hardened-malloc # Not all apps support hardened_malloc (firefox et al)
+  # - .hardened-malloc # Not all apps support hardened_malloc (firefox et al)
   - .homedirs
   - .kmods
   - .misc

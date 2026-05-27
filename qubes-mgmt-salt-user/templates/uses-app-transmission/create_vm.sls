@@ -1,6 +1,6 @@
 {%- if grains.id == "dom0" -%}
 {%- set vm_name = "uses-app-transmission" -%}
-{%- set base_template = "fedora-43-minimal" -%}
+{%- set base_template = "fedora-44-minimal" -%}
 
 
 {%- from "utils/macros/create_templatevm.sls" import templatevm -%}

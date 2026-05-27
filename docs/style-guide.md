@@ -17,7 +17,7 @@ templates are not named directly after operating systems, and there is no
 #### TemplateVMs
 
 > [!NOTE]
-> The default templates (`fedora-43`, `fedora-43-minimal`, etc) are configured
+> The default templates (`fedora-44`, `fedora-44-minimal`, etc) are configured
 > with the `prohibit-start`[^docs-prohib-start] and
 > `skip-update`[^docs-skip-upd] QVM features. They're not intended to be used
 > directly on systems using these salts, and are strictly to be used as a basis
@@ -27,8 +27,8 @@ templates are not named directly after operating systems, and there is no
     offered by Qubes repos (both ITL and otherwise), but with modifications
     fitting this repo.
 
-    **Examples:** `on-fedora-43-minimal`, `on-debian-13-xfce` offer minimally
-    modified versions of the baseline templates `fedora-43-minimal`, and
+    **Examples:** `on-fedora-44-minimal`, `on-debian-13-xfce` offer minimally
+    modified versions of the baseline templates `fedora-44-minimal`, and
     `debian-13-xfce`, respectively.
 
 1.  `uses-app-*` - these templates are intended to offer a single application,

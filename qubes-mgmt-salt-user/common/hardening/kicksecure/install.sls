@@ -1,5 +1,5 @@
 {%- if grains.os_family | lower == 'debian' -%}
-{%-   if salt["cmd.retcode"]("apt list --installed | grep kicksecure") != 0 -%}
+{%-   if salt["cmd.retcode"]("apt list --installed | grep kicksecure", ignore_retcode=true) != 0 -%}
 
 '{{ slsdotpath }}:: prereqs':
   pkg.installed:

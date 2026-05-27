@@ -61,7 +61,7 @@ qvm.vm:
 - unpause:
 
 - present:
-  - template: fedora-43-minimal
+  - template: fedora-44-minimal
   - class: AppVM
   - label: red
   - mem: 3000
