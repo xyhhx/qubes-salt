@@ -1,12 +1,14 @@
 {%- if grains.id == 'dom0' -%}
 
 {% load_yaml as base_templates %}
-qubes-templates-itl: []
-qubes-templates-itl-testing:
+qubes-templates-itl:
   - debian-13-minimal
-  - debian-13-xfce
   - fedora-43-minimal
+qubes-templates-itl-testing:
+  - debian-13-xfce
   - fedora-43-xfce
+  - fedora-44-minimal
+  - fedora-44-xfce
 qubes-templates-community-testing:
   - whonix-gateway-18
   - whonix-workstation-18

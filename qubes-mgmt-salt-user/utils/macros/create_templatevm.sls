@@ -1,4 +1,4 @@
-{%- macro templatevm(name, options={}, base_template="fedora-43-minimal") -%}
+{%- macro templatevm(name, options={}, base_template="fedora-44-minimal") -%}
 
 {%- from "common/defaults/qvm_defaults.jinja" import templatevm_defaults -%}
 

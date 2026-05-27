@@ -1,5 +1,5 @@
 {%- set vm_name = "provides-firewall-linux" -%}
-{%- set base_template = "fedora-43-minimal" -%}
+{%- set base_template = "fedora-44-minimal" -%}
 
 {%- if grains.id == "dom0" -%}
 

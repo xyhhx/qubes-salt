@@ -30,6 +30,7 @@
     - user: "root"
     - group: "root"
     - mode: "0755"
+    - makedirs: true
 
 "{{ slsdotpath }}:: clean scaffold dirs":
   file.directory:

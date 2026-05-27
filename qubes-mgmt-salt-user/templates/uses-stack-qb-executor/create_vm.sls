@@ -1,6 +1,6 @@
 {%- if grains.id == "dom0" -%}
 {%- set vm_name = "uses-stack-qb-executor" -%}
-{%- set base_template = "fedora-43-minimal" -%}
+{%- set base_template = "fedora-44-minimal" -%}
 
 {%- load_yaml as options -%}
 prefs:

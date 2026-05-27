@@ -1,6 +1,6 @@
 # TemplateVMs
 # present:
-#   # - template: fedora-43-minimal
+#   # - template: fedora-44-minimal
 #   - class: TemplateVM
 #   - label: black
 #

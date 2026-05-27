@@ -1,5 +1,5 @@
 {%- if grains.id == "dom0" -%}
-{%- set vm_name = "dvm-fedora-43-minimal" -%}
+{%- set vm_name = "dvm-fedora-44-minimal" -%}
 {%- from "./opts.jinja" import vm, offline_vm, template_name -%}
 
 "{{ template_name }}:: exists":
