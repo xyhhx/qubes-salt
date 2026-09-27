@@ -1,11 +1,14 @@
+{%- set policies = [
+  ("qubes.Gpg", "*", "@tag:split-gpg-client", "@tag:onlykey-gpg-agent-server", "ask"),
+  ("qubes.Gpg", "*", "@tag:onlykey-gpg-client", "@tag:onlykey-gpg-agent-server", "allow notify=yes"),
+  ("qubes.Gpg", "*", "@tag:onlykey-gpg-client", "@default", "ask target=" ~ vm_name),
+  ("qubes.GpgImportKey", "*", "@tag:split-gpg-client", "@tag:onlykey-gpg-agent-server", "ask"),
+  ("qubes.GpgImportKey", "*", "@tag:onlykey-gpg-client", "@tag:onlykey-gpg-agent-server", "allow notify=yes"),
+  ("qubes.GpgImportKey", "*", "@tag:onlykey-gpg-client", "@default", "ask target=" ~ vm_name),
+] -%}
+
+{%- from "utils/macros/generate_policy_file.sls" import generate_policy_file -%}
 {%- include "utils/banner.jinja" -%}
 
-qubes.Gpg   *   @tag:split-gpg-client    @tag:onlykey-gpg-agent-server  ask
-qubes.Gpg   *   @tag:onlykey-gpg-client  @tag:onlykey-gpg-agent-server  allow notify=yes
-qubes.Gpg   *   @tag:onlykey-gpg-client  @default                       ask target={{ vm_name }}
-
-qubes.GpgImportKey   *   @tag:split-gpg-client    @tag:onlykey-gpg-agent-server  ask
-qubes.GpgImportKey   *   @tag:onlykey-gpg-client  @tag:onlykey-gpg-agent-server  allow notify=yes
-qubes.GpgImportKey   *   @tag:onlykey-gpg-client  @default                       ask target={{ vm_name }}
-
+{{ generate_policy_file(policies) }}
 {#- vim: set syn=jinja ft=jinja tw& : -#}

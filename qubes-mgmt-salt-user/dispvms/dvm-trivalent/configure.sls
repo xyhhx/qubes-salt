@@ -5,7 +5,7 @@
 "{{ slsdotpath }}:: add pactl to autostart":
   file.managed:
     - name: "/home/{{ user }}/.config/autostart/pactl-info.desktop"
-    - source: "salt://{{ tpldir | path_join("files/home/user/.config/autostart/pactl-info.desktop") }}"
+    - source: "salt://{{ tpldir | path_join("files/vm/home/user/.config/autostart/pactl-info.desktop") }}"
     - user: "{{ user }}"
     - group: "{{ user }}"
     - mode: "0644"

@@ -42,5 +42,14 @@ include:
     - mode: "0644"
     - makedirs: true
 
+"{{ slsdotpath }} :: set trivalent as default web browser":
+  file.managed:
+    - name: "/etc/xdg/mimeapps.list"
+    - source: "salt://{{ tpldir | path_join("files/vm/etc/xdg/mimeapps.list") }}"
+    - user: "root"
+    - group: "root"
+    - mode: "0644"
+    - makedirs: true
+
 {%- endif -%}
 {#- vim: set ft=salt syn=salt.jinja.yaml ts=2 sw=2 sts=2 et : -#}

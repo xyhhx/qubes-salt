@@ -1,7 +1,11 @@
+{%- set policies = [
+  (keyboard_policy, "*", usb_qube, "@adminvm", keyboard_policy_action ~ " default_target=@adminvm"),
+  (mouse_policy, "*", usb_qube, "@adminvm", mouse_policy_action ~ " default_target=@adminvm"),
+  (tablet_policy, "*", usb_qube, "@adminvm", tablet_policy_action ~ " default_target=@adminvm")
+] -%}
+
+{%- from "utils/macros/generate_policy_file.sls" import generate_policy_file -%}
 {%- include 'utils/banner.jinja' -%}
 
-{{ keyboard_policy }}  *  {{ usb_qube }}  @adminvm  {{ keyboard_policy_action }} default_target=@adminvm
-{{ mouse_policy }}     *  {{ usb_qube }}  @adminvm  {{ mouse_policy_action }} default_target=@adminvm
-{{ tablet_policy }}    *  {{ usb_qube }}  @adminvm  {{ tablet_policy_action }}
-
+{{ generate_policy_file(policies) }}
 {# vim: set ft=jinja ts=2 sw=2 sts=2 et number : #}

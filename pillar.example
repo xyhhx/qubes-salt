@@ -51,6 +51,7 @@ user_qubes:
     ssh: sys-onlykey
     sysusb: disp-sys-usb
     whonix: sys-tor-whonix
+    browser: "@dispvm:dvm-trivalent"
 
 # User custom preferences. These override the defaults set in various salt states
 # for various guest VMs

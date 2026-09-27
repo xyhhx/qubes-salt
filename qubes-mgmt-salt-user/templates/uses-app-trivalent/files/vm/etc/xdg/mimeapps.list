@@ -1,0 +1,7 @@
+[Default Applications]
+text/html=trivalent.desktop
+x-scheme-handler/http=trivalent.desktop
+x-scheme-handler/https=trivalent.desktop
+x-scheme-handler/about=trivalent.desktop
+x-scheme-handler/unknown=trivalent.desktop
+

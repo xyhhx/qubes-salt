@@ -1,6 +1,6 @@
 {%- set policies = [
-  ("qubes.UpdatesProxy", "*", "@tag:whonix-updatevm", "@default", "allow  target=" ~ gateway_vm),
-  ("whonix.NewStatus", "*", "@tag:anon-vm", "@default", "allow  target=" ~ gateway_vm ~ " autostart=no notify=yes"),
+  ("qubes.OpenURL", "*", "@anyvm", browser_vm, "allow"),
+  ("qubes.OpenURL", "*", "@anyvm", "@anyvm", "deny notify=yes")
 ] -%}
 
 {%- from "utils/macros/generate_policy_file.sls" import generate_policy_file -%}

@@ -15,16 +15,19 @@
 
 {%- endif -%}
 
+{%- set policy_dir = "/usr/local/etc/qubes/policy.d" -%}
+{%- set policy_file = "30-split-ssh.policy" -%}
+
 "{{ slsdotpath }}:: install split-ssh policy":
   file.managed:
     - require:
       - qvm: "{{ vm_name }}"
-    - name: "/usr/local/etc/qubes/policy.d/available/30-split-ssh.policy"
-    - source: "salt://{{ tpldir | path_join("/files/split-ssh.policy.j2") }}"
+    - name: "{{ policy_dir | path_join("available", policy_file) }}"
+    - source: "salt://{{ tpldir | path_join("/files/dom0", policy_dir, policy_file ~ ".j2") }}"
     - template: "jinja"
-    - user: root
-    - group: qubes
-    - mode: "0640"
+    - user: "root"
+    - group: "qubes"
+    - mode: "0660"
     - makedirs: true
     - replace: true
     - defaults:
@@ -39,8 +42,8 @@
   file.symlink:
     - require:
       - file: "{{ slsdotpath }}:: install split-ssh policy"
-    - name: "/usr/local/etc/qubes/policy.d/enabled/30-split-ssh.policy"
-    - target: "/usr/local/etc/qubes/policy.d/available/30-split-ssh.policy"
+    - name: "{{ policy_dir | path_join("enabled", policy_file) }}"
+    - target: "{{ policy_dir | path_join("available", policy_file) }}"
     - makedirs: true
     - user: "root"
     - group: "qubes"

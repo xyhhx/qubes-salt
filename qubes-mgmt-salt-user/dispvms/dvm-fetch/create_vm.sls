@@ -23,8 +23,8 @@
     - source: "salt://{{ tpldir | path_join("files/dom0", policy_dir, policy_file ~ ".j2") }}"
     - template: "jinja"
     - user: "root"
-    - group: "root"
-    - mode: "0640"
+    - group: "qubes"
+    - mode: "0660"
     - context:
         vm_name: vm_name
 

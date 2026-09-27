@@ -10,7 +10,7 @@
     - template: "jinja"
     - user: "root"
     - group: "qubes"
-    - mode: "0640"
+    - mode: "0660"
     - makedirs: true
     - replace: true
     - defaults:
@@ -30,7 +30,7 @@
     - target: "{{ "/usr/local" | path_join(policy_dir, "available", policy_file) }}"
     - user: "root"
     - group: "qubes"
-    - mode: "0640"
+    - mode: "0660"
     - makedirs: true
 
 {%- endif -%}
