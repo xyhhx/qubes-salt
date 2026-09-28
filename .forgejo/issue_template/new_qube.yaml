@@ -27,9 +27,9 @@ body:
       description: What official Qubes template will it be based on?
       options:
         - archlinux
-        - fedora-43
-        - fedora-43-minimal
-        - fedora-43-xfce
+        - fedora-44
+        - fedora-44-minimal
+        - fedora-44-xfce
         - debian-13
         - debian-13-minimal
         - debian-13-xfce

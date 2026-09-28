@@ -3,10 +3,10 @@
 {% load_yaml as base_templates %}
 qubes-templates-itl:
   - debian-13-minimal
-  - fedora-43-minimal
+  - fedora-44-minimal
 qubes-templates-itl-testing:
   - debian-13-xfce
-  - fedora-43-xfce
+  - fedora-44-xfce
   - fedora-44-minimal
   - fedora-44-xfce
 qubes-templates-community-testing:
