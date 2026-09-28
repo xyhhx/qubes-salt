@@ -31,7 +31,7 @@ instance), the release cycle can look as follows:
 
 ### Milestone and checklist
 
--   Create a milestone for release _**Qubes User Salts vYYYY.MM.X.0**_
+-   Create a milestone for release _**Release vYYYY.MM.X.0**_
     -   Due date is optional
     -   Description is optional
 -   Create an issue called _**[RELEASE] vYYYY.MM.X.0**_
