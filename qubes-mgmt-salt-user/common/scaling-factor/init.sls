@@ -1,44 +1,31 @@
-{%- if grains.id == 'dom0' -%}
+{%- if grains.id == "dom0" -%}
 
-'{{ slsdotpath }}: configure dom0':
-  file.managed:
-    - names:
-      - '/usr/local/etc/qubes-rpc/qubes.GetScalingFactor':
-        - source: 'salt://{{ tpldir }}/files/qubes.GetScalingFactor'
-        - mode: '0755'
-      - '/usr/local/etc/qubes/policy.d/available/50-scaling-factor.policy':
-        - source: 'salt://{{ tpldir }}/files/scaling-factor.policy.j2'
-    - template: 'jinja'
-    - user: 'root'
-    - group: 'qubes'
-    - mode: '0640'
-    - makedirs: true
-    - replace: true
+{%-   from "utils/macros/managed_policy.sls" import managed_policy -%}
+{%-   set policy_file = "50-scaling-factor.policy" -%}
 
-'/usr/local/etc/qubes/policy.d/enabled/50-scaling-factor.policy':
-  file.symlink:
-    - target: '/usr/local/etc/qubes/policy.d/available/50-scaling-factor.policy'
-    - makedirs: true
-    - user: 'root'
-    - group: 'qubes'
-    - mode: '0777'
+{{ managed_policy(policy_file) }}
 
 {%- else -%}
 
-'{{ slsdotpath }}: configure guest':
+{%-   set files = [
+  "/usr/lib/qubes-user/set-scaling-factor",
+  "/etc/systemd/system/sync-scaling-factor.service",
+] -%}
+
+"{{ slsdotpath }}: configure guest":
   file.managed:
     - names:
-      - '/usr/lib/qubes-user/set-scaling-factor':
-        - source: 'salt://{{ tpldir }}/files/set-scaling-factor'
-      - '/etc/systemd/system/sync-scaling-factor.service':
-        - source: 'salt://{{ tpldir }}/files/sync-scaling-factor.service'
-    - user: 'root'
-    - group: 'root'
-    - mode: '0755'
+{% for file in files -%}
+      - "{{ file }}":
+        - source: "salt://{{ path_join(tpldir, file) }}"
+{% endfor %}
+    - user: "root"
+    - group: "root"
+    - mode: "0755"
     - makedirs: true
-    - template: 'jinja'
+    - template: "jinja"
 
-'sync-scaling-factor.service':
+"sync-scaling-factor.service":
   service.enabled
 
 {%- endif -%}

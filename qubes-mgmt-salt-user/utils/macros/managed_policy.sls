@@ -8,7 +8,7 @@
   param defaults: The defaults to pass to the j2 template
   type defaults: dict
 -#}
-{%- macro managed_policy(policy_file, context, defaults={}) -%}
+{%- macro managed_policy(policy_file, context={}, defaults={}) -%}
 
 {%- if slspath | regex_match("dom0") -%}
 {%-   set j2_path = "files" -%}
