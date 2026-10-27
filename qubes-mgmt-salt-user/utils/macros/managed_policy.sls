@@ -4,13 +4,12 @@
 "{{ slsdotpath }}:: install policy":
   file.managed:
     - name: "{{ policy_dir | path_join("available", policy_file) }}"
-    - source: "salt://{{ tpldir | path_join("files/dom0", policy_dir, policy_file ~ ".j2") }}"
+    - source: "salt://{{ slspath | path_join("files/dom0", policy_dir, policy_file ~ ".j2") }}"
     - template: "jinja"
     - user: "root"
     - group: "qubes"
     - mode: "0664"
-    - context:
-        {{ context | dict_to_yaml_sls_params | indent }}
+    - context: {{ context | yaml }}
 
 "{{ slsdotpath }}:: enable policy":
   file.symlink:
