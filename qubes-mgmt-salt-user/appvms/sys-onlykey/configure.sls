@@ -1,39 +1,19 @@
 {%- if grains.id == "dom0" -%}
+
 {%-   set vm_name = "sys-onlykey" -%}
-{%-   set policies_dir = "/usr/local/etc/qubes/policy.d" -%}
+{%-   from "utils/macros/managed_policy.sls" import managed_policy -%}
 {%-   set policy_files = [
   "30-onlykey-ctap.policy",
   "30-onlykey-gpg.policy",
   "30-onlykey-ssh.policy"
 ] -%}
+{%-   load_yaml as context -%}
+vm_name: "{{ vm_name }}"
+{%-   endload -%}
 
-"{{ slsdotpath }}:: install policies":
-  file.managed:
-    - require:
-      - qvm: "{{ vm_name }}"
-    - names:
-{%    for file in policy_files %}
-      - "{{ policies_dir | path_join("available", file) }}":
-        - source: "salt://{{ tpldir | path_join("files/dom0", policies_dir, file ) }}.j2"
+{%    for policy in policy_files %}
+{{ managed_policy(policy, context) }}
 {%    endfor %}
-    - template: "jinja"
-    - user: "root"
-    - group: "root"
-    - mode: "0644"
-    - makedirs: true
-    - context:
-        vm_name: "{{ vm_name }}"
-
-"{{ slsdotpath }}:: enable policies":
-  file.symlink:
-    - require:
-      - file: "{{ slsdotpath }}:: install policies"
-    - names:
-{%    for file in policy_files %}
-      - "{{ policies_dir | path_join("enabled", file) }}":
-        - target: "{{ policies_dir | path_join("available", file) }}"
-{%    endfor %}
-    - makedirs: true
 
 {%- else -%}
 
