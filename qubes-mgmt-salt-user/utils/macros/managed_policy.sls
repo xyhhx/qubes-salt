@@ -1,10 +1,17 @@
 {%- macro managed_policy(policy_file, context, defaults={}) -%}
+
+{%- if slspath | regex_match("dom0") -%}
+{%-   set j2_path = "files" -%}
+{%- else -%}
+{%-   set j2_path = "files/dom0" -%}
+{%- endif -%}
+
 {%- set policy_dir = "/usr/local/etc/qubes/policy.d" -%}
 
 "{{ slsdotpath }}:: install policy":
   file.managed:
     - name: "{{ policy_dir | path_join("available", policy_file) }}"
-    - source: "salt://{{ slspath | path_join("files/dom0", policy_dir, policy_file ~ ".j2") }}"
+    - source: "salt://{{ slspath | path_join(j2_path, policy_dir, policy_file ~ ".j2") }}"
     - template: "jinja"
     - user: "root"
     - group: "qubes"
