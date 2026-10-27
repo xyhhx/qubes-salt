@@ -1,3 +1,13 @@
+{#-
+  Install a Qubes RPC policy file from a Jinja2 template
+
+  param policy_file: The filename of the j2 policy
+  type policy_file: string
+  param context: The context to pass to the j2 template
+  type context: dict
+  param defaults: The defaults to pass to the j2 template
+  type defaults: dict
+-#}
 {%- macro managed_policy(policy_file, context, defaults={}) -%}
 
 {%- if slspath | regex_match("dom0") -%}
