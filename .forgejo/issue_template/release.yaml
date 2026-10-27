@@ -1,6 +1,6 @@
 name: Release
 about: Prepare for a new release
-title: '[Release] '
+title: '[Release] v'
 labels:
   - Category/Release Engineering
 body:
@@ -21,11 +21,11 @@ body:
     id: release_version
     attributes:
       label: Release version
-      description: What is the upcoming release? Make sure it's formatted as `YYYY.M.X.0`
+      description: What is the upcoming release? Make sure it's formatted as `YYYY.M.x.y`
       placeholder: YYYY.M.X.0
     validations:
       required: true
-      regex: ^[0-9]{4}\.[0-9]{1,2}\.[0-9]\+\.0
+      regex: ^[0-9]{4}\.[0-9]{1,2}\.[0-9]+\.[0-9]+
   - type: checkboxes
     id: todo
     attributes:
