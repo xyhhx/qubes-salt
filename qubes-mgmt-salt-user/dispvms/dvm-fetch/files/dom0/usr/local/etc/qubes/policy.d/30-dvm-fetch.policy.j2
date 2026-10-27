@@ -1,5 +1,13 @@
+{#-
+  WARN: This should really be re-written so as not to just wholesale enable
+  qubes.VMShell in the DispVM as it's a security concern!!!
+-#}
+{%- set policies = [
+  ("qubes.VMShell", "*", "@anyvm", "@dispvm:" ~ vm_name, "allow notify=yes")
+] -%}
+
+{%- from "utils/macros/generate_policy_file.sls" import generate_policy_file -%}
 {%- include "utils/banner.jinja" -%}
 
-qubes.VMShell   *   @anyvm  @dispvm:{{ vm_name }}   allow
-
+{{ generate_policy_file(policies) }}
 {# vim: set ft=jinja ts=2 sw=2 sts=2 et number : #}
