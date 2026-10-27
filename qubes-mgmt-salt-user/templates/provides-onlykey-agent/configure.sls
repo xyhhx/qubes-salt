@@ -25,6 +25,7 @@
     - require:
       - virtualenv: "{{ slsdotpath }}:: pip venv packages"
     - name: "/etc/udev/rules.d/30-onlykey.rules"
+    - source: "salt://{{ path_join("files/vm", "etc/udev/rules/30-onlykey.rules") }}"
     - user: "root"
     - group: "root"
     - mode: "0644"

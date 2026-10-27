@@ -18,7 +18,7 @@
 
 {%- set policy_dir = "/usr/local/etc/qubes/policy.d" -%}
 
-"{{ slsdotpath }}:: install policy":
+"{{ slsdotpath }}:: install {{ policy_file }} policy":
   file.managed:
     - name: "{{ policy_dir | path_join("available", policy_file) }}"
     - source: "salt://{{ slspath | path_join(j2_path, policy_dir, policy_file ~ ".j2") }}"
@@ -28,10 +28,10 @@
     - mode: "0664"
     - context: {{ context | yaml }}
 
-"{{ slsdotpath }}:: enable policy":
+"{{ slsdotpath }}:: enable {{ policy_file }} policy":
   file.symlink:
     - require:
-      - file: "{{ slsdotpath }}:: install policy"
+      - file: "{{ slsdotpath }}:: install {{ policy_file }} policy"
     - name: "{{ policy_dir | path_join("enabled", policy_file) }}"
     - target: "{{ policy_dir | path_join("available", policy_file) }}"
 
