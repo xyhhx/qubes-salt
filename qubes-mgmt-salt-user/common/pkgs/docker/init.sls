@@ -7,7 +7,7 @@
 '{{ slsdotpath }}':
   file.managed:
     - name: "/etc/docker/daemon.json"
-    - source: "salt://{{ path_join(tpldir, "/files/daemon.json") }}"
+    - source: "salt://{{ tpldir | path_join("/files/daemon.json") }}"
     - user: "root"
     - group: "root"
     - mode: "0644"
