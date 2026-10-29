@@ -25,7 +25,7 @@
     - require:
       - file: "{{ slsdotpath }}:: prepare app parent dir"
     - name: |
-        qvm-run-vm @dispvm:dvm-fetch -- "/usr/share/qubes-user/download {{ download_url }} {{ tuta_release.checksum }}" > {{ bin_abs_path }}
+        qvm-run-vm @dispvm:dvm-fetch -- "{{ salt["pillar.get"]("user_qvms:prefs:dirs:user_bins") | path_join("download") }} {{ download_url }} {{ tuta_release.checksum }}" > {{ bin_abs_path }}
     - use_vt: true
     - unless:
       - fun: file.check_hash

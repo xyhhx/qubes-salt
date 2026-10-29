@@ -7,21 +7,20 @@
 
 {%- else -%}
 
-{%-   set files = [
-  "/usr/lib/qubes-user/set-scaling-factor",
-  "/etc/systemd/system/sync-scaling-factor.service",
-] -%}
-
 "{{ slsdotpath }}: configure guest":
   file.managed:
     - names:
-{% for file in files -%}
-      - "{{ file }}":
-        - source: "salt://{{ path_join(tpldir, file) }}"
-{% endfor %}
+      - "{{ salt["pillar.get"]("user_qvms:prefs:dirs:user_bins") | path_join("set-scaling-factor") }}":
+        - "{{ file }}":
+          - source: "salt://{{ path_join(tpldir, file ~ ".j2") }}"
+          - mode: "0755"
+        - "/etc/systemd/system/sync-scaling-factor.service":
+          - source: "salt://{{ tpldir | path_join("/etc/systemd/system/sync-scaling-factor.service.j2") }}"
+          - mode: "0644"
+          - context:
+              scaling_factor_script: {{ salt["pillar.get"]("user_qvms:prefs:dirs:user_bins") | path_join("set-scaling-factor") }}
     - user: "root"
     - group: "root"
-    - mode: "0755"
     - makedirs: true
     - template: "jinja"
 

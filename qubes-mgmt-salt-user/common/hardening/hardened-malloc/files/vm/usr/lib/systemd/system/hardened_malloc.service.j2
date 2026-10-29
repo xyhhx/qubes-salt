@@ -2,7 +2,7 @@
 Description="Configure hardened_malloc linker preload"
 
 [Service]
-ExecStart=/usr/share/qubes-user/preload-hardened-malloc
+ExecStart={{ preload_hardened_malloc_script }}
 
 [Install]
 WantedBy=multi-user.target

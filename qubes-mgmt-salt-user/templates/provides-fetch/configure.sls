@@ -21,8 +21,8 @@
       - pkg: "{{ slsdotpath }}:: install pkgs"
     - names:
 {% for file in [
-  "/usr/share/qubes-user/download",
-  "/usr/share/qubes-user/fetch-github-release"
+  salt("pillar.get")["user_qvms:prefs:dirs:user_bins"] | path_join("download"),
+  salt("pillar.get")["user_qvms:prefs:dirs:user_bins"] | path_join("fetch-github-release"),
 ] %}
       - "{{ file }}":
         - source: "salt://{{ tpldir | path_join("files/vm", file) }}"

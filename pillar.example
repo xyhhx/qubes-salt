@@ -1,17 +1,4 @@
 ---
-# TODO: These should be put down under "user_qubes"
-# ui related preferences
-ui:
-  prefs:
-    theme:
-      cursor: "Adwaita"
-      gtk: "Adwaita"
-      icon: "Adwaita"
-    fonts:
-      mono: "IBM Plex Mono 10"
-      sans: "Liberation Sans 10"
-      serif: "Liberation Serif 10"
-
 # set the defaults for qubes created with salts from this repo
 qvm_defaults:
   prefs:
@@ -56,6 +43,25 @@ user_qubes:
 # User custom preferences. These override the defaults set in various salt states
 # for various guest VMs
 user_qvms:
+  # Common preferences for user qubes
+  prefs:
+    dirs:
+      # Where to store scripts and binaries that this repo will install into
+      # qubes
+      user_bins: "/opt/qubes-user/bin"
+      # Where to store configs for qubes this repo will manage
+      user_configs: "/opt/qubes-user/lib"
+    # Default theme info
+    theme:
+      cursor: "Adwaita"
+      gtk: "Adwaita"
+      icon: "Adwaita"
+    # Default font info
+    fonts:
+      mono: "IBM Plex Mono 10"
+      sans: "Liberation Sans 10"
+      serif: "Liberation Serif 10"
+
   appvms:
 
     sys_net: {}

@@ -20,7 +20,7 @@
     - require:
       - file: "{{ slsdotpath }}:: parent dir"
     - name: |
-        qvm-run-vm @dispvm:dvm-fetch -- "/usr/share/qubes-user/download {{ download_url }} {{ checksum }}" > {{ output }}
+        qvm-run-vm @dispvm:dvm-fetch -- "{{ salt["pillar.get"]("user_qvms:prefs:dirs:user_bins") | path_join("download") ]}} {{ download_url }} {{ checksum }}" > {{ output }}
 
 {%- endif -%}
 {%- endmacro -%}
