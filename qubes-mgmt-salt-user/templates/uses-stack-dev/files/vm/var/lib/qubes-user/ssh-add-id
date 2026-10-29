@@ -1,0 +1,61 @@
+#!/usr/bin/bash --
+
+# Prepares an SSH Identity in the VM
+
+set -euo pipefail
+
+setup_ssh_config(){
+  local ssh_dir="${HOME}/.ssh"
+  local config_file="${HOME}/.ssh/config"
+  [[ ! -d "${ssh_dir}" ]] \
+    && mkdir "${ssh_dir}" \
+    && chmod 700 "${ssh_dir}"
+
+  [[ ! -f "${config_file}" ]] \
+    && cat <<-EOF > "${config_file}"
+IdentitiesOnly yes
+
+EOF
+
+  mkdir -p "${HOME}/.ssh/identities"
+}
+
+prepare_identity(){
+  local parsed_id
+  local remote_user
+  local remote_host
+  local ssh_id_line
+  local pubkey_file
+  local config_file="${HOME}/.ssh/config"
+
+  parsed_id="$(sed -nE 's/(.*)@(.*)/\1 \2/p' <<< "${id}")"
+  read -r remote_user remote_host <<< "${parsed_id}"
+  ssh_id_line="$(ssh-add -L "${id}" | grep "${id}")"
+  pubkey_file="${HOME}/.ssh/identities/${id}.pub"
+
+  [[ -z "${ssh_id_line+x}" ]] \
+    && echo "No matching identity returned by the SSH agent. Create one!" \
+    && exit 1
+
+  echo "Writing the following to ${config_file}"
+  cat <<-EOF | tee -a "${config_file}"
+
+Host ${remote_host}
+  User ${remote_user}
+  IdentityFile ${pubkey_file}
+EOF
+
+  echo "${ssh_id_line}" > "${pubkey_file}"
+}
+
+main(){
+  local id
+  id="$1"
+
+  setup_ssh_config
+  prepare_identity "${id}"
+}
+
+main "$1"
+
+# vim: set ts=2 sw=2 sts=2 tw=80 et number:

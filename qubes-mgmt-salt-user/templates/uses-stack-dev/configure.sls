@@ -2,6 +2,7 @@
 
 {%- from "utils/user_info.jinja" import user -%}
 {%- set ssh_known_hosts_file = "/etc/ssh/ssh_known_hosts" -%}
+{%- set add_ssh_id_script = "/var/lib/qubes-user/ssh-add-id" -%}
 
 include:
   - common.pkgs.dnf-plugins-core
@@ -83,6 +84,17 @@ include:
     - user: "root"
     - group: "root"
     - mode: "0644"
+    - makedirs: true
+
+"{{ slsdotpath }}:: add add-ssh-id script":
+  file.managed:
+    - require:
+      - file: "{{ slsdotpath }}:: populate known_hosts"
+    - name: "{{ add_ssh_id_script }}"
+    - source: "salt://{{ tpldir | path_join("files/vm", add_ssh_id_script) }}"
+    - user: "root"
+    - group: "root"
+    - mode: "0755"
     - makedirs: true
 
 "{{ slsdotpath }}:: configure user shell":
