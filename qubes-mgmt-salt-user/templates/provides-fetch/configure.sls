@@ -1,16 +1,18 @@
 {%- if grains.id == "dom0" -%}
 
-{%- from "utils/macros/managed_policy.sls" import managed_policy -%}
-{%- set vm_name = "disp-sys-usb" -%}
-{%- set policy_file = "50-fetch.policy" -%}
+{%-   from "utils/macros/managed_policy.sls" import managed_policy -%}
+{%-   set vm_name = "disp-sys-usb" -%}
+{%-   set policy_file = "50-fetch.policy" -%}
 
-{%- load_yaml as context -%}
+{%-   load_yaml as context -%}
 dvm_fetch: "{{ vm_name }}"
-{%- endload -%}
+{%-   endload -%}
 
 {{ managed_policy(policy_file, context) }}
 
 {%- else -%}
+
+{%-   set file = "/usr/local/etc/qubes-rpc/user.FetchFile" -%}
 
 "{{ slsdotpath }}:: install pkgs":
   pkg.installed:
@@ -31,14 +33,8 @@ dvm_fetch: "{{ vm_name }}"
   file.managed:
     - require:
       - pkg: "{{ slsdotpath }}:: install pkgs"
-    - names:
-{% for file in [
-  "/usr/share/qubes-user/download",
-  "/usr/share/qubes-user/fetch-github-release"
-] %}
-      - "{{ file }}":
-        - source: "salt://{{ tpldir | path_join("files/vm", file) }}"
-{% endfor %}
+    - name: "{{ file }}"
+    - source: "salt://{{ tpldir | path_join("files/vm", file) }}"
     - user: "root"
     - group: "root"
     - mode: "0755"

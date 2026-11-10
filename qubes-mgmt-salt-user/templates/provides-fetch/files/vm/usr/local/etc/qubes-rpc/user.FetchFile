@@ -1,5 +1,5 @@
 #!/bin/bash --
-set -euo pipefail
+set -xeuo pipefail
 
 read -r encoded_url checksum
 
@@ -15,10 +15,7 @@ decode_url(){
 
 fetch_file(){
   local url="$1"
-  curl -sLO "${url}" \
-    || notify-send "Failed downloading ${url##*/}" \
-    && exit 1
-
+  curl -sLO "${url}"
 }
 
 check_checksum(){
@@ -43,21 +40,14 @@ check_checksum(){
   esac
 }
 
-copy_file_to_remote_domain(){
-  local file="$1"
-  local remote_domain="$2"
-
-  qvm-copy-to-vm "${remote_domain}" "${file}"
-}
-
 main(){
   local url
   local tmpdir
-  local filename="${url##*/}"
-  local remote_domain="${QREXEC_REMOTE_DOMAIN}"
+  local filename
 
   url=$(decode_url "${encoded_url}")
   tmpdir=$(mktemp "fetch.XXXXXX" -d)
+  filename="${url##*/}"
 
   notify-send "Downloading ${filename}"
 
@@ -65,7 +55,8 @@ main(){
 
   fetch_file "${url}"
   check_checksum "${filename}" "${checksum}"
-  copy_file_to_remote_domain "${remote_domain}" "${tmpdir}/${filename}"
+
+  cat "${filename}"
 }
 
 main
