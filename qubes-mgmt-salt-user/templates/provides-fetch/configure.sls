@@ -1,4 +1,16 @@
-{%- if grains.id != "dom0" -%}
+{%- if grains.id == "dom0" -%}
+
+{%- from "utils/macros/managed_policy.sls" import managed_policy -%}
+{%- set vm_name = "disp-sys-usb" -%}
+{%- set policy_file = "50-fetch.policy" -%}
+
+{%- load_yaml as context -%}
+dvm_fetch: "{{ vm_name }}"
+{%- endload -%}
+
+{{ managed_policy(policy_file, context) }}
+
+{%- else -%}
 
 "{{ slsdotpath }}:: install pkgs":
   pkg.installed:

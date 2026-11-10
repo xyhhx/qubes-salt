@@ -1,0 +1,73 @@
+#!/bin/bash --
+set -euo pipefail
+
+read -r encoded_url checksum
+
+if [[ -z "${QREXEC_REMOTE_DOMAIN+x}" ]]; then
+  echo "\$QREXEC_REMOTE_DOMAIN is undefined"
+  exit 1
+fi
+
+
+decode_url(){
+  echo "${encoded_url}" | base64 -d
+}
+
+fetch_file(){
+  local url="$1"
+  curl -sLO "${url}" \
+    || notify-send "Failed downloading ${url##*/}" \
+    && exit 1
+
+}
+
+check_checksum(){
+  local file="$1"
+  local checksum="${2##*:}"
+  local hash_algorithm="${2%%:*}"
+
+  [[ -z "${x+hash_algorithm}" ]] \
+    && hash_algorithm="sha256"
+
+  case "${hash_algorithm}" in
+    sha256)
+      echo "${checksum}  ${file}" | sha256sum -c
+      ;;
+    sha512)
+      echo "${checksum}  ${file}" | sha512sum -c
+      ;;
+    *)
+      echo "Invalid checksum algorithm! Only SHA256 and SHA512 are supported"
+      notify-send "Couldn't validate checksum: invalid hash algo provided."
+      exit 1
+  esac
+}
+
+copy_file_to_remote_domain(){
+  local file="$1"
+  local remote_domain="$2"
+
+  qvm-copy-to-vm "${remote_domain}" "${file}"
+}
+
+main(){
+  local url
+  local tmpdir
+  local filename="${url##*/}"
+  local remote_domain="${QREXEC_REMOTE_DOMAIN}"
+
+  url=$(decode_url "${encoded_url}")
+  tmpdir=$(mktemp "fetch.XXXXXX" -d)
+
+  notify-send "Downloading ${filename}"
+
+  cd "${tmpdir}"
+
+  fetch_file "${url}"
+  check_checksum "${filename}" "${checksum}"
+  copy_file_to_remote_domain "${remote_domain}" "${tmpdir}/${filename}"
+}
+
+main
+
+# vim: set ft=sh ts=80 sts=80 sw :

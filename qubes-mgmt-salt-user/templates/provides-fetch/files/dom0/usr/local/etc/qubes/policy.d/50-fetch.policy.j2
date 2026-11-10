@@ -1,0 +1,11 @@
+{%- set policies = [
+  ("quser.FetchFile", "*", dvm_fetch, "@anyvm", "allow notify=yes"),
+  ("qubes.Filecopy", "*", builder_vm, "@tag:disp-created-by-" ~ builder_vm, "allow"),
+] -%}
+
+{%- from "utils/macros/generate_policy_file.sls" import generate_policy_file -%}
+{%- include 'utils/banner.jinja' -%}
+
+{{ generate_policy_file(policies) }}
+{#- vim: set syn=sh.jinja : -#}
+
